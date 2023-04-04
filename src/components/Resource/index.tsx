@@ -1,22 +1,21 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Resource = () => {
-  
   const Wrapper = styled.div`
     border-bottom: solid 1px #ccc;
     font-size: small;
-  `
+  `;
 
   const Box = styled.div`
     display: flex;
     align-items: center;
     flex-direction: row;
     padding: 10px;
-  `
+  `;
 
   const AvatarWrapper = styled.div`
     display: inline;
-  `
+  `;
   const Avatar = styled.div`
     width: 45px;
     height: 45px;
@@ -24,7 +23,7 @@ const Resource = () => {
     border-radius: 100%;
     overflow: hidden;
     position: relative;
-  `
+  `;
 
   const Initials = styled.span`
     font-size: 18px;
@@ -36,11 +35,11 @@ const Resource = () => {
     left: 0;
     top: 0;
     border-radius: 100%;
-  `
+  `;
 
   const Description = styled.div`
-    margin-left: 8px; 
-  `
+    margin-left: 8px;
+  `;
 
   return (
     <Wrapper>
@@ -53,7 +52,7 @@ const Resource = () => {
         <Description>Lukasz Roth</Description>
       </Box>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default Resource
+export default Resource;
