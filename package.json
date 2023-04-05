@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -13,6 +14,21 @@
     "typecheck": "tsc -b",
     "prepare": "husky install"
   },
+  "main": "dist/index.umd.js",
+  "modules": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "lint-staged": {
     "**/*.{js,jsx}": [
       "yarn run lint",
@@ -21,6 +37,7 @@
   },
   "dependencies": {
     "@types/styled-components": "^5.1.26",
+    "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^5.3.8"
@@ -41,6 +58,7 @@
     "lint-staged": "^13.2.0",
     "prettier": "^2.8.7",
     "typescript": "^4.9.3",
-    "vite": "^4.1.0"
+    "vite": "^4.1.0",
+    "vite-plugin-dts": "^2.2.0"
   }
 }
