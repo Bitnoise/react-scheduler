@@ -30,7 +30,7 @@
     "access": "public"
   },
   "lint-staged": {
-    "**/*.{js,jsx}": [
+    "**/*.{ts,tsx}": [
       "yarn run lint",
       "yarn run format"
     ]
