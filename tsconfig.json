@@ -18,6 +18,6 @@
     "declaration": true,
     "typeRoots": ["./dist/index.d.ts"]
   },
-  "include": ["src"],
+  "include": ["src", "index.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
