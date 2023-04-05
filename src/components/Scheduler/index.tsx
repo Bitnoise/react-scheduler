@@ -27,16 +27,14 @@ const Main = styled.div`
   color: black;
 `;
 
-const Scheduler = () => {
+export const Scheduler = () => {
   return (
     <Container>
       <Header>header</Header>
       <Sidebar>
         <Resource />
       </Sidebar>
-      <Main>content</Main>
+      <Main>conten123</Main>
     </Container>
   );
 };
-
-export default Scheduler;
