@@ -7,8 +7,6 @@ yarn link
 cd ../react-dom
 yarn link
 
-
-
 cd react-scheduler
 yarn link
 yarn install
