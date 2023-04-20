@@ -3,8 +3,8 @@ import { useTheme } from "styled-components";
 import { dayWidth } from "@/constants";
 import { GridProps } from "./types";
 
-const USERS_QUANTITY = 10;
-const BOX_HEIGHT = 60;
+const usersQuantity = 10;
+const boxHeight = 60;
 
 const Grid = ({ days }: GridProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -28,8 +28,8 @@ const Grid = ({ days }: GridProps) => {
       }
 
       ctx.beginPath();
-      ctx.fillRect(x, y, dayWidth, BOX_HEIGHT);
-      ctx.strokeRect(x, y, dayWidth, BOX_HEIGHT);
+      ctx.fillRect(x, y, dayWidth, boxHeight);
+      ctx.strokeRect(x, y, dayWidth, boxHeight);
     },
     [theme.colors.grey, theme.colors.hover, theme.colors.superLightBlue, theme.colors.white]
   );
@@ -37,11 +37,11 @@ const Grid = ({ days }: GridProps) => {
   const drawGrid = useCallback(
     (ctx: CanvasRenderingContext2D) => {
       ctx.canvas.width = daysInYear * dayWidth;
-      ctx.canvas.height = USERS_QUANTITY * BOX_HEIGHT;
+      ctx.canvas.height = usersQuantity * boxHeight;
 
       days.map((day, index) => {
-        for (let y = 0; y <= USERS_QUANTITY; y++) {
-          drawRectange(index * dayWidth, y * BOX_HEIGHT, ctx, day.isBussinessDay, day.isCurrentDay);
+        for (let y = 0; y <= usersQuantity; y++) {
+          drawRectange(index * dayWidth, y * boxHeight, ctx, day.isBussinessDay, day.isCurrentDay);
         }
       });
     },
