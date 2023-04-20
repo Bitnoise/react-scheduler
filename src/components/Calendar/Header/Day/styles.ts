@@ -5,15 +5,15 @@ import { DayProps } from "./types";
 export const StyledDay = styled.div<
   Readonly<Pick<DayProps, "isCurrentDay" | "isBussinessDay" | "dayOfYear">>
 >`
-  background-color: ${(props) => {
-    if (props.isCurrentDay && !props.isBussinessDay) return props.theme.colors.accentLight;
-    if (props.isCurrentDay) return props.theme.colors.accentLight;
-    if (props.isBussinessDay) return props.theme.colors.superLightBlue;
-    return props.theme.colors.hover;
+  background-color: ${({ isCurrentDay, isBussinessDay, theme }) => {
+    if (isCurrentDay && !isBussinessDay) return theme.colors.accentLight;
+    if (isCurrentDay) return theme.colors.accentLight;
+    if (isBussinessDay) return theme.colors.superLightBlue;
+    return theme.colors.hover;
   }};
-  border-right: 1px solid ${(props) => props.theme.colors.grey};
-  border-bottom: 1px solid ${(props) => props.theme.colors.grey};
-  ${(props) => props.dayOfYear === 1 && `border-left: 1px solid ${props.theme.colors.grey}`};
+  border-right: 1px solid ${({ theme }) => theme.colors.grey};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
+  ${({ dayOfYear, theme }) => dayOfYear === 1 && `border-left: 1px solid ${theme.colors.grey}`};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,12 +26,12 @@ export const StyledDay = styled.div<
 export const StyledDayName = styled.span<
   Readonly<Pick<DayProps, "isCurrentDay" | "isBussinessDay">>
 >`
-  color: ${(props) => {
-    if (props.isCurrentDay && !props.isBussinessDay) return props.theme.colors.accent;
-    if (props.isCurrentDay) return props.theme.colors.accent;
-    return props.theme.colors.black;
+  color: ${({ isBussinessDay, isCurrentDay, theme }) => {
+    if (isCurrentDay && !isBussinessDay) return theme.colors.accent;
+    if (isCurrentDay) return theme.colors.accent;
+    return theme.colors.black;
   }};
-  opacity: ${(props) => (!props.isBussinessDay && !props.isCurrentDay ? 0.5 : 1)};
+  opacity: ${({ isBussinessDay, isCurrentDay }) => (!isBussinessDay && !isCurrentDay ? 0.5 : 1)};
   font-weight: 600;
   font-size: 14px;
   line-height: 21px;
@@ -41,8 +41,8 @@ export const StyledDayName = styled.span<
 export const StyledDayNumber = styled.span<
   Readonly<Pick<DayProps, "isCurrentDay" | "isBussinessDay">>
 >`
-  color: ${(props) => props.theme.colors.darkGrey};
-  opacity: ${(props) => (!props.isBussinessDay && !props.isCurrentDay ? 0.5 : 1)};
+  color: ${({ theme }) => theme.colors.darkGrey};
+  opacity: ${({ isBussinessDay, isCurrentDay }) => (!isBussinessDay && !isCurrentDay ? 0.5 : 1)};
   font-weight: 600;
   font-size: 10px;
   line-height: 12px;
