@@ -1,4 +1,4 @@
-import { Scheduler } from "./components/Scheduler";
+import { Scheduler } from ".";
 
 function App() {
   return <Scheduler />;

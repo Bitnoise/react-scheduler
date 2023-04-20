@@ -5,8 +5,24 @@ import dts from "vite-plugin-dts";
 import { visualizer } from "rollup-plugin-visualizer";
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@": resolve(__dirname, "./src")
+    }
+  },
   plugins: [
-    react(),
+    react({
+      babel: {
+        env: {
+          production: {
+            plugins: [["babel-plugin-styled-components", { displayName: false, pure: true }]]
+          },
+          development: {
+            plugins: [["babel-plugin-styled-components", { displayName: true, pure: true }]]
+          }
+        }
+      }
+    }),
     dts(),
     visualizer({
       template: "treemap"

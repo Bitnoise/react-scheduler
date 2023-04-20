@@ -1,3 +1,3 @@
-import { Scheduler } from "./components/Scheduler";
+import { Scheduler } from "./components";
 
 export { Scheduler };

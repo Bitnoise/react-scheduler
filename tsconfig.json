@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
+    "paths": { "@/*": ["./src/*"] },
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
     "skipLibCheck": true,
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -18,6 +19,7 @@
     "declaration": true,
     "typeRoots": ["./dist/index.d.ts"]
   },
-  "include": ["src", "index.ts"],
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
