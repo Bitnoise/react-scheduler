@@ -1,4 +1,4 @@
-import { Calendar } from "..";
+import { Calendar } from "@/components";
 
 const Scheduler = () => <Calendar />;
 

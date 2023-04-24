@@ -1,7 +1,7 @@
 import { getDaysInYear } from "@/utils/dates";
-import { Grid, Header } from "..";
+import { Grid, Header } from "@/components";
 
-export const Calendar = () => {
+const Calendar = () => {
   const days = getDaysInYear(2023);
 
   return (
@@ -11,3 +11,4 @@ export const Calendar = () => {
     </>
   );
 };
+export default Calendar;
