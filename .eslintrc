@@ -24,6 +24,7 @@
   "rules": {
     "react/react-in-jsx-scope": "off",
     "eqeqeq": ["error", "always"],
+    "@typescript-eslint/no-empty-function": "warn",
     "import/order": [
       "error",
       {

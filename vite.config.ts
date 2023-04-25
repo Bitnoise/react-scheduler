@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
 import { visualizer } from "rollup-plugin-visualizer";
+import svgr from "vite-plugin-svgr";
 
 export default defineConfig({
   resolve: {
@@ -23,6 +24,7 @@ export default defineConfig({
         }
       }
     }),
+    svgr(),
     dts(),
     visualizer({
       template: "treemap"
