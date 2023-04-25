@@ -1,5 +1,12 @@
-import { Calendar } from "@/components";
+import { Calendar, Topbar } from "@/components";
 
-const Scheduler = () => <Calendar />;
+const Scheduler = () => {
+  return (
+    <>
+      <Topbar />
+      <Calendar />;
+    </>
+  );
+};
 
 export default Scheduler;

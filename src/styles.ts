@@ -18,6 +18,7 @@ type ColorType =
   | "black"
   | "grey"
   | "darkGrey"
+  | "darkViolet"
   | "superLightBlue"
   | "accentLight"
   | "accent"
@@ -26,13 +27,16 @@ type ColorType =
 
 export type Theme = {
   colors: Record<ColorType, string>;
+  navHeight: string;
 };
 
 export const theme: DefaultTheme = {
+  navHeight: "44px",
   colors: {
     black: "#1C222F",
     grey: "#D2D2D2",
     darkGrey: "#777777",
+    darkViolet: "#3B3C5F",
     superLightBlue: "#F8F8FD",
     accentLight: "#C9E5FF",
     accent: "#0A11EB",
