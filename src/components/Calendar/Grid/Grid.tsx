@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef } from "react";
 import { useTheme } from "styled-components";
 import { dayWidth, headerHeight, headerMonthHeight, headerWeekHeight } from "@/constants";
 import { getMonths } from "@/utils/dates";
-import { renderCalendarHeader, renderDaysRow, renderWeeksRow } from "@/utils/renderCalendatHeader";
+import { renderMonthsRow, renderDaysRow, renderWeeksRow } from "@/utils/renderCalendatHeader";
 import { GridProps } from "./types";
 
 const usersQuantity = 10;
@@ -21,7 +21,7 @@ const Grid = ({ days }: GridProps) => {
       getMonths(days).map((month) => {
         const daysInMonth = days.filter((day) => day.monthName === month).length;
         const width = daysInMonth * dayWidth;
-        renderCalendarHeader(ctx, xPosMonth, 0, width, month.toUpperCase());
+        renderMonthsRow(ctx, xPosMonth, 0, width, month.toUpperCase());
         xPosMonth += width;
       });
 

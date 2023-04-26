@@ -20,7 +20,7 @@ const fonts = {
 };
 const weekLabel = "TYDZIEŃ";
 
-export const renderCalendarHeader = (
+export const renderMonthsRow = (
   ctx: CanvasRenderingContext2D,
   xPos: number,
   yPos: number,
