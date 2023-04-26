@@ -1,15 +1,37 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useTheme } from "styled-components";
-import { dayWidth } from "@/constants";
+import { dayWidth, headerHeight, headerMonthHeight, headerWeekHeight } from "@/constants";
+import { getMonths } from "@/utils/dates";
+import { renderCalendarHeader, renderDaysRow, renderWeeksRow } from "@/utils/renderCalendatHeader";
 import { GridProps } from "./types";
 
 const usersQuantity = 10;
 const boxHeight = 60;
+const weekWidth = dayWidth * 7;
 
 const Grid = ({ days }: GridProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const theme = useTheme();
   const daysInYear = days.length;
+
+  const drawHeader = useCallback(
+    (ctx: CanvasRenderingContext2D) => {
+      let xPosMonth = 0;
+
+      getMonths(days).map((month) => {
+        const daysInMonth = days.filter((day) => day.monthName === month).length;
+        const width = daysInMonth * dayWidth;
+        renderCalendarHeader(ctx, xPosMonth, 0, width, month.toUpperCase());
+        xPosMonth += width;
+      });
+
+      renderWeeksRow(ctx, 0, headerMonthHeight, weekWidth, days);
+
+      renderDaysRow(ctx, 0, headerMonthHeight + headerWeekHeight, days);
+    },
+    [days]
+  );
+
   const drawRectange = useCallback(
     (
       x: number,
@@ -37,21 +59,29 @@ const Grid = ({ days }: GridProps) => {
   const drawGrid = useCallback(
     (ctx: CanvasRenderingContext2D) => {
       ctx.canvas.width = daysInYear * dayWidth;
-      ctx.canvas.height = usersQuantity * boxHeight;
-
+      ctx.canvas.height = usersQuantity * boxHeight + headerHeight;
+      drawHeader(ctx);
       days.map((day, index) => {
         for (let y = 0; y <= usersQuantity; y++) {
-          drawRectange(index * dayWidth, y * boxHeight, ctx, day.isBussinessDay, day.isCurrentDay);
+          drawRectange(
+            index * dayWidth,
+            y * boxHeight + headerHeight,
+            ctx,
+            day.isBussinessDay,
+            day.isCurrentDay
+          );
         }
       });
     },
-    [days, daysInYear, drawRectange]
+    [days, daysInYear, drawHeader, drawRectange]
   );
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas?.getContext("2d");
+    if (!canvas) return;
+    canvas.style.letterSpacing = "1px";
 
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     drawGrid(ctx);
