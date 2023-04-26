@@ -5,7 +5,7 @@ import { getMonths } from "@/utils/dates";
 import { renderMonthsRow, renderDaysRow, renderWeeksRow } from "@/utils/renderCalendatHeader";
 import { GridProps } from "./types";
 
-const usersQuantity = 10;
+const rows = 10;
 const boxHeight = 60;
 const weekWidth = dayWidth * 7;
 
@@ -59,10 +59,10 @@ const Grid = ({ days }: GridProps) => {
   const drawGrid = useCallback(
     (ctx: CanvasRenderingContext2D) => {
       ctx.canvas.width = daysInYear * dayWidth;
-      ctx.canvas.height = usersQuantity * boxHeight + headerHeight;
+      ctx.canvas.height = rows * boxHeight + headerHeight;
       drawHeader(ctx);
       days.map((day, index) => {
-        for (let y = 0; y <= usersQuantity; y++) {
+        for (let y = 0; y <= rows; y++) {
           drawRectange(
             index * dayWidth,
             y * boxHeight + headerHeight,

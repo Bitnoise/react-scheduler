@@ -80,35 +80,40 @@ export const renderDaysRow = (
   yPos: number,
   days: Days
 ) => {
-  const dayNames = days.map((day) => day.dayName.toUpperCase());
   const dayNum = days.map((day) => day.dayOfMonth);
-  const isBusinessDay = days.map((day) => day.isBussinessDay);
-  const isCurrentDay = days.map((day) => day.isCurrentDay);
   const dayNameYPos = headerHeight - headerDayHeight / 1.6;
   const dayNumYPos = headerHeight - headerDayHeight / 4.5;
 
+  const calendarData = days.map(({ dayName, isBussinessDay, isCurrentDay }) => ({
+    dayName: dayName.toUpperCase(),
+    isBussinessDay,
+    isCurrentDay
+  }));
+
   for (let i = 0; i < days.length; i++) {
+    const { dayName, isBussinessDay, isCurrentDay } = calendarData[i];
+
     ctx.beginPath();
-    ctx.fillStyle = isBusinessDay[i] ? daysFillStyle : theme.colors.hover;
-    if (isCurrentDay[i]) ctx.fillStyle = theme.colors.accentLight;
+    ctx.fillStyle = isBussinessDay ? daysFillStyle : theme.colors.hover;
+    if (isCurrentDay) ctx.fillStyle = theme.colors.accentLight;
     ctx.fillRect(xPos, yPos, dayWidth, headerDayHeight);
     ctx.strokeRect(xPos, yPos, dayWidth, headerDayHeight);
 
     // Day name
     ctx.font = fonts.day.name;
 
-    const dayNameXPos = xPos + dayWidth / 2 - ctx.measureText(dayNames[i]).width / 2;
+    const dayNameXPos = xPos + dayWidth / 2 - ctx.measureText(dayName).width / 2;
 
-    ctx.fillStyle = isBusinessDay[i] ? theme.colors.black : theme.colors.darkGrey;
-    if (isCurrentDay[i]) ctx.fillStyle = theme.colors.accent;
-    ctx.fillText(`${dayNames[i]}`, dayNameXPos, dayNameYPos);
+    ctx.fillStyle = isBussinessDay ? theme.colors.black : theme.colors.darkGrey;
+    if (isCurrentDay) ctx.fillStyle = theme.colors.accent;
+    ctx.fillText(`${dayName}`, dayNameXPos, dayNameYPos);
 
     // Day num
     ctx.font = fonts.day.number;
 
     const dayNumXPos = xPos + dayWidth / 2 - ctx.measureText(dayNum[i].toString()).width / 2;
 
-    ctx.fillStyle = isBusinessDay[i] ? theme.colors.darkGrey : theme.colors.darkGrey;
+    ctx.fillStyle = isBussinessDay ? theme.colors.darkGrey : theme.colors.darkGrey;
     ctx.fillText(`${dayNum[i]}`, dayNumXPos, dayNumYPos);
 
     xPos += dayWidth;
