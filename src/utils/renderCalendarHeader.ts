@@ -80,18 +80,18 @@ export const renderDaysRow = (
   yPos: number,
   days: Days
 ) => {
-  const dayNum = days.map((day) => day.dayOfMonth);
   const dayNameYPos = headerHeight - headerDayHeight / 1.6;
   const dayNumYPos = headerHeight - headerDayHeight / 4.5;
 
-  const calendarData = days.map(({ dayName, isBussinessDay, isCurrentDay }) => ({
+  const calendarData = days.map(({ dayName, dayOfMonth, isBussinessDay, isCurrentDay }) => ({
     dayName: dayName.toUpperCase(),
+    dayOfMonth,
     isBussinessDay,
     isCurrentDay
   }));
 
   for (let i = 0; i < days.length; i++) {
-    const { dayName, isBussinessDay, isCurrentDay } = calendarData[i];
+    const { dayName, dayOfMonth, isBussinessDay, isCurrentDay } = calendarData[i];
 
     ctx.beginPath();
     ctx.fillStyle = isBussinessDay ? daysFillStyle : theme.colors.hover;
@@ -111,10 +111,10 @@ export const renderDaysRow = (
     // Day num
     ctx.font = fonts.day.number;
 
-    const dayNumXPos = xPos + dayWidth / 2 - ctx.measureText(dayNum[i].toString()).width / 2;
+    const dayNumXPos = xPos + dayWidth / 2 - ctx.measureText(dayOfMonth.toString()).width / 2;
 
     ctx.fillStyle = isBussinessDay ? theme.colors.darkGrey : theme.colors.darkGrey;
-    ctx.fillText(`${dayNum[i]}`, dayNumXPos, dayNumYPos);
+    ctx.fillText(`${dayOfMonth}`, dayNumXPos, dayNumYPos);
 
     xPos += dayWidth;
   }
