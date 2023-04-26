@@ -6,7 +6,7 @@ import { SchedulerProps } from "./types";
 const Scheduler = ({ data, config, onRangeChange }: SchedulerProps) => {
   const appConfig: Config = {
     zoom: 0,
-    isFiltersVisible: true,
+    isFiltersButtonVisible: true,
     ...config
   };
 

@@ -2,7 +2,7 @@ export type ZoomLevel = 0 | 1;
 
 export type Config = {
   zoom: ZoomLevel;
-  isFiltersVisible?: boolean;
+  isFiltersButtonVisible?: boolean;
 };
 
 export type SchedulerData = SchedulerRow[];

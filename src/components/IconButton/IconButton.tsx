@@ -8,16 +8,12 @@ const IconButton = ({
   height,
   fill,
   className,
-  callback = () => {},
+  onClick = () => {},
   children,
   isFullRounded
 }: IconButtonProps) => {
   return (
-    <ButtonWrapper
-      onClick={callback}
-      isFullRounded={isFullRounded}
-      isButtonWithChildren={!!children}
-    >
+    <ButtonWrapper onClick={onClick} isFullRounded={isFullRounded} hasChildren={!!children}>
       <Icon iconName={iconName} width={width} height={height} fill={fill} className={className} />
       {children}
     </ButtonWrapper>

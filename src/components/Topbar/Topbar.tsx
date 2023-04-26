@@ -24,8 +24,8 @@ const Topbar = () => {
       </NavigationWrapper>
       <Zoom>
         Widok:
-        <IconButton callback={zoomOut} isFullRounded iconName="substract" width="14" />
-        <IconButton callback={zoomIn} isFullRounded iconName="add" width="14" />
+        <IconButton onClick={zoomOut} isFullRounded iconName="substract" width="14" />
+        <IconButton onClick={zoomIn} isFullRounded iconName="add" width="14" />
       </Zoom>
     </Wrapper>
   );

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 type ButtonWrapperProps = {
   isFullRounded?: boolean;
-  isButtonWithChildren?: boolean;
+  hasChildren?: boolean;
 };
 
 export const ButtonWrapper = styled.button<ButtonWrapperProps>`
@@ -19,5 +19,5 @@ export const ButtonWrapper = styled.button<ButtonWrapperProps>`
   color: ${({ theme }) => theme.colors.accent};
   font-size: 14px;
   gap: 4px;
-  padding: ${({ isButtonWithChildren }) => (isButtonWithChildren ? "0 10px" : "0")};
+  padding: ${({ hasChildren }) => (hasChildren ? "0 10px" : "0")};
 `;

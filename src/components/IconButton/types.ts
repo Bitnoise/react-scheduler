@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { IconProps } from "../Icon";
 
 export type IconButtonProps = {
-  callback?: () => void;
+  onClick?: () => void;
   children?: ReactNode;
   isFullRounded?: boolean;
 } & IconProps;
