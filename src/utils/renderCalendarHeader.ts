@@ -119,3 +119,8 @@ export const renderDaysRow = (
     xPos += dayWidth;
   }
 };
+
+export const renderYearRow = (ctx: CanvasRenderingContext2D) => {
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  console.log("year");
+};
