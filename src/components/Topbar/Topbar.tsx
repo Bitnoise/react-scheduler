@@ -13,13 +13,13 @@ const Topbar = () => {
       </Filters>
       <NavigationWrapper>
         <NavBtn onClick={handleGoPrev}>
-          <Icon iconName="arrow_left" height="15" fill="#3B3C5F" />
+          <Icon iconName="arrowLeft" height="15" fill="#3B3C5F" />
           poprzedni
         </NavBtn>
         <Today onClick={handleGoToday}>Dzis</Today>
         <NavBtn onClick={handleGoNext}>
           nastepny
-          <Icon iconName="arrow_right" height="15" fill="#3B3C5F" />
+          <Icon iconName="arrowRight" height="15" fill="#3B3C5F" />
         </NavBtn>
       </NavigationWrapper>
       <Zoom>

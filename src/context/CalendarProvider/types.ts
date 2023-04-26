@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
-
-export type ZoomLevel = 0 | 1;
+import { Config, SchedulerData, ZoomLevel } from "@/types/global";
 
 export type CalendaryContextType = {
   handleGoNext: () => void;
@@ -13,7 +12,7 @@ export type CalendaryContextType = {
 
 export type CalendarProviderProps = {
   children: ReactNode;
-  config?: {
-    zoom: ZoomLevel;
-  };
+  data?: SchedulerData;
+  config: Config;
+  onRangeChange: () => void;
 };

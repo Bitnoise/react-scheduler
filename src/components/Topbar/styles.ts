@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+const resetBtnStyles = `
+  background: none;
+  outline: none;
+  border: none;
+`;
+
 export const Wrapper = styled.div`
   position: fixed;
   top: 0;
@@ -19,9 +25,7 @@ export const NavigationWrapper = styled.div`
 `;
 
 export const NavBtn = styled.button`
-  background: none;
-  outline: none;
-  border: none;
+  ${resetBtnStyles};
   display: flex;
   align-items: center;
   gap: 4px;
@@ -31,9 +35,7 @@ export const NavBtn = styled.button`
 `;
 
 export const Today = styled.button`
-  background: none;
-  outline: none;
-  border: none;
+  ${resetBtnStyles};
   position: relative;
   font-weight: 600;
   cursor: pointer;

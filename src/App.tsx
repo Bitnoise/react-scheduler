@@ -1,12 +1,8 @@
-import CalendarProvider from "./context/CalendarProvider";
+import { mockedData, mockedOnRangeChange } from "./mock/appMock";
 import { Scheduler } from ".";
 
 function App() {
-  return (
-    <CalendarProvider>
-      <Scheduler />;
-    </CalendarProvider>
-  );
+  return <Scheduler onRangeChange={mockedOnRangeChange} data={mockedData} />;
 }
 
 export default App;
