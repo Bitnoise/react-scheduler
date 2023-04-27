@@ -4,7 +4,6 @@ export const en = {
     next: "next",
     prev: "prev",
     today: "Today",
-    week: "Week",
     view: "View"
   }
 };
