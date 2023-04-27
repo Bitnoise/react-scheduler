@@ -8,9 +8,13 @@ const LocaleProvider = ({ children }: LocaleProviderProps) => {
 
   if (!localeId) localeId = "en";
 
-  const [currentLocale, setCurrentLocale] = useState<LocaleType>(
-    locales.find((l) => l.translateCode === localeId)!
-  );
+  const findLocale = () => {
+    const locale = locales.find((l) => l.translateCode === localeId);
+    if (locale) return locale;
+    return locales[0];
+  };
+
+  const [currentLocale, setCurrentLocale] = useState<LocaleType>(findLocale);
 
   const saveCurrentLocale = (locale: LocaleType) => {
     localStorage.setItem("locale", locale.translateCode);
