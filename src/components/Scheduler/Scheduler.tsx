@@ -1,6 +1,7 @@
 import { ThemeProvider } from "styled-components";
 import { Calendar, Topbar } from "@/components";
 import CalendarProvider from "@/context/CalendarProvider";
+import LocaleProvider from "@/context/LocaleProvider";
 import { theme } from "@/styles";
 import { Config } from "@/types/global";
 import { SchedulerProps } from "./types";
@@ -14,10 +15,12 @@ const Scheduler = ({ data, config, onRangeChange }: SchedulerProps) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <CalendarProvider data={data} config={appConfig} onRangeChange={onRangeChange}>
-        <Topbar />
-        <Calendar />
-      </CalendarProvider>
+      <LocaleProvider>
+        <CalendarProvider data={data} config={appConfig} onRangeChange={onRangeChange}>
+          <Topbar />
+          <Calendar />
+        </CalendarProvider>
+      </LocaleProvider>
     </ThemeProvider>
   );
 };
