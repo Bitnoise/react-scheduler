@@ -7,7 +7,10 @@ export const Calendar = () => {
   const days = getDaysInYear(new Date().getFullYear());
   return (
     <>
-      <button onClick={() => setZoom(zoom === 1 ? 2 : 1)} style={{ marginBottom: "2rem" }}>
+      <button
+        onClick={() => setZoom(zoom === 1 ? 2 : 1)}
+        style={{ marginBottom: "2rem", position: "fixed", bottom: "0", left: "0" }}
+      >
         ZMIEŃ
       </button>
       <Grid days={days} zoom={zoom} />

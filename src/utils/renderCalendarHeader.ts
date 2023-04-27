@@ -120,7 +120,18 @@ export const renderDaysRow = (
   }
 };
 
-export const renderYearRow = (ctx: CanvasRenderingContext2D) => {
-  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-  console.log("year");
+export const renderYearRow = (
+  ctx: CanvasRenderingContext2D,
+  xPos: number,
+  yPos: number,
+  width: number,
+  days: Days
+) => {
+  ctx.beginPath();
+  ctx.fillStyle = defaultFillStyle;
+  ctx.strokeStyle = theme.colors.darkGrey;
+  ctx.fillRect(xPos, yPos, width, headerMonthHeight);
+  ctx.strokeRect(xPos, yPos, width, headerMonthHeight);
+
+  ctx.font = fonts.month;
 };

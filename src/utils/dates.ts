@@ -33,7 +33,8 @@ export const getDaysInYear = (year: number) => {
       month: date.month(),
       monthName: date.format("MMMM"),
       isBussinessDay: getIsBusinessDay(date),
-      isCurrentDay: date.isSame(dayjs(), "day")
+      isCurrentDay: date.isSame(dayjs(), "day"),
+      year
     };
   });
 };
