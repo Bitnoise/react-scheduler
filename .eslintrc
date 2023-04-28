@@ -24,7 +24,7 @@
   "rules": {
     "react/react-in-jsx-scope": "off",
     "eqeqeq": ["error", "always"],
-    "@typescript-eslint/no-empty-function": "warn",
+    "@typescript-eslint/no-empty-function": "off",
     "import/order": [
       "error",
       {
@@ -49,7 +49,7 @@
         "allowTemplateLiterals": true
       }
     ],
-    "filenames/match-exported": 1,
+    "filenames/match-exported": 2,
     "import/no-internal-modules": [
       "error",
       {
