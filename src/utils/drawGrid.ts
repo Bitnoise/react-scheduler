@@ -1,16 +1,11 @@
-import { dayWidth, headerHeight, headerMonthHeight, headerWeekHeight } from "@/constants";
+import { dayWidth, headerHeight } from "@/constants";
 import { theme } from "@/styles";
-import { Days, getMonths } from "./dates";
-import {
-  renderMonthsRow,
-  renderWeeksRow,
-  renderDaysRow,
-  renderYearRow
-} from "./renderCalendarHeader";
+import { Days, getDaysInMonths } from "./dates";
+import { drawDashedLine } from "./drawDashedLine";
+import { renderTopRow, renderMiddleRow, renderBottomRow } from "./renderCalendarHeader";
 
-const rows = 10;
+const rows = 15;
 const boxHeight = 60;
-const weekWidth = dayWidth * 7;
 
 export const drawGrid = (ctx: CanvasRenderingContext2D, zoom: number, days: Days) => {
   const daysInYear = days.length;
@@ -22,73 +17,81 @@ export const drawGrid = (ctx: CanvasRenderingContext2D, zoom: number, days: Days
 
   drawHeader(ctx, zoom, days);
 
-  days.map((day, index) => {
-    for (let y = 0; y <= rows; y++) {
-      drawRectange(
-        index * dayWidth,
-        y * boxHeight + headerHeight,
-        ctx,
-        day.isBussinessDay,
-        day.isCurrentDay,
-        zoom
+  if (zoom === 1) {
+    days.map((day, index) => {
+      for (let y = 0; y <= rows; y++) {
+        drawRectangle(
+          ctx,
+          index * dayWidth,
+          y * boxHeight + headerHeight,
+          dayWidth,
+          day.isBusinessDay,
+          day.isCurrentDay
+        );
+      }
+    });
+  } else {
+    let xPos = 0;
+    let startPos = 0;
+    const weekWidth = 84;
+    const daysInMonths = getDaysInMonths(days);
+
+    for (let i = 0; i < 52; i++) {
+      const weeks = days.filter((week) => week.weekOfYear === i + 1);
+      if (weeks[0].dayOfMonth !== 1 && i === 0) xPos += (weekWidth / 7) * (weeks[0].dayOfMonth - 1);
+
+      const isCurrent = weeks.filter((week) =>
+        week.isCurrentDay === true ? week.weekOfYear : undefined
       );
+
+      for (let y = 0; y <= rows; y++) {
+        drawRectangle(
+          ctx,
+          xPos,
+          y * boxHeight + headerHeight,
+          weekWidth,
+          true,
+          isCurrent.length > 0
+        );
+      }
+
+      xPos += weekWidth;
     }
-  });
+    for (let j = 0; j < 12; j++) {
+      const width = daysInMonths[j] * 12;
+      drawDashedLine(ctx, startPos, rows * boxHeight + headerHeight);
+
+      startPos += width;
+    }
+  }
 };
 
 const drawHeader = (ctx: CanvasRenderingContext2D, zoom: number, days: Days) => {
-  const daysInYear = days.length;
+  renderTopRow(ctx, days, zoom);
 
-  if (zoom === 1) {
-    let xPosMonth = 0;
+  renderMiddleRow(ctx, days, zoom);
 
-    getMonths(days).map((month) => {
-      const daysInMonth = days.filter((day) => day.monthName === month).length;
-      const width = daysInMonth * dayWidth;
-      renderMonthsRow(ctx, xPosMonth, 0, width, month.toUpperCase());
-      xPosMonth += width;
-    });
-
-    renderWeeksRow(ctx, 0, headerMonthHeight, weekWidth, days);
-
-    renderDaysRow(ctx, 0, headerMonthHeight + headerWeekHeight, days);
-  } else {
-    let xPosYear = 0;
-
-    const width = daysInYear * dayWidth;
-    renderYearRow(ctx, 0, 0, width, days);
-    getMonths(days).map((month) => {
-      const daysInMonth = days.filter((day) => day.monthName === month).length;
-      //   renderMonthsRow(ctx, xPosYear, 0, width, month.toUpperCase());
-      xPosYear += width;
-    });
-
-    renderWeeksRow(ctx, 0, headerMonthHeight, weekWidth, days);
-
-    renderDaysRow(ctx, 0, headerMonthHeight + headerWeekHeight, days);
-  }
+  renderBottomRow(ctx, days, zoom);
 };
 
-const drawRectange = (
+const drawRectangle = (
+  ctx: CanvasRenderingContext2D,
   x: number,
   y: number,
-  ctx: CanvasRenderingContext2D,
-  isBussinessDay: boolean,
-  isCurrentDay: boolean,
-  zoom: number
+  width: number,
+  isBusinessDay: boolean,
+  isCurrentDay: boolean
 ) => {
-  if (zoom === 1) {
-    ctx.strokeStyle = theme.colors.grey;
-    if (isCurrentDay) {
-      ctx.fillStyle = theme.colors.hover;
-    } else if (isBussinessDay) {
-      ctx.fillStyle = theme.colors.white;
-    } else {
-      ctx.fillStyle = theme.colors.superLightBlue;
-    }
-
-    ctx.beginPath();
-    ctx.fillRect(x, y, dayWidth, boxHeight);
-    ctx.strokeRect(x, y, dayWidth, boxHeight);
+  ctx.strokeStyle = theme.colors.grey;
+  if (isCurrentDay) {
+    ctx.fillStyle = theme.colors.hover;
+  } else if (isBusinessDay) {
+    ctx.fillStyle = theme.colors.white;
+  } else {
+    ctx.fillStyle = theme.colors.superLightBlue;
   }
+  ctx.beginPath();
+  ctx.setLineDash([]);
+  ctx.fillRect(x, y, width, boxHeight);
+  ctx.strokeRect(x, y, width, boxHeight);
 };

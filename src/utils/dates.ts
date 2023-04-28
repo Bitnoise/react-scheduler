@@ -32,7 +32,7 @@ export const getDaysInYear = (year: number) => {
       weekOfYear: date.week(),
       month: date.month(),
       monthName: date.format("MMMM"),
-      isBussinessDay: getIsBusinessDay(date),
+      isBusinessDay: getIsBusinessDay(date),
       isCurrentDay: date.isSame(dayjs(), "day"),
       year
     };
@@ -50,3 +50,15 @@ export const getNumberOfDaysPerWeekOfYear = (days: Days) => {
 };
 
 export type Days = ReturnType<typeof getDaysInYear>;
+
+export const getCalendarData = (days: Days) =>
+  days.map(({ dayName, dayOfMonth, isBusinessDay, isCurrentDay, weekOfYear }) => ({
+    dayName,
+    dayOfMonth,
+    isBusinessDay,
+    isCurrentDay,
+    weekOfYear
+  }));
+
+export const getDaysInMonths = (days: Days) =>
+  getMonths(days).map((month) => days.filter((day) => day.monthName === month).length);

@@ -6,132 +6,196 @@ import {
   headerWeekHeight
 } from "@/constants";
 import { theme } from "@/styles";
-import { Days } from "./dates";
+import { Days, getCalendarData, getDaysInMonths, getMonths } from "./dates";
+import { drawRow } from "./drawRow";
 
-const defaultFillStyle = theme.colors.white;
 const daysFillStyle = theme.colors.superLightBlue;
 const fonts = {
-  month: "600 14px Inter",
-  week: "400 10px Inter",
-  day: {
+  topRow: "600 14px Inter",
+  middleRow: "400 10px Inter",
+  bottomRow: {
     name: "600 14px Inter",
     number: "600 10px Inter"
   }
 };
 const weekLabel = "TYDZIEŃ";
 
-export const renderMonthsRow = (
-  ctx: CanvasRenderingContext2D,
-  xPos: number,
-  yPos: number,
-  width: number,
-  label: string
-) => {
-  ctx.strokeStyle = theme.colors.grey;
-  const textXPos = xPos + width / 2 - ctx.measureText(label).width / 2;
-  const textYPos = headerMonthHeight / 2;
+const getBoxFillStyle = (isCurrent: boolean, isBusinessDay?: boolean, isYearView?: boolean) => {
+  if (isYearView) return isCurrent ? theme.colors.accentLight : daysFillStyle;
+  if (isCurrent) return theme.colors.accentLight;
+  if (!isBusinessDay) return theme.colors.hover;
 
-  ctx.beginPath();
-  ctx.fillStyle = defaultFillStyle;
-
-  ctx.fillRect(xPos, yPos, width, headerMonthHeight);
-  ctx.strokeRect(xPos, yPos, width, headerMonthHeight);
-
-  ctx.font = fonts.month;
-  ctx.textBaseline = "middle";
-  ctx.fillStyle = theme.colors.darkGrey;
-  ctx.fillText(label, textXPos, textYPos);
+  return daysFillStyle;
 };
 
-export const renderWeeksRow = (
-  ctx: CanvasRenderingContext2D,
-  xPos: number,
-  yPos: number,
-  width: number,
-  days: Days
-) => {
-  const textYPos = headerWeekHeight / 2 + headerMonthHeight;
-  ctx.beginPath();
-  ctx.strokeStyle = theme.colors.grey;
+const getTextFillStyle = (isCurrent: boolean, isBusinessDay: boolean, isBottom?: boolean) => {
+  if (isCurrent) return isBottom ? theme.colors.darkGrey : theme.colors.accent;
+  if (isBusinessDay) return isBottom ? theme.colors.darkGrey : theme.colors.black;
+  return theme.colors.darkGrey;
+};
 
-  for (let i = 0; i < 52; i++) {
-    const week = days.filter((week) => week.weekOfYear === i + 1);
+export const renderTopRow = (ctx: CanvasRenderingContext2D, days: Days, zoom: number) => {
+  const yPos = 0;
+  const textYPos = headerMonthHeight / 2;
+  let xPos = 0;
+  let width = 0;
 
-    if (week[0].dayOfMonth !== 1 && i === 0) xPos += dayWidth * (week[0].dayOfMonth - 1);
+  if (zoom === 1) {
+    getMonths(days).map((month) => {
+      const daysInMonth = days.filter((day) => day.monthName === month).length;
+      width = daysInMonth * dayWidth;
+      const monthName = month.toUpperCase();
 
-    const textXPos = xPos + width / 2 - ctx.measureText(`${weekLabel} ${i + 1}`).width / 2;
+      drawRow(ctx, xPos, yPos, width, headerMonthHeight, textYPos, monthName, fonts.topRow);
 
-    ctx.fillStyle = defaultFillStyle;
-    ctx.fillRect(xPos, yPos, width, headerWeekHeight);
-    ctx.strokeRect(xPos, yPos, width, headerWeekHeight);
+      xPos += width;
+    });
+  } else {
+    const daysInMonths = getDaysInMonths(days);
 
-    ctx.font = fonts.week;
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = theme.colors.darkGrey;
-    ctx.fillText(`${weekLabel} ${i + 1}`, textXPos, textYPos);
+    let width = 0;
 
-    xPos += width;
+    for (let i = 0; i < daysInMonths.length; i++) {
+      width += daysInMonths[i] * 12;
+    }
+
+    const yearsArray = days.map((day) => day.year);
+    const year = yearsArray[0].toString();
+
+    drawRow(ctx, xPos, yPos, width, headerMonthHeight, textYPos, year, fonts.topRow);
   }
 };
 
-export const renderDaysRow = (
-  ctx: CanvasRenderingContext2D,
-  xPos: number,
-  yPos: number,
-  days: Days
-) => {
+export const renderMiddleRow = (ctx: CanvasRenderingContext2D, days: Days, zoom: number) => {
+  let xPos = 0;
+
+  if (zoom === 1) {
+    const yPos = headerMonthHeight;
+    const width = 7 * dayWidth;
+
+    const textYPos = headerWeekHeight / 2 + headerMonthHeight;
+
+    for (let i = 0; i < 52; i++) {
+      const week = days.filter((week) => week.weekOfYear === i + 1);
+
+      if (week[0].dayOfMonth !== 1 && i === 0) xPos += dayWidth * (week[0].dayOfMonth - 1);
+
+      drawRow(
+        ctx,
+        xPos,
+        yPos,
+        width,
+        headerWeekHeight,
+        textYPos,
+        `${weekLabel} ${i + 1}`,
+        fonts.middleRow
+      );
+
+      xPos += width;
+    }
+  } else {
+    const yPos = headerMonthHeight;
+    const textYPos = headerWeekHeight / 2 + headerMonthHeight;
+    const months = getMonths(days);
+
+    const daysInMonths = getDaysInMonths(days);
+
+    for (let i = 0; i < months.length; i++) {
+      const width = daysInMonths[i] * 12;
+
+      drawRow(
+        ctx,
+        xPos,
+        yPos,
+        width,
+        headerWeekHeight,
+        textYPos,
+        months[i].toUpperCase(),
+        fonts.bottomRow.number
+      );
+
+      xPos += width;
+    }
+  }
+};
+
+export const renderBottomRow = (ctx: CanvasRenderingContext2D, days: Days, zoom: number) => {
   const dayNameYPos = headerHeight - headerDayHeight / 1.6;
   const dayNumYPos = headerHeight - headerDayHeight / 4.5;
+  const yPos = headerMonthHeight + headerWeekHeight;
+  let xPos = 0;
 
-  const calendarData = days.map(({ dayName, dayOfMonth, isBussinessDay, isCurrentDay }) => ({
-    dayName: dayName.toUpperCase(),
-    dayOfMonth,
-    isBussinessDay,
-    isCurrentDay
-  }));
+  const calendarData = getCalendarData(days);
 
-  for (let i = 0; i < days.length; i++) {
-    const { dayName, dayOfMonth, isBussinessDay, isCurrentDay } = calendarData[i];
+  if (zoom === 1) {
+    for (let i = 0; i < days.length; i++) {
+      const { dayName, dayOfMonth, isBusinessDay, isCurrentDay } = calendarData[i];
 
-    ctx.beginPath();
-    ctx.fillStyle = isBussinessDay ? daysFillStyle : theme.colors.hover;
-    if (isCurrentDay) ctx.fillStyle = theme.colors.accentLight;
-    ctx.fillRect(xPos, yPos, dayWidth, headerDayHeight);
-    ctx.strokeRect(xPos, yPos, dayWidth, headerDayHeight);
+      drawRow(
+        ctx,
+        xPos,
+        yPos,
+        dayWidth,
+        headerDayHeight,
+        undefined,
+        undefined,
+        undefined,
+        true,
+        getBoxFillStyle(isCurrentDay, isBusinessDay),
+        {
+          yPos: dayNameYPos,
+          label: dayName.toUpperCase(),
+          font: fonts.bottomRow.name,
+          color: getTextFillStyle(isCurrentDay, isBusinessDay)
+        },
+        {
+          yPos: dayNumYPos,
+          label: `${dayOfMonth}`,
+          font: fonts.bottomRow.number,
+          color: getTextFillStyle(isCurrentDay, isBusinessDay, true)
+        }
+      );
 
-    // Day name
-    ctx.font = fonts.day.name;
+      xPos += dayWidth;
+    }
+  } else {
+    const weekWidth = 84;
+    let xPos = 0;
 
-    const dayNameXPos = xPos + dayWidth / 2 - ctx.measureText(dayName).width / 2;
+    for (let i = 0; i < 52; i++) {
+      const weeks = days.filter((week) => week.weekOfYear === i + 1);
+      if (weeks[0].dayOfMonth !== 1 && i === 0) xPos += (weekWidth / 7) * (weeks[0].dayOfMonth - 1);
 
-    ctx.fillStyle = isBussinessDay ? theme.colors.black : theme.colors.darkGrey;
-    if (isCurrentDay) ctx.fillStyle = theme.colors.accent;
-    ctx.fillText(`${dayName}`, dayNameXPos, dayNameYPos);
+      const isCurrent = weeks.filter((week) =>
+        week.isCurrentDay === true ? week.weekOfYear : undefined
+      );
 
-    // Day num
-    ctx.font = fonts.day.number;
+      drawRow(
+        ctx,
+        xPos,
+        yPos,
+        weekWidth,
+        headerDayHeight,
+        undefined,
+        undefined,
+        undefined,
+        true,
+        getBoxFillStyle(isCurrent.length > 0, undefined, true),
+        {
+          yPos: dayNameYPos,
+          label: `${i + 1}`,
+          font: fonts.bottomRow.name,
+          color: getTextFillStyle(isCurrent.length > 0, false)
+        },
+        {
+          yPos: dayNumYPos,
+          label: weekLabel,
+          font: fonts.middleRow,
+          color: theme.colors.darkGrey
+        }
+      );
 
-    const dayNumXPos = xPos + dayWidth / 2 - ctx.measureText(dayOfMonth.toString()).width / 2;
-
-    ctx.fillStyle = isBussinessDay ? theme.colors.darkGrey : theme.colors.darkGrey;
-    ctx.fillText(`${dayOfMonth}`, dayNumXPos, dayNumYPos);
-
-    xPos += dayWidth;
+      xPos += weekWidth;
+    }
   }
-};
-
-export const renderYearRow = (
-  ctx: CanvasRenderingContext2D,
-  xPos: number,
-  yPos: number,
-  width: number,
-  days: Days
-) => {
-  ctx.beginPath();
-  ctx.fillStyle = defaultFillStyle;
-  ctx.strokeStyle = theme.colors.darkGrey;
-  ctx.fillRect(xPos, yPos, width, headerMonthHeight);
-  ctx.strokeRect(xPos, yPos, width, headerMonthHeight);
-
-  ctx.font = fonts.month;
 };
