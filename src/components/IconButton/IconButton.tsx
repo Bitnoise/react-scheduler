@@ -1,3 +1,4 @@
+import { useTheme } from "styled-components";
 import { Icon } from "@/components";
 import { ButtonWrapper } from "./styles";
 import { IconButtonProps } from "./types";
@@ -13,6 +14,8 @@ const IconButton = ({
   isFullRounded,
   isDisabled
 }: IconButtonProps) => {
+  const { colors } = useTheme();
+
   return (
     <ButtonWrapper
       onClick={onClick}
@@ -24,7 +27,7 @@ const IconButton = ({
         iconName={iconName}
         width={width}
         height={height}
-        fill={isDisabled ? "#777777" : fill}
+        fill={isDisabled ? colors.darkGrey : fill}
         className={className}
       />
       {children}
