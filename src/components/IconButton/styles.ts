@@ -3,6 +3,7 @@ import styled from "styled-components";
 type ButtonWrapperProps = {
   isFullRounded?: boolean;
   hasChildren?: boolean;
+  disabled?: boolean;
 };
 
 export const ButtonWrapper = styled.button<ButtonWrapperProps>`
@@ -13,11 +14,13 @@ export const ButtonWrapper = styled.button<ButtonWrapperProps>`
   justify-content: center;
   min-width: 24px;
   min-height: 24px;
-  border: 1px solid ${({ theme }) => theme.colors.accent};
+  border: 1px solid
+    ${({ theme, disabled }) => (disabled ? theme.colors.darkGrey : theme.colors.accent)};
   border-radius: ${({ isFullRounded }) => (isFullRounded ? "50%" : "4px")};
   cursor: pointer;
   color: ${({ theme }) => theme.colors.accent};
   font-size: 14px;
   gap: 4px;
   padding: ${({ hasChildren }) => (hasChildren ? "0 10px" : "0")};
+  transition: 0.5s ease;
 `;

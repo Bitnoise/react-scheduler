@@ -10,11 +10,23 @@ const IconButton = ({
   className,
   onClick = () => {},
   children,
-  isFullRounded
+  isFullRounded,
+  isDisabled
 }: IconButtonProps) => {
   return (
-    <ButtonWrapper onClick={onClick} isFullRounded={isFullRounded} hasChildren={!!children}>
-      <Icon iconName={iconName} width={width} height={height} fill={fill} className={className} />
+    <ButtonWrapper
+      onClick={onClick}
+      isFullRounded={isFullRounded}
+      hasChildren={!!children}
+      disabled={isDisabled}
+    >
+      <Icon
+        iconName={iconName}
+        width={width}
+        height={height}
+        fill={isDisabled ? "#777777" : fill}
+        className={className}
+      />
       {children}
     </ButtonWrapper>
   );

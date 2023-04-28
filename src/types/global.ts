@@ -1,4 +1,8 @@
-export type ZoomLevel = 0 | 1;
+export const allZoomLevel = [0, 1] as const;
+
+type ZoomLevelTuple = typeof allZoomLevel;
+
+export type ZoomLevel = ZoomLevelTuple[number];
 
 export type Config = {
   zoom: ZoomLevel;

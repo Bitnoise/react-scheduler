@@ -5,4 +5,5 @@ export type IconButtonProps = {
   onClick?: () => void;
   children?: ReactNode;
   isFullRounded?: boolean;
+  isDisabled?: boolean;
 } & IconProps;

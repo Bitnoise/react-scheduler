@@ -7,5 +7,7 @@ export const calendarContext = createContext<CalendaryContextType>({
   handleGoToday: () => {},
   zoomIn: () => {},
   zoomOut: () => {},
-  zoom: 0
+  zoom: 0,
+  isNextZoom: false,
+  isPrevZoom: false
 });

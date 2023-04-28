@@ -8,6 +8,8 @@ export type CalendaryContextType = {
   zoomIn: () => void;
   zoomOut: () => void;
   zoom: ZoomLevel;
+  isNextZoom: boolean;
+  isPrevZoom: boolean;
 };
 
 export type CalendarProviderProps = {
