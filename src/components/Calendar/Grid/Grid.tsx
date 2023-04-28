@@ -17,7 +17,7 @@ const Grid = ({ days, zoom }: GridProps) => {
     drawGrid(ctx, zoom, days);
   }, [days, zoom]);
 
-  return <canvas ref={canvasRef} />;
+  return <canvas style={{ marginTop: "44px" }} ref={canvasRef} />;
 };
 
 export default Grid;
