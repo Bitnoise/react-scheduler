@@ -31,8 +31,7 @@
   },
   "lint-staged": {
     "**/*.{ts,tsx}": [
-      "yarn run lint",
-      "yarn run format"
+      "yarn run lint"
     ]
   },
   "dependencies": {
