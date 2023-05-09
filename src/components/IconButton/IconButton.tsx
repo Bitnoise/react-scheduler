@@ -9,7 +9,7 @@ const IconButton = ({
   height,
   fill,
   className,
-  onClick = () => {},
+  onClick,
   children,
   isFullRounded,
   isDisabled
