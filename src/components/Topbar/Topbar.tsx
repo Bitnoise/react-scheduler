@@ -26,7 +26,7 @@ const Topbar = () => {
       </NavigationWrapper>
       <Zoom>
         {topbar.view}:
-        <IconButton onClick={zoomOut} isFullRounded iconName="substract" width="14" />
+        <IconButton onClick={zoomOut} isFullRounded iconName="subtract" width="14" />
         <IconButton onClick={zoomIn} isFullRounded iconName="add" width="14" />
       </Zoom>
     </Wrapper>
