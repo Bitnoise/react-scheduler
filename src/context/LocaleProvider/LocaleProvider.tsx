@@ -4,14 +4,11 @@ import { locales } from "./locales";
 import { LocaleProviderProps, LocaleType } from "./types";
 
 const LocaleProvider = ({ children }: LocaleProviderProps) => {
-  let localeId: string | null = localStorage.getItem("locale");
-
-  if (!localeId) localeId = "en";
+  const localeId: string = localStorage.getItem("locale") ?? "en";
 
   const findLocale = () => {
     const locale = locales.find((l) => l.translateCode === localeId);
-    if (locale) return locale;
-    return locales[0];
+    return locale || locales[0];
   };
 
   const [currentLocale, setCurrentLocale] = useState<LocaleType>(findLocale);
@@ -24,7 +21,7 @@ const LocaleProvider = ({ children }: LocaleProviderProps) => {
   const { Provider } = localeContext;
 
   return (
-    <Provider value={{ currentLocale, locales: locales, setCurrentLocale: saveCurrentLocale }}>
+    <Provider value={{ currentLocale, locales, setCurrentLocale: saveCurrentLocale }}>
       {children}
     </Provider>
   );
