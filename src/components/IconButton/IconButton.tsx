@@ -21,8 +21,7 @@ const IconButton = ({
       onClick={onClick}
       isFullRounded={isFullRounded}
       hasChildren={!!children}
-      disabled={isDisabled}
-    >
+      disabled={isDisabled}>
       <Icon
         iconName={iconName}
         width={width}
