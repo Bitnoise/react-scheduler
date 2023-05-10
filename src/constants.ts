@@ -4,3 +4,4 @@ export const headerWeekHeight = 16;
 export const headerDayHeight = 40;
 export const headerHeight = headerDayHeight + headerWeekHeight + headerMonthHeight;
 export const weekWidth = 84;
+export const boxHeight = 60;

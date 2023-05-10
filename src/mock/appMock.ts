@@ -1,121 +1,50 @@
+import { faker } from "@faker-js/faker";
 import { SchedulerData, SchedulerRowData } from "@/types/global";
-
 export const mockedOnRangeChange = () => {
   console.log("Mocked on range change has been triggered");
 };
 
-export const mockedDataExample: SchedulerData = [
-  {
-    label: {
-      icon: "icon",
-      title: "Title",
-      subtitle: "Subtitle"
-    },
-    data: [
-      {
-        startDate: new Date("04.26.2023"),
-        endDate: new Date("04.27.2023"),
-        title: "Data title",
-        subtitle: "Data subtitle",
-        description: "Data description"
-      }
-    ]
-  }
-];
+const getRandomWords = (amount?: number) =>
+  amount ? faker.random.words(amount) : faker.random.word();
 
-const titles = [
-  "nut",
-  "hour",
-  "time",
-  "authority",
-  "giraffe",
-  "whistle",
-  "dad",
-  "pen",
-  "approval",
-  "nation",
-  "smash",
-  "anger",
-  "print",
-  "crown",
-  "order",
-  "disgust",
-  "baby",
-  "caption",
-  "distribution",
-  "banana"
-];
-const subtitles = [
-  "cactus",
-  "prove",
-  "decorous",
-  "gruesome",
-  "whip",
-  "open",
-  "ripe",
-  "wish",
-  "orde",
-  "judicious",
-  "help",
-  "furtive",
-  "like",
-  "black-and-white",
-  "excellent",
-  "cheap",
-  "home",
-  "worship",
-  "bed",
-  "surpass"
-];
-
-const getRandomDates = (start: Date, end: Date) => {
-  const startDate = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-  const endDate = new Date(
-    startDate.getTime() + Math.random() * (end.getTime() - startDate.getTime())
-  );
+const getRandomDates = (year: number) => {
+  const startDate = faker.date.between(new Date(year, 0, 1), new Date(year + 1, 0, 1));
+  const endDate = faker.date.between(startDate, new Date(year + 1, 0, 1));
   return { startDate, endDate };
 };
 
-const generateData = (size: number) => {
+const generateData = (amount: number, year: number, amountOfDscWords: number) => {
   const data: SchedulerRowData[] = [];
 
-  for (let i = 0; i <= size; i++) {
-    const { startDate, endDate } = getRandomDates(new Date(2023, 0, 1), new Date());
-    const { title, subtitle } = getRandomTitleAndSubtitle();
+  for (let i = 0; i < amount; i++) {
+    const { startDate, endDate } = getRandomDates(year);
     const item = {
       startDate,
       endDate,
-      title,
-      subtitle,
-      description: "Data description"
+      title: getRandomWords(),
+      subtitle: getRandomWords(),
+      description: getRandomWords(amountOfDscWords)
     };
     data.push(item);
   }
   return data;
 };
 
-const getRandomTitleAndSubtitle = () => {
-  const titleIndex = Math.floor(Math.random() * (titles.length - 1) + 1);
-  const subtitleIndex = Math.floor(Math.random() * (subtitles.length - 1) + 1);
-  return {
-    title: titles[titleIndex],
-    subtitle: subtitles[subtitleIndex]
-  };
-};
-
-export const createMockData = (size: number, maxDataLength: number): SchedulerData => {
+export const createMockData = (
+  amount: number,
+  year: number,
+  amountOfDscWords = 5
+): SchedulerData => {
   const schedulerData: SchedulerData = [];
 
-  for (let i = 0; i < size; i++) {
-    const dataLengthToGenerate = Math.floor(Math.random() * (maxDataLength - 1) + 1);
-    const data: SchedulerRowData[] = generateData(dataLengthToGenerate);
-    const { title, subtitle } = getRandomTitleAndSubtitle();
+  for (let i = 0; i < amount; i++) {
+    const data: SchedulerRowData[] = generateData(amount, year, amountOfDscWords);
 
     const item = {
       label: {
         icon: "icon",
-        title,
-        subtitle
+        title: getRandomWords(),
+        subtitle: getRandomWords()
       },
       data
     };

@@ -12,13 +12,12 @@ const Scheduler = ({ data, config, onRangeChange }: SchedulerProps) => {
     isFiltersButtonVisible: true,
     ...config
   };
-
   return (
     <ThemeProvider theme={theme}>
       <LocaleProvider>
         <CalendarProvider data={data} config={appConfig} onRangeChange={onRangeChange}>
           <Topbar />
-          <Calendar />
+          <Calendar data={data} />
         </CalendarProvider>
       </LocaleProvider>
     </ThemeProvider>

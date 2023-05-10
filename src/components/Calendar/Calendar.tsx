@@ -1,23 +1,14 @@
-import { useState } from "react";
+import { FC } from "react";
 import { getDaysInYear } from "@/utils/dates";
+import { useCalendar } from "@/context/CalendarProvider";
 import { Grid } from "..";
+import { CalendarProps } from "./types";
 
-export const Calendar = () => {
-  const [zoom, setZoom] = useState(2);
+export const Calendar: FC<CalendarProps> = ({ data }) => {
+  const { zoom } = useCalendar();
   const days = getDaysInYear(new Date().getFullYear());
-  return (
-    <>
-      {/* PLACEHOLDER BUTTON FOR CHANGING ZOOM */}
-      <button
-        onClick={() => setZoom(zoom === 1 ? 2 : 1)}
-        style={{ marginBottom: "2rem", position: "fixed", bottom: "0", left: "0" }}>
-        ZMIEŃ
-      </button>
-      {/* PLACEHOLDER BUTTON FOR CHANGING ZOOM */}
 
-      <Grid days={days} zoom={zoom} />
-    </>
-  );
+  return <Grid days={days} zoom={zoom} rows={data.length} />;
 };
 
 export default Calendar;

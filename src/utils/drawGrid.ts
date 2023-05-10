@@ -1,13 +1,10 @@
-import { dayWidth, headerHeight } from "@/constants";
+import { boxHeight, dayWidth, headerHeight, weekWidth } from "@/constants";
 import { theme } from "@/styles";
 import { Days, getDaysInMonths } from "./dates";
 import { drawDashedLine } from "./drawDashedLine";
 import { renderTopRow, renderMiddleRow, renderBottomRow } from "./renderCalendarHeader";
 
-const rows = 15;
-const boxHeight = 60;
-
-export const drawGrid = (ctx: CanvasRenderingContext2D, zoom: number, days: Days) => {
+export const drawGrid = (ctx: CanvasRenderingContext2D, zoom: number, days: Days, rows: number) => {
   const daysInYear = days.length;
 
   ctx.canvas.width = daysInYear * dayWidth;
@@ -33,7 +30,6 @@ export const drawGrid = (ctx: CanvasRenderingContext2D, zoom: number, days: Days
   } else {
     let xPos = 0;
     let startPos = 0;
-    const weekWidth = 84;
     const daysInMonths = getDaysInMonths(days);
 
     for (let i = 0; i < 52; i++) {
