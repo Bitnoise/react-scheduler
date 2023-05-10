@@ -8,7 +8,7 @@ const CalendarProvider = ({ children, config, onRangeChange }: CalendarProviderP
   const [zoom, setZoom] = useState<ZoomLevel>(config.zoom);
   const isNextZoom = allZoomLevel[zoom] !== allZoomLevel[allZoomLevel.length - 1];
   const isPrevZoom = zoom !== 0;
-  console.log("ZOOM", zoom);
+
   useEffect(() => {
     onRangeChange();
   }, [onRangeChange, zoom]);
