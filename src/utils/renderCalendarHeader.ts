@@ -3,7 +3,8 @@ import {
   headerDayHeight,
   headerHeight,
   headerMonthHeight,
-  headerWeekHeight
+  headerWeekHeight,
+  weekWidth
 } from "@/constants";
 import { theme } from "@/styles";
 import { Days, getCalendarData, getDaysInMonths, getMonths } from "./dates";
@@ -159,16 +160,13 @@ export const renderBottomRow = (ctx: CanvasRenderingContext2D, days: Days, zoom:
       xPos += dayWidth;
     }
   } else {
-    const weekWidth = 84;
     let xPos = 0;
 
     for (let i = 0; i < 52; i++) {
       const weeks = days.filter((week) => week.weekOfYear === i + 1);
       if (weeks[0].dayOfMonth !== 1 && i === 0) xPos += (weekWidth / 7) * (weeks[0].dayOfMonth - 1);
 
-      const isCurrent = weeks.filter((week) =>
-        week.isCurrentDay === true ? week.weekOfYear : undefined
-      );
+      const isCurrent = weeks.filter((week) => (week.isCurrentDay ? week.weekOfYear : undefined));
 
       drawRow(
         ctx,

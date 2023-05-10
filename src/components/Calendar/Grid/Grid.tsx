@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-
 import { drawGrid } from "@/utils/drawGrid";
 import { GridProps } from "./types";
+import { StyledCanvas } from "./styles";
 
 const Grid = ({ days, zoom }: GridProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -17,7 +17,7 @@ const Grid = ({ days, zoom }: GridProps) => {
     drawGrid(ctx, zoom, days);
   }, [days, zoom]);
 
-  return <canvas style={{ marginTop: "44px" }} ref={canvasRef} />;
+  return <StyledCanvas ref={canvasRef} />;
 };
 
 export default Grid;

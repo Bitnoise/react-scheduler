@@ -3,8 +3,8 @@ import { ZoomLevel } from "@/types/global";
 import { calendarContext } from "./calendarContext";
 import { CalendarProviderProps } from "./types";
 
-const CalendarProvider = ({ children, config, data, onRangeChange }: CalendarProviderProps) => {
-  const [zoom, setZoom] = useState<ZoomLevel>(config.zoom);
+const CalendarProvider = ({ children, config, onRangeChange }: CalendarProviderProps) => {
+  const [zoom] = useState<ZoomLevel>(config.zoom);
 
   const handleGoNext = () => {
     console.log("Handle next");

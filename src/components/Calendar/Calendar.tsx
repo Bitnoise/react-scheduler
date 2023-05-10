@@ -10,8 +10,7 @@ export const Calendar = () => {
       {/* PLACEHOLDER BUTTON FOR CHANGING ZOOM */}
       <button
         onClick={() => setZoom(zoom === 1 ? 2 : 1)}
-        style={{ marginBottom: "2rem", position: "fixed", bottom: "0", left: "0" }}
-      >
+        style={{ marginBottom: "2rem", position: "fixed", bottom: "0", left: "0" }}>
         ZMIEŃ
       </button>
       {/* PLACEHOLDER BUTTON FOR CHANGING ZOOM */}
@@ -20,4 +19,5 @@ export const Calendar = () => {
     </>
   );
 };
+
 export default Calendar;

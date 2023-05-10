@@ -3,7 +3,7 @@ import { useCalendar } from "@/context/CalendarProvider";
 import { NavigationWrapper, Wrapper, NavBtn, Today, Zoom, Filters } from "./styles";
 
 const Topbar = () => {
-  const { handleGoNext, handleGoPrev, handleGoToday, zoomIn, zoomOut, zoom } = useCalendar();
+  const { handleGoNext, handleGoPrev, handleGoToday, zoomIn, zoomOut } = useCalendar();
   return (
     <Wrapper>
       <Filters>

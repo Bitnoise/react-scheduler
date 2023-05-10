@@ -40,9 +40,7 @@ export const drawGrid = (ctx: CanvasRenderingContext2D, zoom: number, days: Days
       const weeks = days.filter((week) => week.weekOfYear === i + 1);
       if (weeks[0].dayOfMonth !== 1 && i === 0) xPos += (weekWidth / 7) * (weeks[0].dayOfMonth - 1);
 
-      const isCurrent = weeks.filter((week) =>
-        week.isCurrentDay === true ? week.weekOfYear : undefined
-      );
+      const isCurrent = weeks.filter((week) => (week.isCurrentDay ? week.weekOfYear : undefined));
 
       for (let y = 0; y <= rows; y++) {
         drawRectangle(
