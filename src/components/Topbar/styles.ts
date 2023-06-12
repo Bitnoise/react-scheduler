@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { leftColumnWidth } from "@/constants";
 
 const resetBtnStyles = `
   background: none;
@@ -9,27 +10,27 @@ const resetBtnStyles = `
 export const Wrapper = styled.div`
   position: fixed;
   top: 0;
-  left: 0;
+  left: ${leftColumnWidth + "px"};
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: calc(100% - ${leftColumnWidth + "px"});
   height: ${({ theme }) => theme.navHeight};
-  padding: 10px 16px;
+  padding: 0.625rem 1rem;
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
 export const NavigationWrapper = styled.div`
   display: flex;
-  gap: 30px;
+  gap: 1.875rem;
 `;
 
 export const NavBtn = styled.button`
   ${resetBtnStyles};
   display: flex;
   align-items: center;
-  gap: 4px;
-  font-size: 14px;
+  gap: 0.25rem;
+  font-size: 0.875rem;
   font-weight: 400;
   cursor: pointer;
 `;
@@ -39,29 +40,30 @@ export const Today = styled.button`
   position: relative;
   font-weight: 600;
   cursor: pointer;
+  line-height: 1.5rem;
 
   &::before,
   &::after {
     content: "";
     position: absolute;
     width: 1px;
-    height: 21px;
+    height: 1.5rem;
     background-color: ${({ theme }) => theme.colors.darkViolet};
   }
   &::before {
-    left: -18px;
+    left: -1.125rem;
   }
   &::after {
-    right: -18px;
+    right: -1.125rem;
   }
 `;
 
 export const Zoom = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 0.875rem;
 `;
 
 export const Filters = styled.div`

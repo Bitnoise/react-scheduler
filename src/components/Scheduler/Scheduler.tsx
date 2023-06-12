@@ -5,6 +5,7 @@ import LocaleProvider from "@/context/LocaleProvider";
 import { theme } from "@/styles";
 import { Config } from "@/types/global";
 import { SchedulerProps } from "./types";
+import { StyledInnerWrapper, StyledOutsideWrapper } from "./styles";
 
 const Scheduler = ({ data, config, onRangeChange }: SchedulerProps) => {
   const appConfig: Config = {
@@ -12,12 +13,17 @@ const Scheduler = ({ data, config, onRangeChange }: SchedulerProps) => {
     isFiltersButtonVisible: true,
     ...config
   };
+
   return (
     <ThemeProvider theme={theme}>
       <LocaleProvider>
         <CalendarProvider data={data} config={appConfig} onRangeChange={onRangeChange}>
-          <Topbar />
-          <Calendar data={data} />
+          <StyledOutsideWrapper>
+            <StyledInnerWrapper>
+              <Calendar data={data} />
+              <Topbar />
+            </StyledInnerWrapper>
+          </StyledOutsideWrapper>
         </CalendarProvider>
       </LocaleProvider>
     </ThemeProvider>

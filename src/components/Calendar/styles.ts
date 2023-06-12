@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
 export const StyledWrapper = styled.div`
-  margin-top: 44px;
+  display: flex;
 `;
-
-export const StyledCanvas = styled.canvas``;

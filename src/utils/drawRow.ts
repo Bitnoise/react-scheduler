@@ -30,7 +30,7 @@ export const drawRow = (
   if (label && font && textYPos) {
     ctx.fillStyle = defaultFillStyle;
     ctx.fillRect(xPos, yPos, width, height);
-    ctx.strokeRect(xPos, yPos, width, height);
+    ctx.strokeRect(xPos + 0.5, yPos + 0.5, width, height);
 
     ctx.font = font;
 
@@ -42,7 +42,7 @@ export const drawRow = (
   if (isBottomRow && fillStyle && topText && bottomText) {
     ctx.fillStyle = fillStyle;
     ctx.fillRect(xPos, yPos, width, height);
-    ctx.strokeRect(xPos, yPos, width, height);
+    ctx.strokeRect(xPos + 0.5, yPos + 0.5, width, height);
 
     ctx.font = topText.font;
 
