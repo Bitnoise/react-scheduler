@@ -27,3 +27,14 @@ export type SchedulerRowData = {
   subtitle?: string;
   description?: string;
 };
+
+export type Day = {
+  dayName: string;
+  dayOfMonth: number;
+  weekOfYear: number;
+  month: number;
+  monthName: string;
+  isBusinessDay: boolean;
+  isCurrentDay: boolean;
+  year: number;
+};

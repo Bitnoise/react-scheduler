@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import dayOfYear from "dayjs/plugin/dayOfYear";
 import weekOfYear from "dayjs/plugin/weekOfYear";
 import pl from "dayjs/locale/pl";
+import { months } from "@/constants";
 
 dayjs.locale({
   ...pl
@@ -13,7 +14,7 @@ dayjs.extend(weekOfYear);
 export const daysInYear = (year: number) =>
   (year % 4 === 0 && year % 100 > 0) || year % 400 === 0 ? 366 : 365;
 
-const getIsBusinessDay = (date: dayjs.Dayjs) => {
+export const getIsBusinessDay = (date: dayjs.Dayjs) => {
   const day = date.day();
   return day !== 0 && day !== 6;
 };
@@ -39,26 +40,20 @@ export const getDaysInYear = (year: number) => {
   });
 };
 
-export const getMonths = (days: Days) => Array.from(new Set(days.map((day) => day.monthName)));
-
-export const getNumberOfDaysPerWeekOfYear = (days: Days) => {
-  const weeks = Array.from(new Set(days.map((day) => day.weekOfYear)));
-  const numberOfDaysPerWeekOfYear = weeks.map((week) => {
-    return days.filter((day) => day.weekOfYear === week).length;
-  });
-  return numberOfDaysPerWeekOfYear;
-};
-
 export type Days = ReturnType<typeof getDaysInYear>;
 
-export const getCalendarData = (days: Days) =>
-  days.map(({ dayName, dayOfMonth, isBusinessDay, isCurrentDay, weekOfYear }) => ({
-    dayName,
-    dayOfMonth,
-    isBusinessDay,
-    isCurrentDay,
-    weekOfYear
-  }));
-
 export const getDaysInMonths = (days: Days) =>
-  getMonths(days).map((month) => days.filter((day) => day.monthName === month).length);
+  months.map((month) => days.filter((day) => day.monthName === month).length);
+
+export const parseDay = (data: dayjs.Dayjs) => {
+  return {
+    dayName: data.format("ddd"),
+    dayOfMonth: data.date(),
+    weekOfYear: data.week(),
+    month: data.month(),
+    monthName: data.format("MMMM"),
+    isBusinessDay: getIsBusinessDay(data),
+    isCurrentDay: data.isSame(dayjs(), "day"),
+    year: parseInt(data.format("YYYY"))
+  };
+};

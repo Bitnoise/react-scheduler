@@ -1,14 +1,21 @@
+import dayjs from "dayjs";
+import weekOfYear from "dayjs/plugin/weekOfYear";
 import {
   dayWidth,
   headerDayHeight,
   headerHeight,
   headerMonthHeight,
   headerWeekHeight,
-  weekWidth
+  months,
+  singleDayWidth,
+  weekWidth,
+  weeksInYear
 } from "@/constants";
 import { theme } from "@/styles";
-import { Days, getCalendarData, getDaysInMonths, getMonths } from "./dates";
+import { Day } from "@/types/global";
+import { Days, daysInYear, parseDay } from "./dates";
 import { drawRow } from "./drawRow";
+import { getRearrangedDaysInMonths } from "./getRearrangedDaysInMonths";
 
 const daysFillStyle = theme.colors.superLightBlue;
 const fonts = {
@@ -35,52 +42,100 @@ const getTextFillStyle = (isCurrent: boolean, isBusinessDay: boolean, isBottom?:
   return theme.colors.darkGrey;
 };
 
-export const renderTopRow = (ctx: CanvasRenderingContext2D, days: Days, zoom: number) => {
+export const renderTopRow = (
+  ctx: CanvasRenderingContext2D,
+  days: Days,
+  zoom: number,
+  startDate: Day,
+  dayOfYear: number
+) => {
+  let xPos = 0;
   const yPos = 0;
   const textYPos = headerMonthHeight / 2;
-  let xPos = 0;
-  let width = 0;
 
   if (zoom === 1) {
-    getMonths(days).map((month) => {
-      const daysInMonth = days.filter((day) => day.monthName === month).length;
-      width = daysInMonth * dayWidth;
-      const monthName = month.toUpperCase();
+    // DRAWS MONTHS ROW
 
+    let width = 0;
+    let startMonthIndex = dayjs(
+      `${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`
+    ).month();
+    xPos = -startDate.dayOfMonth * dayWidth + dayWidth;
+
+    const daysInMonths = months.map(
+      (month) => days.filter((day) => day.monthName === month).length
+    );
+
+    for (let i = 0; i <= months.length - 1; i++) {
+      if (startMonthIndex > months.length - 1) startMonthIndex = 0;
+      width = daysInMonths[startMonthIndex] * dayWidth;
+      const monthName = months[startMonthIndex].toUpperCase();
       drawRow(ctx, xPos, yPos, width, headerMonthHeight, textYPos, monthName, fonts.topRow);
 
       xPos += width;
-    });
-  } else {
-    const daysInMonths = getDaysInMonths(days);
-
-    let width = 0;
-
-    for (let i = 0; i < daysInMonths.length; i++) {
-      width += daysInMonths[i] * 12;
+      startMonthIndex++;
     }
+  } else {
+    // DRAWS YEARS ROW
 
-    const yearsArray = days.map((day) => day.year);
-    const year = yearsArray[0].toString();
+    let index = 0;
+    const year = startDate.year;
+    const canvasWidth = ctx.canvas.width * 2;
+    let width = (daysInYear(year) - dayOfYear + 1) * singleDayWidth;
+    let totalWidthOfElements = 0;
 
-    drawRow(ctx, xPos, yPos, width, headerMonthHeight, textYPos, year, fonts.topRow);
+    while (xPos + totalWidthOfElements <= canvasWidth) {
+      if (index > 0) {
+        width = daysInYear(year + index) * singleDayWidth;
+      }
+      if (totalWidthOfElements + width > canvasWidth && index > 0) {
+        width = Math.ceil((canvasWidth - totalWidthOfElements) / singleDayWidth) * singleDayWidth;
+      }
+      drawRow(
+        ctx,
+        xPos,
+        yPos,
+        width,
+        headerMonthHeight,
+        textYPos,
+        (year + index).toString(),
+        fonts.topRow
+      );
+
+      xPos += width;
+      totalWidthOfElements += width;
+      index++;
+    }
   }
 };
 
-export const renderMiddleRow = (ctx: CanvasRenderingContext2D, days: Days, zoom: number) => {
+export const renderMiddleRow = (
+  ctx: CanvasRenderingContext2D,
+  days: Days,
+  zoom: number,
+  cols: number,
+  startDate: Day
+) => {
   let xPos = 0;
 
   if (zoom === 1) {
-    const yPos = headerMonthHeight;
+    // DRAWS WEEKS ROW
+
     const width = 7 * dayWidth;
-
+    const yPos = headerMonthHeight;
     const textYPos = headerWeekHeight / 2 + headerMonthHeight;
+    const weeksThreshold = ctx.canvas.width / width + width;
+    const startWeek = startDate.weekOfYear;
 
-    for (let i = 0; i < 52; i++) {
-      const week = days.filter((week) => week.weekOfYear === i + 1);
+    for (let i = 0; i < weeksThreshold; i++) {
+      let weekIndex = (startWeek + i) % weeksInYear;
+      const day = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`).day();
 
-      if (week[0].dayOfMonth !== 1 && i === 0) xPos += dayWidth * (week[0].dayOfMonth - 1);
+      if (weekIndex <= 0) {
+        weekIndex += weeksInYear;
+      }
 
+      if (day !== 1 && i === 0) xPos = -day * dayWidth + dayWidth;
       drawRow(
         ctx,
         xPos,
@@ -88,22 +143,27 @@ export const renderMiddleRow = (ctx: CanvasRenderingContext2D, days: Days, zoom:
         width,
         headerWeekHeight,
         textYPos,
-        `${weekLabel} ${i + 1}`,
+        `${weekLabel} ${weekIndex}`,
         fonts.middleRow
       );
 
       xPos += width;
     }
   } else {
+    // DRAWS MONTHS ROW
+
+    let xPos = -(startDate.dayOfMonth - 1) * singleDayWidth;
     const yPos = headerMonthHeight;
     const textYPos = headerWeekHeight / 2 + headerMonthHeight;
-    const months = getMonths(days);
+    const monthIndex = months.findIndex((month) => month === startDate.monthName);
+    const rearrangedMonths = [...months.slice(monthIndex), ...months.slice(0, monthIndex)];
+    const daysInMonths = getRearrangedDaysInMonths(days, startDate);
 
-    const daysInMonths = getDaysInMonths(days);
+    let index = 0;
 
-    for (let i = 0; i < months.length; i++) {
-      const width = daysInMonths[i] * 12;
-
+    for (let i = 0; i < cols; i++) {
+      if (index > months.length - 1) index = 0;
+      const width = daysInMonths[index] * singleDayWidth;
       drawRow(
         ctx,
         xPos,
@@ -111,27 +171,33 @@ export const renderMiddleRow = (ctx: CanvasRenderingContext2D, days: Days, zoom:
         width,
         headerWeekHeight,
         textYPos,
-        months[i].toUpperCase(),
+        rearrangedMonths[index].toUpperCase(),
         fonts.bottomRow.number
       );
-
       xPos += width;
+      index++;
     }
   }
 };
 
-export const renderBottomRow = (ctx: CanvasRenderingContext2D, days: Days, zoom: number) => {
+export const renderBottomRow = (
+  ctx: CanvasRenderingContext2D,
+  zoom: number,
+  cols: number,
+  startDate: Day
+) => {
   const dayNameYPos = headerHeight - headerDayHeight / 1.6;
   const dayNumYPos = headerHeight - headerDayHeight / 4.5;
   const yPos = headerMonthHeight + headerWeekHeight;
   let xPos = 0;
 
-  const calendarData = getCalendarData(days);
-
   if (zoom === 1) {
-    for (let i = 0; i < days.length; i++) {
-      const { dayName, dayOfMonth, isBusinessDay, isCurrentDay } = calendarData[i];
+    // DRAWS WEEKS ROW
 
+    for (let i = 0; i < cols; i++) {
+      const day = parseDay(
+        dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`).add(i, "days")
+      );
       drawRow(
         ctx,
         xPos,
@@ -142,31 +208,36 @@ export const renderBottomRow = (ctx: CanvasRenderingContext2D, days: Days, zoom:
         undefined,
         undefined,
         true,
-        getBoxFillStyle(isCurrentDay, isBusinessDay),
+        getBoxFillStyle(day.isCurrentDay, day.isBusinessDay),
         {
           yPos: dayNameYPos,
-          label: dayName.toUpperCase(),
+          label: day.dayName.toUpperCase(),
           font: fonts.bottomRow.name,
-          color: getTextFillStyle(isCurrentDay, isBusinessDay)
+          color: getTextFillStyle(day.isCurrentDay, day.isBusinessDay)
         },
         {
           yPos: dayNumYPos,
-          label: `${dayOfMonth}`,
+          label: `${day.dayOfMonth}`,
           font: fonts.bottomRow.number,
-          color: getTextFillStyle(isCurrentDay, isBusinessDay, true)
+          color: getTextFillStyle(day.isCurrentDay, day.isBusinessDay, true)
         }
       );
 
       xPos += dayWidth;
     }
   } else {
+    // DRAWS DAYS ROW
+
+    dayjs.extend(weekOfYear);
     let xPos = 0;
 
-    for (let i = 0; i < 52; i++) {
-      const weeks = days.filter((week) => week.weekOfYear === i + 1);
-      if (weeks[0].dayOfMonth !== 1 && i === 0) xPos += (weekWidth / 7) * (weeks[0].dayOfMonth - 1);
+    for (let i = 0; i <= cols; i++) {
+      const week = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`).add(
+        i,
+        "weeks"
+      );
 
-      const isCurrent = weeks.filter((week) => (week.isCurrentDay ? week.weekOfYear : undefined));
+      const isCurrWeek = week.isSame(dayjs(), "week");
 
       drawRow(
         ctx,
@@ -178,12 +249,12 @@ export const renderBottomRow = (ctx: CanvasRenderingContext2D, days: Days, zoom:
         undefined,
         undefined,
         true,
-        getBoxFillStyle(isCurrent.length > 0, undefined, true),
+        getBoxFillStyle(isCurrWeek, undefined, true),
         {
           yPos: dayNameYPos,
-          label: `${i + 1}`,
+          label: week.week().toString(),
           font: fonts.bottomRow.name,
-          color: getTextFillStyle(isCurrent.length > 0, false)
+          color: getTextFillStyle(isCurrWeek, false)
         },
         {
           yPos: dayNumYPos,

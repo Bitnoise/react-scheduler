@@ -1,7 +1,9 @@
 import { faker } from "@faker-js/faker";
 import { SchedulerData, SchedulerRowData } from "@/types/global";
-export const mockedOnRangeChange = () => {
-  console.log("Mocked on range change has been triggered");
+import { ParsedDatesRange } from "@/utils/getDatesRange";
+
+export const mockedOnRangeChange = (range: ParsedDatesRange) => {
+  console.log("Mocked on range change has been triggered. New range: ", range);
 };
 
 const getRandomWords = (amount?: number) =>
@@ -14,7 +16,7 @@ const getRandomDates = (year: number) => {
 };
 
 const generateData = (year: number, amountOfDscWords: number, hasMultipleProjects: boolean) =>
-  new Array(hasMultipleProjects ? 2 : 1).map(() => {
+  Array.from({ length: hasMultipleProjects ? 2 : 1 }, () => {
     const { startDate, endDate } = getRandomDates(year);
     return {
       startDate,
@@ -35,7 +37,6 @@ export const createMockData = (
   for (let i = 0; i < amount; i++) {
     const hasMultipleProjects = faker.datatype.boolean();
     const data: SchedulerRowData[] = generateData(year, amountOfDscWords, hasMultipleProjects);
-
     const item = {
       label: {
         icon: "https://picsum.photos/24",

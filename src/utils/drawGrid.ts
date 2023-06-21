@@ -1,71 +1,100 @@
-import { boxHeight, dayWidth, headerHeight, weekWidth } from "@/constants";
+import dayjs from "dayjs";
+import weekOfYear from "dayjs/plugin/weekOfYear";
+import dayOfYear from "dayjs/plugin/dayOfYear";
+import { boxHeight, dayWidth, headerHeight, months, singleDayWidth, weekWidth } from "@/constants";
 import { theme } from "@/styles";
-import { Days, getDaysInMonths } from "./dates";
+import { Day } from "@/types/global";
+import { Days, getIsBusinessDay, parseDay } from "./dates";
 import { drawDashedLine } from "./drawDashedLine";
 import { renderTopRow, renderMiddleRow, renderBottomRow } from "./renderCalendarHeader";
+import { getRearrangedDaysInMonths } from "./getRearrangedDaysInMonths";
+import { getDatesRange } from "./getDatesRange";
 
-export const drawGrid = (ctx: CanvasRenderingContext2D, zoom: number, days: Days, rows: number) => {
-  const daysInYear = days.length;
-
-  ctx.canvas.width = daysInYear * dayWidth;
-  ctx.canvas.height = rows * boxHeight + headerHeight;
+export const drawGrid = (
+  ctx: CanvasRenderingContext2D,
+  zoom: number,
+  days: Days,
+  rows: number,
+  baseDate: dayjs.Dayjs
+) => {
+  dayjs.extend(weekOfYear);
+  dayjs.extend(dayOfYear);
 
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  const canvasWrapper = document.getElementById("canvasWrapper");
+  if (!canvasWrapper) return;
 
-  drawHeader(ctx, zoom, days);
+  const cols =
+    zoom === 0
+      ? Math.ceil(window.innerWidth / weekWidth) * 3
+      : Math.ceil(window.innerWidth / dayWidth) * 3;
+
+  const startDate = getDatesRange(baseDate, zoom).startDate;
+  const parsedStartDate = parseDay(startDate);
+  const dayNumOfYear = dayjs(startDate).dayOfYear();
+
+  drawHeader(ctx, zoom, days, cols, parsedStartDate, dayNumOfYear);
 
   if (zoom === 1) {
-    days.map((day, index) => {
-      for (let y = 0; y <= rows; y++) {
+    for (let i = 0; i <= rows; i++) {
+      for (let y = 0; y <= cols; y++) {
+        const date = dayjs(
+          `${parsedStartDate.year}-${parsedStartDate.month + 1}-${parsedStartDate.dayOfMonth}`
+        ).add(y, "days");
+
+        const isCurrentDay = date.isSame(dayjs(), "day");
+
         drawRectangle(
           ctx,
-          index * dayWidth,
-          y * boxHeight + headerHeight,
+          y * dayWidth,
+          i * boxHeight + headerHeight,
           dayWidth,
-          day.isBusinessDay,
-          day.isCurrentDay
+          getIsBusinessDay(date),
+          isCurrentDay
         );
       }
-    });
+    }
   } else {
     let xPos = 0;
-    let startPos = 0;
-    const daysInMonths = getDaysInMonths(days);
+    let startPos = -(parsedStartDate.dayOfMonth - 1) * singleDayWidth;
 
-    for (let i = 0; i < 52; i++) {
-      const weeks = days.filter((week) => week.weekOfYear === i + 1);
-      if (weeks[0].dayOfMonth !== 1 && i === 0) xPos += (weekWidth / 7) * (weeks[0].dayOfMonth - 1);
+    for (let i = 0; i <= cols; i++) {
+      const week = dayjs(
+        `${parsedStartDate.year}-${parsedStartDate.month + 1}-${parsedStartDate.dayOfMonth}`
+      ).add(i, "weeks");
 
-      const isCurrent = weeks.filter((week) => (week.isCurrentDay ? week.weekOfYear : undefined));
+      const isCurrWeek = week.isSame(dayjs(), "week");
 
       for (let y = 0; y <= rows; y++) {
-        drawRectangle(
-          ctx,
-          xPos,
-          y * boxHeight + headerHeight,
-          weekWidth,
-          true,
-          isCurrent.length > 0
-        );
+        drawRectangle(ctx, xPos, y * boxHeight + headerHeight, weekWidth, true, isCurrWeek);
       }
 
       xPos += weekWidth;
     }
-    for (let j = 0; j < 12; j++) {
-      const width = daysInMonths[j] * 12;
-      drawDashedLine(ctx, startPos, rows * boxHeight + headerHeight);
 
+    const daysInMonths = getRearrangedDaysInMonths(days, parsedStartDate);
+
+    for (let i = 0; i < cols; i++) {
+      const width = daysInMonths[i % months.length] * singleDayWidth;
+      drawDashedLine(ctx, startPos, rows * boxHeight + headerHeight);
       startPos += width;
     }
   }
 };
 
-const drawHeader = (ctx: CanvasRenderingContext2D, zoom: number, days: Days) => {
-  renderTopRow(ctx, days, zoom);
+const drawHeader = (
+  ctx: CanvasRenderingContext2D,
+  zoom: number,
+  days: Days,
+  cols: number,
+  startDate: Day,
+  dayNumOfYear: number
+) => {
+  renderTopRow(ctx, days, zoom, startDate, dayNumOfYear);
 
-  renderMiddleRow(ctx, days, zoom);
+  renderMiddleRow(ctx, days, zoom, cols, startDate);
 
-  renderBottomRow(ctx, days, zoom);
+  renderBottomRow(ctx, zoom, cols, startDate);
 };
 
 const drawRectangle = (

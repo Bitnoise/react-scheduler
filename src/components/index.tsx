@@ -6,3 +6,4 @@ export { default as IconButton } from "./IconButton";
 export { default as Scheduler } from "./Scheduler/Scheduler";
 export { default as LeftColumn } from "./LeftColumn/LeftColumn";
 export { default as LeftColumnItem } from "./LeftColumn/LeftColumnItem";
+export { default as Loader } from "./Loader";

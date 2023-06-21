@@ -8,7 +8,6 @@ import { StyledWrapper } from "./styles";
 export const Calendar: FC<CalendarProps> = ({ data }) => {
   const { zoom } = useCalendar();
   const days = getDaysInYear(new Date().getFullYear());
-
   const rows = data.map((item) => item.data.length).reduce((a, b) => a + b, 0);
 
   return (
