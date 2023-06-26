@@ -1,5 +1,4 @@
 import { Day } from "@/types/global";
-import { getCols } from "../getCols";
 import { drawDaysOnBottom } from "./drawRows/drawDaysOnBottom";
 import { drawMonthsInMiddle } from "./drawRows/drawMonthsInMiddle";
 import { drawMonthsOnTop } from "./drawRows/drawMonthsOnTop";
@@ -20,8 +19,6 @@ export const drawHeader = (
     drawMonthsInMiddle(ctx, cols, startDate);
     drawWeeksOnBottom(ctx, cols, startDate, weekLabel);
   } else {
-    const cols = getCols(zoom);
-
     drawMonthsOnTop(ctx, startDate);
     drawWeeksInMiddle(ctx, startDate, weekLabel);
     drawDaysOnBottom(ctx, cols, startDate);

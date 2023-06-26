@@ -31,9 +31,11 @@ const Grid = ({ zoom, rows }: GridProps) => {
     const ctx = canvasRef.current.getContext("2d");
     if (!ctx) return;
 
-    window.addEventListener("resize", () => handleResize(ctx));
+    const onResize = () => handleResize(ctx);
 
-    return () => window.removeEventListener("resize", () => handleResize(ctx));
+    window.addEventListener("resize", onResize);
+
+    return () => window.removeEventListener("resize", onResize);
   }, [handleResize]);
 
   useEffect(() => {
