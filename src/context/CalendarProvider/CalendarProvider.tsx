@@ -5,7 +5,7 @@ import dayOfYear from "dayjs/plugin/dayOfYear";
 import isoWeek from "dayjs/plugin/isoWeek";
 import { ZoomLevel, allZoomLevel } from "@/types/global";
 import { isAvailableZoom } from "@/types/guards";
-import { weekWidth } from "@/constants";
+import { canvasWrapperId, weekWidth } from "@/constants";
 import { getDatesRange, getParsedDatesRange } from "@/utils/getDatesRange";
 import { parseDay } from "@/utils/dates";
 import { getCols } from "@/utils/getCols";
@@ -22,7 +22,7 @@ const CalendarProvider = ({ children, config, onRangeChange }: CalendarProviderP
   const [isLoading, setIsLoading] = useState(false);
   const isNextZoom = allZoomLevel[zoom] !== allZoomLevel[allZoomLevel.length - 1];
   const isPrevZoom = zoom !== 0;
-  const canvasWrapper = document.getElementById("canvasWrapper");
+  const canvasWrapper = document.getElementById(canvasWrapperId);
   const range = getParsedDatesRange(date, zoom);
   const scrollOffset = window.innerWidth / 2;
   const cols = getCols(zoom);
