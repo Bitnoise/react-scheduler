@@ -7,3 +7,4 @@ export { default as Scheduler } from "./Scheduler/Scheduler";
 export { default as LeftColumn } from "./LeftColumn/LeftColumn";
 export { default as LeftColumnItem } from "./LeftColumn/LeftColumnItem";
 export { default as Loader } from "./Loader";
+export { default as Header } from "./Calendar/Header";

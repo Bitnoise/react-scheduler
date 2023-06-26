@@ -18,6 +18,7 @@ export const Wrapper = styled.div`
   height: ${({ theme }) => theme.navHeight};
   padding: 0.625rem 1rem;
   background-color: ${({ theme }) => theme.colors.white};
+  z-index: 1;
 `;
 
 export const NavigationWrapper = styled.div`

@@ -38,3 +38,31 @@ export type Day = {
   isCurrentDay: boolean;
   year: number;
 };
+
+export type TextAndBoxStyleConfig = {
+  isCurrent: boolean;
+  isBusinessDay?: boolean;
+  variant?: "yearView" | "bottomRow";
+};
+
+type BottomRowText = {
+  y: number;
+  label: string;
+  font: string;
+  color: string;
+};
+
+export type DrawRowConfig = {
+  ctx: CanvasRenderingContext2D;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  textYPos?: number;
+  label?: string;
+  font?: string;
+  isBottomRow?: boolean;
+  fillStyle?: string;
+  topText?: BottomRowText;
+  bottomText?: BottomRowText;
+};

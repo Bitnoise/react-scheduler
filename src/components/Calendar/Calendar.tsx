@@ -1,20 +1,20 @@
 import { FC } from "react";
-import { getDaysInYear } from "@/utils/dates";
 import { useCalendar } from "@/context/CalendarProvider";
-import { Grid, LeftColumn } from "..";
+import { Grid, Header, LeftColumn } from "..";
 import { CalendarProps } from "./types";
-import { StyledWrapper } from "./styles";
+import { StyledOuterWrapper, StyledInnerWrapper } from "./styles";
 
 export const Calendar: FC<CalendarProps> = ({ data }) => {
   const { zoom } = useCalendar();
-  const days = getDaysInYear(new Date().getFullYear());
   const rows = data.map((item) => item.data.length).reduce((a, b) => a + b, 0);
-
   return (
-    <StyledWrapper>
+    <StyledOuterWrapper>
       <LeftColumn data={data} />
-      <Grid days={days} zoom={zoom} rows={rows} />
-    </StyledWrapper>
+      <StyledInnerWrapper>
+        <Header zoom={zoom} />
+        <Grid zoom={zoom} rows={rows} />
+      </StyledInnerWrapper>
+    </StyledOuterWrapper>
   );
 };
 

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import dayjs from "dayjs";
-import { Config, SchedulerData, ZoomLevel } from "@/types/global";
+import { Config, Day, SchedulerData, ZoomLevel } from "@/types/global";
 import { ParsedDatesRange } from "@/utils/getDatesRange";
 
 export type CalendaryContextType = {
@@ -16,6 +16,9 @@ export type CalendaryContextType = {
   isPrevZoom: boolean;
   date: dayjs.Dayjs;
   isLoading: boolean;
+  cols: number;
+  startDate: Day;
+  dayOfYear: number;
 };
 
 export type CalendarProviderProps = {

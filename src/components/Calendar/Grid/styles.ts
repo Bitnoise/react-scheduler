@@ -1,35 +1,22 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { StyledSpanProps } from "./types";
 
 export const StyledWrapper = styled.div`
-  margin-top: 44px;
-  overflow: scroll;
+  height: calc(100vh - headerHeight);
 `;
 
 export const StyledInnerWrapper = styled.div`
   position: relative;
-  width: max-content;
-  display: flex;
 `;
 
 export const StyledCanvas = styled.canvas``;
+export const StyledCanvasHeader = styled.canvas``;
 
 export const StyledSpan = styled.span<StyledSpanProps>`
   width: 1px;
   height: 100%;
   position: absolute;
   top: 0;
-  ${({ position }) => {
-    switch (position) {
-      case "right":
-        return css`
-          right: 0;
-        `;
-      case "left":
-        return css`
-          left: 0;
-        `;
-    }
-  }}
-  background-color: transparent;
+  left: ${({ position }) => (position === "left" ? 0 : "auto")};
+  right: ${({ position }) => (position === "right" ? 0 : "auto")};
 `;

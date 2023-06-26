@@ -5,5 +5,6 @@ export const en = {
     prev: "prev",
     today: "Today",
     view: "View"
-  }
+  },
+  week: "week"
 };

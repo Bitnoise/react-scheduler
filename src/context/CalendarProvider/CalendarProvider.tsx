@@ -1,11 +1,20 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import dayjs from "dayjs";
+import weekOfYear from "dayjs/plugin/weekOfYear";
+import dayOfYear from "dayjs/plugin/dayOfYear";
+import isoWeek from "dayjs/plugin/isoWeek";
 import { ZoomLevel, allZoomLevel } from "@/types/global";
 import { isAvailableZoom } from "@/types/guards";
 import { weekWidth } from "@/constants";
-import { getParsedDatesRange } from "@/utils/getDatesRange";
+import { getDatesRange, getParsedDatesRange } from "@/utils/getDatesRange";
+import { parseDay } from "@/utils/dates";
+import { getCols } from "@/utils/getCols";
 import { calendarContext } from "./calendarContext";
 import { CalendarProviderProps } from "./types";
+
+dayjs.extend(weekOfYear);
+dayjs.extend(dayOfYear);
+dayjs.extend(isoWeek);
 
 const CalendarProvider = ({ children, config, onRangeChange }: CalendarProviderProps) => {
   const [zoom, setZoom] = useState<ZoomLevel>(config.zoom);
@@ -15,55 +24,56 @@ const CalendarProvider = ({ children, config, onRangeChange }: CalendarProviderP
   const isPrevZoom = zoom !== 0;
   const canvasWrapper = document.getElementById("canvasWrapper");
   const range = getParsedDatesRange(date, zoom);
+  const scrollOffset = window.innerWidth / 2;
+  const cols = getCols(zoom);
+  const startDate = getDatesRange(date, zoom).startDate;
+  const dayOfYear = dayjs(startDate).dayOfYear();
+  const parsedStartDate = parseDay(startDate);
 
   useEffect(() => {
     if (!canvasWrapper) return;
-    canvasWrapper.scrollTo({
+    window.scrollTo({
       behavior: "auto",
-      left: canvasWrapper.clientWidth + 4 * weekWidth
+      left: window.innerWidth + 4 * weekWidth
     });
   }, [canvasWrapper]);
-
-  useEffect(() => {
-    onRangeChange(range);
-  }, [onRangeChange, range, zoom]);
 
   const handleGoNext = () => {
     setIsLoading(true);
     setDate((prev) => prev.add(2, "months"));
     onRangeChange(range);
-    setTimeout(() => setIsLoading(false), 1500);
+    setIsLoading(false);
   };
 
-  const handleScrollNext = () => {
+  const handleScrollNext = useCallback(() => {
     setIsLoading(true);
+    window.scroll({
+      behavior: "smooth",
+      left: scrollOffset
+    });
     setDate((prev) => prev.add(5, "weeks"));
-    canvasWrapper?.scroll({ behavior: "smooth", left: canvasWrapper.clientWidth / 0.5 });
     onRangeChange(range);
-    setTimeout(() => setIsLoading(false), 1500);
-  };
+    setIsLoading(false);
+  }, [onRangeChange, range, scrollOffset]);
 
   const handleGoPrev = () => {
     setIsLoading(true);
     setDate((prev) => prev.subtract(2, "months"));
     onRangeChange(range);
-    setTimeout(() => setIsLoading(false), 1500);
+    setIsLoading(false);
   };
 
-  const handleScrollPrev = () => {
+  const handleScrollPrev = useCallback(() => {
     setIsLoading(true);
+    window.scrollTo({ behavior: "smooth", left: scrollOffset });
     setDate((prev) => prev.subtract(5, "weeks"));
-    canvasWrapper?.scroll({
-      behavior: "smooth",
-      left: canvasWrapper.clientWidth - canvasWrapper.clientWidth / 2
-    });
     onRangeChange(range);
-    setTimeout(() => setIsLoading(false), 1500);
-  };
+    setIsLoading(false);
+  }, [onRangeChange, range, scrollOffset]);
 
   const handleGoToday = () => {
     setDate(dayjs());
-    canvasWrapper?.scroll({ behavior: "smooth", left: canvasWrapper.clientWidth + weekWidth });
+    window.scrollTo({ behavior: "smooth", left: window.innerWidth });
     onRangeChange(range);
   };
 
@@ -74,6 +84,7 @@ const CalendarProvider = ({ children, config, onRangeChange }: CalendarProviderP
   const changeZoom = (zoomLevel: number) => {
     if (!isAvailableZoom(zoomLevel)) return;
     setZoom(zoomLevel);
+    onRangeChange(range);
   };
 
   const { Provider } = calendarContext;
@@ -92,7 +103,10 @@ const CalendarProvider = ({ children, config, onRangeChange }: CalendarProviderP
         isNextZoom,
         isPrevZoom,
         date,
-        isLoading
+        isLoading,
+        cols,
+        startDate: parsedStartDate,
+        dayOfYear
       }}>
       {children}
     </Provider>

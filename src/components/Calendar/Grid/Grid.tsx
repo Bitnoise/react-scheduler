@@ -1,67 +1,81 @@
-import { useEffect, useRef } from "react";
-import { drawGrid } from "@/utils/drawGrid";
-import { boxHeight, headerHeight } from "@/constants";
+import { useCallback, useEffect, useRef } from "react";
+import { drawGrid } from "@/utils/drawGrid/drawGrid";
+import {
+  boxHeight,
+  canvasWrapperId,
+  headerHeight,
+  leftColumnWidth,
+  screenWidthMultiplier
+} from "@/constants";
 import { Loader } from "@/components";
 import { useCalendar } from "@/context/CalendarProvider";
 import { GridProps } from "./types";
 import { StyledCanvas, StyledInnerWrapper, StyledSpan, StyledWrapper } from "./styles";
 
-const Grid = ({ days, zoom, rows }: GridProps) => {
-  const { handleScrollNext, handleScrollPrev, date, isLoading } = useCalendar();
+const Grid = ({ zoom, rows }: GridProps) => {
+  const { handleScrollNext, handleScrollPrev, date, isLoading, cols, startDate } = useCalendar();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const refRight = useRef<HTMLSpanElement>(null);
   const refLeft = useRef<HTMLSpanElement>(null);
+
+  const handleResize = useCallback(
+    (ctx: CanvasRenderingContext2D) => {
+      ctx.canvas.width = window.innerWidth * screenWidthMultiplier;
+      drawGrid(ctx, zoom, rows, cols, startDate);
+    },
+    [cols, startDate, rows, zoom]
+  );
+
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    const ctx = canvasRef.current.getContext("2d");
+    if (!ctx) return;
+
+    window.addEventListener("resize", () => handleResize(ctx));
+
+    return () => window.removeEventListener("resize", () => handleResize(ctx));
+  }, [handleResize]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     canvas.style.letterSpacing = "1px";
-
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     ctx.canvas.height = rows * boxHeight + headerHeight;
 
-    const handleResize = () => {
-      ctx.canvas.width = window.innerWidth * 3;
-
-      drawGrid(ctx, zoom, days, rows, date);
-    };
-
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-
-    drawGrid(ctx, zoom, days, rows, date);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, [days, date, rows, zoom]);
+    handleResize(ctx);
+  }, [date, rows, zoom, handleResize]);
 
   useEffect(() => {
+    if (!refRight.current) return;
     const observerRight = new IntersectionObserver((e) =>
       e[0].isIntersecting ? handleScrollNext() : null
     );
-    const observerLeft = new IntersectionObserver((e) =>
-      e[0].isIntersecting ? handleScrollPrev() : null
-    );
-
-    if (!refRight.current || !refLeft.current) return;
     observerRight.observe(refRight.current);
+
+    return () => observerRight.disconnect();
+  }, [handleScrollNext]);
+
+  useEffect(() => {
+    if (!refLeft.current) return;
+    const observerLeft = new IntersectionObserver(
+      (e) => (e[0].isIntersecting ? handleScrollPrev() : null),
+      { rootMargin: `0px 0px 0px -${leftColumnWidth}px` }
+    );
     observerLeft.observe(refLeft.current);
 
-    return () => {
-      observerLeft.disconnect();
-      observerRight.disconnect();
-    };
-  }, [handleScrollNext, handleScrollPrev]);
+    return () => observerLeft.disconnect();
+  }, [handleScrollPrev]);
 
   return (
-    <StyledWrapper id="canvasWrapper">
+    <StyledWrapper id={canvasWrapperId}>
       <StyledInnerWrapper>
-        <StyledSpan position="left" ref={refLeft}></StyledSpan>
+        <StyledSpan position="left" ref={refLeft} />
         <Loader isLoading={isLoading} position="left" />
         <StyledCanvas ref={canvasRef} />
-        <StyledSpan position="right" ref={refRight}></StyledSpan>
+        <StyledSpan ref={refRight} position="right" />
         <Loader isLoading={isLoading} position="right" />
       </StyledInnerWrapper>
     </StyledWrapper>

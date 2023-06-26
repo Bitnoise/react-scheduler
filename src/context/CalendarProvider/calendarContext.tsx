@@ -14,5 +14,17 @@ export const calendarContext = createContext<CalendaryContextType>({
   isNextZoom: false,
   isPrevZoom: false,
   date: dayjs(),
-  isLoading: false
+  isLoading: false,
+  cols: 0,
+  startDate: {
+    dayName: "",
+    dayOfMonth: 0,
+    weekOfYear: 0,
+    month: 0,
+    monthName: "",
+    isCurrentDay: false,
+    isBusinessDay: false,
+    year: 0
+  },
+  dayOfYear: 0
 });

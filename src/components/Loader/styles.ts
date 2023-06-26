@@ -1,22 +1,13 @@
-import styled, { css, keyframes } from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { StyledWrapperProps } from "./types";
 
 export const StyledWrapper = styled.div<StyledWrapperProps>`
   width: 388px;
   height: 100%;
   position: absolute;
-  ${({ position }) => {
-    switch (position) {
-      case "right":
-        return css`
-          right: 0;
-        `;
-      case "left":
-        return css`
-          left: 0;
-        `;
-    }
-  }}
+  top: 0;
+  left: ${({ position }) => (position === "left" ? 0 : "auto")};
+  right: ${({ position }) => (position === "right" ? 0 : "auto")};
   background-color: ${({ theme }) => theme.colors.hover};
   opacity: 0.7;
   overflow: hidden;
