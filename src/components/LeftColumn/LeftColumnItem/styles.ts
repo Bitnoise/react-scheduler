@@ -8,7 +8,8 @@ export const StyledWrapper = styled.div<StyledLeftColumnItemWrapperProps>`
   align-items: ${({ rows }) => (rows > 1 ? "start" : "center")};
   padding: 0.813rem 0 0.813rem 1rem;
   width: 100%;
-  height: calc(${boxHeight + "px"} * ${({ rows }) => rows});
+  min-height: ${boxHeight}px;
+  height: calc(${boxHeight}px * ${({ rows }) => rows});
   border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
   &:first-child {
     border-top: 1px solid ${({ theme }) => theme.colors.grey};

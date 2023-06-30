@@ -10,6 +10,7 @@ export const boxHeight = 56;
 export const leftColumnWidth = 196;
 export const singleDayWidth = 12;
 export const weeksInYear = 52;
+export const navHeight = 44;
 export const daysFillStyle = theme.colors.superLightBlue;
 export const fonts = {
   topRow: "600 14px Inter",
@@ -25,3 +26,5 @@ export const dayNumYOffset = 4.5;
 export const monthsInYear = 12;
 export const canvasHeaderWrapperId = "canvasHeaderWrapper";
 export const canvasWrapperId = "canvasWrapper";
+export const tileYOffset = 4;
+export const tileHeight = 48;

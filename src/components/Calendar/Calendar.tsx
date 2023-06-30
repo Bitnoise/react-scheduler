@@ -1,18 +1,49 @@
 import { FC } from "react";
 import { useCalendar } from "@/context/CalendarProvider";
-import { Grid, Header, LeftColumn } from "..";
-import { CalendarProps } from "./types";
+import { setProjectsInRows } from "@/utils/setProjectsInRows";
+import { Grid, Header, LeftColumn, Tile } from "..";
+import { CalendarProps, ProjectsData, Tiles } from "./types";
 import { StyledOuterWrapper, StyledInnerWrapper } from "./styles";
 
 export const Calendar: FC<CalendarProps> = ({ data }) => {
   const { zoom } = useCalendar();
-  const rows = data.map((item) => item.data.length).reduce((a, b) => a + b, 0);
+  const initialProjectsData: ProjectsData = [[], []];
+
+  const [projectsPerPerson, rowsPerPerson] = data.reduce((acc, curr) => {
+    const projectsInRows = setProjectsInRows(curr.data);
+    acc[0].push(projectsInRows);
+    acc[1].push(projectsInRows.length);
+
+    return acc;
+  }, initialProjectsData);
+
+  const rowsInTotal = rowsPerPerson.reduce((a, b) => a + Math.max(b, 1), 0);
+
+  const placeTiles = (): Tiles => {
+    let rows = 0;
+    return projectsPerPerson.map((person, personIndex) => {
+      if (personIndex > 0) {
+        rows += Math.max(projectsPerPerson[personIndex - 1].length, 1);
+      }
+      return person.map((projectsPerRow, rowIndex) =>
+        projectsPerRow.map((project) => (
+          <Tile
+            key={project.title + project.subtitle + project.description}
+            row={rowIndex + rows}
+            data={project}
+            zoom={zoom}
+          />
+        ))
+      );
+    });
+  };
   return (
     <StyledOuterWrapper>
-      <LeftColumn data={data} />
+      <LeftColumn data={data} rows={rowsPerPerson} />
       <StyledInnerWrapper>
         <Header zoom={zoom} />
-        <Grid zoom={zoom} rows={rows} />
+        <Grid zoom={zoom} rows={rowsInTotal} />
+        {placeTiles()}
       </StyledInnerWrapper>
     </StyledOuterWrapper>
   );

@@ -11,6 +11,7 @@ export const StyledWrapper = styled.div<StyledWrapperProps>`
   background-color: ${({ theme }) => theme.colors.hover};
   opacity: 0.7;
   overflow: hidden;
+  z-index: 1;
 `;
 
 const move = keyframes`

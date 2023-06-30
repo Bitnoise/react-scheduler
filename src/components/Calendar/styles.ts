@@ -7,7 +7,9 @@ export const StyledOuterWrapper = styled.div`
 `;
 
 export const StyledInnerWrapper = styled.div`
+  position: relative;
   margin-left: ${leftColumnWidth};
   display: flex;
   flex-direction: column;
+  contain: paint;
 `;

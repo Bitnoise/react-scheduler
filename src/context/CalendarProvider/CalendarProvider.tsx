@@ -1,11 +1,11 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import dayjs from "dayjs";
 import weekOfYear from "dayjs/plugin/weekOfYear";
 import dayOfYear from "dayjs/plugin/dayOfYear";
 import isoWeek from "dayjs/plugin/isoWeek";
+import isBetween from "dayjs/plugin/isBetween";
 import { ZoomLevel, allZoomLevel } from "@/types/global";
 import { isAvailableZoom } from "@/types/guards";
-import { canvasWrapperId, weekWidth } from "@/constants";
 import { getDatesRange, getParsedDatesRange } from "@/utils/getDatesRange";
 import { parseDay } from "@/utils/dates";
 import { getCols } from "@/utils/getCols";
@@ -15,32 +15,34 @@ import { CalendarProviderProps } from "./types";
 dayjs.extend(weekOfYear);
 dayjs.extend(dayOfYear);
 dayjs.extend(isoWeek);
+dayjs.extend(isBetween);
 
 const CalendarProvider = ({ children, config, onRangeChange }: CalendarProviderProps) => {
   const [zoom, setZoom] = useState<ZoomLevel>(config.zoom);
   const [date, setDate] = useState(dayjs());
   const [isLoading, setIsLoading] = useState(false);
+  const [cols, setCols] = useState(getCols(zoom));
   const isNextZoom = allZoomLevel[zoom] !== allZoomLevel[allZoomLevel.length - 1];
   const isPrevZoom = zoom !== 0;
-  const canvasWrapper = document.getElementById(canvasWrapperId);
-  const range = getParsedDatesRange(date, zoom);
+  const range = useMemo(() => getParsedDatesRange(date, zoom), [date, zoom]);
   const scrollOffset = window.innerWidth / 2;
-  const cols = getCols(zoom);
   const startDate = getDatesRange(date, zoom).startDate;
   const dayOfYear = dayjs(startDate).dayOfYear();
   const parsedStartDate = parseDay(startDate);
 
   useEffect(() => {
-    if (!canvasWrapper) return;
-    window.scrollTo({
-      behavior: "auto",
-      left: window.innerWidth + 4 * weekWidth
-    });
-  }, [canvasWrapper]);
+    const handleResize = () => setCols(getCols(zoom));
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [zoom]);
+
+  useEffect(() => {
+    onRangeChange(range);
+  }, [onRangeChange, range]);
 
   const handleGoNext = () => {
     setIsLoading(true);
-    setDate((prev) => prev.add(2, "months"));
+    setDate((prev) => prev.add(1, "months"));
     onRangeChange(range);
     setIsLoading(false);
   };
@@ -51,14 +53,14 @@ const CalendarProvider = ({ children, config, onRangeChange }: CalendarProviderP
       behavior: "smooth",
       left: scrollOffset
     });
-    setDate((prev) => prev.add(5, "weeks"));
+    setDate((prev) => prev.add(2, "weeks"));
     onRangeChange(range);
     setIsLoading(false);
   }, [onRangeChange, range, scrollOffset]);
 
   const handleGoPrev = () => {
     setIsLoading(true);
-    setDate((prev) => prev.subtract(2, "months"));
+    setDate((prev) => prev.subtract(1, "months"));
     onRangeChange(range);
     setIsLoading(false);
   };
@@ -66,7 +68,7 @@ const CalendarProvider = ({ children, config, onRangeChange }: CalendarProviderP
   const handleScrollPrev = useCallback(() => {
     setIsLoading(true);
     window.scrollTo({ behavior: "smooth", left: scrollOffset });
-    setDate((prev) => prev.subtract(5, "weeks"));
+    setDate((prev) => prev.subtract(2, "weeks"));
     onRangeChange(range);
     setIsLoading(false);
   }, [onRangeChange, range, scrollOffset]);
@@ -84,6 +86,7 @@ const CalendarProvider = ({ children, config, onRangeChange }: CalendarProviderP
   const changeZoom = (zoomLevel: number) => {
     if (!isAvailableZoom(zoomLevel)) return;
     setZoom(zoomLevel);
+    setCols(getCols(zoomLevel));
     onRangeChange(range);
   };
 

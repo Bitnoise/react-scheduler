@@ -20,9 +20,11 @@ export const drawYearsOnTop = (
     if (index > 0) {
       width = daysInYear(year + index) * singleDayWidth;
     }
+
     if (totalWidthOfElements + width > canvasWidth && index > 0) {
       width = Math.ceil((canvasWidth - totalWidthOfElements) / singleDayWidth) * singleDayWidth;
     }
+
     drawRow({
       ctx,
       x: xPos,

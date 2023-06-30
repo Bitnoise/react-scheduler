@@ -1,9 +1,10 @@
 import { faker } from "@faker-js/faker";
-import { SchedulerData, SchedulerRowData } from "@/types/global";
+import dayjs from "dayjs";
+import { SchedulerData, SchedulerProjectData } from "@/types/global";
 import { ParsedDatesRange } from "@/utils/getDatesRange";
 
-export const mockedOnRangeChange = (range: ParsedDatesRange) => {
-  console.log("Mocked on range change has been triggered. New range: ", range);
+export const mockedOnRangeChange = (range: ParsedDatesRange, data: SchedulerData) => {
+  console.log("Mocked on range change has been triggered. New range: ", range, data);
 };
 
 const getRandomWords = (amount?: number) =>
@@ -15,32 +16,64 @@ const getRandomDates = (year: number) => {
   return { startDate, endDate };
 };
 
-const generateData = (year: number, amountOfDscWords: number, hasMultipleProjects: boolean) =>
-  Array.from({ length: hasMultipleProjects ? 2 : 1 }, () => {
-    const { startDate, endDate } = getRandomDates(year);
-    return {
-      startDate,
-      endDate,
-      title: getRandomWords(),
-      subtitle: getRandomWords(),
-      description: getRandomWords(amountOfDscWords)
-    };
-  });
+export const generateProjects = (
+  years: number,
+  maxProjectsPerYear: number,
+  amountOfDscWords = 5,
+  title: string
+): SchedulerProjectData[] => {
+  const startYear = dayjs()
+    .subtract(Math.floor(years / 2), "years")
+    .get("year");
+
+  const endYear = dayjs()
+    .add(Math.floor(years / 2), "years")
+    .get("year");
+
+  const data = [];
+
+  const bgColor = `rgb(${Math.ceil(Math.random() * 255)},${Math.ceil(
+    Math.random() * 200
+  )},${Math.ceil(Math.random() * 200)})`;
+
+  for (let yearIndex = startYear; yearIndex <= endYear; yearIndex++) {
+    const projectsPerYear = Math.ceil(Math.random() * maxProjectsPerYear);
+
+    for (let projectIndex = 0; projectIndex < projectsPerYear; projectIndex++) {
+      const { startDate, endDate } = getRandomDates(yearIndex);
+      data.push({
+        startDate,
+        endDate,
+        title,
+        subtitle: getRandomWords(),
+        description: getRandomWords(amountOfDscWords),
+        bgColor
+      });
+    }
+  }
+  return data;
+};
 
 export const createMockData = (
-  amount: number,
-  year: number,
+  amountOfPeople: number,
+  years: number,
+  maxProjectsPerYear: number,
   amountOfDscWords = 5
 ): SchedulerData => {
   const schedulerData: SchedulerData = [];
+  for (let i = 0; i < amountOfPeople; i++) {
+    const title = getRandomWords(2);
+    const data: SchedulerProjectData[] = generateProjects(
+      years,
+      maxProjectsPerYear,
+      amountOfDscWords,
+      title
+    );
 
-  for (let i = 0; i < amount; i++) {
-    const hasMultipleProjects = faker.datatype.boolean();
-    const data: SchedulerRowData[] = generateData(year, amountOfDscWords, hasMultipleProjects);
     const item = {
       label: {
         icon: "https://picsum.photos/24",
-        title: getRandomWords(),
+        title,
         subtitle: getRandomWords()
       },
       data

@@ -13,19 +13,21 @@ export type SchedulerData = SchedulerRow[];
 
 export type SchedulerRow = {
   label: SchedulerRowLabel;
-  data: SchedulerRowData[];
+  data: SchedulerProjectData[];
 };
 export type SchedulerRowLabel = {
   icon: string;
   title: string;
   subtitle: string;
 };
-export type SchedulerRowData = {
+export type SchedulerProjectData = {
   startDate: Date;
   endDate: Date;
   title: string;
   subtitle?: string;
   description?: string;
+  bgColor?: string;
+  id?: number;
 };
 
 export type Day = {
@@ -65,4 +67,11 @@ export type DrawRowConfig = {
   fillStyle?: string;
   topText?: BottomRowText;
   bottomText?: BottomRowText;
+};
+
+export type TileProperties = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
 };
