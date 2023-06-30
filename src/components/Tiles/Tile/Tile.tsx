@@ -11,7 +11,7 @@ import {
 } from "./styles";
 import { TileProps } from "./types";
 
-const Tile: FC<TileProps> = ({ row, data, zoom }) => {
+const Tile: FC<TileProps> = ({ row, data, zoom, onItemClick }) => {
   const { date } = useCalendar();
   const datesRange = getDatesRange(date, zoom);
   const { y, x, width } = getTileProperties(
@@ -28,7 +28,8 @@ const Tile: FC<TileProps> = ({ row, data, zoom }) => {
         top: `${y}px`,
         backgroundColor: `${data.bgColor}`,
         width: `${width}px`
-      }}>
+      }}
+      onClick={() => onItemClick(data)}>
       <StyledTextWrapper>
         <StyledStickyWrapper>
           <StyledText bold>{data.title}</StyledText>

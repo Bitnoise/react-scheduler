@@ -11,6 +11,7 @@ export type CalendaryContextType = {
   handleGoToday: () => void;
   zoomIn: () => void;
   zoomOut: () => void;
+  handleFilterData: () => void;
   zoom: ZoomLevel;
   isNextZoom: boolean;
   isPrevZoom: boolean;
@@ -26,4 +27,5 @@ export type CalendarProviderProps = {
   data?: SchedulerData;
   config: Config;
   onRangeChange: (range: ParsedDatesRange) => void;
+  onFilterData: () => void;
 };

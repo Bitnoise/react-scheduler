@@ -17,7 +17,12 @@ dayjs.extend(dayOfYear);
 dayjs.extend(isoWeek);
 dayjs.extend(isBetween);
 
-const CalendarProvider = ({ children, config, onRangeChange }: CalendarProviderProps) => {
+const CalendarProvider = ({
+  children,
+  config,
+  onRangeChange,
+  onFilterData
+}: CalendarProviderProps) => {
   const [zoom, setZoom] = useState<ZoomLevel>(config.zoom);
   const [date, setDate] = useState(dayjs());
   const [isLoading, setIsLoading] = useState(false);
@@ -90,6 +95,8 @@ const CalendarProvider = ({ children, config, onRangeChange }: CalendarProviderP
     onRangeChange(range);
   };
 
+  const handleFilterData = () => onFilterData();
+
   const { Provider } = calendarContext;
 
   return (
@@ -109,7 +116,8 @@ const CalendarProvider = ({ children, config, onRangeChange }: CalendarProviderP
         isLoading,
         cols,
         startDate: parsedStartDate,
-        dayOfYear
+        dayOfYear,
+        handleFilterData
       }}>
       {children}
     </Provider>

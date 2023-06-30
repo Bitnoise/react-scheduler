@@ -7,7 +7,7 @@ import { Config } from "@/types/global";
 import { SchedulerProps } from "./types";
 import { StyledInnerWrapper, StyledOutsideWrapper } from "./styles";
 
-const Scheduler = ({ data, config, onRangeChange }: SchedulerProps) => {
+const Scheduler = ({ data, config, onRangeChange, onItemClick, onFilterData }: SchedulerProps) => {
   const appConfig: Config = {
     zoom: 0,
     isFiltersButtonVisible: true,
@@ -17,10 +17,14 @@ const Scheduler = ({ data, config, onRangeChange }: SchedulerProps) => {
   return (
     <ThemeProvider theme={theme}>
       <LocaleProvider>
-        <CalendarProvider data={data} config={appConfig} onRangeChange={onRangeChange}>
+        <CalendarProvider
+          data={data}
+          config={appConfig}
+          onRangeChange={onRangeChange}
+          onFilterData={onFilterData}>
           <StyledOutsideWrapper>
             <StyledInnerWrapper>
-              <Calendar data={data} />
+              <Calendar data={data} onItemClick={onItemClick} />
               <Topbar />
             </StyledInnerWrapper>
           </StyledOutsideWrapper>

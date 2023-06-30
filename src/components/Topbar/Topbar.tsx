@@ -6,14 +6,22 @@ import { NavigationWrapper, Wrapper, NavBtn, Today, Zoom, Filters } from "./styl
 
 const Topbar = () => {
   const { topbar } = useLanguage();
-  const { handleGoNext, handleGoPrev, handleGoToday, zoomIn, zoomOut, isNextZoom, isPrevZoom } =
-    useCalendar();
+  const {
+    handleGoNext,
+    handleGoPrev,
+    handleGoToday,
+    zoomIn,
+    zoomOut,
+    isNextZoom,
+    isPrevZoom,
+    handleFilterData
+  } = useCalendar();
   const { colors } = useTheme();
 
   return (
     <Wrapper>
       <Filters>
-        <IconButton iconName="filter" width="16" height="16">
+        <IconButton iconName="filter" width="16" height="16" onClick={() => handleFilterData()}>
           {topbar.filters}
         </IconButton>
       </Filters>

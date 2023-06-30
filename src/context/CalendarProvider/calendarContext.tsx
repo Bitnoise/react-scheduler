@@ -10,6 +10,7 @@ export const calendarContext = createContext<CalendaryContextType>({
   handleGoToday: () => {},
   zoomIn: () => {},
   zoomOut: () => {},
+  handleFilterData: () => {},
   zoom: 0,
   isNextZoom: false,
   isPrevZoom: false,
