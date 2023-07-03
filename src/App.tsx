@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import { createMockData } from "./mock/appMock";
 import { ParsedDatesRange } from "./utils/getDatesRange";
 import { SchedulerProjectData } from "./types/global";
+import ConfigPanel from "./components/ConfigPanel";
 import { Scheduler } from ".";
 
 const mocked = createMockData(25, 5, 8);
@@ -34,12 +35,15 @@ function App() {
     console.log(`Item ${data.title} - ${data.subtitle} was clicked.`);
 
   return (
-    <Scheduler
-      onRangeChange={handleRangeChange}
-      data={filteredData}
-      onItemClick={handleItemClick}
-      onFilterData={handleFilterData}
-    />
+    <>
+      <ConfigPanel />
+      <Scheduler
+        onRangeChange={handleRangeChange}
+        data={filteredData}
+        onItemClick={handleItemClick}
+        onFilterData={handleFilterData}
+      />
+    </>
   );
 }
 
