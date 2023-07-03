@@ -7,7 +7,7 @@ const LeftColumn: FC<LeftColumnProps> = ({ data, rows }) => {
   return (
     <StyledWrapper>
       {data.map((item, index) => (
-        <LeftColumnItem item={item.label} key={index} rows={rows[index]} />
+        <LeftColumnItem item={item.label} key={item.id} rows={rows[index]} />
       ))}
     </StyledWrapper>
   );

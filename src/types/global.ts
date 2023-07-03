@@ -12,6 +12,7 @@ export type Config = {
 export type SchedulerData = SchedulerRow[];
 
 export type SchedulerRow = {
+  id: string;
   label: SchedulerRowLabel;
   data: SchedulerProjectData[];
 };

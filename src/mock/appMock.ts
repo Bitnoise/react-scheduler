@@ -71,6 +71,7 @@ export const createMockData = (
     );
 
     const item = {
+      id: faker.datatype.uuid(),
       label: {
         icon: "https://picsum.photos/24",
         title,
