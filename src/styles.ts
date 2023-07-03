@@ -44,3 +44,14 @@ export const theme: DefaultTheme = {
     white: "#FFFFFF"
   }
 };
+
+export const marginPaddingReset = `
+margin: 0;
+padding: 0;
+`;
+
+export const truncate = `
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+`;

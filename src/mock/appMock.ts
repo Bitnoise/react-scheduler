@@ -31,7 +31,6 @@ export const generateProjects = (
     .get("year");
 
   const data = [];
-
   const bgColor = `rgb(${Math.ceil(Math.random() * 255)},${Math.ceil(
     Math.random() * 200
   )},${Math.ceil(Math.random() * 200)})`;
@@ -42,6 +41,7 @@ export const generateProjects = (
     for (let projectIndex = 0; projectIndex < projectsPerYear; projectIndex++) {
       const { startDate, endDate } = getRandomDates(yearIndex);
       data.push({
+        id: faker.datatype.uuid(),
         startDate,
         endDate,
         title,

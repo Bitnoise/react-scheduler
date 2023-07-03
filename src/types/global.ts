@@ -21,13 +21,13 @@ export type SchedulerRowLabel = {
   subtitle: string;
 };
 export type SchedulerProjectData = {
+  id: string;
   startDate: Date;
   endDate: Date;
   title: string;
   subtitle?: string;
   description?: string;
   bgColor?: string;
-  id?: number;
 };
 
 export type Day = {

@@ -8,4 +8,5 @@ export { default as LeftColumn } from "./LeftColumn/LeftColumn";
 export { default as LeftColumnItem } from "./LeftColumn/LeftColumnItem";
 export { default as Loader } from "./Loader";
 export { default as Header } from "./Calendar/Header";
-export { default as Tile } from "./Tile";
+export { default as Tile } from "./Tiles/Tile";
+export { default as Tiles } from "./Tiles";

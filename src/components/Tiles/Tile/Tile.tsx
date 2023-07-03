@@ -31,7 +31,7 @@ const Tile: FC<TileProps> = ({ row, data, zoom }) => {
       }}>
       <StyledTextWrapper>
         <StyledStickyWrapper>
-          <StyledText style={{ fontWeight: "600" }}>{data.title}</StyledText>
+          <StyledText bold>{data.title}</StyledText>
           <StyledText>{data.subtitle}</StyledText>
           <StyledDescription>{data.description}</StyledDescription>
         </StyledStickyWrapper>

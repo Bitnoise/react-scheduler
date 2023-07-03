@@ -1,16 +1,7 @@
 import styled from "styled-components";
 import { leftColumnWidth, tileHeight } from "@/constants";
-
-const marginPaddingReset = `
-margin: 0;
-padding: 0;
-`;
-
-const truncate = `
-overflow: hidden;
-text-overflow: ellipsis;
-white-space: nowrap;
-`;
+import { marginPaddingReset, truncate } from "@/styles";
+import { StyledTextProps } from "./types";
 
 export const StyledTileWrapper = styled.button`
   padding: 10px 16px;
@@ -33,10 +24,11 @@ export const StyledTextWrapper = styled.div`
   line-height: 12px;
 `;
 
-export const StyledText = styled.p`
+export const StyledText = styled.p<StyledTextProps>`
   ${marginPaddingReset}
   ${truncate}
   display: inline;
+  font-weight: ${({ bold }) => (bold ? "600" : "400")};
   &:first-child {
     &::after {
       content: "|";

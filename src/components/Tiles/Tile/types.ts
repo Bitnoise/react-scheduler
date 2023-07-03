@@ -5,3 +5,7 @@ export type TileProps = {
   data: SchedulerProjectData;
   zoom: number;
 };
+
+export type StyledTextProps = {
+  bold?: boolean;
+};
