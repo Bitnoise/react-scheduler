@@ -21,7 +21,7 @@ const Topbar = () => {
   return (
     <Wrapper>
       <Filters>
-        <IconButton iconName="filter" width="16" height="16" onClick={() => handleFilterData()}>
+        <IconButton iconName="filter" width="16" height="16" onClick={handleFilterData}>
           {topbar.filters}
         </IconButton>
       </Filters>

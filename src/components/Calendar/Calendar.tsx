@@ -20,7 +20,7 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick }) => {
       <StyledInnerWrapper>
         <Header zoom={zoom} />
         <Grid zoom={zoom} rows={rowsInTotal} />
-        <Tiles data={projectsPerPerson} zoom={zoom} />
+        <Tiles data={projectsPerPerson} zoom={zoom} onItemClick={onItemClick} />
       </StyledInnerWrapper>
     </StyledOuterWrapper>
   );
