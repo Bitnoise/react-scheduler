@@ -1,14 +1,28 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import dayjs from "dayjs";
 import { createMockData } from "./mock/appMock";
 import { ParsedDatesRange } from "./utils/getDatesRange";
-import { SchedulerProjectData } from "./types/global";
+import { ConfigFormValues, SchedulerProjectData } from "./types/global";
 import ConfigPanel from "./components/ConfigPanel";
 import { Scheduler } from ".";
 
-const mocked = createMockData(25, 5, 8);
-
 function App() {
+  const [values, setValues] = useState<ConfigFormValues>({
+    peopleCount: 5,
+    projectsPerYear: 5,
+    yearsCovered: 0,
+    isInFrame: false
+  });
+
+  const { peopleCount, projectsPerYear, yearsCovered } = values;
+
+  const mocked = useMemo(
+    () => createMockData(+peopleCount, +yearsCovered, +projectsPerYear),
+    [peopleCount, projectsPerYear, yearsCovered]
+  );
+
+  const handleSubmit = (values: ConfigFormValues) => setValues({ ...values });
+
   const [range, setRange] = useState<ParsedDatesRange>({
     startDate: new Date(),
     endDate: new Date()
@@ -36,7 +50,7 @@ function App() {
 
   return (
     <>
-      <ConfigPanel />
+      <ConfigPanel values={values} onSubmit={handleSubmit} />
       <Scheduler
         onRangeChange={handleRangeChange}
         data={filteredData}

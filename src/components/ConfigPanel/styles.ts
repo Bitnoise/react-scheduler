@@ -1,45 +1,58 @@
 import styled from "styled-components";
+import { leftColumnWidth } from "@/constants";
 
 export const StyledWrapper = styled.div`
+  padding: 0 0.5rem;
+  width: ${leftColumnWidth}px;
+  height: 125px;
   position: fixed;
-  z-index: 999;
+  display: flex;
+  flex-direction: column;
   background-color: white;
+  z-index: 999;
+`;
+
+export const StyledInnerWrapper = styled.div`
+  width: 100%;
+  margin-top: 2px;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  letter-spacing: 0.5px;
+`;
+
+export const StyledLabel = styled.label`
+  font-size: 14px;
+`;
+
+export const StyledInput = styled.input`
+  width: 45px;
+  height: 18px;
+  font-size: 14px;
+  border: 1px solid #0a11eb;
+  border-radius: 4px;
+  background-color: transparent;
+  outline: none;
 `;
 
 export const StyledCheckbox = styled.input`
-  height: 0;
-  width: 0;
-  visibility: hidden;
+  height: 18px;
+  width: 18px;
 `;
 
-export const StyledCheckboxLabel = styled.label`
-  width: 60px;
-  height: 30px;
-  position: relative;
-  display: block;
-  background: grey;
-  border-radius: 100px;
-  text-indent: -9999px;
+export const StyledButton = styled.button`
+  width: 100%;
+  font-size: 14px;
+  outline: none;
+  background-color: transparent;
+  border: 1px solid #0a11eb;
+  border-radius: 4px;
+  color: #0a11eb;
   cursor: pointer;
-  &::after {
-    content: "";
-    position: absolute;
-    top: 1px;
-    left: 1px;
-    width: 28px;
-    height: 28px;
-    background: #fff;
-    border-radius: 28px;
-    transition: 0.3s;
-  }
-  &:checked {
-    background-color: red;
-  }
-  &:checked + ::after {
-    left: calc(100% - 5px);
-    transform: translateX(-100%);
-  }
-  &:active::after {
-    width: 50px;
+  &:hover {
+    background-color: #c9e5ff;
   }
 `;
+
+export const StyledForm = styled.form``;

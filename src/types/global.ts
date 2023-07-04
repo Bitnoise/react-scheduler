@@ -76,3 +76,10 @@ export type TileProperties = {
   width: number;
   height: number;
 };
+
+export type ConfigFormValues = {
+  peopleCount: number;
+  projectsPerYear: number;
+  yearsCovered: number;
+  isInFrame: boolean;
+};
