@@ -45,7 +45,7 @@
   "devDependencies": {
     "@faker-js/faker": "7.6.0",
     "@types/datejs": "0.0.32",
-    "@types/lodash.debounce": "^4.0.7",
+    "@types/lodash.debounce": "4.0.7",
     "@types/node": "18.15.11",
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
