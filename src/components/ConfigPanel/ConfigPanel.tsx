@@ -16,13 +16,19 @@ const ConfigPanel: FC<ConfigPanelProps> = ({ values, onSubmit }) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = event.target;
-
     const inputValue = type === "checkbox" ? checked : value;
 
     setInputValues((prev) => ({
       ...prev,
       [name]: +inputValue
     }));
+  };
+
+  const formFieldsIds = {
+    peopleCount: "peopleCount",
+    projectsPerYear: "projectsPerYear",
+    yearsCovered: "yearsCovered",
+    isFullscreen: "isFullscreen"
   };
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -34,9 +40,10 @@ const ConfigPanel: FC<ConfigPanelProps> = ({ values, onSubmit }) => {
     <StyledWrapper>
       <StyledForm onSubmit={handleSubmit}>
         <StyledInnerWrapper>
-          <StyledLabel htmlFor="peopleCount">People count: </StyledLabel>
+          <StyledLabel htmlFor={formFieldsIds.peopleCount}>People count: </StyledLabel>
           <StyledInput
-            name="peopleCount"
+            id={formFieldsIds.peopleCount}
+            name={formFieldsIds.peopleCount}
             type="number"
             value={inputValues.peopleCount}
             onChange={handleChange}
@@ -45,9 +52,10 @@ const ConfigPanel: FC<ConfigPanelProps> = ({ values, onSubmit }) => {
           />
         </StyledInnerWrapper>
         <StyledInnerWrapper>
-          <StyledLabel htmlFor="projectsPerYear">Projects per year: </StyledLabel>
+          <StyledLabel htmlFor={formFieldsIds.projectsPerYear}>Projects per year: </StyledLabel>
           <StyledInput
-            name="projectsPerYear"
+            id={formFieldsIds.projectsPerYear}
+            name={formFieldsIds.projectsPerYear}
             value={inputValues.projectsPerYear}
             type="number"
             onChange={handleChange}
@@ -56,9 +64,10 @@ const ConfigPanel: FC<ConfigPanelProps> = ({ values, onSubmit }) => {
           />
         </StyledInnerWrapper>
         <StyledInnerWrapper>
-          <StyledLabel htmlFor="yearsCovered">Years covered: </StyledLabel>
+          <StyledLabel htmlFor={formFieldsIds.yearsCovered}>Years covered: </StyledLabel>
           <StyledInput
-            name="yearsCovered"
+            id={formFieldsIds.yearsCovered}
+            name={formFieldsIds.yearsCovered}
             value={inputValues.yearsCovered}
             type="number"
             onChange={handleChange}
@@ -67,13 +76,13 @@ const ConfigPanel: FC<ConfigPanelProps> = ({ values, onSubmit }) => {
           />
         </StyledInnerWrapper>
         <StyledInnerWrapper>
-          <StyledLabel htmlFor="isInFrame">Display in frame: </StyledLabel>
+          <StyledLabel htmlFor={formFieldsIds.isFullscreen}>Fullscreen: </StyledLabel>
           <StyledCheckbox
-            name="isInFrame"
-            checked={inputValues.isInFrame}
+            id={formFieldsIds.isFullscreen}
+            name={formFieldsIds.isFullscreen}
+            checked={inputValues.isFullscreen}
             type="checkbox"
             onChange={handleChange}
-            disabled
           />
         </StyledInnerWrapper>
         <StyledButton type="submit">Change</StyledButton>

@@ -1,10 +1,12 @@
 import { useTheme } from "styled-components";
+import { FC } from "react";
 import { Icon, IconButton } from "@/components";
 import { useCalendar } from "@/context/CalendarProvider";
 import { useLanguage } from "@/context/LocaleProvider";
 import { NavigationWrapper, Wrapper, NavBtn, Today, Zoom, Filters } from "./styles";
+import { TopbarProps } from "./types";
 
-const Topbar = () => {
+const Topbar: FC<TopbarProps> = ({ width }) => {
   const { topbar } = useLanguage();
   const {
     handleGoNext,
@@ -19,7 +21,7 @@ const Topbar = () => {
   const { colors } = useTheme();
 
   return (
-    <Wrapper>
+    <Wrapper width={width}>
       <Filters>
         <IconButton iconName="filter" width="16" height="16" onClick={handleFilterData}>
           {topbar.filters}

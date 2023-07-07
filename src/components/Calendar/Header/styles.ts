@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { headerHeight } from "@/constants";
 
 export const StyledOuterWrapper = styled.div`
-  padding-top: 44px;
   position: sticky;
   top: 0;
   z-index: 1;

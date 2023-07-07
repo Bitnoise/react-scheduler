@@ -5,7 +5,7 @@ import { Grid, Header, LeftColumn, Tiles } from "..";
 import { CalendarProps } from "./types";
 import { StyledOuterWrapper, StyledInnerWrapper } from "./styles";
 
-export const Calendar: FC<CalendarProps> = ({ data, onItemClick }) => {
+export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) => {
   const { zoom } = useCalendar();
 
   const { projectsPerPerson, rowsPerPerson } = useMemo(() => {
@@ -18,7 +18,7 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick }) => {
     <StyledOuterWrapper>
       <LeftColumn data={data} rows={rowsPerPerson} />
       <StyledInnerWrapper>
-        <Header zoom={zoom} />
+        <Header zoom={zoom} topBarWidth={topBarWidth} />
         <Grid zoom={zoom} rows={rowsInTotal} />
         <Tiles data={projectsPerPerson} zoom={zoom} onItemClick={onItemClick} />
       </StyledInnerWrapper>

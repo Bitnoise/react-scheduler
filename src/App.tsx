@@ -1,20 +1,28 @@
 import { useCallback, useMemo, useState } from "react";
 import dayjs from "dayjs";
+import styled from "styled-components";
 import { createMockData } from "./mock/appMock";
 import { ParsedDatesRange } from "./utils/getDatesRange";
 import { ConfigFormValues, SchedulerProjectData } from "./types/global";
 import ConfigPanel from "./components/ConfigPanel";
 import { Scheduler } from ".";
 
+const StyledDiv = styled.div`
+  position: relative;
+  width: 1024px;
+  height: 768px;
+  border-right: 1px dashed black;
+`;
+
 function App() {
   const [values, setValues] = useState<ConfigFormValues>({
     peopleCount: 5,
     projectsPerYear: 5,
     yearsCovered: 0,
-    isInFrame: false
+    isFullscreen: true
   });
 
-  const { peopleCount, projectsPerYear, yearsCovered } = values;
+  const { peopleCount, projectsPerYear, yearsCovered, isFullscreen } = values;
 
   const mocked = useMemo(
     () => createMockData(+peopleCount, +yearsCovered, +projectsPerYear),
@@ -51,12 +59,24 @@ function App() {
   return (
     <>
       <ConfigPanel values={values} onSubmit={handleSubmit} />
-      <Scheduler
-        onRangeChange={handleRangeChange}
-        data={filteredData}
-        onItemClick={handleItemClick}
-        onFilterData={handleFilterData}
-      />
+
+      {isFullscreen ? (
+        <Scheduler
+          onRangeChange={handleRangeChange}
+          data={filteredData}
+          onItemClick={handleItemClick}
+          onFilterData={handleFilterData}
+        />
+      ) : (
+        <StyledDiv>
+          <Scheduler
+            onRangeChange={handleRangeChange}
+            data={filteredData}
+            onItemClick={handleItemClick}
+            onFilterData={handleFilterData}
+          />
+        </StyledDiv>
+      )}
     </>
   );
 }

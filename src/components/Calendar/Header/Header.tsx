@@ -5,8 +5,9 @@ import { useLanguage } from "@/context/LocaleProvider";
 import { drawHeader } from "@/utils/drawHeader/drawHeader";
 import { HeaderProps } from "./types";
 import { StyledCanvas, StyledOuterWrapper, StyledWrapper } from "./styles";
+import Topbar from "./Topbar";
 
-const Header: FC<HeaderProps> = ({ zoom }) => {
+const Header: FC<HeaderProps> = ({ zoom, topBarWidth }) => {
   const { week } = useLanguage();
   const { date, cols, dayOfYear, startDate } = useCalendar();
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -45,6 +46,7 @@ const Header: FC<HeaderProps> = ({ zoom }) => {
 
   return (
     <StyledOuterWrapper>
+      <Topbar width={topBarWidth} />
       <StyledWrapper id={canvasHeaderWrapperId}>
         <StyledCanvas ref={canvasRef} />
       </StyledWrapper>

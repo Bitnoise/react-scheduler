@@ -81,5 +81,5 @@ export type ConfigFormValues = {
   peopleCount: number;
   projectsPerYear: number;
   yearsCovered: number;
-  isInFrame: boolean;
+  isFullscreen: boolean;
 };

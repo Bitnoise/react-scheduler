@@ -26,5 +26,6 @@ export const dayNumYOffset = 4.5;
 export const monthsInYear = 12;
 export const canvasHeaderWrapperId = "canvasHeaderWrapper";
 export const canvasWrapperId = "canvasWrapper";
+export const outsideWrapperId = "outsideWrapper";
 export const tileYOffset = 4;
 export const tileHeight = 48;

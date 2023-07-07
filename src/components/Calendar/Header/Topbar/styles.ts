@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { leftColumnWidth } from "@/constants";
+import { TopbarProps } from "./types";
 
 const resetBtnStyles = `
   background: none;
@@ -7,18 +8,18 @@ const resetBtnStyles = `
   border: none;
 `;
 
-export const Wrapper = styled.div`
-  position: fixed;
+export const Wrapper = styled.div<TopbarProps>`
+  width: calc(${({ width }) => width}px - ${leftColumnWidth}px);
+  position: sticky;
   top: 0;
-  left: ${leftColumnWidth + "px"};
+  left: ${leftColumnWidth}px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: calc(100% - ${leftColumnWidth + "px"});
   height: ${({ theme }) => theme.navHeight};
   padding: 0.625rem 1rem;
   background-color: ${({ theme }) => theme.colors.white};
-  z-index: 1;
+  z-index: 3;
 `;
 
 export const NavigationWrapper = styled.div`
