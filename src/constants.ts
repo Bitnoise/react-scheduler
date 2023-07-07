@@ -29,3 +29,9 @@ export const canvasWrapperId = "canvasWrapper";
 export const outsideWrapperId = "outsideWrapper";
 export const tileYOffset = 4;
 export const tileHeight = 48;
+export const formFieldsIds = {
+  peopleCount: "peopleCount",
+  projectsPerYear: "projectsPerYear",
+  yearsCovered: "yearsCovered",
+  isFullscreen: "isFullscreen"
+};

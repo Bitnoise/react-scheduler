@@ -1,5 +1,5 @@
 import { normalize } from "styled-normalize";
-import { createGlobalStyle, type DefaultTheme } from "styled-components";
+import styled, { createGlobalStyle, type DefaultTheme } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -54,4 +54,11 @@ export const truncate = `
 overflow: hidden;
 text-overflow: ellipsis;
 white-space: nowrap;
+`;
+
+export const StyledSchedulerFrame = styled.div`
+  position: relative;
+  width: 1024px;
+  height: 768px;
+  border-right: 1px dashed black;
 `;

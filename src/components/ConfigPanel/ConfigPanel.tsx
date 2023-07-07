@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import { ConfigFormValues } from "@/types/global";
+import { formFieldsIds } from "@/constants";
 import {
   StyledButton,
   StyledCheckbox,
@@ -22,13 +23,6 @@ const ConfigPanel: FC<ConfigPanelProps> = ({ values, onSubmit }) => {
       ...prev,
       [name]: +inputValue
     }));
-  };
-
-  const formFieldsIds = {
-    peopleCount: "peopleCount",
-    projectsPerYear: "projectsPerYear",
-    yearsCovered: "yearsCovered",
-    isFullscreen: "isFullscreen"
   };
 
   const handleSubmit = (event: React.FormEvent) => {

@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import dayjs from "dayjs";
 import weekOfYear from "dayjs/plugin/weekOfYear";
 import dayOfYear from "dayjs/plugin/dayOfYear";
@@ -26,7 +26,6 @@ const CalendarProvider = ({
   onRangeChange,
   onFilterData
 }: CalendarProviderProps) => {
-  const outsideWrapper = document.getElementById(outsideWrapperId);
   const [zoom, setZoom] = useState<ZoomLevel>(config.zoom);
   const [date, setDate] = useState(dayjs());
   const [isLoading, setIsLoading] = useState(false);
@@ -37,9 +36,11 @@ const CalendarProvider = ({
   const startDate = getDatesRange(date, zoom).startDate;
   const dayOfYear = dayjs(startDate).dayOfYear();
   const parsedStartDate = parseDay(startDate);
+  const outsideWrapper = useRef<HTMLElement | null>(null);
+
   const scrollToMiddle = useCallback(
-    () => outsideWrapper?.scrollTo({ behavior: "smooth", left: window.innerWidth }),
-    [outsideWrapper]
+    () => outsideWrapper.current?.scrollTo({ behavior: "smooth", left: window.innerWidth }),
+    []
   );
 
   const loadMore = useCallback(
@@ -54,6 +55,10 @@ const CalendarProvider = ({
     },
     [onRangeChange, range]
   );
+
+  useEffect(() => {
+    outsideWrapper.current = document.getElementById(outsideWrapperId);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => setCols(getCols(zoom));

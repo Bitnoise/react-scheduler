@@ -20,21 +20,14 @@ const Scheduler = ({ data, config, onRangeChange, onItemClick, onFilterData }: S
   const [topBarWidth, setTopBarWidth] = useState(outsideWrapperRef.current?.clientWidth);
 
   useEffect(() => {
-    const getInitialOutsideWrapperWidth = () => {
-      if (outsideWrapperRef.current) {
-        setTopBarWidth(outsideWrapperRef.current.clientWidth);
-      }
-    };
-
-    getInitialOutsideWrapperWidth();
-  }, []);
-
-  useEffect(() => {
     const handleResize = () => {
       if (outsideWrapperRef.current) {
         setTopBarWidth(outsideWrapperRef.current.clientWidth);
       }
     };
+
+    handleResize();
+
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);

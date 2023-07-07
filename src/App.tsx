@@ -1,18 +1,11 @@
 import { useCallback, useMemo, useState } from "react";
 import dayjs from "dayjs";
-import styled from "styled-components";
 import { createMockData } from "./mock/appMock";
 import { ParsedDatesRange } from "./utils/getDatesRange";
 import { ConfigFormValues, SchedulerProjectData } from "./types/global";
 import ConfigPanel from "./components/ConfigPanel";
+import { StyledSchedulerFrame } from "./styles";
 import { Scheduler } from ".";
-
-const StyledDiv = styled.div`
-  position: relative;
-  width: 1024px;
-  height: 768px;
-  border-right: 1px dashed black;
-`;
 
 function App() {
   const [values, setValues] = useState<ConfigFormValues>({
@@ -68,14 +61,14 @@ function App() {
           onFilterData={handleFilterData}
         />
       ) : (
-        <StyledDiv>
+        <StyledSchedulerFrame>
           <Scheduler
             onRangeChange={handleRangeChange}
             data={filteredData}
             onItemClick={handleItemClick}
             onFilterData={handleFilterData}
           />
-        </StyledDiv>
+        </StyledSchedulerFrame>
       )}
     </>
   );
