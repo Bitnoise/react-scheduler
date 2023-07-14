@@ -23,6 +23,7 @@ type ColorType =
   | "accentLight"
   | "accent"
   | "hover"
+  | "warning"
   | "white";
 
 export type Theme = {
@@ -41,6 +42,7 @@ export const theme: DefaultTheme = {
     accentLight: "#C9E5FF",
     accent: "#0A11EB",
     hover: "#E6F3FF",
+    warning: "#EF4444",
     white: "#FFFFFF"
   }
 };
@@ -57,8 +59,8 @@ white-space: nowrap;
 `;
 
 export const StyledSchedulerFrame = styled.div`
+  margin: 10rem 10rem;
   position: relative;
-  width: 1024px;
-  height: 768px;
-  border-right: 1px dashed black;
+  width: 40vw;
+  height: 40vh;
 `;

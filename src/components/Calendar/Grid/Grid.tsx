@@ -1,18 +1,12 @@
-import { useCallback, useEffect, useRef } from "react";
+import { forwardRef, useCallback, useEffect, useRef } from "react";
 import { drawGrid } from "@/utils/drawGrid/drawGrid";
-import {
-  boxHeight,
-  canvasWrapperId,
-  headerHeight,
-  leftColumnWidth,
-  screenWidthMultiplier
-} from "@/constants";
+import { boxHeight, canvasWrapperId, leftColumnWidth, screenWidthMultiplier } from "@/constants";
 import { Loader } from "@/components";
 import { useCalendar } from "@/context/CalendarProvider";
 import { GridProps } from "./types";
 import { StyledCanvas, StyledInnerWrapper, StyledSpan, StyledWrapper } from "./styles";
 
-const Grid = ({ zoom, rows }: GridProps) => {
+const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid({ zoom, rows }, ref) {
   const { handleScrollNext, handleScrollPrev, date, isLoading, cols, startDate } = useCalendar();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const refRight = useRef<HTMLSpanElement>(null);
@@ -45,7 +39,7 @@ const Grid = ({ zoom, rows }: GridProps) => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    ctx.canvas.height = rows * boxHeight + headerHeight;
+    ctx.canvas.height = rows * boxHeight + 1;
 
     handleResize(ctx);
   }, [date, rows, zoom, handleResize]);
@@ -73,7 +67,7 @@ const Grid = ({ zoom, rows }: GridProps) => {
 
   return (
     <StyledWrapper id={canvasWrapperId}>
-      <StyledInnerWrapper>
+      <StyledInnerWrapper ref={ref}>
         <StyledSpan position="left" ref={refLeft} />
         <Loader isLoading={isLoading} position="left" />
         <StyledCanvas ref={canvasRef} />
@@ -82,6 +76,6 @@ const Grid = ({ zoom, rows }: GridProps) => {
       </StyledInnerWrapper>
     </StyledWrapper>
   );
-};
+});
 
 export default Grid;

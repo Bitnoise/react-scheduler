@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import dayjs from "dayjs";
-import { Config, Day, SchedulerData, ZoomLevel } from "@/types/global";
+import { Config, Coords, Day, SchedulerData, ZoomLevel } from "@/types/global";
 import { ParsedDatesRange } from "@/utils/getDatesRange";
 
 export type CalendaryContextType = {
@@ -12,6 +12,8 @@ export type CalendaryContextType = {
   zoomIn: () => void;
   zoomOut: () => void;
   handleFilterData: () => void;
+  updateTilesCoords: (coords: Coords[]) => void;
+  tilesCoords: Coords[];
   zoom: ZoomLevel;
   isNextZoom: boolean;
   isPrevZoom: boolean;

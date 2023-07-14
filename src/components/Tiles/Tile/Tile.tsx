@@ -21,6 +21,7 @@ const Tile: FC<TileProps> = ({ row, data, zoom, onItemClick }) => {
     data.endDate,
     zoom
   );
+
   return (
     <StyledTileWrapper
       style={{

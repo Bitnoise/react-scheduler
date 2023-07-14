@@ -35,3 +35,6 @@ export const formFieldsIds = {
   yearsCovered: "yearsCovered",
   isFullscreen: "isFullscreen"
 };
+export const businessDays = 5;
+export const maxHoursPerWeek = 40;
+export const maxHoursPerDay = 8;

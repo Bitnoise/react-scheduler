@@ -25,6 +25,7 @@ export type SchedulerProjectData = {
   id: string;
   startDate: Date;
   endDate: Date;
+  hoursTaken: number;
   title: string;
   subtitle?: string;
   description?: string;
@@ -82,4 +83,21 @@ export type ConfigFormValues = {
   projectsPerYear: number;
   yearsCovered: number;
   isFullscreen: boolean;
+};
+
+export type Coords = {
+  x: number;
+  y: number;
+};
+
+export type OccupancyData = {
+  taken: number;
+  free: number;
+  overtime: number;
+};
+
+export type TooltipData = {
+  coords: Coords;
+  resourceIndex: number;
+  disposition: OccupancyData;
 };

@@ -44,6 +44,7 @@ export const generateProjects = (
         id: faker.datatype.uuid(),
         startDate,
         endDate,
+        hoursTaken: Math.ceil(Math.random() * 8),
         title,
         subtitle: getRandomWords(),
         description: getRandomWords(amountOfDscWords),

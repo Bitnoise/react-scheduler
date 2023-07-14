@@ -5,7 +5,7 @@ import dayOfYear from "dayjs/plugin/dayOfYear";
 import isoWeek from "dayjs/plugin/isoWeek";
 import isBetween from "dayjs/plugin/isBetween";
 import debounce from "lodash.debounce";
-import { ZoomLevel, allZoomLevel } from "@/types/global";
+import { Coords, ZoomLevel, allZoomLevel } from "@/types/global";
 import { isAvailableZoom } from "@/types/guards";
 import { getDatesRange, getParsedDatesRange } from "@/utils/getDatesRange";
 import { parseDay } from "@/utils/dates";
@@ -19,7 +19,6 @@ dayjs.extend(isoWeek);
 dayjs.extend(isBetween);
 
 type Direction = "prev" | "next";
-
 const CalendarProvider = ({
   children,
   config,
@@ -37,11 +36,16 @@ const CalendarProvider = ({
   const dayOfYear = dayjs(startDate).dayOfYear();
   const parsedStartDate = parseDay(startDate);
   const outsideWrapper = useRef<HTMLElement | null>(null);
+  const [tilesCoords, setTilesCoords] = useState<Coords[]>([{ x: 0, y: 0 }]);
 
   const scrollToMiddle = useCallback(
     () => outsideWrapper.current?.scrollTo({ behavior: "smooth", left: window.innerWidth }),
     []
   );
+
+  const updateTilesCoords = (coords: Coords[]) => {
+    setTilesCoords(coords);
+  };
 
   const loadMore = useCallback(
     (direction: Direction) => {
@@ -79,11 +83,10 @@ const CalendarProvider = ({
 
   const handleScrollNext = useCallback(() => {
     setIsLoading(true);
-
     loadMore("next");
     scrollToMiddle();
-
-    setIsLoading(false);
+    // Timeout is set for testers
+    setTimeout(() => setIsLoading(false), 1500);
   }, [loadMore, scrollToMiddle]);
 
   const handleGoPrev = () => {
@@ -97,7 +100,8 @@ const CalendarProvider = ({
     setIsLoading(true);
     loadMore("prev");
     scrollToMiddle();
-    setIsLoading(false);
+    // Timeout is set for testers
+    setTimeout(() => setIsLoading(false), 1500);
   }, [loadMore, scrollToMiddle]);
 
   const handleGoToday = () => {
@@ -139,7 +143,9 @@ const CalendarProvider = ({
         cols,
         startDate: parsedStartDate,
         dayOfYear,
-        handleFilterData
+        handleFilterData,
+        tilesCoords,
+        updateTilesCoords
       }}>
       {children}
     </Provider>

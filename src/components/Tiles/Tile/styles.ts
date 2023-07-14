@@ -4,7 +4,7 @@ import { marginPaddingReset, truncate } from "@/styles";
 import { StyledTextProps } from "./types";
 
 export const StyledTileWrapper = styled.button`
-  padding: 10px 16px;
+  ${marginPaddingReset}
   height: ${tileHeight}px;
   position: absolute;
   outline: none;
@@ -14,9 +14,11 @@ export const StyledTileWrapper = styled.button`
   color: white;
   width: 100%;
   cursor: pointer;
+  pointer-events: none;
 `;
 
 export const StyledTextWrapper = styled.div`
+  margin: 10px 16px;
   position: relative;
   display: flex;
   font-size: 10px;
