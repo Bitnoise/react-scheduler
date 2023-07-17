@@ -13,9 +13,7 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
   const [isHovering, setIsHovering] = useState(false);
   const { zoom, startDate } = useCalendar();
   const gridRef = useRef<HTMLDivElement>(null);
-  const { projectsPerPerson, rowsPerPerson } = useMemo(() => {
-    return projectsOnGrid(data);
-  }, [data]);
+  const { projectsPerPerson, rowsPerPerson } = useMemo(() => projectsOnGrid(data), [data]);
 
   const [tooltipData, setTooltipData] = useState<TooltipData>({
     coords: { x: 0, y: 0 },
