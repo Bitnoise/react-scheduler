@@ -3,6 +3,7 @@ import {
   fonts,
   headerMonthHeight,
   headerWeekHeight,
+  middleRowTextYPos,
   monthsInYear,
   singleDayWidth
 } from "@/constants";
@@ -13,7 +14,6 @@ import { drawRow } from "../../drawRow";
 export const drawMonthsInMiddle = (ctx: CanvasRenderingContext2D, cols: number, startDate: Day) => {
   let xPos = -(startDate.dayOfMonth - 1) * singleDayWidth;
   const yPos = headerMonthHeight;
-  const textYPos = headerWeekHeight / 2 + headerMonthHeight;
   const monthIndex = startDate.month;
   let index = monthIndex;
 
@@ -27,7 +27,7 @@ export const drawMonthsInMiddle = (ctx: CanvasRenderingContext2D, cols: number, 
       y: yPos,
       width,
       height: headerWeekHeight,
-      textYPos,
+      textYPos: middleRowTextYPos,
       label: dayjs().month(index).format("MMMM").toUpperCase(),
       font: fonts.bottomRow.number
     });

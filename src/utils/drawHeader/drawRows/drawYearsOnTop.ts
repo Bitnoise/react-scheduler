@@ -1,4 +1,4 @@
-import { fonts, headerMonthHeight, singleDayWidth } from "@/constants";
+import { fonts, headerMonthHeight, singleDayWidth, topRowTextYPos } from "@/constants";
 import { Day } from "@/types/global";
 import { daysInYear } from "@/utils/dates";
 import { drawRow } from "@/utils/drawRow";
@@ -8,7 +8,6 @@ export const drawYearsOnTop = (
   dayOfYear: number
 ) => {
   const yPos = 0;
-  const textYPos = headerMonthHeight / 2;
   const year = startDate.year;
   const canvasWidth = ctx.canvas.width * 2;
   let xPos = 0;
@@ -31,7 +30,7 @@ export const drawYearsOnTop = (
       y: yPos,
       width,
       height: headerMonthHeight,
-      textYPos,
+      textYPos: topRowTextYPos,
       label: (year + index).toString(),
       font: fonts.topRow
     });

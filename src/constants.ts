@@ -38,3 +38,5 @@ export const formFieldsIds = {
 export const businessDays = 5;
 export const maxHoursPerWeek = 40;
 export const maxHoursPerDay = 8;
+export const topRowTextYPos = headerMonthHeight / 2 + 2;
+export const middleRowTextYPos = headerWeekHeight / 2 + headerMonthHeight + 1;

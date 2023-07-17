@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "types": ["vite-plugin-svgr/client"],
     "paths": { "@/*": ["./src/*"] },
     "target": "ESNext",
     "useDefineForClassFields": true,

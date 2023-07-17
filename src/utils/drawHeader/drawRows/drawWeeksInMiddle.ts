@@ -1,6 +1,13 @@
 import dayjs from "dayjs";
 import { Day } from "@/types/global";
-import { dayWidth, fonts, headerMonthHeight, headerWeekHeight, weeksInYear } from "@/constants";
+import {
+  dayWidth,
+  fonts,
+  headerMonthHeight,
+  headerWeekHeight,
+  middleRowTextYPos,
+  weeksInYear
+} from "@/constants";
 import { drawRow } from "@/utils/drawRow";
 
 export const drawWeeksInMiddle = (
@@ -10,7 +17,7 @@ export const drawWeeksInMiddle = (
 ) => {
   const width = 7 * dayWidth;
   const yPos = headerMonthHeight;
-  const textYPos = headerWeekHeight / 2 + headerMonthHeight;
+
   const weeksThreshold = ctx.canvas.width / width + width;
   const startWeek = startDate.weekOfYear;
   let xPos = 0;
@@ -31,7 +38,7 @@ export const drawWeeksInMiddle = (
       y: yPos,
       width,
       height: headerWeekHeight,
-      textYPos: textYPos,
+      textYPos: middleRowTextYPos,
       label: `${weekLabel.toUpperCase()} ${weekIndex}`,
       font: fonts.middleRow
     });
