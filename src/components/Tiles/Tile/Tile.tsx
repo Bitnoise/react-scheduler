@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { getTileProperties } from "@/utils/getTileProperies";
 import { useCalendar } from "@/context/CalendarProvider";
 import { getDatesRange } from "@/utils/getDatesRange";
+import { getTileProperties } from "@/utils/getTileProperties";
 import {
   StyledDescription,
   StyledStickyWrapper,

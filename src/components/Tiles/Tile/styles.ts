@@ -14,7 +14,6 @@ export const StyledTileWrapper = styled.button`
   color: white;
   width: 100%;
   cursor: pointer;
-  pointer-events: none;
 `;
 
 export const StyledTextWrapper = styled.div`

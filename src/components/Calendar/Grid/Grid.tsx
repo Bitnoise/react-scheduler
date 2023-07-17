@@ -1,12 +1,15 @@
 import { forwardRef, useCallback, useEffect, useRef } from "react";
 import { drawGrid } from "@/utils/drawGrid/drawGrid";
 import { boxHeight, canvasWrapperId, leftColumnWidth, screenWidthMultiplier } from "@/constants";
-import { Loader } from "@/components";
+import { Loader, Tiles } from "@/components";
 import { useCalendar } from "@/context/CalendarProvider";
 import { GridProps } from "./types";
 import { StyledCanvas, StyledInnerWrapper, StyledSpan, StyledWrapper } from "./styles";
 
-const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid({ zoom, rows }, ref) {
+const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
+  { zoom, rows, data, onItemClick },
+  ref
+) {
   const { handleScrollNext, handleScrollPrev, date, isLoading, cols, startDate } = useCalendar();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const refRight = useRef<HTMLSpanElement>(null);
@@ -71,6 +74,7 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid({ zoom, rows },
         <StyledSpan position="left" ref={refLeft} />
         <Loader isLoading={isLoading} position="left" />
         <StyledCanvas ref={canvasRef} />
+        <Tiles data={data} zoom={zoom} onItemClick={onItemClick} />
         <StyledSpan ref={refRight} position="right" />
         <Loader isLoading={isLoading} position="right" />
       </StyledInnerWrapper>
