@@ -28,7 +28,7 @@ const CalendarProvider = ({
   const [zoom, setZoom] = useState<ZoomLevel>(config.zoom);
   const [date, setDate] = useState(dayjs());
   const [isLoading, setIsLoading] = useState(false);
-  const [isInitial, setIsInitial] = useState(true);
+  const [isInitialized, setIsInitialized] = useState(true);
   const [cols, setCols] = useState(getCols(zoom));
   const isNextZoom = allZoomLevel[zoom] !== allZoomLevel[allZoomLevel.length - 1];
   const isPrevZoom = zoom !== 0;
@@ -136,14 +136,14 @@ const CalendarProvider = ({
   };
 
   const handleScrollPrev = useCallback(() => {
-    if (!isInitial) {
+    if (!isInitialized) {
       setIsLoading(true);
       loadMore("back");
       moveHorizontalScroll("back");
       // Timeout is set for testers
       setTimeout(() => setIsLoading(false), 1500);
     }
-  }, [isInitial, loadMore, moveHorizontalScroll]);
+  }, [isInitialized, loadMore, moveHorizontalScroll]);
 
   const handleGoToday = useCallback(() => {
     moveHorizontalScroll("middle");
@@ -151,11 +151,11 @@ const CalendarProvider = ({
   }, [moveHorizontalScroll, onRangeChange, range]);
 
   const handleGoToInitialView = useCallback(() => {
-    if (isInitial) {
+    if (isInitialized) {
       moveHorizontalScroll("middle");
-      setIsInitial(false);
+      setIsInitialized(false);
     }
-  }, [isInitial, moveHorizontalScroll]);
+  }, [isInitialized, moveHorizontalScroll]);
 
   const zoomIn = () => changeZoom(zoom + 1);
 
