@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { Config, Coords, Day, SchedulerData, ZoomLevel } from "@/types/global";
 import { ParsedDatesRange } from "@/utils/getDatesRange";
 
-export type CalendaryContextType = {
+export type CalendarContextType = {
   handleGoNext: () => void;
   handleScrollNext: () => void;
   handleGoPrev: () => void;
@@ -13,6 +13,7 @@ export type CalendaryContextType = {
   zoomOut: () => void;
   handleFilterData: () => void;
   updateTilesCoords: (coords: Coords[]) => void;
+  handleGoToInitialView: () => void;
   tilesCoords: Coords[];
   zoom: ZoomLevel;
   isNextZoom: boolean;

@@ -1,8 +1,8 @@
 import { createContext } from "react";
 import dayjs from "dayjs";
-import { CalendaryContextType } from "./types";
+import { CalendarContextType } from "./types";
 
-export const calendarContext = createContext<CalendaryContextType>({
+export const calendarContext = createContext<CalendarContextType>({
   handleGoNext: () => {},
   handleScrollNext: () => {},
   handleGoPrev: () => {},
@@ -12,6 +12,7 @@ export const calendarContext = createContext<CalendaryContextType>({
   zoomOut: () => {},
   handleFilterData: () => {},
   updateTilesCoords: () => {},
+  handleGoToInitialView: () => {},
   tilesCoords: [],
   zoom: 0,
   isNextZoom: false,

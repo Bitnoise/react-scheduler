@@ -10,7 +10,15 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
   { zoom, rows, data, onItemClick },
   ref
 ) {
-  const { handleScrollNext, handleScrollPrev, date, isLoading, cols, startDate } = useCalendar();
+  const {
+    handleScrollNext,
+    handleScrollPrev,
+    date,
+    isLoading,
+    cols,
+    startDate,
+    handleGoToInitialView
+  } = useCalendar();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const refRight = useRef<HTMLSpanElement>(null);
   const refLeft = useRef<HTMLSpanElement>(null);
@@ -22,6 +30,10 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
     },
     [cols, startDate, rows, zoom]
   );
+
+  useEffect(() => {
+    handleGoToInitialView();
+  }, [handleGoToInitialView]);
 
   useEffect(() => {
     if (!canvasRef.current) return;
