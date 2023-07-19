@@ -39,7 +39,9 @@ function App() {
       data: person.data.filter(
         (project) =>
           dayjs(project.startDate).isBetween(range.startDate, range.endDate) ||
-          dayjs(project.endDate).isBetween(range.startDate, range.endDate)
+          dayjs(project.endDate).isBetween(range.startDate, range.endDate) ||
+          (dayjs(project.startDate).isBefore(range.startDate, "day") &&
+            dayjs(project.endDate).isAfter(range.endDate, "day"))
       )
     };
   });
@@ -47,7 +49,9 @@ function App() {
   const handleFilterData = () => console.log(`Filters button was clicked.`);
 
   const handleItemClick = (data: SchedulerProjectData) =>
-    console.log(`Item ${data.title} - ${data.subtitle} was clicked.`);
+    console.log(
+      `Item ${data.title} - ${data.subtitle} was clicked. \n==============\nStart date: ${data.startDate} \n==============\nEnd date: ${data.endDate}\n==============\nHours per day: ${data.hoursTaken}`
+    );
 
   return (
     <>

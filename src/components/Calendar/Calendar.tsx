@@ -4,6 +4,7 @@ import { useCalendar } from "@/context/CalendarProvider";
 import { projectsOnGrid } from "@/utils/getProjectsOnGrid";
 import { TooltipData } from "@/types/global";
 import { getTooltipData } from "@/utils/getTooltipData";
+import { getDatesRange } from "@/utils/getDatesRange";
 import { Grid, Header, LeftColumn, Tooltip } from "..";
 import { CalendarProps } from "./types";
 import { StyledOuterWrapper, StyledInnerWrapper } from "./styles";
@@ -11,9 +12,13 @@ import { StyledOuterWrapper, StyledInnerWrapper } from "./styles";
 export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
-  const { zoom, startDate } = useCalendar();
+  const { zoom, startDate, date } = useCalendar();
   const gridRef = useRef<HTMLDivElement>(null);
-  const { projectsPerPerson, rowsPerPerson } = useMemo(() => projectsOnGrid(data), [data]);
+  const datesRange = getDatesRange(date, zoom);
+  const { projectsPerPerson, rowsPerPerson } = useMemo(
+    () => projectsOnGrid(data, datesRange),
+    [data, datesRange]
+  );
 
   const [tooltipData, setTooltipData] = useState<TooltipData>({
     coords: { x: 0, y: 0 },

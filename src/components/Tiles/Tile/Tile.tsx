@@ -17,6 +17,7 @@ const Tile: FC<TileProps> = ({ row, data, zoom, onItemClick }) => {
   const { y, x, width } = getTileProperties(
     row,
     datesRange.startDate,
+    datesRange.endDate,
     data.startDate,
     data.endDate,
     zoom

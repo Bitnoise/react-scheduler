@@ -75,7 +75,6 @@ export type TileProperties = {
   x: number;
   y: number;
   width: number;
-  height: number;
 };
 
 export type ConfigFormValues = {
