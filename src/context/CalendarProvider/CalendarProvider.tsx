@@ -10,7 +10,14 @@ import { isAvailableZoom } from "@/types/guards";
 import { getDatesRange, getParsedDatesRange } from "@/utils/getDatesRange";
 import { parseDay } from "@/utils/dates";
 import { getCols } from "@/utils/getCols";
-import { dayWidth, outsideWrapperId, screenWidthMultiplier, weekWidth } from "@/constants";
+import {
+  buttonWeeksJump,
+  dayWidth,
+  outsideWrapperId,
+  screenWidthMultiplier,
+  scrollWeeksJump,
+  weekWidth
+} from "@/constants";
 import { calendarContext } from "./calendarContext";
 import { CalendarProviderProps } from "./types";
 dayjs.extend(weekOfYear);
@@ -19,6 +26,7 @@ dayjs.extend(isoWeek);
 dayjs.extend(isBetween);
 
 type Direction = "back" | "forward" | "middle";
+
 const CalendarProvider = ({
   children,
   config,
@@ -90,8 +98,8 @@ const CalendarProvider = ({
     (direction: Direction) => {
       const load = debounce(() => {
         direction === "forward"
-          ? setDate((prev) => prev.add(4, "weeks"))
-          : setDate((prev) => prev.subtract(4, "weeks"));
+          ? setDate((prev) => prev.add(scrollWeeksJump, "weeks"))
+          : setDate((prev) => prev.subtract(scrollWeeksJump, "weeks"));
         onRangeChange(range);
       }, 300);
       load();
@@ -115,7 +123,7 @@ const CalendarProvider = ({
 
   const handleGoNext = () => {
     setIsLoading(true);
-    setDate((prev) => prev.add(2, "weeks"));
+    setDate((prev) => prev.add(buttonWeeksJump, "weeks"));
     onRangeChange(range);
     setIsLoading(false);
   };
@@ -130,7 +138,7 @@ const CalendarProvider = ({
 
   const handleGoPrev = () => {
     setIsLoading(true);
-    setDate((prev) => prev.subtract(2, "weeks"));
+    setDate((prev) => prev.subtract(buttonWeeksJump, "weeks"));
     onRangeChange(range);
     setIsLoading(false);
   };

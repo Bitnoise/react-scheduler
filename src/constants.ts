@@ -40,3 +40,5 @@ export const maxHoursPerWeek = 40;
 export const maxHoursPerDay = 8;
 export const topRowTextYPos = headerMonthHeight / 2 + 2;
 export const middleRowTextYPos = headerWeekHeight / 2 + headerMonthHeight + 1;
+export const buttonWeeksJump = 2;
+export const scrollWeeksJump = 4;
