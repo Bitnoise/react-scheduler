@@ -28,7 +28,7 @@ const CalendarProvider = ({
   const [zoom, setZoom] = useState<ZoomLevel>(config.zoom);
   const [date, setDate] = useState(dayjs());
   const [isLoading, setIsLoading] = useState(false);
-  const [isInitialized, setIsInitialized] = useState(true);
+  const [isInitialized, setIsInitialized] = useState(false);
   const [cols, setCols] = useState(getCols(zoom));
   const isNextZoom = allZoomLevel[zoom] !== allZoomLevel[allZoomLevel.length - 1];
   const isPrevZoom = zoom !== 0;
@@ -136,7 +136,7 @@ const CalendarProvider = ({
   };
 
   const handleScrollPrev = useCallback(() => {
-    if (!isInitialized) {
+    if (isInitialized) {
       setIsLoading(true);
       loadMore("back");
       moveHorizontalScroll("back");
@@ -151,9 +151,9 @@ const CalendarProvider = ({
   }, [moveHorizontalScroll, onRangeChange, range]);
 
   const handleGoToInitialView = useCallback(() => {
-    if (isInitialized) {
+    if (!isInitialized) {
       moveHorizontalScroll("middle");
-      setIsInitialized(false);
+      setIsInitialized(true);
     }
   }, [isInitialized, moveHorizontalScroll]);
 
