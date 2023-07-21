@@ -183,6 +183,27 @@ module.exports = {
 };
 ```
 
+- When using with NextJS (app router) Scheduler needs to be wrapped with component with `use client`
+
+```ts
+"use client"
+import { Scheduler, SchedulerProps } from "@bitnoi.se/react-scheduler";
+
+default export function SchedulerClient(props: SchedulerProps) {
+	return <Scheduler {...props} />;
+}
+
+```
+
+- When using with NextJS (pages router) it needs to be imported using `dynamic`:
+
+```ts
+import dynamic from "next/dynamic";
+const Scheduler = dynamic(() => import("@bitnoi.se/react-scheduler").then((mod) => mod.Scheduler), {
+  ssr: false
+});
+```
+
 ### Known Issues
 
 1. No responsiveness
