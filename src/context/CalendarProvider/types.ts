@@ -28,6 +28,6 @@ export type CalendarProviderProps = {
   children: ReactNode;
   data?: SchedulerData;
   config: Config;
-  onRangeChange: (range: ParsedDatesRange) => void;
-  onFilterData: () => void;
+  onRangeChange?: (range: ParsedDatesRange) => void;
+  onFilterData?: () => void;
 };

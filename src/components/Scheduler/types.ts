@@ -3,8 +3,8 @@ import { ParsedDatesRange } from "@/utils/getDatesRange";
 
 export type SchedulerProps = {
   data: SchedulerData;
-  onRangeChange: (range: ParsedDatesRange) => void;
-  onItemClick: (data: SchedulerProjectData) => void;
-  onFilterData: () => void;
+  onRangeChange?: (range: ParsedDatesRange) => void;
+  onItemClick?: (data: SchedulerProjectData) => void;
+  onFilterData?: () => void;
   config?: Config;
 };

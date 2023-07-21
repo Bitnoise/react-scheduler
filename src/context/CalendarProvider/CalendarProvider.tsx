@@ -108,7 +108,7 @@ const CalendarProvider = ({
             setDate(dayjs());
             break;
         }
-        onRangeChange(range);
+        onRangeChange?.(range);
       }, 300);
       load();
     },
@@ -126,13 +126,13 @@ const CalendarProvider = ({
   }, [zoom]);
 
   useEffect(() => {
-    onRangeChange(range);
+    onRangeChange?.(range);
   }, [onRangeChange, range]);
 
   const handleGoNext = () => {
     setIsLoading(true);
     setDate((prev) => prev.add(buttonWeeksJump, "weeks"));
-    onRangeChange(range);
+    onRangeChange?.(range);
     setIsLoading(false);
   };
 
@@ -147,7 +147,7 @@ const CalendarProvider = ({
   const handleGoPrev = () => {
     setIsLoading(true);
     setDate((prev) => prev.subtract(buttonWeeksJump, "weeks"));
-    onRangeChange(range);
+    onRangeChange?.(range);
     setIsLoading(false);
   };
 
@@ -179,10 +179,10 @@ const CalendarProvider = ({
     if (!isAvailableZoom(zoomLevel)) return;
     setZoom(zoomLevel);
     setCols(getCols(zoomLevel));
-    onRangeChange(range);
+    onRangeChange?.(range);
   };
 
-  const handleFilterData = () => onFilterData();
+  const handleFilterData = () => onFilterData?.();
 
   useEffect(() => {
     if (isInitialized) {
