@@ -1,12 +1,9 @@
 # Usage
 
-In order to display Scheduler properly you need to import _Inter_ font variants first.
-You can copy paste code below into your project to import it:
+In order to display Scheduler properly it's required to import styles:
 
-```
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+```ts
+import "@bitnoi.se/react-scheduler/style.css";
 ```
 
 Or you can import it differently from [here](https://fonts.google.com/specimen/Inter?query=Inter).
