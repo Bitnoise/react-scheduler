@@ -97,9 +97,17 @@ const CalendarProvider = ({
   const loadMore = useCallback(
     (direction: Direction) => {
       const load = debounce(() => {
-        direction === "forward"
-          ? setDate((prev) => prev.add(scrollWeeksJump, "weeks"))
-          : setDate((prev) => prev.subtract(scrollWeeksJump, "weeks"));
+        switch (direction) {
+          case "back":
+            setDate((prev) => prev.subtract(scrollWeeksJump, "weeks"));
+            break;
+          case "forward":
+            setDate((prev) => prev.add(scrollWeeksJump, "weeks"));
+            break;
+          case "middle":
+            setDate(dayjs());
+            break;
+        }
         onRangeChange(range);
       }, 300);
       load();
@@ -144,26 +152,24 @@ const CalendarProvider = ({
   };
 
   const handleScrollPrev = useCallback(() => {
-    if (isInitialized) {
+    if (isInitialized && !isLoading) {
       setIsLoading(true);
       loadMore("back");
       moveHorizontalScroll("back");
       // Timeout is set for testers
       setTimeout(() => setIsLoading(false), 1500);
     }
-  }, [isInitialized, loadMore, moveHorizontalScroll]);
+  }, [isInitialized, isLoading, loadMore, moveHorizontalScroll]);
 
   const handleGoToday = useCallback(() => {
-    moveHorizontalScroll("middle");
-    onRangeChange(range);
-  }, [moveHorizontalScroll, onRangeChange, range]);
-
-  const handleGoToInitialView = useCallback(() => {
-    if (!isInitialized) {
+    if (!isLoading) {
+      setIsLoading(true);
       moveHorizontalScroll("middle");
-      setIsInitialized(true);
+      loadMore("middle");
+      // Timeout is set for testers
+      setTimeout(() => setIsLoading(false), 1500);
     }
-  }, [isInitialized, moveHorizontalScroll]);
+  }, [isLoading, loadMore, moveHorizontalScroll]);
 
   const zoomIn = () => changeZoom(zoom + 1);
 
@@ -177,6 +183,15 @@ const CalendarProvider = ({
   };
 
   const handleFilterData = () => onFilterData();
+
+  useEffect(() => {
+    if (isInitialized) {
+      return;
+    }
+
+    handleGoToday();
+    setIsInitialized(true);
+  }, [handleGoToday, isInitialized]);
 
   const { Provider } = calendarContext;
 
@@ -200,8 +215,7 @@ const CalendarProvider = ({
         dayOfYear,
         handleFilterData,
         tilesCoords,
-        updateTilesCoords,
-        handleGoToInitialView
+        updateTilesCoords
       }}>
       {children}
     </Provider>

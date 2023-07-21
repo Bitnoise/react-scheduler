@@ -13,7 +13,6 @@ export type CalendarContextType = {
   zoomOut: () => void;
   handleFilterData: () => void;
   updateTilesCoords: (coords: Coords[]) => void;
-  handleGoToInitialView: () => void;
   tilesCoords: Coords[];
   zoom: ZoomLevel;
   isNextZoom: boolean;
