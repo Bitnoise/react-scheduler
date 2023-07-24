@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { weekWidth, boxHeight, dayWidth } from "@/constants";
-import { Day, Coords, SchedulerProjectData, TooltipData } from "@/types/global";
+import { Day, Coords, SchedulerProjectData, TooltipData, ZoomLevel } from "@/types/global";
 import { getOccupancy } from "./getOccupancy";
 
 export const getTooltipData = (
@@ -8,7 +8,7 @@ export const getTooltipData = (
   cursorPosition: Coords,
   rowsPerPerson: number[],
   resourcesData: SchedulerProjectData[][][],
-  zoom: number
+  zoom: ZoomLevel
 ): TooltipData => {
   const currBoxWidth = zoom === 0 ? weekWidth : dayWidth;
   const column = Math.ceil(cursorPosition.x / currBoxWidth);

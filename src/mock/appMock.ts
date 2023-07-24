@@ -3,6 +3,8 @@ import dayjs from "dayjs";
 import { SchedulerData, SchedulerProjectData } from "@/types/global";
 import { ParsedDatesRange } from "@/utils/getDatesRange";
 
+const secondsInWorkDay = 28800;
+
 export const mockedOnRangeChange = (range: ParsedDatesRange, data: SchedulerData) => {
   console.log("Mocked on range change has been triggered. New range: ", range, data);
 };
@@ -48,7 +50,7 @@ export const generateProjects = (
         id: faker.datatype.uuid(),
         startDate,
         endDate,
-        hoursTaken: Math.ceil(Math.random() * 8),
+        occupancy: Math.ceil(Math.random() * secondsInWorkDay),
         title,
         subtitle: getRandomWords(),
         description: getRandomWords(amountOfDscWords),
