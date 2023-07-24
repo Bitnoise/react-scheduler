@@ -41,11 +41,11 @@ const Tooltip: FC<TooltipProps> = ({ tooltipData, zoom }) => {
           <StyledInnerWrapper>
             <Icon iconName="calendarWarning" height="14" />
             <StyledTextWrapper>
-              <StyledText>{`${taken}: ${disposition.taken}h`}</StyledText>
-              {disposition.overtime > 0 && (
+              <StyledText>{`${taken}: ${disposition.taken.hours}h ${disposition.taken.minutes}m`}</StyledText>
+              {(disposition.overtime.hours > 0 || disposition.overtime.minutes > 0) && (
                 <>
                   &nbsp;{"-"}&nbsp;
-                  <StyledOvertimeWarning>{`${disposition.overtime} ${over}`}</StyledOvertimeWarning>
+                  <StyledOvertimeWarning>{`${disposition.overtime.hours}h ${disposition.overtime.minutes}m ${over}`}</StyledOvertimeWarning>
                 </>
               )}
             </StyledTextWrapper>
@@ -53,7 +53,7 @@ const Tooltip: FC<TooltipProps> = ({ tooltipData, zoom }) => {
           <StyledInnerWrapper>
             <Icon iconName="calendarFree" height="14" />
             <StyledTextWrapper>
-              <StyledText>{`${free}: ${disposition.free}h`}</StyledText>
+              <StyledText>{`${free}: ${disposition.free.hours}h ${disposition.free.minutes}m`}</StyledText>
             </StyledTextWrapper>
           </StyledInnerWrapper>
         </StyledContentWrapper>

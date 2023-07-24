@@ -24,7 +24,11 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
   const [tooltipData, setTooltipData] = useState<TooltipData>({
     coords: { x: 0, y: 0 },
     resourceIndex: 0,
-    disposition: { taken: 0, free: 0, overtime: 0 }
+    disposition: {
+      taken: { hours: 0, minutes: 0 },
+      free: { hours: 0, minutes: 0 },
+      overtime: { hours: 0, minutes: 0 }
+    }
   });
 
   const rowsInTotal = rowsPerPerson.reduce((a, b) => a + Math.max(b, 1), 0);

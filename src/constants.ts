@@ -43,3 +43,4 @@ export const topRowTextYPos = headerMonthHeight / 2 + 2;
 export const middleRowTextYPos = headerWeekHeight / 2 + headerMonthHeight + 1;
 export const buttonWeeksJump = 2;
 export const scrollWeeksJump = 4;
+export const minutesInHour = 60;

@@ -25,7 +25,7 @@ export type SchedulerProjectData = {
   id: string;
   startDate: Date;
   endDate: Date;
-  hoursTaken: number;
+  occupancy: number;
   title: string;
   subtitle?: string;
   description?: string;
@@ -90,10 +90,15 @@ export type Coords = {
   y: number;
 };
 
+export type TimeUnits = {
+  hours: number;
+  minutes: number;
+};
+
 export type OccupancyData = {
-  taken: number;
-  free: number;
-  overtime: number;
+  taken: TimeUnits;
+  free: TimeUnits;
+  overtime: TimeUnits;
 };
 
 export type TooltipData = {

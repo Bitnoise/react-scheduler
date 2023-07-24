@@ -49,7 +49,7 @@ function App() {
 
   const handleItemClick = (data: SchedulerProjectData) =>
     console.log(
-      `Item ${data.title} - ${data.subtitle} was clicked. \n==============\nStart date: ${data.startDate} \n==============\nEnd date: ${data.endDate}\n==============\nHours per day: ${data.hoursTaken}`
+      `Item ${data.title} - ${data.subtitle} was clicked. \n==============\nStart date: ${data.startDate} \n==============\nEnd date: ${data.endDate}\n==============\nOccupancy: ${data.occupancy}`
     );
 
   return (

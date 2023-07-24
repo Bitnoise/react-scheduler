@@ -4,6 +4,7 @@ import weekOfYear from "dayjs/plugin/weekOfYear";
 import dayOfYear from "dayjs/plugin/dayOfYear";
 import isoWeek from "dayjs/plugin/isoWeek";
 import isBetween from "dayjs/plugin/isBetween";
+import duration from "dayjs/plugin/duration";
 import debounce from "lodash.debounce";
 import { Coords, ZoomLevel, allZoomLevel } from "@/types/global";
 import { isAvailableZoom } from "@/types/guards";
@@ -24,6 +25,7 @@ dayjs.extend(weekOfYear);
 dayjs.extend(dayOfYear);
 dayjs.extend(isoWeek);
 dayjs.extend(isBetween);
+dayjs.extend(duration);
 
 type Direction = "back" | "forward" | "middle";
 
