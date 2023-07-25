@@ -25,8 +25,10 @@ export default defineConfig({
         }
       }
     }),
+    dts({
+      rollupTypes: true
+    }),
     svgr(),
-    dts(),
     visualizer({
       template: "treemap"
     })
