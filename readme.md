@@ -16,7 +16,7 @@ npm install @bitnoi.se/scheduler
 1. import required styles for scheduler
 
 ```ts
-import "@bitnoi.se/react-scheduler/style.css";
+import "@bitnoi.se/react-scheduler/dist/style.css";
 ```
 
 2. Import Scheduler component into your project
@@ -51,7 +51,7 @@ const mockedSchedulerData: SchedulerData = [
         id: "8b71a8a5-33dd-4fc8-9caa-b4a584ba3762",
         startDate: new Date("2023-04-13T15:31:24.272Z"),
         endDate: new Date("2023-08-28T10:28:22.649Z"),
-        hoursTaken: 3,
+        occupancy: 3600,
         title: "Project A",
         subtitle: "Subtitle A",
         description: "array indexing Salad West Account",
@@ -61,7 +61,7 @@ const mockedSchedulerData: SchedulerData = [
         id: "22fbe237-6344-4c8e-affb-64a1750f33bd",
         startDate: new Date("2023-10-07T08:16:31.123Z"),
         endDate: new Date("2023-11-15T21:55:23.582Z"),
-        hoursTaken: 1,
+        occupancy: 2852,
         title: "Project B",
         subtitle: "Subtitle B",
         description: "Tuna Home pascal IP drive",
@@ -71,7 +71,7 @@ const mockedSchedulerData: SchedulerData = [
         id: "3601c1cd-f4b5-46bc-8564-8c983919e3f5",
         startDate: new Date("2023-03-30T22:25:14.377Z"),
         endDate: new Date("2023-09-01T07:20:50.526Z"),
-        hoursTaken: 3,
+        occupancy: 1800,
         title: "Project C",
         subtitle: "Subtitle C",
         bgColor: "rgb(254,165,177)"
@@ -80,7 +80,7 @@ const mockedSchedulerData: SchedulerData = [
         id: "b088e4ac-9911-426f-aef3-843d75e714c2",
         startDate: new Date("2023-10-28T10:08:22.986Z"),
         endDate: new Date("2023-10-30T12:30:30.150Z"),
-        hoursTaken: 5,
+        occupancy: 11111,
         title: "Project D",
         subtitle: "Subtitle D",
         description: "Garden heavy an software Metal",
@@ -214,4 +214,4 @@ If you have any questions or need further assistance, feel free to reach out to 
 
 ### License
 
-> Open source license here
+MIT Licensed. Copyright (c) Bitnoise 2023.
