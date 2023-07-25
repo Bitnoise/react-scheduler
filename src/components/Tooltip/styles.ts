@@ -7,7 +7,7 @@ export const StyledTooltipWrapper = styled.div<Coords>`
   position: absolute;
   top: ${({ y }) => y + 8}px;
   left: ${({ x }) => x}px;
-  background-color: ${({ theme }) => theme.colors.darkViolet};
+  background-color: ${({ theme }) => theme.colors.blue900};
   border-radius: 8px;
   z-index: 3;
 `;
@@ -24,7 +24,7 @@ export const StyledTooltipBeak = styled.div`
   transform: translateX(-50%);
   border-left: 14px solid transparent;
   border-right: 14px solid transparent;
-  border-top: 14px solid ${({ theme }) => theme.colors.darkViolet};
+  border-top: 14px solid ${({ theme }) => theme.colors.blue900};
 `;
 
 export const StyledContentWrapper = styled.div``;
@@ -54,5 +54,5 @@ export const StyledText = styled.p`
 export const StyledOvertimeWarning = styled.span`
   font-size: 10px;
   font-weight: 600;
-  color: ${({ theme }) => theme.colors.warning};
+  color: ${({ theme }) => theme.colors.red400};
 `;

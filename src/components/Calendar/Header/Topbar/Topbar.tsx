@@ -36,7 +36,7 @@ const Topbar: FC<TopbarProps> = ({ width }) => {
         <Today onClick={handleGoToday}>{topbar.today}</Today>
         <NavBtn disabled={!data?.length} onClick={handleGoNext}>
           {topbar.next}
-          <Icon iconName="arrowRight" height="15" fill={colors.darkViolet} />
+          <Icon iconName="arrowRight" height="15" fill={colors.blue900} />
         </NavBtn>
       </NavigationWrapper>
       <Zoom>

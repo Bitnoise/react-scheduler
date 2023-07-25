@@ -10,14 +10,14 @@ export const StyledWrapper = styled.div<StyledLeftColumnItemWrapperProps>`
   width: 100%;
   min-height: ${boxHeight}px;
   height: calc(${boxHeight}px * ${({ rows }) => rows});
-  border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.grey400};
   &:first-child {
-    border-top: 1px solid ${({ theme }) => theme.colors.grey};
+    border-top: 1px solid ${({ theme }) => theme.colors.grey400};
   }
   transition: 0.5s ease;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.hover};
+    background-color: ${({ theme }) => theme.colors.blue200};
   }
 `;
 
@@ -44,5 +44,5 @@ export const StyledText = styled.p<StyledTextProps>`
   font-size: ${({ isMain }) => (isMain ? 0.75 + "rem" : 0.625 + "rem")};
   letter-spacing: ${({ isMain }) => (isMain ? 1 + "px" : 0.5 + "px")};
   line-height: ${({ isMain }) => (isMain ? 1.125 + "rem" : 0.75 + "rem")};
-  color: ${({ isMain }) => (isMain ? theme.colors.black : theme.colors.darkGrey)};
+  color: ${({ isMain }) => (isMain ? theme.colors.black : theme.colors.grey600)};
 `;

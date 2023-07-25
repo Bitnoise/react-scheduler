@@ -9,13 +9,13 @@ export const drawCell = (
   isBusinessDay: boolean,
   isCurrentDay: boolean
 ) => {
-  ctx.strokeStyle = theme.colors.grey;
+  ctx.strokeStyle = theme.colors.grey400;
   if (isCurrentDay) {
-    ctx.fillStyle = theme.colors.hover;
+    ctx.fillStyle = theme.colors.blue200;
   } else if (isBusinessDay) {
     ctx.fillStyle = "transparent";
   } else {
-    ctx.fillStyle = theme.colors.superLightBlue;
+    ctx.fillStyle = theme.colors.blue100;
   }
   ctx.beginPath();
   ctx.setLineDash([]);

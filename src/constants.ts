@@ -11,7 +11,7 @@ export const leftColumnWidth = 196;
 export const singleDayWidth = 12;
 export const weeksInYear = 52;
 export const navHeight = 44;
-export const daysFillStyle = theme.colors.superLightBlue;
+export const daysFillStyle = theme.colors.blue100;
 export const fonts = {
   topRow: "600 14px Inter",
   middleRow: "400 10px Inter",

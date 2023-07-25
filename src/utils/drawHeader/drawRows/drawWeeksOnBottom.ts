@@ -49,7 +49,7 @@ export const drawWeeksOnBottom = (
         y: dayNumYPos,
         label: weekLabel.toUpperCase(),
         font: fonts.middleRow,
-        color: theme.colors.darkGrey
+        color: theme.colors.grey600
       }
     });
 

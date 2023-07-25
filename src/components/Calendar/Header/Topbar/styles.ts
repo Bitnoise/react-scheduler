@@ -52,7 +52,7 @@ export const Today = styled.button`
     position: absolute;
     width: 1px;
     height: 1.5rem;
-    background-color: ${({ theme }) => theme.colors.darkViolet};
+    background-color: ${({ theme }) => theme.colors.blue900};
   }
   &::before {
     left: -1.125rem;
