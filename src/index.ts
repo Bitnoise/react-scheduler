@@ -1,5 +1,6 @@
 import { Scheduler } from "./components";
 import "./styles.css";
-export * from "./components/Scheduler/types";
+export type { SchedulerProps } from "./components/Scheduler/types";
+export type { SchedulerData, SchedulerProjectData, ZoomLevel, Config } from "./types/global";
 
 export { Scheduler };
