@@ -15,17 +15,17 @@ export const getTimeOccupancy = (
       hours++;
       minutes = 0;
     }
-    return { hours: hours < 0 ? 0 : hours, minutes: hours < 0 ? 0 : minutes };
+    return { hours: Math.max(0, hours), minutes: hours < 0 ? 0 : minutes };
   };
 
-  const getOvertime = () => {
+  const getOverTime = () => {
     const overHours = timeUnits.hours - maxHours;
     const overMinutes = timeUnits.minutes;
-    return { hours: overHours < 0 ? 0 : overHours, minutes: overHours < 0 ? 0 : overMinutes };
+    return { hours: Math.max(0, overHours), minutes: overHours < 0 ? 0 : overMinutes };
   };
 
   return {
-    free: { ...getFreeTime() },
-    overtime: { ...getOvertime() }
+    free: getFreeTime(),
+    overtime: getOverTime()
   };
 };
