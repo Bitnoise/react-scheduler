@@ -8,3 +8,7 @@ export type SchedulerProps = {
   onFilterData?: () => void;
   config?: Config;
 };
+
+export type StyledOutsideWrapperProps = {
+  showScroll: boolean;
+};

@@ -28,6 +28,7 @@ dayjs.extend(isBetween);
 type Direction = "back" | "forward" | "middle";
 
 const CalendarProvider = ({
+  data,
   children,
   config,
   onRangeChange,
@@ -198,6 +199,7 @@ const CalendarProvider = ({
   return (
     <Provider
       value={{
+        data,
         handleGoNext,
         handleScrollNext,
         handleGoPrev,

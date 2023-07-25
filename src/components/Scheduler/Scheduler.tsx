@@ -42,7 +42,10 @@ const Scheduler = ({ data, config, onRangeChange, onItemClick, onFilterData }: S
           config={appConfig}
           onRangeChange={onRangeChange}
           onFilterData={onFilterData}>
-          <StyledOutsideWrapper id={outsideWrapperId} ref={outsideWrapperRef}>
+          <StyledOutsideWrapper
+            showScroll={!!data.length}
+            id={outsideWrapperId}
+            ref={outsideWrapperRef}>
             <StyledInnerWrapper>
               <Calendar data={data} onItemClick={onItemClick} topBarWidth={topBarWidth ?? 0} />
             </StyledInnerWrapper>

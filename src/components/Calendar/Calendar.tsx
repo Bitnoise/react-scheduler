@@ -5,6 +5,7 @@ import { projectsOnGrid } from "@/utils/getProjectsOnGrid";
 import { TooltipData } from "@/types/global";
 import { getTooltipData } from "@/utils/getTooltipData";
 import { getDatesRange } from "@/utils/getDatesRange";
+import EmptyBox from "../EmptyBox";
 import { Grid, Header, LeftColumn, Tooltip } from "..";
 import { CalendarProps } from "./types";
 import { StyledOuterWrapper, StyledInnerWrapper } from "./styles";
@@ -61,13 +62,17 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
           setIsHovering(true);
         }}>
         <Header zoom={zoom} topBarWidth={topBarWidth} />
-        <Grid
-          data={projectsPerPerson}
-          zoom={zoom}
-          rows={rowsInTotal}
-          ref={gridRef}
-          onItemClick={onItemClick}
-        />
+        {data.length ? (
+          <Grid
+            data={projectsPerPerson}
+            zoom={zoom}
+            rows={rowsInTotal}
+            ref={gridRef}
+            onItemClick={onItemClick}
+          />
+        ) : (
+          <EmptyBox />
+        )}
         {isHovering && isVisible && tooltipData?.resourceIndex > -1 && (
           <Tooltip tooltipData={tooltipData} zoom={zoom} />
         )}

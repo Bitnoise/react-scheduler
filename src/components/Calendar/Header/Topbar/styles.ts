@@ -34,7 +34,9 @@ export const NavBtn = styled.button`
   gap: 0.25rem;
   font-size: 0.875rem;
   font-weight: 400;
-  cursor: pointer;
+  :not(:disabled) {
+    cursor: pointer;
+  }
 `;
 
 export const Today = styled.button`
