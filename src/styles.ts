@@ -16,14 +16,14 @@ export const GlobalStyle = createGlobalStyle`
 
 type ColorType =
   | "black"
-  | "grey"
-  | "darkGrey"
-  | "darkViolet"
-  | "superLightBlue"
-  | "accentLight"
-  | "accent"
-  | "hover"
-  | "warning"
+  | "grey400"
+  | "grey600"
+  | "blue900"
+  | "blue100"
+  | "blue300"
+  | "blue400"
+  | "blue200"
+  | "red400"
   | "white";
 
 export type Theme = {
@@ -35,14 +35,14 @@ export const theme: DefaultTheme = {
   navHeight: "44px",
   colors: {
     black: "#1C222F",
-    grey: "#D2D2D2",
-    darkGrey: "#777777",
-    darkViolet: "#3B3C5F",
-    superLightBlue: "#F8F8FD",
-    accentLight: "#C9E5FF",
-    accent: "#0A11EB",
-    hover: "#E6F3FF",
-    warning: "#EF4444",
+    grey400: "#D2D2D2",
+    grey600: "#777777",
+    blue900: "#3B3C5F",
+    blue100: "#F8F8FD",
+    blue300: "#C9E5FF",
+    blue400: "#0A11EB",
+    blue200: "#E6F3FF",
+    red400: "#EF4444",
     white: "#FFFFFF"
   }
 };

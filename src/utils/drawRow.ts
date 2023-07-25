@@ -20,7 +20,7 @@ export const drawRow = (config: DrawRowConfig) => {
   } = config;
 
   ctx.beginPath();
-  ctx.strokeStyle = theme.colors.grey;
+  ctx.strokeStyle = theme.colors.grey400;
   ctx.setLineDash([]);
 
   if (label && font && textYPos) {
@@ -32,7 +32,7 @@ export const drawRow = (config: DrawRowConfig) => {
 
     const textXPos = x + width / 2 - ctx.measureText(label).width / 2;
     ctx.textBaseline = "middle";
-    ctx.fillStyle = theme.colors.darkGrey;
+    ctx.fillStyle = theme.colors.grey600;
     ctx.fillText(label, textXPos, textYPos);
   }
   if (isBottomRow && fillStyle && topText && bottomText) {
