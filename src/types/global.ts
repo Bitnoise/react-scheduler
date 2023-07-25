@@ -82,6 +82,7 @@ export type ConfigFormValues = {
   projectsPerYear: number;
   yearsCovered: number;
   isFullscreen: boolean;
+  startDate?: string;
 };
 
 export type Coords = {

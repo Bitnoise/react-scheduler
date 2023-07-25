@@ -45,7 +45,7 @@ export const StyledButton = styled.button`
   width: 100%;
   font-size: 14px;
   outline: none;
-  background-color: transparent;
+  background-color: #fff;
   border: 1px solid #0a11eb;
   border-radius: 4px;
   color: #0a11eb;
@@ -55,4 +55,6 @@ export const StyledButton = styled.button`
   }
 `;
 
-export const StyledForm = styled.form``;
+export const StyledForm = styled.form`
+  background-color: rgba(255, 255, 255, 0.75);
+`;

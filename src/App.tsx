@@ -12,7 +12,8 @@ function App() {
     peopleCount: 5,
     projectsPerYear: 5,
     yearsCovered: 0,
-    isFullscreen: true
+    isFullscreen: true,
+    startDate: undefined
   });
 
   const { peopleCount, projectsPerYear, yearsCovered, isFullscreen } = values;
@@ -21,8 +22,6 @@ function App() {
     () => createMockData(+peopleCount, +yearsCovered, +projectsPerYear),
     [peopleCount, projectsPerYear, yearsCovered]
   );
-
-  const handleSubmit = (values: ConfigFormValues) => setValues({ ...values });
 
   const [range, setRange] = useState<ParsedDatesRange>({
     startDate: new Date(),
@@ -55,10 +54,11 @@ function App() {
 
   return (
     <>
-      <ConfigPanel values={values} onSubmit={handleSubmit} />
+      <ConfigPanel values={values} onSubmit={setValues} />
 
       {isFullscreen ? (
         <Scheduler
+          startDate={values.startDate ? new Date(values.startDate) : undefined}
           onRangeChange={handleRangeChange}
           data={filteredData}
           onItemClick={handleItemClick}
@@ -67,6 +67,7 @@ function App() {
       ) : (
         <StyledSchedulerFrame>
           <Scheduler
+            startDate={values.startDate ? new Date(values.startDate) : undefined}
             onRangeChange={handleRangeChange}
             data={filteredData}
             onItemClick={handleItemClick}

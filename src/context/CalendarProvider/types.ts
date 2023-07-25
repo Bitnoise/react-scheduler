@@ -27,6 +27,7 @@ export type CalendarContextType = {
 
 export type CalendarProviderProps = {
   children: ReactNode;
+  defaultStartDate?: dayjs.Dayjs;
   data?: SchedulerData;
   config: Config;
   onRangeChange?: (range: ParsedDatesRange) => void;

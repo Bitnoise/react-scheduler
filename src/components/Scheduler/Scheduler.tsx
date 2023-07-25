@@ -1,5 +1,6 @@
 import { ThemeProvider } from "styled-components";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import dayjs from "dayjs";
 import { Calendar } from "@/components";
 import CalendarProvider from "@/context/CalendarProvider";
 import LocaleProvider from "@/context/LocaleProvider";
@@ -9,15 +10,22 @@ import { outsideWrapperId } from "@/constants";
 import { SchedulerProps } from "./types";
 import { StyledInnerWrapper, StyledOutsideWrapper } from "./styles";
 
-const Scheduler = ({ data, config, onRangeChange, onItemClick, onFilterData }: SchedulerProps) => {
+const Scheduler = ({
+  data,
+  config,
+  startDate,
+  onRangeChange,
+  onItemClick,
+  onFilterData
+}: SchedulerProps) => {
   const appConfig: Config = {
     zoom: 0,
     isFiltersButtonVisible: true,
     ...config
   };
-
   const outsideWrapperRef = useRef<HTMLDivElement>(null);
   const [topBarWidth, setTopBarWidth] = useState(outsideWrapperRef.current?.clientWidth);
+  const defaultStartDate = useMemo(() => dayjs(startDate), [startDate]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -41,6 +49,7 @@ const Scheduler = ({ data, config, onRangeChange, onItemClick, onFilterData }: S
           data={data}
           config={appConfig}
           onRangeChange={onRangeChange}
+          defaultStartDate={defaultStartDate}
           onFilterData={onFilterData}>
           <StyledOutsideWrapper
             showScroll={!!data.length}
