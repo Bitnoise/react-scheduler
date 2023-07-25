@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import dayjs from "dayjs";
 import { ConfigFormValues } from "@/types/global";
 import { formFieldsIds } from "@/constants";
 import {
@@ -28,6 +29,15 @@ const ConfigPanel: FC<ConfigPanelProps> = ({ values, onSubmit }) => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     onSubmit(inputValues);
+  };
+
+  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+
+    setInputValues((prev) => ({
+      ...prev,
+      startDate: value ? dayjs(value).format("YYYY-MM-DD") : undefined
+    }));
   };
 
   return (
@@ -67,6 +77,17 @@ const ConfigPanel: FC<ConfigPanelProps> = ({ values, onSubmit }) => {
             onChange={handleChange}
             min={0}
             title="How many years back and forward? Default: 0"
+          />
+        </StyledInnerWrapper>
+        <StyledInnerWrapper>
+          <StyledLabel htmlFor={formFieldsIds.startDate}>Starting date </StyledLabel>
+          <StyledInput
+            id={formFieldsIds.startDate}
+            name={formFieldsIds.startDate}
+            value={inputValues.startDate ?? ""}
+            type="date"
+            onChange={handleDateChange}
+            title="When do you want to start your scheduler? Default: today"
           />
         </StyledInnerWrapper>
         <StyledInnerWrapper>

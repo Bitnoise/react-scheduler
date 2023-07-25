@@ -7,6 +7,7 @@ export type SchedulerProps = {
   onItemClick?: (data: SchedulerProjectData) => void;
   onFilterData?: () => void;
   config?: Config;
+  startDate?: Date;
 };
 
 export type StyledOutsideWrapperProps = {

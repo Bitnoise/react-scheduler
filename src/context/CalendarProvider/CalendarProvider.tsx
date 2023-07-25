@@ -31,11 +31,12 @@ const CalendarProvider = ({
   data,
   children,
   config,
+  defaultStartDate = dayjs(),
   onRangeChange,
   onFilterData
 }: CalendarProviderProps) => {
   const [zoom, setZoom] = useState<ZoomLevel>(config.zoom);
-  const [date, setDate] = useState(dayjs());
+  const [date, setDate] = useState(defaultStartDate);
   const [isLoading, setIsLoading] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const [cols, setCols] = useState(getCols(zoom));
@@ -130,6 +131,19 @@ const CalendarProvider = ({
     onRangeChange?.(range);
   }, [onRangeChange, range]);
 
+  useEffect(() => {
+    if (date.isSame(defaultStartDate)) return;
+    setDate(defaultStartDate);
+  }, [date, defaultStartDate]);
+
+  useEffect(() => {
+    if (isInitialized) {
+      return;
+    }
+    moveHorizontalScroll("middle");
+    setIsInitialized(true);
+  }, [isInitialized, moveHorizontalScroll]);
+
   const handleGoNext = () => {
     setIsLoading(true);
     setDate((prev) => prev.add(buttonWeeksJump, "weeks"));
@@ -165,8 +179,8 @@ const CalendarProvider = ({
   const handleGoToday = useCallback(() => {
     if (!isLoading) {
       setIsLoading(true);
-      moveHorizontalScroll("middle");
       loadMore("middle");
+      moveHorizontalScroll("middle");
       // Timeout is set for testers
       setTimeout(() => setIsLoading(false), 1500);
     }
@@ -184,15 +198,6 @@ const CalendarProvider = ({
   };
 
   const handleFilterData = () => onFilterData?.();
-
-  useEffect(() => {
-    if (isInitialized) {
-      return;
-    }
-
-    handleGoToday();
-    setIsInitialized(true);
-  }, [handleGoToday, isInitialized]);
 
   const { Provider } = calendarContext;
 
