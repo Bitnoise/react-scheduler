@@ -6,7 +6,7 @@ export const getTileXAndWidth = (item: DatesRange, range: DatesRange, zoom: numb
 
   const getX = () => {
     const position = (item.startDate.diff(range.startDate, "day") + 1) * cellWidth;
-    return position >= 0 ? position : 0;
+    return Math.max(0, position);
   };
 
   if (item.startDate.isAfter(range.startDate) && item.endDate.isBefore(range.endDate)) {

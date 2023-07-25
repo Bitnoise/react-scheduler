@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { businessDays } from "@/constants";
-import { SchedulerProjectData, TimeUnits, ZoomLevel } from "@/types/global";
+import { OccupancyData, SchedulerProjectData, TimeUnits, ZoomLevel } from "@/types/global";
 import { getDuration } from "./getDuration";
 import { getTotalHoursAndMinutes } from "./getTotalHoursAndMinutes";
 import { getTimeOccupancy } from "./getTimeOccupancy";
@@ -9,7 +9,7 @@ export const getWeekOccupancy = (
   occupancy: SchedulerProjectData[],
   focusedDate: dayjs.Dayjs,
   zoom: ZoomLevel
-) => {
+): OccupancyData => {
   const focusedWeek = focusedDate.isoWeek();
 
   const getHoursAndMinutes: TimeUnits[] = occupancy.map((item) => {
@@ -24,7 +24,7 @@ export const getWeekOccupancy = (
     if (focusedWeek === startWeekNum) {
       const hours = (businessDays + 1 - startDateDayNum) * itemHours;
       const minutes = (businessDays + 1 - startDateDayNum) * itemMinutes;
-      return { hours: hours < 0 ? 0 : hours, minutes };
+      return { hours: Math.max(0, hours), minutes };
     } else if (focusedWeek === endWeekNum) {
       const hours =
         endDateDayNum > businessDays ? businessDays * itemHours : endDateDayNum * itemHours;
@@ -41,8 +41,8 @@ export const getWeekOccupancy = (
   const { free, overtime } = getTimeOccupancy({ hours: totalHours, minutes: totalMinutes }, zoom);
 
   return {
-    taken: { hours: totalHours < 0 ? 0 : totalHours, minutes: totalMinutes < 0 ? 0 : totalMinutes },
-    free: { ...free },
-    overtime: { ...overtime }
+    taken: { hours: Math.max(0, totalHours), minutes: Math.max(0, totalMinutes) },
+    free,
+    overtime
   };
 };
