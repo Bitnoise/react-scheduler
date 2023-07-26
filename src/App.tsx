@@ -58,7 +58,7 @@ function App() {
 
       {isFullscreen ? (
         <Scheduler
-          startDate={values.startDate ? new Date(values.startDate) : undefined}
+          startDate={values.startDate ? new Date(values.startDate).toISOString() : undefined}
           onRangeChange={handleRangeChange}
           data={filteredData}
           onItemClick={handleItemClick}
@@ -67,7 +67,7 @@ function App() {
       ) : (
         <StyledSchedulerFrame>
           <Scheduler
-            startDate={values.startDate ? new Date(values.startDate) : undefined}
+            startDate={values.startDate ? new Date(values.startDate).toISOString() : undefined}
             onRangeChange={handleRangeChange}
             data={filteredData}
             onItemClick={handleItemClick}
