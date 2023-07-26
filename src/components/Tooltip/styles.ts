@@ -1,12 +1,9 @@
 import styled from "styled-components";
 import { marginPaddingReset } from "@/styles";
-import { Coords } from "@/types/global";
 
-export const StyledTooltipWrapper = styled.div<Coords>`
+export const StyledTooltipWrapper = styled.div`
   padding: 8px 16px;
   position: absolute;
-  top: ${({ y }) => y + 8}px;
-  left: ${({ x }) => x}px;
   background-color: ${({ theme }) => theme.colors.blue900};
   border-radius: 8px;
   z-index: 3;
