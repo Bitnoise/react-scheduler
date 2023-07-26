@@ -132,17 +132,18 @@ const CalendarProvider = ({
   }, [onRangeChange, range]);
 
   useEffect(() => {
-    if (date.isSame(defaultStartDate)) return;
-    setDate(defaultStartDate);
-  }, [date, defaultStartDate]);
-
-  useEffect(() => {
     if (isInitialized) {
       return;
     }
     moveHorizontalScroll("middle");
     setIsInitialized(true);
-  }, [isInitialized, moveHorizontalScroll]);
+    setDate(defaultStartDate);
+  }, [defaultStartDate, isInitialized, moveHorizontalScroll]);
+
+  useEffect(() => {
+    // when defaultStartDate changes repaint grid
+    setIsInitialized(false);
+  }, [defaultStartDate]);
 
   const handleGoNext = () => {
     setIsLoading(true);
