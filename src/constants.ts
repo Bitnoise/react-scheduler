@@ -33,8 +33,9 @@ export const formFieldsIds = {
   peopleCount: "peopleCount",
   projectsPerYear: "projectsPerYear",
   yearsCovered: "yearsCovered",
-  isFullscreen: "isFullscreen",
-  startDate: "startDate"
+  startDate: "startDate",
+  maxRecordsPerPage: "maxRecordsPerPage",
+  isFullscreen: "isFullscreen"
 };
 export const businessDays = 5;
 export const maxHoursPerWeek = 40;

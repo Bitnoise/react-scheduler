@@ -1,5 +1,7 @@
 export const pl = {
   free: "Wolne",
+  loadNext: "Wczytaj następne",
+  loadPrevious: "Wczytaj poprzednie",
   over: "ponad",
   taken: "Zajęte",
   topbar: {

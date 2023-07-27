@@ -1,10 +1,10 @@
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import debounce from "lodash.debounce";
 import { useCalendar } from "@/context/CalendarProvider";
-import { projectsOnGrid } from "@/utils/getProjectsOnGrid";
 import { TooltipData } from "@/types/global";
 import { getTooltipData } from "@/utils/getTooltipData";
 import { getDatesRange } from "@/utils/getDatesRange";
+import { usePagination } from "@/hooks/usePagination";
 import EmptyBox from "../EmptyBox";
 import { Grid, Header, LeftColumn, Tooltip } from "..";
 import { CalendarProps } from "./types";
@@ -25,6 +25,18 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
   const [isVisible, setIsVisible] = useState(false);
   const { zoom, startDate, date } = useCalendar();
   const gridRef = useRef<HTMLDivElement>(null);
+  const datesRange = useMemo(() => getDatesRange(date, zoom), [date, zoom]);
+
+  const {
+    page,
+    projectsPerPerson,
+    totalRowsPerPage,
+    rowsPerItem,
+    currentPageNum,
+    pagesAmount,
+    next,
+    previous
+  } = usePagination(data, datesRange);
 
   const debouncedHandleMouseOver = useRef(
     debounce((e: MouseEvent) => {
@@ -36,18 +48,11 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
         coords: { x, y },
         resourceIndex,
         disposition
-      } = getTooltipData(startDate, tooltipCoords, rowsPerPerson, projectsPerPerson, zoom);
+      } = getTooltipData(startDate, tooltipCoords, rowsPerItem, projectsPerPerson, zoom);
       setTooltipData({ coords: { x, y }, resourceIndex, disposition });
       setIsVisible(true);
     }, 600)
   );
-  const datesRange = useMemo(() => getDatesRange(date, zoom), [date, zoom]);
-  const { projectsPerPerson, rowsPerPerson } = useMemo(
-    () => projectsOnGrid(data, datesRange),
-    [data, datesRange]
-  );
-
-  const rowsInTotal = rowsPerPerson.reduce((a, b) => a + Math.max(b, 1), 0);
 
   const handleMouseLeave = useCallback(() => {
     debouncedHandleMouseOver.current.cancel();
@@ -72,14 +77,21 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
 
   return (
     <StyledOuterWrapper>
-      <LeftColumn data={data} rows={rowsPerPerson} />
+      <LeftColumn
+        data={page}
+        pageNum={currentPageNum}
+        pagesAmount={pagesAmount}
+        rows={rowsPerItem}
+        onLoadNext={next}
+        onLoadPrevious={previous}
+      />
       <StyledInnerWrapper>
         <Header zoom={zoom} topBarWidth={topBarWidth} />
         {data.length ? (
           <Grid
-            data={projectsPerPerson}
+            data={page}
             zoom={zoom}
-            rows={rowsInTotal}
+            rows={totalRowsPerPage}
             ref={gridRef}
             onItemClick={onItemClick}
           />

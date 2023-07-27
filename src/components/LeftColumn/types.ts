@@ -1,6 +1,10 @@
-import { SchedulerData } from "@/types/global";
+import { PaginatedSchedulerData } from "@/types/global";
 
 export type LeftColumnProps = {
-  data: SchedulerData;
+  data: PaginatedSchedulerData;
   rows: number[];
+  pageNum: number;
+  pagesAmount: number;
+  onLoadNext: () => void;
+  onLoadPrevious: () => void;
 };

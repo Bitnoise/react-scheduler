@@ -1,11 +1,16 @@
 import styled from "styled-components";
 import { leftColumnWidth } from "@/constants";
 
-export const StyledWrapper = styled.div`
+type WrapperProps = {
+  isExpanded: boolean;
+};
+
+export const StyledWrapper = styled.div<WrapperProps>`
   padding: 0 0.5rem;
   width: ${leftColumnWidth}px;
   height: 125px;
   position: fixed;
+  top: ${({ isExpanded }) => (isExpanded ? 0 : "-129px")};
   display: flex;
   flex-direction: column;
   background-color: white;

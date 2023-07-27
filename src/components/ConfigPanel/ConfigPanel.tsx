@@ -15,6 +15,7 @@ import { ConfigPanelProps } from "./types";
 
 const ConfigPanel: FC<ConfigPanelProps> = ({ values, onSubmit }) => {
   const [inputValues, setInputValues] = useState<ConfigFormValues>(values);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = event.target;
@@ -41,7 +42,7 @@ const ConfigPanel: FC<ConfigPanelProps> = ({ values, onSubmit }) => {
   };
 
   return (
-    <StyledWrapper>
+    <StyledWrapper onMouseLeave={() => setIsExpanded(false)} isExpanded={isExpanded}>
       <StyledForm onSubmit={handleSubmit}>
         <StyledInnerWrapper>
           <StyledLabel htmlFor={formFieldsIds.peopleCount}>People count: </StyledLabel>
@@ -87,7 +88,18 @@ const ConfigPanel: FC<ConfigPanelProps> = ({ values, onSubmit }) => {
             value={inputValues.startDate ?? ""}
             type="date"
             onChange={handleDateChange}
-            title="When do you want to start your scheduler? Default: today"
+            title="When do you want to start your scheduler? Default: today"></StyledInput>
+        </StyledInnerWrapper>
+        <StyledInnerWrapper>
+          <StyledLabel htmlFor={formFieldsIds.maxRecordsPerPage}>Records/page: </StyledLabel>
+          <StyledInput
+            id={formFieldsIds.maxRecordsPerPage}
+            name={formFieldsIds.maxRecordsPerPage}
+            value={inputValues.maxRecordsPerPage}
+            type="number"
+            onChange={handleChange}
+            min={1}
+            title="How many records per page? Default: 10"
           />
         </StyledInnerWrapper>
         <StyledInnerWrapper>
@@ -100,7 +112,13 @@ const ConfigPanel: FC<ConfigPanelProps> = ({ values, onSubmit }) => {
             onChange={handleChange}
           />
         </StyledInnerWrapper>
-        <StyledButton type="submit">Change</StyledButton>
+        {isExpanded ? (
+          <StyledButton type="submit">Change</StyledButton>
+        ) : (
+          <StyledButton onClick={() => setIsExpanded(true)} type="button">
+            Expand config panel
+          </StyledButton>
+        )}
       </StyledForm>
     </StyledWrapper>
   );

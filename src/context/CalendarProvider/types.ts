@@ -23,6 +23,7 @@ export type CalendarContextType = {
   cols: number;
   startDate: Day;
   dayOfYear: number;
+  recordsThreshold: number;
 };
 
 export type CalendarProviderProps = {

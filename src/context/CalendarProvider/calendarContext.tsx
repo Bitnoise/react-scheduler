@@ -29,5 +29,6 @@ export const calendarContext = createContext<CalendarContextType>({
     isBusinessDay: false,
     year: 0
   },
-  dayOfYear: 0
+  dayOfYear: 0,
+  recordsThreshold: 0
 });
