@@ -8,6 +8,8 @@ export type IconsNames =
   | "arrowRight"
   | "defaultAvatar"
   | "calendarWarning"
-  | "calendarFree";
+  | "calendarFree"
+  | "arrowUp"
+  | "arrowDown";
 
 export type Icon = FunctionComponent<ComponentProps<"svg"> & { title?: string }>;

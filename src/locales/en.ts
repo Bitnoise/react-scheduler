@@ -1,5 +1,7 @@
 export const en = {
   free: "Free",
+  loadNext: "Load next",
+  loadPrevious: "Load previous",
   over: "over",
   taken: "Taken",
   topbar: {

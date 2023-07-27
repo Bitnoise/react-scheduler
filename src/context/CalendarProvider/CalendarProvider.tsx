@@ -37,8 +37,10 @@ const CalendarProvider = ({
   onRangeChange,
   onFilterData
 }: CalendarProviderProps) => {
-  const [zoom, setZoom] = useState<ZoomLevel>(config.zoom);
-  const [date, setDate] = useState(defaultStartDate);
+  const { zoom: configZoom, maxRecordsPerPage } = config;
+  const [zoom, setZoom] = useState<ZoomLevel>(configZoom);
+  const recordsThreshold = maxRecordsPerPage ? maxRecordsPerPage : 10;
+  const [date, setDate] = useState(dayjs());
   const [isLoading, setIsLoading] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const [cols, setCols] = useState(getCols(zoom));
@@ -225,7 +227,8 @@ const CalendarProvider = ({
         dayOfYear,
         handleFilterData,
         tilesCoords,
-        updateTilesCoords
+        updateTilesCoords,
+        recordsThreshold
       }}>
       {children}
     </Provider>

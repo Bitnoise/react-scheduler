@@ -9,14 +9,15 @@ import { Scheduler } from ".";
 
 function App() {
   const [values, setValues] = useState<ConfigFormValues>({
-    peopleCount: 5,
+    peopleCount: 15,
     projectsPerYear: 5,
     yearsCovered: 0,
-    isFullscreen: true,
-    startDate: undefined
+    startDate: undefined,
+    maxRecordsPerPage: 10,
+    isFullscreen: true
   });
 
-  const { peopleCount, projectsPerYear, yearsCovered, isFullscreen } = values;
+  const { peopleCount, projectsPerYear, yearsCovered, isFullscreen, maxRecordsPerPage } = values;
 
   const mocked = useMemo(
     () => createMockData(+peopleCount, +yearsCovered, +projectsPerYear),
@@ -32,18 +33,22 @@ function App() {
     setRange(range);
   }, []);
 
-  const filteredData = mocked.map((person) => {
-    return {
-      ...person,
-      data: person.data.filter(
-        (project) =>
-          dayjs(project.startDate).isBetween(range.startDate, range.endDate) ||
-          dayjs(project.endDate).isBetween(range.startDate, range.endDate) ||
-          (dayjs(project.startDate).isBefore(range.startDate, "day") &&
-            dayjs(project.endDate).isAfter(range.endDate, "day"))
-      )
-    };
-  });
+  const filteredData = useMemo(
+    () =>
+      mocked.map((person) => {
+        return {
+          ...person,
+          data: person.data.filter(
+            (project) =>
+              dayjs(project.startDate).isBetween(range.startDate, range.endDate) ||
+              dayjs(project.endDate).isBetween(range.startDate, range.endDate) ||
+              (dayjs(project.startDate).isBefore(range.startDate, "day") &&
+                dayjs(project.endDate).isAfter(range.endDate, "day"))
+          )
+        };
+      }),
+    [mocked, range.endDate, range.startDate]
+  );
 
   const handleFilterData = () => console.log(`Filters button was clicked.`);
 
@@ -63,6 +68,7 @@ function App() {
           data={filteredData}
           onItemClick={handleItemClick}
           onFilterData={handleFilterData}
+          config={{ zoom: 0, maxRecordsPerPage: maxRecordsPerPage }}
         />
       ) : (
         <StyledSchedulerFrame>

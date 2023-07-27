@@ -7,6 +7,7 @@ export type ZoomLevel = ZoomLevelTuple[number];
 export type Config = {
   zoom: ZoomLevel;
   isFiltersButtonVisible?: boolean;
+  maxRecordsPerPage?: number;
 };
 
 export type SchedulerData = SchedulerRow[];
@@ -16,6 +17,15 @@ export type SchedulerRow = {
   label: SchedulerRowLabel;
   data: SchedulerProjectData[];
 };
+
+export type PaginatedSchedulerData = PaginatedSchedulerRow[];
+
+export type PaginatedSchedulerRow = {
+  id: string;
+  label: SchedulerRowLabel;
+  data: SchedulerProjectData[][];
+};
+
 export type SchedulerRowLabel = {
   icon: string;
   title: string;
@@ -81,6 +91,7 @@ export type ConfigFormValues = {
   peopleCount: number;
   projectsPerYear: number;
   yearsCovered: number;
+  maxRecordsPerPage: number;
   isFullscreen: boolean;
   startDate?: string;
 };

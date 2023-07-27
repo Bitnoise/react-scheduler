@@ -8,9 +8,9 @@ const Tiles: FC<TilesProps> = ({ data, zoom, onItemClick }) => {
     return data
       .map((person, personIndex) => {
         if (personIndex > 0) {
-          rows += Math.max(data[personIndex - 1].length, 1);
+          rows += Math.max(data[personIndex - 1].data.length, 1);
         }
-        return person.map((projectsPerRow, rowIndex) =>
+        return person.data.map((projectsPerRow, rowIndex) =>
           projectsPerRow.map((project) => (
             <Tile
               key={project.id}
