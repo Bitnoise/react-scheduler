@@ -14,10 +14,7 @@ export const usePagination = (data: SchedulerData, datesRange: DatesRange): UseP
 
   const { projectsPerPerson, rowsPerPerson } = projectsOnGrid(data, datesRange);
 
-  const pages = useMemo(
-    () => splitToPages(data, projectsPerPerson, rowsPerPerson, recordsThreshold),
-    [data, projectsPerPerson, recordsThreshold, rowsPerPerson]
-  );
+  const pages = splitToPages(data, projectsPerPerson, rowsPerPerson, recordsThreshold);
 
   const next = () => {
     if (pages[pageNum].length) {
