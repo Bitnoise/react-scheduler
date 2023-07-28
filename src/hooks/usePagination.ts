@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { SchedulerData } from "@/types/global";
 import { DatesRange } from "@/utils/getDatesRange";
 import { splitToPages } from "@/utils/splitToPages";

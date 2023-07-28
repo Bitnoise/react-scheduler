@@ -136,6 +136,11 @@ const CalendarProvider = ({
   }, [onRangeChange, range]);
 
   useEffect(() => {
+    // when defaultStartDate changes repaint grid
+    setIsInitialized(false);
+  }, [defaultStartDate]);
+
+  useEffect(() => {
     if (isInitialized) {
       return;
     }
@@ -143,11 +148,6 @@ const CalendarProvider = ({
     setIsInitialized(true);
     setDate(defaultStartDate);
   }, [defaultStartDate, isInitialized, moveHorizontalScroll]);
-
-  useEffect(() => {
-    // when defaultStartDate changes repaint grid
-    setIsInitialized(false);
-  }, [defaultStartDate]);
 
   const handleGoNext = () => {
     setIsLoading(true);
@@ -172,6 +172,8 @@ const CalendarProvider = ({
   };
 
   const handleScrollPrev = useCallback(() => {
+    console.log("DEFAULT DATA", defaultStartDate);
+    console.log("IS INITIALIZED", isInitialized);
     if (isInitialized && !isLoading) {
       setIsLoading(true);
       loadMore("back");

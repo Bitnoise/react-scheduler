@@ -25,6 +25,7 @@ export const StyledInnerWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   letter-spacing: 0.5px;
+  background-color: white;
 `;
 
 export const StyledLabel = styled.label`
@@ -37,7 +38,7 @@ export const StyledInput = styled.input`
   font-size: 14px;
   border: 1px solid #0a11eb;
   border-radius: 4px;
-  background-color: transparent;
+  background-color: white;
   outline: none;
 `;
 
