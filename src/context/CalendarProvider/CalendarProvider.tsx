@@ -172,8 +172,6 @@ const CalendarProvider = ({
   };
 
   const handleScrollPrev = useCallback(() => {
-    console.log("DEFAULT DATA", defaultStartDate);
-    console.log("IS INITIALIZED", isInitialized);
     if (isInitialized && !isLoading) {
       setIsLoading(true);
       loadMore("back");
