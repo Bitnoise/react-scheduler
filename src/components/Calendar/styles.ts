@@ -4,8 +4,6 @@ import { leftColumnWidth } from "@/constants";
 export const StyledOuterWrapper = styled.div`
   position: relative;
   display: flex;
-  min-height: 100%;
-  contain: paint;
 `;
 
 export const StyledInnerWrapper = styled.div`
