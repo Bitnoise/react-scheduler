@@ -1,6 +1,6 @@
 # @bitnoi.se/scheduler
 
-Typescript oriented, light-weight and ultra fast React Component for creating a gantt charts.
+Typescript oriented, light-weight and ultra fast React Component for creating gantt charts.
 
 ### Installation
 
@@ -11,7 +11,7 @@ yarn add @bitnoi.se/scheduler
 npm install @bitnoi.se/scheduler
 ```
 
-### Example Usage
+### Example usage
 
 1. import required styles for scheduler
 
@@ -22,8 +22,7 @@ import "@bitnoi.se/react-scheduler/dist/style.css";
 2. Import Scheduler component into your project
 
 ```ts
-import { Scheduler } from "@bitnoi.se/scheduler"
-import type { SchedulerData } from "@bitnoi.se/scheduler/types/global"
+import { Scheduler, SchedulerData } from "@bitnoi.se/scheduler";
 
 default export function Component() {
 	return (
@@ -43,7 +42,7 @@ const mockedSchedulerData: SchedulerData = [
     id: "070ac5b5-8369-4cd2-8ba2-0a209130cc60",
     label: {
       icon: "https://picsum.photos/24",
-      title: "JOe Doe",
+      title: "Joe Doe",
       subtitle: "Frontend Developer"
     },
     data: [
@@ -123,7 +122,7 @@ data | array | array of `resources` |
 
 ##### Resource
 
-item that will be visable on the grid as tile
+item that will be visible on the grid as tile
 | Property | Type | Description |
 | -------- | -------- | ------- |
 id | string | unique resource id |
@@ -136,35 +135,39 @@ hoursTaken | number | number of hours resource takes up for given row that will 
 bgColor | string (optional) | tile color
 
 ### Project structure
-#### General: 
+
+#### General:
+
 ```
 .
 ├── src
 │   ├── assets
 │   ├── components
-│   |   ├── ExampleCompoenent
-│   |   ├── AnotherCompoenent
-|   |   └── index.ts                                  
+│   |   ├── ExampleComponent
+│   |   ├── AnotherComponent
+|   |   └── index.ts
 │   ├── constants.ts
 │   ├── context
 │   ├── locales
 │   ├── types
 │   ├── utils
 ```
+
 - **assets** - folder that consists all of the svgs and images used within app
-- **components** - folder that constist all React components used within app
-    - ***ExampleComponent*** - folder with component files, written in camelCase convention
-    - ***index.ts*** - file that consists exports of all components f.e. 
-        ```
-        export { default as ExampleComponent } from "./ExampleComponent"
-        ```
-- **constants** - all consts that are globally used and should not change during usage of app, f.e.: height and width of cell, width of single tile.
+- **components** - folder that has all React components used within app
+  - **_ExampleComponent_** - folder with component files, written in camelCase convention
+  - **_index.ts_** - file that consists exports of all components f.e.
+    ```
+    export { default as ExampleComponent } from "./ExampleComponent"
+    ```
+- **constants** - all constants that are globally used and should not change during usage of app, f.e.: height and width of cell, width of single tile.
 - **context** - folder that consists CalendarProvider and LocaleProvider
 - **locales** - folder that consists files with translations (currently en / pl)
 - **types** - folder that consists all global types and type guards
 - **utils** - folder that consists all utility functions used within app (f.e. drawing all the grid, data parsers etc.)
 
 #### Example of component folder structure:
+
 ```
 ExampleComponent
 ├── ExampleComponent.tsx
@@ -172,14 +175,16 @@ ExampleComponent
 ├── styles.ts
 ├── types.ts
 ```
+
 Each component should consist of the following files:
-- ***[ComponentName].tsx*** - .tsx file named after compoenent name, written in camelCase convention
-- ***index.ts*** - file that exports component f.e.:
+
+- **_[ComponentName].tsx_** - .tsx file named after component name, written in camelCase convention
+- **_index.ts_** - file that exports component f.e.:
   ```
   export { default } from "./ExampleComponent";
   ```
-- ***styles.ts*** - optional file that consists all styling of the component
-- ***types.ts*** - optional file that consists all types of component
+- **_styles.ts_** - optional file that consists all styling of the component
+- **_types.ts_** - optional file that consists all types of component
 
 ### Code Style and Guidelines
 
@@ -192,13 +197,13 @@ Each component should consist of the following files:
 - **Reporting Issues**: If you come across any bugs, glitches, or have any suggestions for improvements, please [open an issue](https://github.com/Bitnoise/react-scheduler/issues) on our GitHub repository. Provide as much detail as possible, including steps to reproduce the issue.
 - **Suggesting Enhancements**: If you have ideas for new features or enhancements, we would love to hear them! You can [open an issue](https://github.com/Bitnoise/react-scheduler/issues) on our GitHub repository and clearly describe your suggestion.
 - **Submitting Pull Requests**: If you have developed a fix or a new feature that you would like to contribute, you can submit a pull request. Here's a quick overview of the process:
-  -   Clone the repository and create your own branch: `git checkout -b your-branch-name`.
-  -  Implement your changes, following the **code style and guidelines**.
-  -  Test your changes to ensure they work as expected.
-  -  Commit your changes and push to your forked repository.
-  -  Open a pull request against our main repository's `master` branch.
-        - add at least 1 reviewer
-        - link correct issue
+  - Clone the repository and create your own branch: `git checkout -b your-branch-name`.
+  - Implement your changes, following the **code style and guidelines**.
+  - Test your changes to ensure they work as expected.
+  - Commit your changes and push to your forked repository.
+  - Open a pull request against our main repository's `master` branch.
+    - add at least 1 reviewer
+    - link correct issue
 
 ### Development Setup
 
@@ -212,7 +217,8 @@ To set up the project locally for development and testing, please follow these s
 
 1. Clone the repository: `git clone git@github.com:Bitnoise/react-scheduler.git`.
 2. Install the dependencies: `yarn install`, depending on your package manager.
-3. Start the development server: `yarn dev`. 4. Open http://localhost:5173 in your web browser.
+3. Start the development server: `yarn dev`.
+4. Open http://localhost:5173 in your web browser.
 
 ### Troubleshooting
 
@@ -254,7 +260,7 @@ const Scheduler = dynamic(() => import("@bitnoi.se/react-scheduler").then((mod) 
 
 ### Contact
 
-If you have any questions or need further assistance, feel free to reach out to us at [bitnoise@bitnoi.se](mailto:email@example.com). We appreciate your contributions and thank you for helping us improve our project!
+If you have any questions or need further assistance, feel free to reach out to us at [scheduler@bitnoi.se](mailto:scheduler@bitnoi.se). We appreciate your contributions and thank you for helping us improve our project!
 
 ### License
 
