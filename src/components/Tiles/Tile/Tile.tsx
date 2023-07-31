@@ -2,6 +2,7 @@ import { FC } from "react";
 import { useCalendar } from "@/context/CalendarProvider";
 import { getDatesRange } from "@/utils/getDatesRange";
 import { getTileProperties } from "@/utils/getTileProperties";
+import { tileDefaultBgColor } from "@/constants";
 import {
   StyledDescription,
   StyledStickyWrapper,
@@ -28,7 +29,7 @@ const Tile: FC<TileProps> = ({ row, data, zoom, onItemClick }) => {
       style={{
         left: `${x}px`,
         top: `${y}px`,
-        backgroundColor: `${data.bgColor}`,
+        backgroundColor: `${data.bgColor ?? tileDefaultBgColor}`,
         width: `${width}px`
       }}
       onClick={() => onItemClick?.(data)}>
