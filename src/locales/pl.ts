@@ -11,5 +11,6 @@ export const pl = {
     today: "Dziś",
     view: "Widok"
   },
+  search: "szukaj",
   week: "tydzień"
 };

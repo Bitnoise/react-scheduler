@@ -7,4 +7,10 @@ export type LeftColumnProps = {
   pagesAmount: number;
   onLoadNext: () => void;
   onLoadPrevious: () => void;
+  searchInputValue: string;
+  onSearchInputChange: React.ChangeEventHandler<HTMLInputElement>;
+};
+
+export type StyledInputWrapperProps = {
+  isFocused: boolean;
 };

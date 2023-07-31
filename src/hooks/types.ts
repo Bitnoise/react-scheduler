@@ -33,4 +33,9 @@ export type UsePaginationData = {
    * Callback function to load previous page
    */
   previous: () => void;
+
+  /**
+   * Jumps to first page
+   */
+  reset: () => void;
 };
