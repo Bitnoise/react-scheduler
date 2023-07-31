@@ -38,30 +38,32 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
     previous
   } = usePagination(data, datesRange);
 
-  const debouncedHandleMouseOver = useRef(
-    debounce((e: MouseEvent) => {
-      if (!gridRef.current) return;
+  const debouncedHandleMouseOver = useCallback(
+    () =>
+      debounce((e: MouseEvent) => {
+        if (!gridRef.current) return;
 
-      const { left, top } = gridRef.current.getBoundingClientRect();
-      const tooltipCoords = { x: e.clientX - left, y: e.clientY - top };
-      const {
-        coords: { x, y },
-        resourceIndex,
-        disposition
-      } = getTooltipData(startDate, tooltipCoords, rowsPerItem, projectsPerPerson, zoom);
-      setTooltipData({ coords: { x, y }, resourceIndex, disposition });
-      setIsVisible(true);
-    }, 600)
+        const { left, top } = gridRef.current.getBoundingClientRect();
+        const tooltipCoords = { x: e.clientX - left, y: e.clientY - top };
+        const {
+          coords: { x, y },
+          resourceIndex,
+          disposition
+        } = getTooltipData(startDate, tooltipCoords, rowsPerItem, projectsPerPerson, zoom);
+        setTooltipData({ coords: { x, y }, resourceIndex, disposition });
+        setIsVisible(true);
+      }, 600),
+    [projectsPerPerson, rowsPerItem, startDate, zoom]
   );
 
   const handleMouseLeave = useCallback(() => {
-    debouncedHandleMouseOver.current.cancel();
+    debouncedHandleMouseOver().cancel();
     setIsVisible(false);
     setTooltipData(initialTooltipData);
-  }, []);
+  }, [debouncedHandleMouseOver]);
 
   useEffect(() => {
-    const handleMouseOver = debouncedHandleMouseOver.current;
+    const handleMouseOver = debouncedHandleMouseOver();
     const gridArea = gridRef.current;
 
     if (!gridArea) return;
@@ -73,7 +75,7 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
       gridArea.removeEventListener("mousemove", handleMouseOver);
       gridArea.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [handleMouseLeave]);
+  }, [debouncedHandleMouseOver, handleMouseLeave]);
 
   return (
     <StyledOuterWrapper>

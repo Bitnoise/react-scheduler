@@ -18,12 +18,10 @@ export const getTooltipData = (
   );
 
   const rowPosition = Math.ceil(cursorPosition.y / boxHeight);
-
   const resourceIndex = rowsPerPerson.findIndex((_, index, array) => {
     const sumOfRows = array.slice(0, index + 1).reduce((acc, cur) => acc + cur, 0);
     return sumOfRows >= rowPosition;
   });
-
   const xPos = column * currBoxWidth;
   const yPos = (rowPosition - 1) * boxHeight + boxHeight;
 
