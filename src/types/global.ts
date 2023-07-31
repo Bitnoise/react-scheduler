@@ -32,13 +32,37 @@ export type SchedulerRowLabel = {
   subtitle: string;
 };
 export type SchedulerProjectData = {
+  /**
+   * Unique Id of item
+   */
   id: string;
+  /**
+   * Represents start date of from which tile will render
+   */
   startDate: Date;
+  /**
+   * Represents end date to which tile will render
+   */
   endDate: Date;
+  /**
+   * Indicates how much time is spent per day. Given in seconds and converted by Scheduler to hours/minutes
+   */
   occupancy: number;
+  /**
+   * Title of item
+   */
   title: string;
+  /**
+   * Subtitle of item
+   */
   subtitle?: string;
+  /**
+   * Short description displayed on tile. Optional
+   */
   description?: string;
+  /**
+   * Background color of the tile, given in rgb color model. If not given, default color (rgb()) is set.
+   */
   bgColor?: string;
 };
 
