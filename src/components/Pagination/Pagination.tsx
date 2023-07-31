@@ -15,14 +15,14 @@ const Pagination: FC<PaginationProps> = ({
       <PaginationButton
         intent={"previous"}
         icon={<Icon iconName={"arrowUp"} width="16" height="16" />}
-        onLoadPrevious={onLoadPrevious}
+        onClick={onLoadPrevious}
         isVisible={pageNum !== 0}
       />
       {children && children}
       <PaginationButton
         icon={<Icon iconName="arrowDown" width="16" height="16" />}
         intent={"next"}
-        onLoadNext={onLoadNext}
+        onClick={onLoadNext}
         isVisible={pageNum !== pagesAmount - 1}
       />
     </>
