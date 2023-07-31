@@ -136,6 +136,50 @@ hoursTaken | number | number of hours resource takes up for given row that will 
 bgColor | string (optional) | tile color
 
 ### Project structure
+#### General: 
+```
+.
+├── src
+│   ├── assets
+│   ├── components
+│   |   ├── ExampleCompoenent
+│   |   ├── AnotherCompoenent
+|   |   └── index.ts                                  
+│   ├── constants.ts
+│   ├── context
+│   ├── locales
+│   ├── types
+│   ├── utils
+```
+- **assets** - folder that consists all of the svgs and images used within app
+- **components** - folder that constist all React components used within app
+    - ***ExampleComponent*** - folder with component files, written in camelCase convention
+    - ***index.ts*** - file that consists exports of all components f.e. 
+        ```
+        export { default as ExampleComponent } from "./ExampleComponent"
+        ```
+- **constants** - all consts that are globally used and should not change during usage of app, f.e.: height and width of cell, width of single tile.
+- **context** - folder that consists CalendarProvider and LocaleProvider
+- **locales** - folder that consists files with translations (currently en / pl)
+- **types** - folder that consists all global types and type guards
+- **utils** - folder that consists all utility functions used within app (f.e. drawing all the grid, data parsers etc.)
+
+#### Example of component folder structure:
+```
+ExampleComponent
+├── ExampleComponent.tsx
+├── index.ts
+├── styles.ts
+├── types.ts
+```
+Each component should consist of the following files:
+- ***[ComponentName].tsx*** - .tsx file named after compoenent name, written in camelCase convention
+- ***index.ts*** - file that exports component f.e.:
+  ```
+  export { default } from "./ExampleComponent";
+  ```
+- ***styles.ts*** - optional file that consists all styling of the component
+- ***types.ts*** - optional file that consists all types of component
 
 ### Code Style and Guidelines
 
@@ -148,13 +192,13 @@ bgColor | string (optional) | tile color
 - **Reporting Issues**: If you come across any bugs, glitches, or have any suggestions for improvements, please [open an issue](https://github.com/Bitnoise/react-scheduler/issues) on our GitHub repository. Provide as much detail as possible, including steps to reproduce the issue.
 - **Suggesting Enhancements**: If you have ideas for new features or enhancements, we would love to hear them! You can [open an issue](https://github.com/Bitnoise/react-scheduler/issues) on our GitHub repository and clearly describe your suggestion.
 - **Submitting Pull Requests**: If you have developed a fix or a new feature that you would like to contribute, you can submit a pull request. Here's a quick overview of the process:
-  - 1.  Clone the repository and create your own branch: `git checkout -b your-branch-name`.
-  - 2.  Implement your changes, following the **code style and guidelines**.
-  - 3.  Test your changes to ensure they work as expected.
-  - 4.  Commit your changes and push to your forked repository.
-  - 5.  Open a pull request against our main repository's `master` branch.
-    - add at least 1 reviewer
-    - link correct issue
+  -   Clone the repository and create your own branch: `git checkout -b your-branch-name`.
+  -  Implement your changes, following the **code style and guidelines**.
+  -  Test your changes to ensure they work as expected.
+  -  Commit your changes and push to your forked repository.
+  -  Open a pull request against our main repository's `master` branch.
+        - add at least 1 reviewer
+        - link correct issue
 
 ### Development Setup
 
