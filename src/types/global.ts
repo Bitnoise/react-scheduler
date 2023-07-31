@@ -53,7 +53,7 @@ export type SchedulerProjectData = {
    */
   title: string;
   /**
-   * Subtitle of item
+   * Subtitle of item. Optional
    */
   subtitle?: string;
   /**
@@ -61,7 +61,7 @@ export type SchedulerProjectData = {
    */
   description?: string;
   /**
-   * Background color of the tile, given in rgb color model. If not given, default color (rgb()) is set.
+   * Background color of the tile, given in rgb color model. If not given, default color (rgb(114, 141,226 )) is set. Optional
    */
   bgColor?: string;
 };
