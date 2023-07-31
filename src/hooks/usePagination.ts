@@ -31,13 +31,16 @@ export const usePagination = (data: SchedulerData, datesRange: DatesRange): UseP
     }
   };
   const end = startIndex + pages[pageNum].length;
+
   const rowsPerItem = rowsPerPerson.slice(startIndex, end);
+
+  const projectsPerPage = projectsPerPerson.slice(startIndex, end);
 
   return {
     page: pages[pageNum],
     currentPageNum: pageNum,
     pagesAmount: pages.length,
-    projectsPerPerson,
+    projectsPerPerson: projectsPerPage,
     rowsPerItem,
     totalRowsPerPage: getTotalRowsPerPage(pages[pageNum]),
     next,
