@@ -32,7 +32,7 @@ export const splitToPages = (
       singlePage.push(newItem);
     });
 
-    if (rowsPerPerson.slice(leftIndex).reduce((acc, curr) => acc + curr) <= recordsThreshold) {
+    if (rowsPerPerson.slice(leftIndex).length <= recordsThreshold) {
       singlePage = [];
       projectsPerPerson.slice(leftIndex).forEach((projects, i) => {
         const newItem = {
@@ -41,6 +41,7 @@ export const splitToPages = (
           data: projects
         };
         singlePage.push(newItem);
+
         if (i === projectsPerPerson.length - leftIndex - 1) pages.push(singlePage);
       });
     }
