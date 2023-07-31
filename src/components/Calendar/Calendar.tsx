@@ -23,9 +23,15 @@ const initialTooltipData: TooltipData = {
 export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) => {
   const [tooltipData, setTooltipData] = useState<TooltipData>(initialTooltipData);
   const [isVisible, setIsVisible] = useState(false);
+  const [searchPhrase, setSearchPhrase] = useState("");
   const { zoom, startDate, date } = useCalendar();
   const gridRef = useRef<HTMLDivElement>(null);
   const datesRange = useMemo(() => getDatesRange(date, zoom), [date, zoom]);
+  const filteredData = useMemo(
+    () =>
+      data.filter((item) => item.label.title.toLowerCase().includes(searchPhrase.toLowerCase())),
+    [data, searchPhrase]
+  );
 
   const {
     page,
@@ -35,8 +41,9 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
     currentPageNum,
     pagesAmount,
     next,
-    previous
-  } = usePagination(data, datesRange);
+    previous,
+    reset
+  } = usePagination(filteredData, datesRange);
 
   const debouncedHandleMouseOver = useRef(
     debounce(
@@ -84,6 +91,11 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
     };
   }, [debouncedHandleMouseOver, handleMouseLeave, projectsPerPerson, rowsPerItem, startDate, zoom]);
 
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    reset();
+    setSearchPhrase(event.target.value);
+  };
+
   return (
     <StyledOuterWrapper>
       <LeftColumn
@@ -93,6 +105,8 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
         rows={rowsPerItem}
         onLoadNext={next}
         onLoadPrevious={previous}
+        searchInputValue={searchPhrase}
+        onSearchInputChange={handleSearch}
       />
       <StyledInnerWrapper>
         <Header zoom={zoom} topBarWidth={topBarWidth} />

@@ -10,6 +10,7 @@ export type IconsNames =
   | "calendarWarning"
   | "calendarFree"
   | "arrowUp"
-  | "arrowDown";
+  | "arrowDown"
+  | "search";
 
 export type Icon = FunctionComponent<ComponentProps<"svg"> & { title?: string }>;

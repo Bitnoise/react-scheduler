@@ -8,6 +8,7 @@ import { ReactComponent as calendarWarning } from "./svgs/calendar-warning.svg";
 import { ReactComponent as calendarFree } from "./svgs/calendar-free.svg";
 import { ReactComponent as arrowUp } from "./svgs/arrow-up.svg";
 import { ReactComponent as arrowDown } from "./svgs/arrow-down.svg";
+import { ReactComponent as search } from "./svgs/search.svg";
 import { Icon, IconsNames } from "./types";
 
 const icons: { [key in IconsNames]: Icon } = {
@@ -20,7 +21,8 @@ const icons: { [key in IconsNames]: Icon } = {
   calendarWarning,
   calendarFree,
   arrowDown,
-  arrowUp
+  arrowUp,
+  search
 };
 
 export default icons;

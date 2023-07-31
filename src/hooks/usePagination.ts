@@ -37,7 +37,12 @@ export const usePagination = (data: SchedulerData, datesRange: DatesRange): UseP
     }
   }, [pageNum, pages]);
 
-  const end = useMemo(() => startIndex + pages[pageNum].length, [pageNum, pages, startIndex]);
+  const reset = useCallback(() => {
+    setStartIndex(0);
+    setPage(0);
+  }, []);
+
+  const end = startIndex + pages[pageNum].length;
 
   const rowsPerItem = useMemo(
     () => rowsPerPerson.slice(startIndex, end),
@@ -57,6 +62,7 @@ export const usePagination = (data: SchedulerData, datesRange: DatesRange): UseP
     rowsPerItem,
     totalRowsPerPage: getTotalRowsPerPage(pages[pageNum]),
     next,
-    previous
+    previous,
+    reset
   };
 };

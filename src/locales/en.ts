@@ -11,5 +11,6 @@ export const en = {
     today: "Today",
     view: "View"
   },
+  search: "search",
   week: "week"
 };
