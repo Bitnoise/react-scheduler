@@ -134,92 +134,6 @@ endDate | Date | date for calculating end position for resource |
 hoursTaken | number | number of hours resource takes up for given row that will be visible on resource tooltip when hovered |
 bgColor | string (optional) | tile color
 
-### Project structure
-
-#### General:
-
-```
-.
-├── src
-│   ├── assets
-│   ├── components
-│   |   ├── ExampleComponent
-│   |   ├── AnotherComponent
-|   |   └── index.ts
-│   ├── constants.ts
-│   ├── context
-│   ├── locales
-│   ├── types
-│   ├── utils
-```
-
-- **assets** - folder that consists all of the svgs and images used within app
-- **components** - folder that has all React components used within app
-  - **_ExampleComponent_** - folder with component files, written in camelCase convention
-  - **_index.ts_** - file that consists exports of all components f.e.
-    ```
-    export { default as ExampleComponent } from "./ExampleComponent"
-    ```
-- **constants** - all constants that are globally used and should not change during usage of app, f.e.: height and width of cell, width of single tile.
-- **context** - folder that consists CalendarProvider and LocaleProvider
-- **locales** - folder that consists files with translations (currently en / pl)
-- **types** - folder that consists all global types and type guards
-- **utils** - folder that consists all utility functions used within app (f.e. drawing all the grid, data parsers etc.)
-
-#### Example of component folder structure:
-
-```
-ExampleComponent
-├── ExampleComponent.tsx
-├── index.ts
-├── styles.ts
-├── types.ts
-```
-
-Each component should consist of the following files:
-
-- **_[ComponentName].tsx_** - .tsx file named after component name, written in camelCase convention
-- **_index.ts_** - file that exports component f.e.:
-  ```
-  export { default } from "./ExampleComponent";
-  ```
-- **_styles.ts_** - optional file that consists all styling of the component
-- **_types.ts_** - optional file that consists all types of component
-
-### Code Style and Guidelines
-
-1. Commits should meet [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) rules
-2. Project uses `eslint` and `prettier` for code linting and styling.
-3. Both `husky` and `lint-staged` are used to ensure that code meets code style and guidelines
-
-### How to contribute
-
-- **Reporting Issues**: If you come across any bugs, glitches, or have any suggestions for improvements, please [open an issue](https://github.com/Bitnoise/react-scheduler/issues) on our GitHub repository. Provide as much detail as possible, including steps to reproduce the issue.
-- **Suggesting Enhancements**: If you have ideas for new features or enhancements, we would love to hear them! You can [open an issue](https://github.com/Bitnoise/react-scheduler/issues) on our GitHub repository and clearly describe your suggestion.
-- **Submitting Pull Requests**: If you have developed a fix or a new feature that you would like to contribute, you can submit a pull request. Here's a quick overview of the process:
-  - Clone the repository and create your own branch: `git checkout -b your-branch-name`.
-  - Implement your changes, following the **code style and guidelines**.
-  - Test your changes to ensure they work as expected.
-  - Commit your changes and push to your forked repository.
-  - Open a pull request against our main repository's `master` branch.
-    - add at least 1 reviewer
-    - link correct issue
-
-### Development Setup
-
-##### Pre-requirements
-
-- **Node version**: please check `.nvmrc` file for required node version
-
-##### Local setup
-
-To set up the project locally for development and testing, please follow these steps:
-
-1. Clone the repository: `git clone git@github.com:Bitnoise/react-scheduler.git`.
-2. Install the dependencies: `yarn install`, depending on your package manager.
-3. Start the development server: `yarn dev`.
-4. Open http://localhost:5173 in your web browser.
-
 ### Troubleshooting
 
 - For using Scheduler with RemixJS make sure to add `@bitnoi.se/scheduler` to `serverDependenciesToBundle` in `remix.config.js` like so:
@@ -257,6 +171,19 @@ const Scheduler = dynamic(() => import("@bitnoi.se/react-scheduler").then((mod) 
 ### Known Issues
 
 1. No responsiveness
+
+### How to contribute
+
+- **Reporting Issues**: If you come across any bugs, glitches, or have any suggestions for improvements, please [open an issue](https://github.com/Bitnoise/react-scheduler/issues) on our GitHub repository. Provide as much detail as possible, including steps to reproduce the issue.
+- **Suggesting Enhancements**: If you have ideas for new features or enhancements, we would love to hear them! You can [open an issue](https://github.com/Bitnoise/react-scheduler/issues) on our GitHub repository and clearly describe your suggestion.
+- **Submitting Pull Requests**: If you have developed a fix or a new feature that you would like to contribute, you can submit a pull request. Here's a quick overview of the process:
+  - Clone the repository and create your own branch: `git checkout -b feat/your-branch-name`.
+  - Implement your changes, following the **code style and guidelines** from [development.md](development.md).
+  - Test your changes to ensure they work as expected.
+  - Commit your changes and push to your forked repository.
+  - Open a pull request against our main repository's `master` branch.
+    - add at least 1 reviewer
+    - link correct issue
 
 ### Contact
 
