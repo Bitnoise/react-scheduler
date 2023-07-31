@@ -46,14 +46,13 @@ export const splitToPages = (
     }
 
     return pages;
-  } else {
-    projectsPerPerson.forEach((projects, i) => {
-      const newItem = { id: data[i].id, label: data[i].label, data: projects };
-      singlePage.push(newItem);
-    });
-
-    pages.push(singlePage);
-
-    return pages;
   }
+  projectsPerPerson.forEach((projects, i) => {
+    const newItem = { id: data[i].id, label: data[i].label, data: projects };
+    singlePage.push(newItem);
+  });
+
+  pages.push(singlePage);
+
+  return pages;
 };

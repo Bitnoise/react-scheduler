@@ -1,8 +1,7 @@
 export type PaginationButtonProps = {
   intent: "previous" | "next";
   isVisible: boolean;
-  onLoadNext?: () => void;
-  onLoadPrevious?: () => void;
+  onClick: () => void;
   icon?: React.ReactNode;
 };
 
