@@ -35,18 +35,16 @@ function App() {
 
   const filteredData = useMemo(
     () =>
-      mocked.map((person) => {
-        return {
-          ...person,
-          data: person.data.filter(
-            (project) =>
-              dayjs(project.startDate).isBetween(range.startDate, range.endDate) ||
-              dayjs(project.endDate).isBetween(range.startDate, range.endDate) ||
-              (dayjs(project.startDate).isBefore(range.startDate, "day") &&
-                dayjs(project.endDate).isAfter(range.endDate, "day"))
-          )
-        };
-      }),
+      mocked.map((person) => ({
+        ...person,
+        data: person.data.filter(
+          (project) =>
+            dayjs(project.startDate).isBetween(range.startDate, range.endDate) ||
+            dayjs(project.endDate).isBetween(range.startDate, range.endDate) ||
+            (dayjs(project.startDate).isBefore(range.startDate, "day") &&
+              dayjs(project.endDate).isAfter(range.endDate, "day"))
+        )
+      })),
     [mocked, range.endDate, range.startDate]
   );
 
