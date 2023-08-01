@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { ChangeEvent, FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import debounce from "lodash.debounce";
 import { useCalendar } from "@/context/CalendarProvider";
 import { Day, SchedulerProjectData, TooltipData, ZoomLevel } from "@/types/global";
@@ -22,17 +22,12 @@ const initialTooltipData: TooltipData = {
 
 export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) => {
   const [tooltipData, setTooltipData] = useState<TooltipData>(initialTooltipData);
+  const [filteredData, setFilteredData] = useState(data);
   const [isVisible, setIsVisible] = useState(false);
   const [searchPhrase, setSearchPhrase] = useState("");
   const { zoom, startDate, date } = useCalendar();
   const gridRef = useRef<HTMLDivElement>(null);
   const datesRange = useMemo(() => getDatesRange(date, zoom), [date, zoom]);
-  const filteredData = useMemo(
-    () =>
-      data.filter((item) => item.label.title.toLowerCase().includes(searchPhrase.toLowerCase())),
-    [data, searchPhrase]
-  );
-
   const {
     page,
     projectsPerPerson,
@@ -44,7 +39,6 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
     previous,
     reset
   } = usePagination(filteredData, datesRange);
-
   const debouncedHandleMouseOver = useRef(
     debounce(
       (
@@ -68,12 +62,28 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
       600
     )
   );
+  const debouncedFilterData = useRef(
+    debounce((enteredSearchPhrase) => {
+      reset();
+      setFilteredData(
+        data.filter((item) =>
+          item.label.title.toLowerCase().includes(enteredSearchPhrase.toLowerCase())
+        )
+      );
+    }, 500)
+  );
+
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchPhrase(event.target.value);
+    debouncedFilterData.current.cancel();
+    debouncedFilterData.current(event.target.value);
+  };
 
   const handleMouseLeave = useCallback(() => {
     debouncedHandleMouseOver.current.cancel();
     setIsVisible(false);
     setTooltipData(initialTooltipData);
-  }, [debouncedHandleMouseOver]);
+  }, []);
 
   useEffect(() => {
     const handleMouseOver = (e: MouseEvent) =>
@@ -90,11 +100,6 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
       gridArea.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, [debouncedHandleMouseOver, handleMouseLeave, projectsPerPerson, rowsPerItem, startDate, zoom]);
-
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    reset();
-    setSearchPhrase(event.target.value);
-  };
 
   return (
     <StyledOuterWrapper>
