@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { SchedulerData } from "@/types/global";
 import { DatesRange } from "@/utils/getDatesRange";
 import { splitToPages } from "@/utils/splitToPages";
@@ -12,29 +12,42 @@ export const usePagination = (data: SchedulerData, datesRange: DatesRange): UseP
   const [startIndex, setStartIndex] = useState(0);
   const [pageNum, setPage] = useState(0);
 
-  const { projectsPerPerson, rowsPerPerson } = projectsOnGrid(data, datesRange);
+  const { projectsPerPerson, rowsPerPerson } = useMemo(
+    () => projectsOnGrid(data, datesRange),
+    [data, datesRange]
+  );
 
-  const pages = splitToPages(data, projectsPerPerson, rowsPerPerson, recordsThreshold);
+  const pages = useMemo(
+    () => splitToPages(data, projectsPerPerson, rowsPerPerson, recordsThreshold),
+    [data, projectsPerPerson, recordsThreshold, rowsPerPerson]
+  );
 
-  const next = () => {
+  const next = useCallback(() => {
     if (pages[pageNum].length) {
       setStartIndex((prev) => prev + pages[Math.max(pageNum, 0)].length);
       setPage((prev) => Math.min(prev + 1, pages.length - 1));
       window.scroll({ top: 0 });
     }
-  };
+  }, [pageNum, pages]);
 
-  const previous = () => {
+  const previous = useCallback(() => {
     if (pages[pageNum].length) {
       setStartIndex((prev) => Math.max(prev - pages[pageNum - 1].length, 0));
       setPage((prev) => Math.max(prev - 1, 0));
     }
-  };
-  const end = startIndex + pages[pageNum].length;
+  }, [pageNum, pages]);
 
-  const rowsPerItem = rowsPerPerson.slice(startIndex, end);
+  const end = useMemo(() => startIndex + pages[pageNum].length, [pageNum, pages, startIndex]);
 
-  const projectsPerPage = projectsPerPerson.slice(startIndex, end);
+  const rowsPerItem = useMemo(
+    () => rowsPerPerson.slice(startIndex, end),
+    [end, rowsPerPerson, startIndex]
+  );
+
+  const projectsPerPage = useMemo(
+    () => projectsPerPerson.slice(startIndex, end),
+    [end, projectsPerPerson, startIndex]
+  );
 
   return {
     page: pages[pageNum],

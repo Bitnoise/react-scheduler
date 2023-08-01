@@ -1,7 +1,7 @@
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import debounce from "lodash.debounce";
 import { useCalendar } from "@/context/CalendarProvider";
-import { TooltipData } from "@/types/global";
+import { Day, SchedulerProjectData, TooltipData, ZoomLevel } from "@/types/global";
 import { getTooltipData } from "@/utils/getTooltipData";
 import { getDatesRange } from "@/utils/getDatesRange";
 import { usePagination } from "@/hooks/usePagination";
@@ -38,11 +38,16 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
     previous
   } = usePagination(data, datesRange);
 
-  const debouncedHandleMouseOver = useCallback(
-    () =>
-      debounce((e: MouseEvent) => {
+  const debouncedHandleMouseOver = useRef(
+    debounce(
+      (
+        e: MouseEvent,
+        startDate: Day,
+        rowsPerItem: number[],
+        projectsPerPerson: SchedulerProjectData[][][],
+        zoom: ZoomLevel
+      ) => {
         if (!gridRef.current) return;
-
         const { left, top } = gridRef.current.getBoundingClientRect();
         const tooltipCoords = { x: e.clientX - left, y: e.clientY - top };
         const {
@@ -52,18 +57,20 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
         } = getTooltipData(startDate, tooltipCoords, rowsPerItem, projectsPerPerson, zoom);
         setTooltipData({ coords: { x, y }, resourceIndex, disposition });
         setIsVisible(true);
-      }, 600),
-    [projectsPerPerson, rowsPerItem, startDate, zoom]
+      },
+      600
+    )
   );
 
   const handleMouseLeave = useCallback(() => {
-    debouncedHandleMouseOver().cancel();
+    debouncedHandleMouseOver.current.cancel();
     setIsVisible(false);
     setTooltipData(initialTooltipData);
   }, [debouncedHandleMouseOver]);
 
   useEffect(() => {
-    const handleMouseOver = debouncedHandleMouseOver();
+    const handleMouseOver = (e: MouseEvent) =>
+      debouncedHandleMouseOver.current(e, startDate, rowsPerItem, projectsPerPerson, zoom);
     const gridArea = gridRef.current;
 
     if (!gridArea) return;
@@ -75,7 +82,7 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
       gridArea.removeEventListener("mousemove", handleMouseOver);
       gridArea.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [debouncedHandleMouseOver, handleMouseLeave]);
+  }, [debouncedHandleMouseOver, handleMouseLeave, projectsPerPerson, rowsPerItem, startDate, zoom]);
 
   return (
     <StyledOuterWrapper>
