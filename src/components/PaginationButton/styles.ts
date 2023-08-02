@@ -3,7 +3,7 @@ import { marginPaddingReset } from "@/styles";
 import { StyledPaginationButton } from "./types";
 
 export const StyledWrapper = styled.div`
-  padding: 4px 11px 0 11px;
+  padding: 4px 11px 0;
   width: 100%;
 `;
 
