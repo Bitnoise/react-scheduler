@@ -110,6 +110,7 @@ const mockedSchedulerData: SchedulerData = [
 | ------------------------ | ------------- | ----------------- | -------------------------------------------------------------------------- |
 | `zoom`                   | 0             | `0` or `1`        | `0` - display grid divided into weeks `1` - display grid divided into days |
 | `isFiltersButtonVisible` | `true`        | `true` or `false` | `true` - displays filter button, `false` - hides filter button             |
+| `maxRecordsPerPage`      | 10            | `number`          | number of items from `SchedulerData` visible per page                      |
 
 ##### Scheduler Data
 
@@ -131,7 +132,7 @@ subtitle | string (optional) | resource subtitle that will be displayed on resou
 description | string (optional) | resource description that will be displayed on resource tile |
 startDate | Date | date for calculating start position for resource |
 endDate | Date | date for calculating end position for resource |
-hoursTaken | number | number of hours resource takes up for given row that will be visible on resource tooltip when hovered |
+occupancy | number | number of seconds resource takes up for given row that will be visible on resource tooltip when hovered |
 bgColor | string (optional) | tile color
 
 ### Troubleshooting
