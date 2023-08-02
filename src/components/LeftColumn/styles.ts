@@ -6,7 +6,6 @@ export const StyledWrapper = styled.div`
   min-width: ${leftColumnWidth + "px"};
   max-width: ${leftColumnWidth + "px"};
   min-height: 100vh;
-  padding-top: 94px;
   position: sticky;
   left: 0;
   background-color: ${({ theme }) => theme.colors.white};
