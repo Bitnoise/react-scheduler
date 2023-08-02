@@ -1,4 +1,5 @@
 export const pl = {
+  feelingEmpty: "Czuję się taki pusty...",
   free: "Wolne",
   loadNext: "Wczytaj następne",
   loadPrevious: "Wczytaj poprzednie",
