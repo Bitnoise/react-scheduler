@@ -6,8 +6,8 @@ import { StyledButton, StyledIconWrapper, StyledText, StyledWrapper } from "./st
 const PaginationButton: FC<PaginationButtonProps> = ({ intent, onClick, icon, isVisible }) => {
   const { loadNext, loadPrevious } = useLanguage();
   return (
-    <StyledWrapper isVisible={isVisible}>
-      <StyledButton onClick={onClick}>
+    <StyledWrapper>
+      <StyledButton onClick={onClick} isVisible={isVisible}>
         {icon && <StyledIconWrapper>{icon}</StyledIconWrapper>}
         <StyledText>{intent === "next" ? loadNext : loadPrevious}</StyledText>
       </StyledButton>

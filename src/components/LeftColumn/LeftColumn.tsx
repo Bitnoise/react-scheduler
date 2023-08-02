@@ -1,8 +1,8 @@
 import { FC, useState } from "react";
 import { useLanguage } from "@/context/LocaleProvider";
-import Pagination from "../Pagination/Pagination";
 import Icon from "../Icon";
-import { StyledInput, StyledInputWrapper, StyledWrapper } from "./styles";
+import PaginationButton from "../PaginationButton/PaginationButton";
+import { StyledInput, StyledInputWrapper, StyledLeftColumnHeader, StyledWrapper } from "./styles";
 import { LeftColumnProps } from "./types";
 import LeftColumnItem from "./LeftColumnItem/LeftColumnItem";
 
@@ -23,25 +23,33 @@ const LeftColumn: FC<LeftColumnProps> = ({
 
   return (
     <StyledWrapper>
-      <StyledInputWrapper isFocused={isInputFocused}>
-        <StyledInput
-          placeholder={search}
-          value={searchInputValue}
-          onChange={onSearchInputChange}
-          onFocus={toggleFocus}
-          onBlur={toggleFocus}
+      <StyledLeftColumnHeader>
+        <StyledInputWrapper isFocused={isInputFocused}>
+          <StyledInput
+            placeholder={search}
+            value={searchInputValue}
+            onChange={onSearchInputChange}
+            onFocus={toggleFocus}
+            onBlur={toggleFocus}
+          />
+          <Icon iconName="search" />
+        </StyledInputWrapper>
+        <PaginationButton
+          intent="previous"
+          isVisible={pageNum !== 0}
+          onClick={onLoadPrevious}
+          icon={<Icon iconName="arrowUp" width="16" height="16" />}
         />
-        <Icon iconName="search" />
-      </StyledInputWrapper>
-      <Pagination
-        pageNum={pageNum}
-        pagesAmount={pagesAmount}
-        onLoadNext={onLoadNext}
-        onLoadPrevious={onLoadPrevious}>
-        {data.map((item, index) => (
-          <LeftColumnItem item={item.label} key={item.id} rows={rows[index]} />
-        ))}
-      </Pagination>
+      </StyledLeftColumnHeader>
+      {data.map((item, index) => (
+        <LeftColumnItem item={item.label} key={item.id} rows={rows[index]} />
+      ))}
+      <PaginationButton
+        intent="next"
+        isVisible={pageNum !== pagesAmount - 1}
+        onClick={onLoadNext}
+        icon={<Icon iconName="arrowDown" width="16" height="16" />}
+      />
     </StyledWrapper>
   );
 };

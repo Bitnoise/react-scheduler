@@ -13,7 +13,7 @@ function App() {
     projectsPerYear: 5,
     yearsCovered: 0,
     startDate: undefined,
-    maxRecordsPerPage: 10,
+    maxRecordsPerPage: 50,
     isFullscreen: true
   });
 
