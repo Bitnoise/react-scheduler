@@ -1,16 +1,22 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { SchedulerData } from "@/types/global";
 import { DatesRange } from "@/utils/getDatesRange";
 import { splitToPages } from "@/utils/splitToPages";
 import { projectsOnGrid } from "@/utils/getProjectsOnGrid";
 import { getTotalRowsPerPage } from "@/utils/getTotalRowsPerPage";
 import { useCalendar } from "@/context/CalendarProvider";
+import { outsideWrapperId } from "@/constants";
 import { UsePaginationData } from "./types";
 
 export const usePagination = (data: SchedulerData, datesRange: DatesRange): UsePaginationData => {
   const { recordsThreshold } = useCalendar();
   const [startIndex, setStartIndex] = useState(0);
   const [pageNum, setPage] = useState(0);
+  const outsideWrapper = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    outsideWrapper.current = document.getElementById(outsideWrapperId);
+  }, []);
 
   const { projectsPerPerson, rowsPerPerson } = useMemo(
     () => projectsOnGrid(data, datesRange),
@@ -23,7 +29,8 @@ export const usePagination = (data: SchedulerData, datesRange: DatesRange): UseP
   );
 
   const next = useCallback(() => {
-    if (pages[pageNum].length) {
+    if (pages[pageNum].length && outsideWrapper.current) {
+      outsideWrapper.current.scroll({ top: 0 });
       setStartIndex((prev) => prev + pages[Math.max(pageNum, 0)].length);
       setPage((prev) => Math.min(prev + 1, pages.length - 1));
       window.scroll({ top: 0 });

@@ -10,12 +10,11 @@ export const StyledWrapper = styled.div<StyledLeftColumnItemWrapperProps>`
   width: 100%;
   min-height: ${boxHeight}px;
   height: calc(${boxHeight}px * ${({ rows }) => rows});
-  border-bottom: 1px solid ${({ theme }) => theme.colors.grey400};
-  &:first-child {
-    border-top: 1px solid ${({ theme }) => theme.colors.grey400};
-  }
+  border-top: 1px solid ${({ theme }) => theme.colors.grey400};
   transition: 0.5s ease;
-
+  &:nth-last-child(2) {
+    border-bottom: 1px solid ${({ theme }) => theme.colors.grey400};
+  }
   &:hover {
     background-color: ${({ theme }) => theme.colors.blue200};
   }

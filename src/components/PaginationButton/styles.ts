@@ -2,15 +2,14 @@ import styled from "styled-components";
 import { marginPaddingReset } from "@/styles";
 import { StyledPaginationButton } from "./types";
 
-export const StyledWrapper = styled.div<StyledPaginationButton>`
+export const StyledWrapper = styled.div`
+  padding: 4px 11px 0 11px;
   width: 100%;
-  padding: 4px 11px;
-  opacity: ${({ isVisible }) => (isVisible ? "1" : "0")};
-  pointer-events: ${({ isVisible }) => (isVisible ? "auto" : "none")};
 `;
 
-export const StyledButton = styled.button`
-  ${marginPaddingReset}
+export const StyledButton = styled.button<StyledPaginationButton>`
+  margin-top: 0px;
+  padding: 0;
   width: 100%;
   display: flex;
   align-items: center;
@@ -22,6 +21,8 @@ export const StyledButton = styled.button`
   line-height: 150%;
   letter-spacing: 1px;
   cursor: pointer;
+  opacity: ${({ isVisible }) => (isVisible ? "1" : "0")};
+  pointer-events: ${({ isVisible }) => (isVisible ? "auto" : "none")};
   &:hover {
     transition: 0.5s ease;
     background-color: ${({ theme }) => theme.colors.blue200};
@@ -30,8 +31,8 @@ export const StyledButton = styled.button`
 
 export const StyledIconWrapper = styled.div`
   position: absolute;
+  max-height: 16px;
   margin: 0 4px 0 10px;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
