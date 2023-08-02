@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import debounce from "lodash.debounce";
 import { useCalendar } from "@/context/CalendarProvider";
-import { Day, SchedulerProjectData, TooltipData, ZoomLevel } from "@/types/global";
+import { Day, SchedulerData, SchedulerProjectData, TooltipData, ZoomLevel } from "@/types/global";
 import { getTooltipData } from "@/utils/getTooltipData";
 import { getDatesRange } from "@/utils/getDatesRange";
 import { usePagination } from "@/hooks/usePagination";
@@ -63,10 +63,10 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
     )
   );
   const debouncedFilterData = useRef(
-    debounce((enteredSearchPhrase) => {
+    debounce((dataToFilter: SchedulerData, enteredSearchPhrase: string) => {
       reset();
       setFilteredData(
-        data.filter((item) =>
+        dataToFilter.filter((item) =>
           item.label.title.toLowerCase().includes(enteredSearchPhrase.toLowerCase())
         )
       );
@@ -74,9 +74,10 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
   );
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchPhrase(event.target.value);
+    const phrase = event.target.value;
+    setSearchPhrase(phrase);
     debouncedFilterData.current.cancel();
-    debouncedFilterData.current(event.target.value);
+    debouncedFilterData.current(data, phrase);
   };
 
   const handleMouseLeave = useCallback(() => {
@@ -100,6 +101,10 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
       gridArea.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, [debouncedHandleMouseOver, handleMouseLeave, projectsPerPerson, rowsPerItem, startDate, zoom]);
+
+  useEffect(() => {
+    setFilteredData(data);
+  }, [data]);
 
   return (
     <StyledOuterWrapper>
