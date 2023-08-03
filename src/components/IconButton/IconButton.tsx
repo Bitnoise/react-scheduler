@@ -12,7 +12,8 @@ const IconButton = ({
   onClick,
   children,
   isFullRounded,
-  isDisabled
+  isDisabled,
+  variant = "outlined"
 }: IconButtonProps) => {
   const { colors } = useTheme();
 
@@ -21,7 +22,8 @@ const IconButton = ({
       onClick={onClick}
       isFullRounded={isFullRounded}
       hasChildren={!!children}
-      disabled={isDisabled}>
+      disabled={isDisabled}
+      variant={variant}>
       <Icon
         iconName={iconName}
         width={width}

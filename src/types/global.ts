@@ -1,12 +1,20 @@
 export const allZoomLevel = [0, 1] as const;
 
+export type FilterButtonState = -1 | 0 | 1;
+
 type ZoomLevelTuple = typeof allZoomLevel;
 
 export type ZoomLevel = ZoomLevelTuple[number];
 
 export type Config = {
   zoom: ZoomLevel;
-  isFiltersButtonVisible?: boolean;
+  /**
+   * Dictates filter button behavior
+   * - `< 0` - filter button is hidden
+   * - `0` - filter button is visible, no filter had been applied
+   * - `> 0` - filter button visible - filters had been applied
+   */
+  filterButtonState?: number;
   maxRecordsPerPage?: number;
 };
 

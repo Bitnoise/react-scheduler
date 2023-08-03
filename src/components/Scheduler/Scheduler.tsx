@@ -16,11 +16,12 @@ const Scheduler = ({
   startDate,
   onRangeChange,
   onItemClick,
-  onFilterData
+  onFilterData,
+  onClearFilterData
 }: SchedulerProps) => {
   const appConfig: Config = {
     zoom: 0,
-    isFiltersButtonVisible: true,
+    filterButtonState: 1,
     ...config
   };
   const outsideWrapperRef = useRef<HTMLDivElement>(null);
@@ -50,7 +51,8 @@ const Scheduler = ({
           config={appConfig}
           onRangeChange={onRangeChange}
           defaultStartDate={defaultStartDate}
-          onFilterData={onFilterData}>
+          onFilterData={onFilterData}
+          onClearFilterData={onClearFilterData}>
           <StyledOutsideWrapper
             showScroll={!!data.length}
             id={outsideWrapperId}
