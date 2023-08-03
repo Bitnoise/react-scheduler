@@ -32,7 +32,11 @@ export const StyledImageWrapper = styled.div`
   border-radius: 50%;
   overflow: hidden;
 `;
-export const StyledImage = styled.img``;
+export const StyledImage = styled.img`
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+`;
 export const StyledTextWrapper = styled.div`
   display: flex;
   flex-direction: column;
