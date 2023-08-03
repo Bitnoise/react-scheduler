@@ -24,6 +24,7 @@ const Scheduler = ({
     filterButtonState: 1,
     ...config
   };
+
   const outsideWrapperRef = useRef<HTMLDivElement>(null);
   const [topBarWidth, setTopBarWidth] = useState(outsideWrapperRef.current?.clientWidth);
   const defaultStartDate = useMemo(() => dayjs(startDate), [startDate]);
@@ -45,7 +46,7 @@ const Scheduler = ({
   if (!outsideWrapperRef.current) null;
   return (
     <ThemeProvider theme={theme}>
-      <LocaleProvider>
+      <LocaleProvider lang={appConfig.lang}>
         <CalendarProvider
           data={data}
           config={appConfig}

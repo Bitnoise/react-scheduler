@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { en } from "@/locales/en";
+import { LangCodes } from "@/types/global";
 
 export type LocaleContextType = {
   currentLocale: LocaleType;
@@ -9,6 +10,7 @@ export type LocaleContextType = {
 
 export type LocaleProviderProps = {
   children: ReactNode;
+  lang?: LangCodes;
 };
 
 export type TranslationType = typeof en;
