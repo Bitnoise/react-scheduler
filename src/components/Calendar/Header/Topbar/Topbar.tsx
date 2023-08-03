@@ -1,5 +1,5 @@
 import { useTheme } from "styled-components";
-import { FC } from "react";
+import { FC, MouseEventHandler } from "react";
 import { Icon, IconButton } from "@/components";
 import { useCalendar } from "@/context/CalendarProvider";
 import { useLanguage } from "@/context/LocaleProvider";
@@ -10,6 +10,7 @@ const Topbar: FC<TopbarProps> = ({ width }) => {
   const { topbar } = useLanguage();
   const {
     data,
+    config,
     handleGoNext,
     handleGoPrev,
     handleGoToday,
@@ -17,16 +18,35 @@ const Topbar: FC<TopbarProps> = ({ width }) => {
     zoomOut,
     isNextZoom,
     isPrevZoom,
-    handleFilterData
+    handleFilterData,
+    onClearFilterData
   } = useCalendar();
   const { colors } = useTheme();
+  const { filterButtonState = -1 } = config;
+
+  const handleClearData: MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.stopPropagation();
+    onClearFilterData?.();
+  };
 
   return (
     <Wrapper width={width}>
       <Filters>
-        <IconButton iconName="filter" width="16" height="16" onClick={handleFilterData}>
-          {topbar.filters}
-        </IconButton>
+        {filterButtonState >= 0 && (
+          <IconButton
+            variant={filterButtonState ? "filled" : "outlined"}
+            iconName="filter"
+            width="16"
+            height="16"
+            onClick={handleFilterData}>
+            {topbar.filters}
+            {!!filterButtonState && (
+              <button onClick={handleClearData}>
+                <Icon iconName="close" height="16" width="16" />
+              </button>
+            )}
+          </IconButton>
+        )}
       </Filters>
       <NavigationWrapper>
         <NavBtn disabled={!data?.length} onClick={handleGoPrev}>

@@ -13,6 +13,7 @@ export type CalendarContextType = {
   zoomOut: () => void;
   handleFilterData: () => void;
   updateTilesCoords: (coords: Coords[]) => void;
+  onClearFilterData?: () => void;
   data?: SchedulerData;
   tilesCoords: Coords[];
   zoom: ZoomLevel;
@@ -24,6 +25,7 @@ export type CalendarContextType = {
   startDate: Day;
   dayOfYear: number;
   recordsThreshold: number;
+  config: Config;
 };
 
 export type CalendarProviderProps = {
@@ -33,4 +35,5 @@ export type CalendarProviderProps = {
   config: Config;
   onRangeChange?: (range: ParsedDatesRange) => void;
   onFilterData?: () => void;
+  onClearFilterData?: () => void;
 };

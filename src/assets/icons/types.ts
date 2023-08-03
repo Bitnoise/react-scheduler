@@ -11,6 +11,7 @@ export type IconsNames =
   | "calendarFree"
   | "arrowUp"
   | "arrowDown"
-  | "search";
+  | "search"
+  | "close";
 
 export type Icon = FunctionComponent<ComponentProps<"svg"> & { title?: string }>;
