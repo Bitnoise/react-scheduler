@@ -101,7 +101,7 @@ const mockedSchedulerData: SchedulerData = [
 | --------------- | --------------------------------- | ----------------------------------------------------------- |
 | `onRangeChange` | updated `startDate` and `endDate` | runs whenever user reaches end of currently rendered canvas |
 | `onItemClick`   | clicked resource data             | detects resource click                                      |
-| `onFilterData`  | ??                                | ??                                                          |
+| `onFilterData`  | -                                 | callback firing when filter button was clicked              |
 | `config`        | -                                 | object with scheduler config properties                     |
 
 ##### Scheduler Config Object
@@ -110,7 +110,7 @@ const mockedSchedulerData: SchedulerData = [
 | ------------------------ | ------------- | ----------------- | -------------------------------------------------------------------------- |
 | `zoom`                   | 0             | `0` or `1`        | `0` - display grid divided into weeks `1` - display grid divided into days |
 | `isFiltersButtonVisible` | `true`        | `true` or `false` | `true` - displays filter button, `false` - hides filter button             |
-| `maxRecordsPerPage`      | 10            | `number`          | number of items from `SchedulerData` visible per page                      |
+| `maxRecordsPerPage`      | 50            | `number`          | number of items from `SchedulerData` visible per page                      |
 
 ##### Scheduler Data
 
