@@ -54,17 +54,17 @@ const CalendarProvider = ({
   const scrollForwardOffsetModifier = 2;
 
   const moveHorizontalScroll = useCallback(
-    (direction: Direction) => {
+    (direction: Direction, behavior: ScrollBehavior = "smooth") => {
       switch (direction) {
         case "back":
           return outsideWrapper.current?.scrollTo({
-            behavior: "smooth",
+            behavior,
             left: zoom === 0 ? weekWidth * screenWidthMultiplier : dayWidth * screenWidthMultiplier
           });
 
         case "forward":
           return outsideWrapper.current?.scrollTo({
-            behavior: "smooth",
+            behavior,
             left:
               zoom === 0
                 ? window.innerWidth +
@@ -81,13 +81,13 @@ const CalendarProvider = ({
 
         case "middle":
           return outsideWrapper.current?.scrollTo({
-            behavior: "smooth",
+            behavior,
             left: window.innerWidth
           });
 
         default:
           return outsideWrapper.current?.scrollTo({
-            behavior: "smooth",
+            behavior,
             left: window.innerWidth
           });
       }
@@ -143,7 +143,7 @@ const CalendarProvider = ({
     if (isInitialized) {
       return;
     }
-    moveHorizontalScroll("middle");
+    moveHorizontalScroll("middle", "auto");
     setIsInitialized(true);
     setDate(defaultStartDate);
   }, [defaultStartDate, isInitialized, moveHorizontalScroll]);
