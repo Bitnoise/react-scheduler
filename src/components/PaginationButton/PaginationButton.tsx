@@ -13,18 +13,16 @@ const PaginationButton: FC<PaginationButtonProps> = ({
 }) => {
   const { loadNext, loadPrevious } = useLanguage();
 
-  const renderText = () => {
-    if (intent === "next") {
-      return `${loadNext} ${pageNum + 2}/${pagesAmount}`;
-    }
-    return `${loadPrevious} ${pageNum}/${pagesAmount}`;
-  };
+  const buttonText =
+    intent === "next"
+      ? `${loadNext} ${pageNum + 2}/${pagesAmount}`
+      : `${loadPrevious} ${pageNum}/${pagesAmount}`;
 
   return (
     <StyledWrapper>
       <StyledButton onClick={onClick} isVisible={isVisible}>
         {icon && <StyledIconWrapper>{icon}</StyledIconWrapper>}
-        <StyledText>{renderText()}</StyledText>
+        <StyledText>{buttonText}</StyledText>
       </StyledButton>
     </StyledWrapper>
   );
