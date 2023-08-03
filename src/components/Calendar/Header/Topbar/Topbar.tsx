@@ -24,7 +24,7 @@ const Topbar: FC<TopbarProps> = ({ width }) => {
   const { colors } = useTheme();
   const { filterButtonState = -1 } = config;
 
-  const handleClearData: MouseEventHandler<HTMLButtonElement> = (event) => {
+  const handleClearFilters: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
     onClearFilterData?.();
   };
@@ -41,9 +41,9 @@ const Topbar: FC<TopbarProps> = ({ width }) => {
             onClick={handleFilterData}>
             {topbar.filters}
             {!!filterButtonState && (
-              <button onClick={handleClearData}>
+              <span onClick={handleClearFilters}>
                 <Icon iconName="close" height="16" width="16" />
-              </button>
+              </span>
             )}
           </IconButton>
         )}
