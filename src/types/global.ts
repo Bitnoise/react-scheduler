@@ -5,7 +5,7 @@ export type FilterButtonState = -1 | 0 | 1;
 type ZoomLevelTuple = typeof allZoomLevel;
 
 export type ZoomLevel = ZoomLevelTuple[number];
-
+export type LangCodes = "en" | "pl";
 export type Config = {
   zoom: ZoomLevel;
   /**
@@ -15,6 +15,11 @@ export type Config = {
    * - `> 0` - filter button visible - filters had been applied
    */
   filterButtonState?: number;
+  /**
+   * Language code: "en" | "pl"
+   */
+  lang?: LangCodes;
+  isFiltersButtonVisible?: boolean;
   maxRecordsPerPage?: number;
 };
 

@@ -7,12 +7,12 @@ export const locales: LocaleType[] = [
     id: "en",
     name: "ENGLISH",
     lang: en,
-    translateCode: "en"
+    translateCode: "en-GB"
   },
   {
     id: "pl",
     name: "POLISH",
     lang: pl,
-    translateCode: "pl"
+    translateCode: "pl-PL"
   }
 ];
