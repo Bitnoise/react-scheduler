@@ -37,15 +37,15 @@ To set up the project locally for development and testing, please follow these s
 - **assets** - folder that consists all of the svgs and images used within app
 - **components** - folder that has all React components used within app
   - **_ExampleComponent_** - folder with component files, written in camelCase convention
-  - **_index.ts_** - file that consists exports of all components f.e.
+  - **_index.ts_** - file that consists exports of all components e.g.
     ```
     export { default as ExampleComponent } from "./ExampleComponent"
     ```
-- **constants** - all constants that are globally used and should not change during usage of app, f.e.: height and width of cell, width of single tile.
+- **constants** - all constants that are globally used and should not change during usage of app, e.g.: height and width of cell, width of single tile.
 - **context** - folder that consists CalendarProvider and LocaleProvider
 - **locales** - folder that consists files with translations (currently en / pl)
 - **types** - folder that consists all global types and type guards
-- **utils** - folder that consists all utility functions used within app (f.e. drawing all the grid, data parsers etc.)
+- **utils** - folder that consists all utility functions used within app (e.g. drawing all the grid, data parsers etc.)
 
 #### Example of component folder structure:
 
@@ -60,7 +60,7 @@ ExampleComponent
 Each component should consist of the following files:
 
 - **_[ComponentName].tsx_** - .tsx file named after component name, written in camelCase convention
-- **_index.ts_** - file that exports component f.e.:
+- **_index.ts_** - file that exports component e.g.:
   ```
   export { default } from "./ExampleComponent";
   ```

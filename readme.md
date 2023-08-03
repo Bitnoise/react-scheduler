@@ -25,16 +25,30 @@ import "@bitnoi.se/react-scheduler/dist/style.css";
 import { Scheduler, SchedulerData } from "@bitnoi.se/scheduler";
 
 default export function Component() {
-	return (
-		<section>
-			<Scheduler
-				data={mockedSchedulerData}
-				onRangeChange={(newRange) => console.log(newRange)}
-				onItemClick={(clickedResource) => console.log(clickedResource)}
-				onFilterData={() => { // some filtering logic }}
-			/>
-		</section>
-	);
+  const [filterButtonState, setFilterButtonState] = useState(0);
+
+  return (
+    <section>
+      <Scheduler
+        data={mockedSchedulerData}
+        onRangeChange={(newRange) => console.log(newRange)}
+        onTileClick={(clickedResource) => console.log(clickedResource)}
+        onItemClick={(item) => console.log(item)}
+        onFilterData={() => {
+          // Some filtering logic...
+          setFilterButtonState(1);
+        }}
+        onClearFilterData={() => {
+          // Some clearing filters logic...
+          setFilterButtonState(0)
+        }}
+        config={{
+          zoom: 0,
+          filterButtonState,
+        }}
+      />
+    </section>
+  );
 }
 
 const mockedSchedulerData: SchedulerData = [
@@ -97,43 +111,56 @@ const mockedSchedulerData: SchedulerData = [
 
 ##### Scheduler Component Props
 
-| Prop name       | Arguments                         | Description                                                 |
-| --------------- | --------------------------------- | ----------------------------------------------------------- |
-| `onRangeChange` | updated `startDate` and `endDate` | runs whenever user reaches end of currently rendered canvas |
-| `onItemClick`   | clicked resource data             | detects resource click                                      |
-| `onFilterData`  | -                                 | callback firing when filter button was clicked              |
-| `config`        | -                                 | object with scheduler config properties                     |
+| Property Name     | Type       | Arguments                         | Description                                                                                                                       |
+| ----------------- | ---------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| isLoading         | `boolean`  | -                                 | shows loading indicators on scheduler                                                                                             |
+| onRangeChange     | `function` | updated `startDate` and `endDate` | runs whenever user reaches end of currently rendered canvas                                                                       |
+| onTileClick       | `function` | clicked resource data             | detects resource click                                                                                                            |
+| onItemClick       | `function` | clicked left column item data     | detects item click on left column                                                                                                 |
+| onFilterData      | `function` | -                                 | callback firing when filter button was clicked                                                                                    |
+| onClearFilterData | `function` | -                                 | callback firing when clear filters button was clicked (clearing button is visible **only** when filterButtonState is set to `>0`) |
+| config            | `Config`   | -                                 | object with scheduler config properties                                                                                           |
 
 ##### Scheduler Config Object
 
-| Property                 | Default Value | Values            | Description                                                                |
-| ------------------------ | ------------- | ----------------- | -------------------------------------------------------------------------- |
-| `zoom`                   | 0             | `0` or `1`        | `0` - display grid divided into weeks `1` - display grid divided into days |
-| `isFiltersButtonVisible` | `true`        | `true` or `false` | `true` - displays filter button, `false` - hides filter button             |
-| `maxRecordsPerPage`      | 50            | `number`          | number of items from `SchedulerData` visible per page                      |
+| Property Name                        | Type         | Default | Description                                                                                                                                                            |
+| ------------------------------------ | ------------ | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| zoom                                 | `0` or `1`   | 0       | `0` - display grid divided into weeks `1` - display grid divided into days                                                                                             |
+| filterButtonState                    | `number`     | 0       | `< 0` - hides filter button, `0` - state for when filters were not set, `> 0` - state for when some filters were set (allows to also handle `onClearFilterData` event) |
+| maxRecordsPerPage                    | `number`     | 50      | number of items from `SchedulerData` visible per page                                                                                                                  |
+| lang                                 | `en` or `pl` | en      | scheduler's language                                                                                                                                                   |
+| includeTakenHoursOnWeekendsInDayView | `boolean`    | `false` | show weekends as taken when given resource is longer than a week                                                                                                       |
 
 ##### Scheduler Data
 
-array of chart rows
-| Property | Type | Description |
-| -------- | -------- | ------- |
-id | string | uniqe row id |
-label | string | row's label, `f.e person's name` |
-data | array | array of `resources` |
+array of chart rows with shape of
+| Property Name | Type | Description |
+| -------- | --------------------- | -------------------------------- |
+| id | `string` | unique row id |
+| label | `string` | row's label, `e.g person's name` |
+| data | `Array<ResourceItem>` | array of `resources` |
 
-##### Resource
+##### Left Colum Item Data
 
-item that will be visible on the grid as tile
-| Property | Type | Description |
-| -------- | -------- | ------- |
-id | string | unique resource id |
-title | string | resource title that will be displayed on resource tile |
-subtitle | string (optional) | resource subtitle that will be displayed on resource tile |
-description | string (optional) | resource description that will be displayed on resource tile |
-startDate | Date | date for calculating start position for resource |
-endDate | Date | date for calculating end position for resource |
-occupancy | number | number of seconds resource takes up for given row that will be visible on resource tooltip when hovered |
-bgColor | string (optional) | tile color
+data that is accessible as argument of `onItemClick` callback
+| Property Name | Type | Description |
+| -------- | --------------------- | -------------------------------- |
+| id | `string` | unique row id |
+| label | `string` | row's label, `e.g person's name` |
+
+##### Resource Item
+
+item that will be visible on the grid as tile and that will be accessible as argument of `onTileClick` event
+| Property Name | Type | Description |
+| ----------- | ----------------- | ------------------------------------------------------------------------------------------------------- |
+| id | `string` | unique resource id |
+| title | `string` | resource title that will be displayed on resource tile |
+| subtitle | `string (optional)` | resource subtitle that will be displayed on resource tile |
+| description | `string (optional)` | resource description that will be displayed on resource tile |
+| startDate | `Date` | date for calculating start position for resource |
+| endDate | `Date` | date for calculating end position for resource |
+| occupancy | `number` | number of seconds resource takes up for given row that will be visible on resource tooltip when hovered |
+| bgColor | `string (optional)` | tile color |
 
 ### Troubleshooting
 
@@ -172,6 +199,7 @@ const Scheduler = dynamic(() => import("@bitnoi.se/react-scheduler").then((mod) 
 ### Known Issues
 
 1. No responsiveness
+2. Slower performance on Firefox when working with big set of data due to Firefox being slower working with canvas
 
 ### How to contribute
 
@@ -188,7 +216,7 @@ const Scheduler = dynamic(() => import("@bitnoi.se/react-scheduler").then((mod) 
 
 ### Contact
 
-If you have any questions or need further assistance, feel free to reach out to us at [scheduler@bitnoi.se](mailto:scheduler@bitnoi.se). We appreciate your contributions and thank you for helping us improve our project!
+If you have any questions or need further assistance, feel free to reach out to us at [scheduler@bitnoi.se](mailto:scheduler@bitnoi.se). We appreciate your contributions and thank you for helping us improve this project!
 
 ### License
 
