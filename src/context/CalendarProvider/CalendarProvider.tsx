@@ -141,28 +141,33 @@ const CalendarProvider = ({
   }, [defaultStartDate]);
 
   useEffect(() => {
-    if (isInitialized) {
-      return;
-    }
+    if (isInitialized) return;
+
     moveHorizontalScroll("middle", "auto");
     setIsInitialized(true);
     setDate(defaultStartDate);
   }, [defaultStartDate, isInitialized, moveHorizontalScroll]);
 
   const handleGoNext = () => {
+    if (isLoading) return;
+
     setDate((prev) => prev.add(buttonWeeksJump, "weeks"));
     onRangeChange?.(range);
   };
 
   const handleScrollNext = useCallback(() => {
+    if (isLoading) return;
+
     loadMore("forward");
     moveHorizontalScroll("forward");
-  }, [loadMore, moveHorizontalScroll]);
+  }, [isLoading, loadMore, moveHorizontalScroll]);
 
-  const handleGoPrev = () => {
+  function handleGoPrev() {
+    if (isLoading) return;
+
     setDate((prev) => prev.subtract(buttonWeeksJump, "weeks"));
     onRangeChange?.(range);
-  };
+  }
 
   const handleScrollPrev = useCallback(() => {
     if (isInitialized && !isLoading) {
@@ -173,10 +178,10 @@ const CalendarProvider = ({
   }, [isInitialized, isLoading, loadMore, moveHorizontalScroll]);
 
   const handleGoToday = useCallback(() => {
-    if (!isLoading) {
-      loadMore("middle");
-      moveHorizontalScroll("middle");
-    }
+    if (isLoading) return;
+
+    loadMore("middle");
+    moveHorizontalScroll("middle");
   }, [isLoading, loadMore, moveHorizontalScroll]);
 
   const zoomIn = () => changeZoom(zoom + 1);
