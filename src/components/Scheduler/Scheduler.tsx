@@ -17,7 +17,8 @@ const Scheduler = ({
   onRangeChange,
   onItemClick,
   onFilterData,
-  onClearFilterData
+  onClearFilterData,
+  isLoading
 }: SchedulerProps) => {
   const appConfig: Config = {
     zoom: 0,
@@ -49,6 +50,7 @@ const Scheduler = ({
       <LocaleProvider lang={appConfig.lang}>
         <CalendarProvider
           data={data}
+          isLoading={isLoading}
           config={appConfig}
           onRangeChange={onRangeChange}
           defaultStartDate={defaultStartDate}

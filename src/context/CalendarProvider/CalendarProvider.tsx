@@ -32,6 +32,7 @@ type Direction = "back" | "forward" | "middle";
 const CalendarProvider = ({
   data,
   children,
+  isLoading,
   config,
   defaultStartDate = dayjs(),
   onRangeChange,
@@ -41,7 +42,6 @@ const CalendarProvider = ({
   const { zoom: configZoom, maxRecordsPerPage = 50 } = config;
   const [zoom, setZoom] = useState<ZoomLevel>(configZoom);
   const [date, setDate] = useState(dayjs());
-  const [isLoading, setIsLoading] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const [cols, setCols] = useState(getCols(zoom));
   const isNextZoom = allZoomLevel[zoom] !== allZoomLevel[allZoomLevel.length - 1];
@@ -150,44 +150,32 @@ const CalendarProvider = ({
   }, [defaultStartDate, isInitialized, moveHorizontalScroll]);
 
   const handleGoNext = () => {
-    setIsLoading(true);
     setDate((prev) => prev.add(buttonWeeksJump, "weeks"));
     onRangeChange?.(range);
-    setIsLoading(false);
   };
 
   const handleScrollNext = useCallback(() => {
-    setIsLoading(true);
     loadMore("forward");
     moveHorizontalScroll("forward");
-    // Timeout is set for testers
-    setTimeout(() => setIsLoading(false), 1500);
   }, [loadMore, moveHorizontalScroll]);
 
   const handleGoPrev = () => {
-    setIsLoading(true);
     setDate((prev) => prev.subtract(buttonWeeksJump, "weeks"));
     onRangeChange?.(range);
-    setIsLoading(false);
   };
 
   const handleScrollPrev = useCallback(() => {
     if (isInitialized && !isLoading) {
-      setIsLoading(true);
       loadMore("back");
-      moveHorizontalScroll("back");
-      // Timeout is set for testers
-      setTimeout(() => setIsLoading(false), 1500);
     }
+
+    moveHorizontalScroll("back");
   }, [isInitialized, isLoading, loadMore, moveHorizontalScroll]);
 
   const handleGoToday = useCallback(() => {
     if (!isLoading) {
-      setIsLoading(true);
       loadMore("middle");
       moveHorizontalScroll("middle");
-      // Timeout is set for testers
-      setTimeout(() => setIsLoading(false), 1500);
     }
   }, [isLoading, loadMore, moveHorizontalScroll]);
 

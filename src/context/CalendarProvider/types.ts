@@ -30,6 +30,7 @@ export type CalendarContextType = {
 
 export type CalendarProviderProps = {
   children: ReactNode;
+  isLoading: boolean;
   defaultStartDate?: dayjs.Dayjs;
   data?: SchedulerData;
   config: Config;
