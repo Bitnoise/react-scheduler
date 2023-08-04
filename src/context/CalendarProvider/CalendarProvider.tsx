@@ -162,18 +162,17 @@ const CalendarProvider = ({
     moveHorizontalScroll("forward");
   }, [isLoading, loadMore, moveHorizontalScroll]);
 
-  function handleGoPrev() {
+  const handleGoPrev = () => {
     if (isLoading) return;
 
     setDate((prev) => prev.subtract(buttonWeeksJump, "weeks"));
     onRangeChange?.(range);
-  }
+  };
 
   const handleScrollPrev = useCallback(() => {
-    if (isInitialized && !isLoading) {
-      loadMore("back");
-    }
+    if (!isInitialized || isLoading) return;
 
+    loadMore("back");
     moveHorizontalScroll("back");
   }, [isInitialized, isLoading, loadMore, moveHorizontalScroll]);
 
