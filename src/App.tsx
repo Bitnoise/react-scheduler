@@ -64,6 +64,7 @@ function App() {
           startDate={values.startDate ? new Date(values.startDate).toISOString() : undefined}
           onRangeChange={handleRangeChange}
           data={filteredData}
+          isLoading={false}
           onItemClick={handleItemClick}
           onFilterData={handleFilterData}
           config={{ zoom: 0, maxRecordsPerPage: maxRecordsPerPage }}
@@ -73,6 +74,7 @@ function App() {
           <Scheduler
             startDate={values.startDate ? new Date(values.startDate).toISOString() : undefined}
             onRangeChange={handleRangeChange}
+            isLoading={false}
             data={filteredData}
             onItemClick={handleItemClick}
             onFilterData={handleFilterData}
