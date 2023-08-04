@@ -59,7 +59,7 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
         setTooltipData({ coords: { x, y }, resourceIndex, disposition });
         setIsVisible(true);
       },
-      600
+      300
     )
   );
   const debouncedFilterData = useRef(

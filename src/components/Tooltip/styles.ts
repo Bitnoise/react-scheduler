@@ -7,6 +7,9 @@ export const StyledTooltipWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.blue900};
   border-radius: 8px;
   z-index: 3;
+  transition: all 0.25s;
+  transition-timing-function: ease-out;
+  pointer-events: none;
 `;
 
 export const StyledTooltipContent = styled.div`
