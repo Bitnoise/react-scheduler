@@ -103,8 +103,10 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
   }, [debouncedHandleMouseOver, handleMouseLeave, projectsPerPerson, rowsPerItem, startDate, zoom]);
 
   useEffect(() => {
+    if (searchPhrase) return;
+
     setFilteredData(data);
-  }, [data]);
+  }, [data, searchPhrase]);
 
   return (
     <StyledOuterWrapper>
