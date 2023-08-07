@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { marginPaddingReset } from "@/styles";
-import { StyledPaginationButton } from "./types";
+import { PaginationButtonProps, StyledPaginationButton } from "./types";
 
-export const StyledWrapper = styled.div`
+export const StyledWrapper = styled.div<Pick<PaginationButtonProps, "intent">>`
   padding: 4px 11px 0;
   width: 100%;
+  border-top: ${({ intent, theme }) =>
+    intent === "next" ? `1px solid ${theme.colors.grey400}` : "none"};
 `;
 
 export const StyledButton = styled.button<StyledPaginationButton>`
