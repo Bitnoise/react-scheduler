@@ -4,7 +4,7 @@ export type GridProps = {
   zoom: number;
   rows: number;
   data: PaginatedSchedulerData;
-  onItemClick?: (data: SchedulerProjectData) => void;
+  onTileClick?: (data: SchedulerProjectData) => void;
 };
 
 export type StyledSpanProps = {

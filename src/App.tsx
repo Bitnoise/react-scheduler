@@ -65,7 +65,7 @@ function App() {
           onRangeChange={handleRangeChange}
           data={filteredData}
           isLoading={false}
-          onItemClick={handleItemClick}
+          onTileClick={handleItemClick}
           onFilterData={handleFilterData}
           config={{ zoom: 0, maxRecordsPerPage: maxRecordsPerPage }}
         />
@@ -76,7 +76,7 @@ function App() {
             onRangeChange={handleRangeChange}
             isLoading={false}
             data={filteredData}
-            onItemClick={handleItemClick}
+            onTileClick={handleItemClick}
             onFilterData={handleFilterData}
           />
         </StyledSchedulerFrame>

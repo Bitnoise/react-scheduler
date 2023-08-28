@@ -2,7 +2,7 @@ import { FC, useCallback } from "react";
 import { Tile } from "..";
 import { PlacedTiles, TilesProps } from "./types";
 
-const Tiles: FC<TilesProps> = ({ data, zoom, onItemClick }) => {
+const Tiles: FC<TilesProps> = ({ data, zoom, onTileClick }) => {
   const placeTiles = useCallback((): PlacedTiles => {
     let rows = 0;
     return data
@@ -17,13 +17,13 @@ const Tiles: FC<TilesProps> = ({ data, zoom, onItemClick }) => {
               row={rowIndex + rows}
               data={project}
               zoom={zoom}
-              onItemClick={onItemClick}
+              onTileClick={onTileClick}
             />
           ))
         );
       })
       .flat(2);
-  }, [data, onItemClick, zoom]);
+  }, [data, onTileClick, zoom]);
 
   return <>{placeTiles()}</>;
 };
