@@ -12,7 +12,7 @@ export const StyledWrapper = styled.div<StyledLeftColumnItemWrapperProps>`
   height: calc(${boxHeight}px * ${({ rows }) => rows});
   border-top: 1px solid ${({ theme }) => theme.colors.grey400};
   transition: 0.5s ease;
-
+  cursor: ${({ clickable }) => (clickable ? "pointer" : "auto")};
   &:hover {
     background-color: ${({ theme }) => theme.colors.blue200};
   }

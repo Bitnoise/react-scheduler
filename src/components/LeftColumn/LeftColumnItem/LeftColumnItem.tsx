@@ -12,7 +12,10 @@ import { LeftColumnItemProps } from "./types";
 
 const LeftColumnItem: FC<LeftColumnItemProps> = ({ id, item, rows, onItemClick }) => {
   return (
-    <StyledWrapper rows={rows} onClick={() => onItemClick?.({ id, label: item })}>
+    <StyledWrapper
+      clickable={typeof onItemClick === "function"}
+      rows={rows}
+      onClick={() => onItemClick?.({ id, label: item })}>
       <StyledInnerWrapper>
         <StyledImageWrapper>
           {item.icon ? (

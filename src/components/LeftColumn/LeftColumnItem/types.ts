@@ -13,4 +13,5 @@ export type StyledTextProps = {
 
 export type StyledLeftColumnItemWrapperProps = {
   rows: number;
+  clickable: boolean;
 };
