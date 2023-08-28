@@ -10,9 +10,9 @@ import {
 } from "./styles";
 import { LeftColumnItemProps } from "./types";
 
-const LeftColumnItem: FC<LeftColumnItemProps> = ({ item, rows }) => {
+const LeftColumnItem: FC<LeftColumnItemProps> = ({ id, item, rows, onItemClick }) => {
   return (
-    <StyledWrapper rows={rows}>
+    <StyledWrapper rows={rows} onClick={() => onItemClick?.({ id, label: item })}>
       <StyledInnerWrapper>
         <StyledImageWrapper>
           {item.icon ? (
