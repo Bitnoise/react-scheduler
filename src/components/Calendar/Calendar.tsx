@@ -20,7 +20,7 @@ const initialTooltipData: TooltipData = {
   }
 };
 
-export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) => {
+export const Calendar: FC<CalendarProps> = ({ data, onTileClick, topBarWidth }) => {
   const [tooltipData, setTooltipData] = useState<TooltipData>(initialTooltipData);
   const [filteredData, setFilteredData] = useState(data);
   const [isVisible, setIsVisible] = useState(false);
@@ -128,7 +128,7 @@ export const Calendar: FC<CalendarProps> = ({ data, onItemClick, topBarWidth }) 
             zoom={zoom}
             rows={totalRowsPerPage}
             ref={gridRef}
-            onItemClick={onItemClick}
+            onTileClick={onTileClick}
           />
         ) : (
           <EmptyBox />

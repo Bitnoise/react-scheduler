@@ -4,7 +4,7 @@ export type TileProps = {
   row: number;
   data: SchedulerProjectData;
   zoom: number;
-  onItemClick?: (data: SchedulerProjectData) => void;
+  onTileClick?: (data: SchedulerProjectData) => void;
 };
 
 export type StyledTextProps = {
