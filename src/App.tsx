@@ -50,7 +50,7 @@ function App() {
 
   const handleFilterData = () => console.log(`Filters button was clicked.`);
 
-  const handleItemClick = (data: SchedulerProjectData) =>
+  const handleTileClick = (data: SchedulerProjectData) =>
     console.log(
       `Item ${data.title} - ${data.subtitle} was clicked. \n==============\nStart date: ${data.startDate} \n==============\nEnd date: ${data.endDate}\n==============\nOccupancy: ${data.occupancy}`
     );
@@ -65,9 +65,10 @@ function App() {
           onRangeChange={handleRangeChange}
           data={filteredData}
           isLoading={false}
-          onTileClick={handleItemClick}
+          onTileClick={handleTileClick}
           onFilterData={handleFilterData}
           config={{ zoom: 0, maxRecordsPerPage: maxRecordsPerPage }}
+          onItemClick={(data) => console.log("clicked: ", data)}
         />
       ) : (
         <StyledSchedulerFrame>
@@ -76,8 +77,9 @@ function App() {
             onRangeChange={handleRangeChange}
             isLoading={false}
             data={filteredData}
-            onTileClick={handleItemClick}
+            onTileClick={handleTileClick}
             onFilterData={handleFilterData}
+            onItemClick={(data) => console.log("clicked: ", data)}
           />
         </StyledSchedulerFrame>
       )}

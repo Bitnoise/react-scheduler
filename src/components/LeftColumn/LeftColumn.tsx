@@ -14,7 +14,8 @@ const LeftColumn: FC<LeftColumnProps> = ({
   pageNum,
   pagesAmount,
   searchInputValue,
-  onSearchInputChange
+  onSearchInputChange,
+  onItemClick
 }) => {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const { search } = useLanguage();
@@ -44,7 +45,13 @@ const LeftColumn: FC<LeftColumnProps> = ({
         />
       </StyledLeftColumnHeader>
       {data.map((item, index) => (
-        <LeftColumnItem item={item.label} key={item.id} rows={rows[index]} />
+        <LeftColumnItem
+          id={item.id}
+          item={item.label}
+          key={item.id}
+          rows={rows[index]}
+          onItemClick={onItemClick}
+        />
       ))}
       <PaginationButton
         intent="next"

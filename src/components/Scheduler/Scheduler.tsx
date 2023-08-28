@@ -18,6 +18,7 @@ const Scheduler = ({
   onTileClick,
   onFilterData,
   onClearFilterData,
+  onItemClick,
   isLoading
 }: SchedulerProps) => {
   const appConfig: Config = {
@@ -61,7 +62,12 @@ const Scheduler = ({
             id={outsideWrapperId}
             ref={outsideWrapperRef}>
             <StyledInnerWrapper>
-              <Calendar data={data} onTileClick={onTileClick} topBarWidth={topBarWidth ?? 0} />
+              <Calendar
+                data={data}
+                onTileClick={onTileClick}
+                topBarWidth={topBarWidth ?? 0}
+                onItemClick={onItemClick}
+              />
             </StyledInnerWrapper>
           </StyledOutsideWrapper>
         </CalendarProvider>

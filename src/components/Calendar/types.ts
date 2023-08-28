@@ -1,9 +1,10 @@
-import { SchedulerData, SchedulerProjectData } from "@/types/global";
+import { SchedulerData, SchedulerItemClickData, SchedulerProjectData } from "@/types/global";
 
 export type CalendarProps = {
   data: SchedulerData;
-  onTileClick?: (data: SchedulerProjectData) => void;
   topBarWidth: number;
+  onTileClick?: (data: SchedulerProjectData) => void;
+  onItemClick?: (data: SchedulerItemClickData) => void;
 };
 
 export type StyledSpanProps = {
