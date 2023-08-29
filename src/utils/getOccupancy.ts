@@ -7,7 +7,8 @@ export const getOccupancy = (
   resource: SchedulerProjectData[][],
   resourceIndex: number,
   focusedDate: dayjs.Dayjs,
-  zoom: ZoomLevel
+  zoom: ZoomLevel,
+  includeTakenHoursOnWeekendsInDayView = false
 ): OccupancyData => {
   if (resourceIndex < 0)
     return {
@@ -32,5 +33,5 @@ export const getOccupancy = (
 
   return zoom === 0
     ? getWeekOccupancy(occupancy, focusedDate, zoom)
-    : getDayOccupancy(occupancy, focusedDate, zoom);
+    : getDayOccupancy(occupancy, focusedDate, zoom, includeTakenHoursOnWeekendsInDayView);
 };

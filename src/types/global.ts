@@ -21,6 +21,13 @@ export type Config = {
   lang?: LangCodes;
   isFiltersButtonVisible?: boolean;
   maxRecordsPerPage?: number;
+  /**
+   * property for changing behavior of showing tooltip hours
+   * true - will show taken hours same as business days
+   * false - will always show 0 taken hours on weekends in day view
+   * @default false
+   */
+  includeTakenHoursOnWeekendsInDayView?: boolean;
 };
 
 export type SchedulerData = SchedulerRow[];
