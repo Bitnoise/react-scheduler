@@ -3,6 +3,7 @@ import { useCalendar } from "@/context/CalendarProvider";
 import { getDatesRange } from "@/utils/getDatesRange";
 import { getTileProperties } from "@/utils/getTileProperties";
 import { tileDefaultBgColor } from "@/constants";
+import { getTileTextColor } from "@/utils/getTileTextColor";
 import {
   StyledDescription,
   StyledStickyWrapper,
@@ -30,7 +31,8 @@ const Tile: FC<TileProps> = ({ row, data, zoom, onItemClick }) => {
         left: `${x}px`,
         top: `${y}px`,
         backgroundColor: `${data.bgColor ?? tileDefaultBgColor}`,
-        width: `${width}px`
+        width: `${width}px`,
+        color: getTileTextColor(data.bgColor ?? "")
       }}
       onClick={() => onItemClick?.(data)}>
       <StyledTextWrapper>
