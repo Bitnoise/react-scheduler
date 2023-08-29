@@ -21,11 +21,15 @@ const Scheduler = ({
   onItemClick,
   isLoading
 }: SchedulerProps) => {
-  const appConfig: Config = {
-    zoom: 0,
-    filterButtonState: 1,
-    ...config
-  };
+  const appConfig: Config = useMemo(
+    () => ({
+      zoom: 0,
+      filterButtonState: 1,
+      includeTakenHoursOnWeekendsInDayView: false,
+      ...config
+    }),
+    [config]
+  );
 
   const outsideWrapperRef = useRef<HTMLDivElement>(null);
   const [topBarWidth, setTopBarWidth] = useState(outsideWrapperRef.current?.clientWidth);

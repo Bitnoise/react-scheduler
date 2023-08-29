@@ -8,7 +8,8 @@ export const getTooltipData = (
   cursorPosition: Coords,
   rowsPerPerson: number[],
   resourcesData: SchedulerProjectData[][][],
-  zoom: ZoomLevel
+  zoom: ZoomLevel,
+  includeTakenHoursOnWeekendsInDayView = false
 ): TooltipData => {
   const currBoxWidth = zoom === 0 ? weekWidth : dayWidth;
   const column = Math.ceil(cursorPosition.x / currBoxWidth);
@@ -25,6 +26,12 @@ export const getTooltipData = (
   const xPos = column * currBoxWidth;
   const yPos = (rowPosition - 1) * boxHeight + boxHeight;
 
-  const disposition = getOccupancy(resourcesData[resourceIndex], resourceIndex, focusedDate, zoom);
+  const disposition = getOccupancy(
+    resourcesData[resourceIndex],
+    resourceIndex,
+    focusedDate,
+    zoom,
+    includeTakenHoursOnWeekendsInDayView
+  );
   return { coords: { x: xPos, y: yPos }, resourceIndex, disposition };
 };

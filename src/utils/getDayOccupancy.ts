@@ -7,13 +7,15 @@ import { getTimeOccupancy } from "./getTimeOccupancy";
 export const getDayOccupancy = (
   occupancy: SchedulerProjectData[],
   focusedDate: dayjs.Dayjs,
-  zoom: number
+  zoom: number,
+  includeTakenHoursOnWeekendsInDayView: boolean
 ): OccupancyData => {
   const focusedDayNum = focusedDate.isoWeekday();
   const getHoursAndMinutes: TimeUnits[] = occupancy.map((item) => {
     const { hours: itemHours, minutes: itemMinutes } = getDuration(item.occupancy);
 
-    if (focusedDayNum < 6) {
+    // if config was set to include free weekends max day num is 5 - friday else is 7 - whole week
+    if (focusedDayNum <= (includeTakenHoursOnWeekendsInDayView ? 7 : 5)) {
       return { hours: itemHours, minutes: itemMinutes };
     }
     return { hours: 0, minutes: 0 };

@@ -25,7 +25,12 @@ export const Calendar: FC<CalendarProps> = ({ data, onTileClick, onItemClick, to
   const [filteredData, setFilteredData] = useState(data);
   const [isVisible, setIsVisible] = useState(false);
   const [searchPhrase, setSearchPhrase] = useState("");
-  const { zoom, startDate, date } = useCalendar();
+  const {
+    zoom,
+    startDate,
+    date,
+    config: { includeTakenHoursOnWeekendsInDayView }
+  } = useCalendar();
   const gridRef = useRef<HTMLDivElement>(null);
   const datesRange = useMemo(() => getDatesRange(date, zoom), [date, zoom]);
   const {
@@ -55,7 +60,14 @@ export const Calendar: FC<CalendarProps> = ({ data, onTileClick, onItemClick, to
           coords: { x, y },
           resourceIndex,
           disposition
-        } = getTooltipData(startDate, tooltipCoords, rowsPerItem, projectsPerPerson, zoom);
+        } = getTooltipData(
+          startDate,
+          tooltipCoords,
+          rowsPerItem,
+          projectsPerPerson,
+          zoom,
+          includeTakenHoursOnWeekendsInDayView
+        );
         setTooltipData({ coords: { x, y }, resourceIndex, disposition });
         setIsVisible(true);
       },
