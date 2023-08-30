@@ -29,6 +29,7 @@ export const StyledImageWrapper = styled.div`
   height: 1.5rem;
   border-radius: 50%;
   overflow: hidden;
+  flex-shrink: 0;
 `;
 export const StyledImage = styled.img`
   object-fit: cover;
@@ -38,6 +39,7 @@ export const StyledImage = styled.img`
 export const StyledTextWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 1 0 0;
 `;
 export const StyledText = styled.p<StyledTextProps>`
   margin: 0;
@@ -46,4 +48,10 @@ export const StyledText = styled.p<StyledTextProps>`
   letter-spacing: ${({ isMain }) => (isMain ? 1 + "px" : 0.5 + "px")};
   line-height: ${({ isMain }) => (isMain ? 1.125 + "rem" : 0.75 + "rem")};
   color: ${({ isMain }) => (isMain ? theme.colors.black : theme.colors.grey600)};
+  text-overflow: ellipsis;
+  display: inline-block;
+  max-width: 144px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
 `;
