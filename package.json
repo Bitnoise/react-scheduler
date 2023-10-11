@@ -1,6 +1,6 @@
 {
   "name": "@bitnoi.se/react-scheduler",
-  "version": "0.1",
+  "version": "0.1.0",
   "type": "module",
   "license": "MIT",
   "repository": {
@@ -17,7 +17,7 @@
   ],
   "author": {
     "name": "Bitnoise",
-    "url": "https://www.bitnoise.pl/"
+    "url": "https://scheduler.bitnoise.pl/"
   },
   "scripts": {
     "dev": "vite",
