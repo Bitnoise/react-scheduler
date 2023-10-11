@@ -6,9 +6,9 @@ Typescript oriented, light-weight and ultra fast React Component for creating ga
 
 ```bash
 # yarn
-yarn add @bitnoi.se/scheduler
+yarn add @bitnoi.se/react-scheduler
 # npm
-npm install @bitnoi.se/scheduler
+npm install @bitnoi.se/react-scheduler
 ```
 
 ### Example usage
@@ -22,7 +22,7 @@ import "@bitnoi.se/react-scheduler/dist/style.css";
 2. Import Scheduler component into your project
 
 ```ts
-import { Scheduler, SchedulerData } from "@bitnoi.se/scheduler";
+import { Scheduler, SchedulerData } from "@bitnoi.se/react-scheduler";
 
 default export function Component() {
   const [filterButtonState, setFilterButtonState] = useState(0);
@@ -164,7 +164,7 @@ item that will be visible on the grid as tile and that will be accessible as arg
 
 ### Troubleshooting
 
-- For using Scheduler with RemixJS make sure to add `@bitnoi.se/scheduler` to `serverDependenciesToBundle` in `remix.config.js` like so:
+- For using Scheduler with RemixJS make sure to add `@bitnoi.se/react-scheduler` to `serverDependenciesToBundle` in `remix.config.js` like so:
 
 ```js
 // remix.config.js
