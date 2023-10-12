@@ -1,4 +1,4 @@
-# @bitnoi.se/scheduler
+# @bitnoi.se/react-scheduler
 
 Typescript oriented, light-weight and ultra fast React Component for creating gantt charts.
 
