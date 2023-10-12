@@ -1,6 +1,18 @@
-# @bitnoi.se/react-scheduler
-
-Typescript oriented, light-weight and ultra fast React Component for creating gantt charts.
+<div align="center">
+  <img src="logo.svg" style="height: 60px" alt="@bitnoise/react-scheduler">
+  <hr />
+  <p align="center">
+    ✨ <a href="https://scheduler.bitnoise.pl/">https://scheduler.bitnoise.pl/</a> ✨
+    <br/>
+    Open sourced, typescript oriented, light-weight, and ultra fast React Component for creating gantt charts.
+  </p>
+  <div align="center">
+    <a href="https://www.npmjs.com/package/@bitnoi.se/react-scheduler">npm</a>
+    <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+    <a href="https://github.com/Bitnoise/react-scheduler/issues/new">Report an issue</a>
+  </div>
+</div>
+<hr />
 
 ### Installation
 
