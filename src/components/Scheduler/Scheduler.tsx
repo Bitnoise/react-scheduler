@@ -55,7 +55,7 @@ const Scheduler = ({
       <LocaleProvider lang={appConfig.lang}>
         <CalendarProvider
           data={data}
-          isLoading={isLoading}
+          isLoading={!!isLoading}
           config={appConfig}
           onRangeChange={onRangeChange}
           defaultStartDate={defaultStartDate}
