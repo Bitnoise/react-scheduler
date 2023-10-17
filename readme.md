@@ -43,6 +43,7 @@ default export function Component() {
     <section>
       <Scheduler
         data={mockedSchedulerData}
+        isLoading={isLoading}
         onRangeChange={(newRange) => console.log(newRange)}
         onTileClick={(clickedResource) => console.log(clickedResource)}
         onItemClick={(item) => console.log(item)}
