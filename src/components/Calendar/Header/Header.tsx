@@ -3,6 +3,7 @@ import { headerHeight, screenWidthMultiplier, canvasHeaderWrapperId } from "@/co
 import { useCalendar } from "@/context/CalendarProvider";
 import { useLanguage } from "@/context/LocaleProvider";
 import { drawHeader } from "@/utils/drawHeader/drawHeader";
+import { resizeCanvas } from "@/utils/resizeCanvas";
 import { HeaderProps } from "./types";
 import { StyledCanvas, StyledOuterWrapper, StyledWrapper } from "./styles";
 import Topbar from "./Topbar";
@@ -16,11 +17,7 @@ const Header: FC<HeaderProps> = ({ zoom, topBarWidth }) => {
     (ctx: CanvasRenderingContext2D) => {
       const width = window.innerWidth * screenWidthMultiplier;
       const height = headerHeight + 1;
-      ctx.canvas.width = width * window.devicePixelRatio;
-      ctx.canvas.height = height * window.devicePixelRatio;
-      ctx.canvas.style.width = width + "px";
-      ctx.canvas.style.height = height + "px";
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      resizeCanvas(ctx, width, height);
 
       drawHeader(ctx, zoom, cols, startDate, week, dayOfYear);
     },
