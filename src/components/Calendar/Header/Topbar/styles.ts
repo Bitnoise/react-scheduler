@@ -6,6 +6,9 @@ const resetBtnStyles = `
   background: none;
   outline: none;
   border: none;
+  font-size: 100%;
+  line-height: 1.15
+  margin: 0
 `;
 
 export const Wrapper = styled.div<TopbarProps>`

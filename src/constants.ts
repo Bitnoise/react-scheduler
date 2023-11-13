@@ -1,4 +1,4 @@
-import { theme } from "./styles";
+import { prefixId, theme } from "./styles";
 
 export const dayWidth = 50;
 export const headerMonthHeight = 24;
@@ -24,9 +24,9 @@ export const screenWidthMultiplier = 3;
 export const dayNameYoffset = 1.6;
 export const dayNumYOffset = 4.5;
 export const monthsInYear = 12;
-export const canvasHeaderWrapperId = "canvasHeaderWrapper";
-export const canvasWrapperId = "canvasWrapper";
-export const outsideWrapperId = "outsideWrapper";
+export const canvasHeaderWrapperId = "reactSchedulerCanvasHeaderWrapper";
+export const canvasWrapperId = "reactSchedulerCanvasWrapper";
+export const outsideWrapperId = prefixId;
 export const tileYOffset = 4;
 export const tileHeight = 48;
 export const formFieldsIds = {

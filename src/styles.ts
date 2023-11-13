@@ -1,16 +1,23 @@
-import { normalize } from "styled-normalize";
 import styled, { createGlobalStyle, type DefaultTheme } from "styled-components";
 
-export const GlobalStyle = createGlobalStyle`
-  ${normalize}
+export const prefixId = "reactSchedulerOutsideWrapper";
 
-  body {
+export const GlobalStyle = createGlobalStyle`
+
+  #${prefixId} {
     font-family: 'Inter', sans-serif;
     box-sizing: border-box;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    margin: 0;
   }
 
-  *, *:before, *:after {
+ #${prefixId} *,
+ #${prefixId} *:before,
+ #${prefixId} *:after {
     box-sizing: inherit;
+    font-family: inherit;
+    line-height: inherit;
   }
 `;
 
