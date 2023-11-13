@@ -58,7 +58,6 @@ function App() {
   return (
     <>
       <ConfigPanel values={values} onSubmit={setValues} />
-
       {isFullscreen ? (
         <Scheduler
           startDate={values.startDate ? new Date(values.startDate).toISOString() : undefined}
