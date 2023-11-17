@@ -18,9 +18,9 @@
 
 ```bash
 # yarn
-yarn add @bitnoi.se/react-scheduler
+yarn add '@bitnoi.se/react-scheduler'
 # npm
-npm install @bitnoi.se/react-scheduler
+npm install '@bitnoi.se/react-scheduler'
 ```
 
 ### Example usage
