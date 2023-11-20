@@ -7,6 +7,8 @@
     Open sourced, typescript oriented, light-weight, and ultra fast React Component for creating gantt charts.
   </p>
   <div align="center">
+    <a href="https://bit.ly/react_scheduler">Youtube Tutorial</a>
+    <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
     <a href="https://www.npmjs.com/package/@bitnoi.se/react-scheduler">npm</a>
     <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
     <a href="https://github.com/Bitnoise/react-scheduler/issues/new">Report an issue</a>
