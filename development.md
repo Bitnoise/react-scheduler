@@ -43,7 +43,7 @@ To set up the project locally for development and testing, please follow these s
     ```
 - **constants** - all constants that are globally used and should not change during usage of app, e.g.: height and width of cell, width of single tile.
 - **context** - folder that consists CalendarProvider and LocaleProvider
-- **locales** - folder that consists files with translations (currently en / pl)
+- **locales** - folder that consists files with translations (currently en / pl / fr)
 - **types** - folder that consists all global types and type guards
 - **utils** - folder that consists all utility functions used within app (e.g. drawing all the grid, data parsers etc.)
 
