@@ -5,7 +5,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Bitnoise/react-scheduler.git"
+    "url": "https://github.com/1thomas13/react-scheduler"
   },
   "keywords": [
     "scheduler",
@@ -15,7 +15,7 @@
     "timeline",
     "calendar"
   ],
-  "author": "Bitnoise (https://scheduler.bitnoise.pl/)",
+  "author": "Bitnoise (https://scheduler.bitnoise.pl/), 1thomas13 (https://github.com/1thomas13) ",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
