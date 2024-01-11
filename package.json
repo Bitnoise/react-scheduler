@@ -1,11 +1,11 @@
 {
-  "name": "@rossanodr/react-scheduler-ptbr",
+  "name": "@bitnoi.se/react-scheduler",
   "version": "0.1.2",
   "type": "module",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rossanodr/react-scheduler-ptbr.git"
+    "url": "https://github.com/Bitnoise/react-scheduler"
   },
   "keywords": [
     "scheduler",
@@ -15,7 +15,10 @@
     "timeline",
     "calendar"
   ],
-  "author": "Bitnoise (https://scheduler.bitnoise.pl/)",
+  "author": {
+    "name": "Bitnoise",
+    "url": "https://scheduler.bitnoise.pl/"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -26,10 +29,8 @@
     "typecheck": "tsc -b",
     "prepare": "husky install"
   },
-  "publishConfig": {
-    "@rossanodr:registry": "https://npm.pkg.github.com"
-  },
   "main": "dist/index.umd.js",
+  "modules": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
@@ -44,13 +45,15 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "lint-staged": {
     "**/*.{ts,tsx}": [
       "yarn run lint"
     ]
   },
   "dependencies": {
-    "@rossanodr/react-scheduler-ptbr": "^0.1.2",
     "dayjs": "1.11.7",
     "lodash.debounce": "4.0.8",
     "path": "0.12.7",
@@ -84,13 +87,8 @@
     "prettier": "2.8.7",
     "rollup-plugin-visualizer": "5.9.0",
     "typescript": "4.9.3",
-    "vite": "^4.5.1",
+    "vite": "4.1.0",
     "vite-plugin-dts": "2.2.0",
     "vite-plugin-svgr": "2.4.0"
-  },
-  "description": "<div align=\"center\">\r   <img src=\"logo.svg\" style=\"height: 60px\" alt=\"@bitnoise/react-scheduler\">\r   <hr />\r   <p align=\"center\">\r     ✨ <a href=\"https://scheduler.bitnoise.pl/\">https://scheduler.bitnoise.pl/</a> ✨\r     <br/>\r     Open sourced, typescript oriented, light-weight, and ultra fast React Component for creating gantt charts.\r   </p>\r   <div align=\"center\">\r     <a href=\"https://www.npmjs.com/package/@bitnoi.se/react-scheduler\">npm</a>\r     <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>\r     <a href=\"https://github.com/Bitnoise/react-scheduler/issues/new\">Report an issue</a>\r   </div>\r </div>\r <hr />",
-  "bugs": {
-    "url": "https://github.com/rossanodr/react-scheduler-ptbr/issues"
-  },
-  "homepage": "https://github.com/rossanodr/react-scheduler-ptbr#readme"
+  }
 }
