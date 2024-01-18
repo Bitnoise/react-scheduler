@@ -1,8 +1,9 @@
 import { FC, useCallback, useEffect, useRef } from "react";
-import { boxHeight, headerHeight, screenWidthMultiplier, canvasHeaderWrapperId } from "@/constants";
+import { headerHeight, screenWidthMultiplier, canvasHeaderWrapperId } from "@/constants";
 import { useCalendar } from "@/context/CalendarProvider";
 import { useLanguage } from "@/context/LocaleProvider";
 import { drawHeader } from "@/utils/drawHeader/drawHeader";
+import { resizeCanvas } from "@/utils/resizeCanvas";
 import { HeaderProps } from "./types";
 import { StyledCanvas, StyledOuterWrapper, StyledWrapper } from "./styles";
 import Topbar from "./Topbar";
@@ -14,8 +15,9 @@ const Header: FC<HeaderProps> = ({ zoom, topBarWidth }) => {
 
   const handleResize = useCallback(
     (ctx: CanvasRenderingContext2D) => {
-      ctx.canvas.width = window.innerWidth * screenWidthMultiplier;
-      ctx.canvas.height = headerHeight + 1;
+      const width = window.innerWidth * screenWidthMultiplier;
+      const height = headerHeight + 1;
+      resizeCanvas(ctx, width, height);
 
       drawHeader(ctx, zoom, cols, startDate, week, dayOfYear);
     },
@@ -38,8 +40,6 @@ const Header: FC<HeaderProps> = ({ zoom, topBarWidth }) => {
     canvas.style.letterSpacing = "1px";
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
-
-    ctx.canvas.height = boxHeight + headerHeight;
 
     handleResize(ctx);
   }, [date, zoom, handleResize]);

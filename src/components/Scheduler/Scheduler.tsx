@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import { Calendar } from "@/components";
 import CalendarProvider from "@/context/CalendarProvider";
 import LocaleProvider from "@/context/LocaleProvider";
-import { theme } from "@/styles";
+import { GlobalStyle, theme } from "@/styles";
 import { Config } from "@/types/global";
 import { outsideWrapperId } from "@/constants";
 import { SchedulerProps } from "./types";
@@ -51,32 +51,35 @@ const Scheduler = ({
 
   if (!outsideWrapperRef.current) null;
   return (
-    <ThemeProvider theme={theme}>
-      <LocaleProvider lang={appConfig.lang}>
-        <CalendarProvider
-          data={data}
-          isLoading={!!isLoading}
-          config={appConfig}
-          onRangeChange={onRangeChange}
-          defaultStartDate={defaultStartDate}
-          onFilterData={onFilterData}
-          onClearFilterData={onClearFilterData}>
-          <StyledOutsideWrapper
-            showScroll={!!data.length}
-            id={outsideWrapperId}
-            ref={outsideWrapperRef}>
-            <StyledInnerWrapper>
-              <Calendar
-                data={data}
-                onTileClick={onTileClick}
-                topBarWidth={topBarWidth ?? 0}
-                onItemClick={onItemClick}
-              />
-            </StyledInnerWrapper>
-          </StyledOutsideWrapper>
-        </CalendarProvider>
-      </LocaleProvider>
-    </ThemeProvider>
+    <>
+      <GlobalStyle />
+      <ThemeProvider theme={theme}>
+        <LocaleProvider lang={appConfig.lang}>
+          <CalendarProvider
+            data={data}
+            isLoading={!!isLoading}
+            config={appConfig}
+            onRangeChange={onRangeChange}
+            defaultStartDate={defaultStartDate}
+            onFilterData={onFilterData}
+            onClearFilterData={onClearFilterData}>
+            <StyledOutsideWrapper
+              showScroll={!!data.length}
+              id={outsideWrapperId}
+              ref={outsideWrapperRef}>
+              <StyledInnerWrapper>
+                <Calendar
+                  data={data}
+                  onTileClick={onTileClick}
+                  topBarWidth={topBarWidth ?? 0}
+                  onItemClick={onItemClick}
+                />
+              </StyledInnerWrapper>
+            </StyledOutsideWrapper>
+          </CalendarProvider>
+        </LocaleProvider>
+      </ThemeProvider>
+    </>
   );
 };
 

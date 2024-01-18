@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import { leftColumnWidth } from "@/constants";
 
 type WrapperProps = {
   isExpanded: boolean;
 };
 
 export const StyledWrapper = styled.div<WrapperProps>`
+  box-sizing: border-box;
+  font-family: Inter;
   padding: 0 0.5rem;
-  width: ${leftColumnWidth}px;
   height: 125px;
   position: fixed;
   top: ${({ isExpanded }) => (isExpanded ? 0 : "-129px")};
