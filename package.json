@@ -5,7 +5,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/1thomas13/react-scheduler"
+    "url": "https://github.com/Bitnoise/react-scheduler"
   },
   "keywords": [
     "scheduler",
@@ -27,6 +27,7 @@
     "prepare": "husky install"
   },
   "main": "dist/index.umd.js",
+  "modules": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
