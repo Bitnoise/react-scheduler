@@ -15,7 +15,10 @@
     "timeline",
     "calendar"
   ],
-  "author": "Bitnoise (https://scheduler.bitnoise.pl/), 1thomas13 (https://github.com/1thomas13) ",
+   "author": {
+    "name": "Bitnoise",
+    "url": "https://scheduler.bitnoise.pl/"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
