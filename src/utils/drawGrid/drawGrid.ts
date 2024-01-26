@@ -11,6 +11,8 @@ export const drawGrid = (
   parsedStartDate: Day
 ) => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
   const canvasWrapper = document.getElementById(canvasWrapperId);
   if (!canvasWrapper) return;
 
