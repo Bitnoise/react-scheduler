@@ -17,7 +17,11 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
 
   const handleResize = useCallback(
     (ctx: CanvasRenderingContext2D) => {
-      ctx.canvas.width = window.innerWidth * screenWidthMultiplier;
+      const canvasWidth = window.innerWidth * screenWidthMultiplier;
+
+      ctx.canvas.width = canvasWidth * window.devicePixelRatio;
+      ctx.canvas.style.width = canvasWidth + "px";
+
       drawGrid(ctx, zoom, rows, cols, startDate);
     },
     [cols, startDate, rows, zoom]
@@ -41,8 +45,10 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
     canvas.style.letterSpacing = "1px";
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+    const canvasHeight = rows * boxHeight + 1;
 
-    ctx.canvas.height = rows * boxHeight + 1;
+    ctx.canvas.height = canvasHeight * window.devicePixelRatio;
+    ctx.canvas.style.height = canvasHeight + "px";
 
     handleResize(ctx);
   }, [date, rows, zoom, handleResize]);

@@ -14,8 +14,14 @@ const Header: FC<HeaderProps> = ({ zoom, topBarWidth }) => {
 
   const handleResize = useCallback(
     (ctx: CanvasRenderingContext2D) => {
-      ctx.canvas.width = window.innerWidth * screenWidthMultiplier;
-      ctx.canvas.height = headerHeight + 1;
+      const canvasWidth = window.innerWidth * screenWidthMultiplier;
+      const canvasHeight = headerHeight + 1;
+
+      ctx.canvas.width = canvasWidth * window.devicePixelRatio;
+      ctx.canvas.height = canvasHeight * window.devicePixelRatio;
+      ctx.canvas.style.width = canvasWidth + "px";
+      ctx.canvas.style.height = canvasHeight + "px";
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
 
       drawHeader(ctx, zoom, cols, startDate, week, dayOfYear);
     },
