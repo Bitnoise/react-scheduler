@@ -152,7 +152,7 @@ array of chart rows with shape of
 | Property Name | Type | Description |
 | -------- | --------------------- | -------------------------------- |
 | id | `string` | unique row id |
-| label | `string` | row's label, `e.g person's name` |
+| label | `SchedulerRowLabel` | row's label, `e.g person's name, surname, icon` |
 | data | `Array<ResourceItem>` | array of `resources` |
 
 ##### Left Colum Item Data
