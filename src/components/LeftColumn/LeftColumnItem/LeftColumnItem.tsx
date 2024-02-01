@@ -28,6 +28,7 @@ const LeftColumnItem: FC<LeftColumnItemProps> = ({ id, item, startDate, rows, on
         <StyledTextWrapper>
           <StyledText isMain>{item.title}</StyledText>
           <StyledText>{item.subtitle}</StyledText>
+          <StyledText>{startDate}</StyledText>
         </StyledTextWrapper>
       </StyledInnerWrapper>
     </StyledWrapper>

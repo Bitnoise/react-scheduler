@@ -3,7 +3,7 @@ import { SchedulerItemClickData, SchedulerRowLabel } from "@/types/global";
 export type LeftColumnItemProps = {
   id: string;
   item: SchedulerRowLabel;
-  startDate?: () => string;
+  startDate?: string;
   rows: number;
   onItemClick?: (data: SchedulerItemClickData) => void;
 };

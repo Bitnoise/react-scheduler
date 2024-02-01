@@ -35,7 +35,7 @@ export type SchedulerData = SchedulerRow[];
 export type SchedulerRow = {
   id: string;
   label: SchedulerRowLabel;
-  startDate?: () => string;
+  startDate?: string;
   data: SchedulerProjectData[];
 };
 
@@ -46,7 +46,7 @@ export type PaginatedSchedulerData = PaginatedSchedulerRow[];
 export type PaginatedSchedulerRow = {
   id: string;
   label: SchedulerRowLabel;
-  startDate?: () => string;
+  startDate?: string;
   data: SchedulerProjectData[][];
 };
 
