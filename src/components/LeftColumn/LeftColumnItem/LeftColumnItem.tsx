@@ -16,7 +16,7 @@ const LeftColumnItem: FC<LeftColumnItemProps> = ({ id, item, startDate, rows, on
       title={item.title + " | " + item.subtitle}
       clickable={typeof onItemClick === "function"}
       rows={rows}
-      onClick={() => onItemClick?.({ id, label: item })}>
+      onClick={() => onItemClick?.({ id, label: item, startDate })}>
       <StyledInnerWrapper>
         <StyledImageWrapper>
           {item.icon ? (
