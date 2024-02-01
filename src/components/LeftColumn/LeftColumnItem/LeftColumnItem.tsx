@@ -10,7 +10,7 @@ import {
 } from "./styles";
 import { LeftColumnItemProps } from "./types";
 
-const LeftColumnItem: FC<LeftColumnItemProps> = ({ id, item, rows, onItemClick }) => {
+const LeftColumnItem: FC<LeftColumnItemProps> = ({ id, item, startDate, rows, onItemClick }) => {
   return (
     <StyledWrapper
       title={item.title + " | " + item.subtitle}
