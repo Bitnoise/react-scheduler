@@ -3,6 +3,7 @@ import { drawGrid } from "@/utils/drawGrid/drawGrid";
 import { boxHeight, canvasWrapperId, leftColumnWidth, screenWidthMultiplier } from "@/constants";
 import { Loader, Tiles } from "@/components";
 import { useCalendar } from "@/context/CalendarProvider";
+import { resizeCanvas } from "@/utils/resizeCanvas";
 import { GridProps } from "./types";
 import { StyledCanvas, StyledInnerWrapper, StyledSpan, StyledWrapper } from "./styles";
 
@@ -17,7 +18,9 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
 
   const handleResize = useCallback(
     (ctx: CanvasRenderingContext2D) => {
-      ctx.canvas.width = window.innerWidth * screenWidthMultiplier;
+      const width = window.innerWidth * screenWidthMultiplier;
+      const height = rows * boxHeight + 1;
+      resizeCanvas(ctx, width, height);
       drawGrid(ctx, zoom, rows, cols, startDate);
     },
     [cols, startDate, rows, zoom]
@@ -41,8 +44,6 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
     canvas.style.letterSpacing = "1px";
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
-
-    ctx.canvas.height = rows * boxHeight + 1;
 
     handleResize(ctx);
   }, [date, rows, zoom, handleResize]);
