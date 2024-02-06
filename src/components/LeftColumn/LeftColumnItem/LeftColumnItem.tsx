@@ -10,13 +10,13 @@ import {
 } from "./styles";
 import { LeftColumnItemProps } from "./types";
 
-const LeftColumnItem: FC<LeftColumnItemProps> = ({ id, item, rows, onItemClick }) => {
+const LeftColumnItem: FC<LeftColumnItemProps> = ({ id, item, startDate, rows, onItemClick }) => {
   return (
     <StyledWrapper
       title={item.title + " | " + item.subtitle}
       clickable={typeof onItemClick === "function"}
       rows={rows}
-      onClick={() => onItemClick?.({ id, label: item })}>
+      onClick={() => onItemClick?.({ id, label: item, startDate })}>
       <StyledInnerWrapper>
         <StyledImageWrapper>
           {item.icon ? (
@@ -28,6 +28,7 @@ const LeftColumnItem: FC<LeftColumnItemProps> = ({ id, item, rows, onItemClick }
         <StyledTextWrapper>
           <StyledText isMain>{item.title}</StyledText>
           <StyledText>{item.subtitle}</StyledText>
+          <StyledText>{startDate}</StyledText>
         </StyledTextWrapper>
       </StyledInnerWrapper>
     </StyledWrapper>
