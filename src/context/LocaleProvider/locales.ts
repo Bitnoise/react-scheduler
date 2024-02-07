@@ -1,9 +1,7 @@
 import enDayjsTranslations from "dayjs/locale/en";
 import plDayjsTranslations from "dayjs/locale/pl";
 import deDayjsTranslations from "dayjs/locale/de";
-import { en } from "@/locales/en";
-import { pl } from "@/locales/pl";
-import { de } from "@/locales/de";
+import { en, pl, de } from "@/locales";
 import { LocaleType } from "./types";
 
 export const locales: LocaleType[] = [
