@@ -20,4 +20,5 @@ export type LocaleType = {
   name: string;
   lang: TranslationType;
   translateCode: string;
+  dayjsTranslations: string | ILocale | undefined;
 };
