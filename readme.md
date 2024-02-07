@@ -38,7 +38,7 @@ import "@bitnoi.se/react-scheduler/dist/style.css";
 ```ts
 import { Scheduler, SchedulerData } from "@bitnoi.se/react-scheduler";
 
-default export function Component() {
+export default function Component() {
   const [filterButtonState, setFilterButtonState] = useState(0);
 
   return (
