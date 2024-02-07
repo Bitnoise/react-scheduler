@@ -145,6 +145,7 @@ const mockedSchedulerData: SchedulerData = [
 | maxRecordsPerPage                    | `number`     | 50      | number of items from `SchedulerData` visible per page                                                                                                                  |
 | lang                                 | `en` or `pl` | en      | scheduler's language                                                                                                                                                   |
 | includeTakenHoursOnWeekendsInDayView | `boolean`    | `false` | show weekends as taken when given resource is longer than a week                                                                                                       |
+| showTooltip                          | `boolean`    | `true`  | show tooltip when hovering over tiles                                                                                                                                  |
 
 ##### Scheduler Data
 
