@@ -14,7 +14,7 @@ const LocaleProvider = ({ children, lang }: LocaleProviderProps) => {
     });
 
     if (typeof locale?.dayjsTranslations === "object") {
-      dayjs.locale({ ...locale.dayjsTranslations });
+      dayjs.locale(locale.dayjsTranslations);
     }
 
     return locale || locales[0];
