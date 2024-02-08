@@ -69,7 +69,7 @@ export const Calendar: FC<CalendarProps> = ({ data, onTileClick, onItemClick, to
           includeTakenHoursOnWeekendsInDayView
         );
         setTooltipData({ coords: { x, y }, resourceIndex, disposition });
-        setIsVisible(true);
+        setIsVisible(false);
       },
       300
     )
