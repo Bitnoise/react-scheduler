@@ -47,7 +47,6 @@ const LeftColumn: FC<LeftColumnProps> = ({
       {data.map((item, index) => (
         <LeftColumnItem
           id={item.id}
-          startDate={item.startDate}
           item={item.label}
           key={item.id}
           rows={rows[index]}
