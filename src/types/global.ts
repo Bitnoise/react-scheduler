@@ -28,6 +28,12 @@ export type Config = {
    * @default false
    */
   includeTakenHoursOnWeekendsInDayView?: boolean;
+
+  /**
+   * show tooltip when hovering over tiles items
+   * @default true
+   */
+  showTooltip?: boolean;
 };
 
 export type SchedulerData = SchedulerRow[];
