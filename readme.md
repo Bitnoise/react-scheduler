@@ -211,6 +211,24 @@ const Scheduler = dynamic(() => import("@bitnoi.se/react-scheduler").then((mod) 
 });
 ```
 
+- How to customize Scheduler dimensions
+
+Scheduler is position absolutely to take all available space. If you want to have fixed dimensions wrap Scheduler inside a div with position set to relative.
+
+Example using styled components:
+
+```ts
+export const StyledSchedulerFrame = styled.div`
+  position: relative;
+  height: 40vh;
+  width: 40vw;
+`;
+
+<StyledSchedulerFrame>
+    <Scheduler  {...}/>
+</StyledSchedulerFrame>
+```
+
 ### Known Issues
 
 1. No responsiveness
