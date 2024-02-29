@@ -16,7 +16,7 @@ export type Config = {
    */
   filterButtonState?: number;
   /**
-   * Language code: "en" | "pl"
+   * Language code: "en" | "pl" | "fr"
    */
   lang?: LangCodes;
   isFiltersButtonVisible?: boolean;
