@@ -3,7 +3,7 @@ export const ptBR = {
   free: "livre",
   loadNext: "Próximo",
   loadPrevious: "Anterior",
-  over: "terminé",
+  over: "finalizado",
   taken: "ocupado",
   topbar: {
     filters: "filtros",

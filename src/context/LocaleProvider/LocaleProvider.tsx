@@ -16,7 +16,6 @@ const LocaleProvider = ({ children, lang }: LocaleProviderProps) => {
       return l.id === localLang;
     });
 
-
     switch (locale?.id) {
       case "en":
         dayjs.locale({ ...en });
