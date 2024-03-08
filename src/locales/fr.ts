@@ -4,7 +4,7 @@ export const fr = {
   loadNext: "Suivant",
   loadPrevious: "Précédent",
   over: "terminé",
-  taken: "Pris",
+  taken: "Occupé",
   topbar: {
     filters: "Filtres",
     next: "suivant",
