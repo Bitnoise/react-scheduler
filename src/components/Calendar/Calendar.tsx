@@ -29,7 +29,7 @@ export const Calendar: FC<CalendarProps> = ({ data, onTileClick, onItemClick, to
     zoom,
     startDate,
     date,
-    config: { includeTakenHoursOnWeekendsInDayView }
+    config: { includeTakenHoursOnWeekendsInDayView, showTooltip }
   } = useCalendar();
   const gridRef = useRef<HTMLDivElement>(null);
   const datesRange = useMemo(() => getDatesRange(date, zoom), [date, zoom]);
@@ -146,7 +146,7 @@ export const Calendar: FC<CalendarProps> = ({ data, onTileClick, onItemClick, to
         ) : (
           <EmptyBox />
         )}
-        {isVisible && tooltipData?.resourceIndex > -1 && (
+        {showTooltip && isVisible && tooltipData?.resourceIndex > -1 && (
           <Tooltip tooltipData={tooltipData} zoom={zoom} />
         )}
       </StyledInnerWrapper>

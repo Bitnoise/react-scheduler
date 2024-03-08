@@ -5,7 +5,7 @@ export type FilterButtonState = -1 | 0 | 1;
 type ZoomLevelTuple = typeof allZoomLevel;
 
 export type ZoomLevel = ZoomLevelTuple[number];
-export type LangCodes = "en" | "pl" | "pt-BR";
+export type LangCodes = "en" | "pl" | "de" | "pt-BR";
 export type Config = {
   zoom: ZoomLevel;
   /**
@@ -16,7 +16,7 @@ export type Config = {
    */
   filterButtonState?: number;
   /**
-   * Language code: "en" | "pl" | "pt-BR"
+   * Language code: "en" | "pl" | "de" | "pt-BR"
    */
   lang?: LangCodes;
   isFiltersButtonVisible?: boolean;
@@ -28,6 +28,12 @@ export type Config = {
    * @default false
    */
   includeTakenHoursOnWeekendsInDayView?: boolean;
+
+  /**
+   * show tooltip when hovering over tiles items
+   * @default true
+   */
+  showTooltip?: boolean;
 };
 
 export type SchedulerData = SchedulerRow[];
