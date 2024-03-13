@@ -43,7 +43,7 @@ export const drawWeeksOnBottom = (
         y: dayNameYPos,
         label: week.isoWeek().toString(),
         font: fonts.bottomRow.name,
-        color: getTextStyle({ isCurrent: isCurrWeek })
+        color: getTextStyle({ isCurrent: isCurrWeek, isWeek: true })
       },
       bottomText: {
         y: dayNumYPos,

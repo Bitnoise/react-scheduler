@@ -108,6 +108,7 @@ export type Day = {
 export type TextAndBoxStyleConfig = {
   isCurrent: boolean;
   isBusinessDay?: boolean;
+  isWeek?: boolean;
   variant?: "yearView" | "bottomRow";
 };
 
