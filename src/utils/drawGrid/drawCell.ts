@@ -15,7 +15,7 @@ export const drawCell = (
   } else if (isBusinessDay) {
     ctx.fillStyle = "transparent";
   } else {
-    ctx.fillStyle = theme.colors.blue100;
+    ctx.fillStyle = "#FBFBFB";
   }
   ctx.beginPath();
   ctx.setLineDash([]);

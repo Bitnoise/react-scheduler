@@ -37,9 +37,7 @@ export const generateProjects = (
     .get("year");
 
   const data = [];
-  const bgColor = `rgb(${Math.ceil(Math.random() * 255)},${Math.ceil(
-    Math.random() * 200
-  )},${Math.ceil(Math.random() * 200)})`;
+  const bgColor =  "#D1FADF";
 
   for (let yearIndex = startYear; yearIndex <= endYear; yearIndex++) {
     const projectsPerYear = Math.ceil(Math.random() * maxProjectsPerYear);

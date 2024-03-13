@@ -5,5 +5,8 @@ export const getTextStyle = (config: TextAndBoxStyleConfig) => {
   const { isCurrent, isBusinessDay, variant } = config;
   if (isCurrent) return variant === "bottomRow" ? theme.colors.grey600 : theme.colors.blue400;
   if (isBusinessDay) return variant === "bottomRow" ? theme.colors.grey600 : theme.colors.black;
-  return theme.colors.grey600;
+
+   if (variant == undefined) return theme.colors.black;
+
+  return "#B5B8BB";
 };
