@@ -60,21 +60,25 @@ const Topbar: FC<TopbarProps> = ({ width }) => {
         </NavBtn>
       </NavigationWrapper>
       <Zoom>
-        {topbar.view}
-        <IconButton
-          isDisabled={!isPrevZoom}
-          onClick={zoomOut}
-          isFullRounded
-          iconName="subtract"
-          width="14"
-        />
-        <IconButton
-          isDisabled={!isNextZoom}
-          onClick={zoomIn}
-          isFullRounded
-          iconName="add"
-          width="14"
-        />
+        {config.showZoom && (
+          <>
+            {topbar.view}
+            <IconButton
+              isDisabled={!isPrevZoom}
+              onClick={zoomOut}
+              isFullRounded
+              iconName="subtract"
+              width="14"
+            />
+            <IconButton
+              isDisabled={!isNextZoom}
+              onClick={zoomIn}
+              isFullRounded
+              iconName="add"
+              width="14"
+            />
+          </>
+        )}
       </Zoom>
     </Wrapper>
   );

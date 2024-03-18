@@ -27,6 +27,7 @@ const Scheduler = ({
       filterButtonState: 1,
       includeTakenHoursOnWeekendsInDayView: false,
       showTooltip: true,
+      showZoom: false,
       ...config
     }),
     [config]
@@ -65,7 +66,7 @@ const Scheduler = ({
             onFilterData={onFilterData}
             onClearFilterData={onClearFilterData}>
             <StyledOutsideWrapper
-              showScroll={!!data.length}
+              showScroll={false}
               id={outsideWrapperId}
               ref={outsideWrapperRef}>
               <StyledInnerWrapper>

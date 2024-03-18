@@ -34,6 +34,12 @@ export type Config = {
    * @default true
    */
   showTooltip?: boolean;
+
+  /**
+   * show zoom configuration level
+   * @default false
+   */
+  showZoom?: boolean;
 };
 
 export type SchedulerData = SchedulerRow[];
