@@ -26,23 +26,27 @@ const Tile: FC<TileProps> = ({ row, data, zoom, onTileClick }) => {
   );
 
   return (
-    <StyledTileWrapper
-      style={{
-        left: `${x}px`,
-        top: `${y}px`,
-        backgroundColor: `${data.bgColor ?? tileDefaultBgColor}`,
-        width: `${width}px`,
-        color: getTileTextColor(data.bgColor ?? "")
-      }}
-      onClick={() => onTileClick?.(data)}>
-      <StyledTextWrapper>
-        <StyledStickyWrapper>
-          <StyledText bold>{data.title}</StyledText>
-          <StyledText>{data.subtitle}</StyledText>
-          <StyledDescription>{data.description}</StyledDescription>
-        </StyledStickyWrapper>
-      </StyledTextWrapper>
-    </StyledTileWrapper>
+    <div>
+      {width > 0 && (
+        <StyledTileWrapper
+          style={{
+            left: `${x}px`,
+            top: `${y}px`,
+            backgroundColor: `${data.bgColor ?? tileDefaultBgColor}`,
+            width: `${width}px`,
+            color: getTileTextColor(data.bgColor ?? "")
+          }}
+          onClick={() => onTileClick?.(data)}>
+          <StyledTextWrapper>
+            <StyledStickyWrapper>
+              <StyledText bold>{data.title}</StyledText>
+              <StyledText>{data.subtitle}</StyledText>
+              <StyledDescription>{data.description}</StyledDescription>
+            </StyledStickyWrapper>
+          </StyledTextWrapper>
+        </StyledTileWrapper>
+      )}
+    </div>
   );
 };
 
