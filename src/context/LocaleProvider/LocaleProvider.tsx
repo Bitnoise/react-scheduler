@@ -2,6 +2,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import dayjs from "dayjs";
 import en from "dayjs/locale/en";
 import pl from "dayjs/locale/pl";
+import it from "dayjs/locale/it";
 import { LangCodes } from "@/types/global";
 import { localeContext } from "./localeContext";
 import { locales } from "./locales";
@@ -14,7 +15,9 @@ const LocaleProvider = ({ children, lang }: LocaleProviderProps) => {
     const locale = locales.find((l) => {
       return l.id === localLang;
     });
-    locale?.id === "en" ? dayjs.locale({ ...en }) : dayjs.locale({ ...pl });
+    if (locale?.id === "it") dayjs.locale({ ...it });
+    else if (locale?.id === "pl") dayjs.locale({ ...pl });
+    else dayjs.locale({ ...en });
     return locale || locales[0];
   }, [localLang]);
 
