@@ -13,11 +13,11 @@ export const weeksInYear = 52;
 export const navHeight = 44;
 export const daysFillStyle = theme.colors.blue100;
 export const fonts = {
-  topRow: "600 14px Inter",
-  middleRow: "400 10px Inter",
+  topRow: "600 14px Segoe UI",
+  middleRow: "400 10px Segoe UI",
   bottomRow: {
-    name: "600 14px Inter",
-    number: "600 10px Inter"
+    name: "600 14px Segoe UI",
+    number: "600 12px Segoe UI"
   }
 };
 export const screenWidthMultiplier = 3;
@@ -43,6 +43,6 @@ export const maxHoursPerDay = 8;
 export const topRowTextYPos = headerMonthHeight / 2 + 2;
 export const middleRowTextYPos = headerWeekHeight / 2 + headerMonthHeight + 1;
 export const buttonWeeksJump = 2;
-export const scrollWeeksJump = 4;
+export const scrollWeeksJump = 1;
 export const minutesInHour = 60;
 export const tileDefaultBgColor = "rgb(114,141,226)";

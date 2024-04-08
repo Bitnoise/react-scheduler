@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import dayjs from "dayjs";
 import { createMockData } from "./mock/appMock";
 import { ParsedDatesRange } from "./utils/getDatesRange";
@@ -9,12 +9,12 @@ import { Scheduler } from ".";
 
 function App() {
   const [values, setValues] = useState<ConfigFormValues>({
-    peopleCount: 15,
-    projectsPerYear: 5,
+    peopleCount: 3,
+    projectsPerYear: 2,
     yearsCovered: 0,
     startDate: undefined,
     maxRecordsPerPage: 50,
-    isFullscreen: true
+    isFullscreen: false
   });
 
   const { peopleCount, projectsPerYear, yearsCovered, isFullscreen, maxRecordsPerPage } = values;

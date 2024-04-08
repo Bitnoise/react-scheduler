@@ -5,7 +5,7 @@ export const prefixId = "reactSchedulerOutsideWrapper";
 export const GlobalStyle = createGlobalStyle`
 
   #${prefixId} {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     box-sizing: border-box;
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
@@ -41,15 +41,15 @@ export type Theme = {
 export const theme: DefaultTheme = {
   navHeight: "44px",
   colors: {
-    black: "#1C222F",
-    grey400: "#D2D2D2",
-    grey600: "#777777",
-    blue900: "#3B3C5F",
-    blue100: "#F8F8FD",
-    blue300: "#C9E5FF",
-    blue400: "#0A11EB",
-    blue200: "#E6F3FF",
-    red400: "#EF4444",
+    black: "#323130", //"#1C222F",
+    grey600: "#605e5c", // "#a19f9d", //"#777777",
+    grey400: "#edebe9", //"#D2D2D2",
+    blue900: "#005a9e", // "#3B3C5F",
+    blue400: "#0078d4", //"#0A11EB",
+    blue300: "#c7e0f4", //"#C9E5FF",
+    blue200: "#deecf9", //"#E6F3FF",
+    blue100: "#eff6fc", // "#F8F8FD",
+    red400: "#d13438", //"#EF4444",
     white: "#FFFFFF"
   }
 };

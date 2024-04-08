@@ -56,42 +56,46 @@ const CalendarProvider = ({
 
   const moveHorizontalScroll = useCallback(
     (direction: Direction, behavior: ScrollBehavior = "smooth") => {
-      switch (direction) {
-        case "back":
-          return outsideWrapper.current?.scrollTo({
-            behavior,
-            left: zoom === 0 ? weekWidth * screenWidthMultiplier : dayWidth * screenWidthMultiplier
-          });
+      const scroll = debounce(() => {
+        switch (direction) {
+          case "back":
+            return outsideWrapper.current?.scrollTo({
+              behavior,
+              left:
+                zoom === 0 ? weekWidth * screenWidthMultiplier : dayWidth * screenWidthMultiplier
+            });
 
-        case "forward":
-          return outsideWrapper.current?.scrollTo({
-            behavior,
-            left:
-              zoom === 0
-                ? window.innerWidth +
-                  (cols / screenWidthMultiplier -
-                    screenWidthMultiplier +
-                    scrollForwardOffsetModifier) *
-                    weekWidth
-                : window.innerWidth +
-                  (cols / screenWidthMultiplier -
-                    screenWidthMultiplier +
-                    scrollForwardOffsetModifier) *
-                    dayWidth
-          });
+          case "forward":
+            return outsideWrapper.current?.scrollTo({
+              behavior,
+              left:
+                zoom === 0
+                  ? window.innerWidth +
+                    (cols / screenWidthMultiplier -
+                      screenWidthMultiplier +
+                      scrollForwardOffsetModifier) *
+                      weekWidth
+                  : window.innerWidth +
+                    (cols / screenWidthMultiplier -
+                      screenWidthMultiplier +
+                      scrollForwardOffsetModifier) *
+                      dayWidth
+            });
 
-        case "middle":
-          return outsideWrapper.current?.scrollTo({
-            behavior,
-            left: window.innerWidth
-          });
+          case "middle":
+            return outsideWrapper.current?.scrollTo({
+              behavior,
+              left: window.innerWidth
+            });
 
-        default:
-          return outsideWrapper.current?.scrollTo({
-            behavior,
-            left: window.innerWidth
-          });
-      }
+          default:
+            return outsideWrapper.current?.scrollTo({
+              behavior,
+              left: window.innerWidth
+            });
+        }
+      }, 250);
+      scroll();
     },
     [cols, zoom]
   );

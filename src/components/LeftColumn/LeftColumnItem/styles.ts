@@ -44,8 +44,8 @@ export const StyledTextWrapper = styled.div`
 export const StyledText = styled.p<StyledTextProps>`
   margin: 0;
   padding: 0;
-  font-size: ${({ isMain }) => (isMain ? 0.75 + "rem" : 0.625 + "rem")};
-  letter-spacing: ${({ isMain }) => (isMain ? 1 + "px" : 0.5 + "px")};
+  font-size: ${({ isMain }) => (isMain ? 14 + "px" : 12 + "px")};
+  font-weight: ${({ isMain }) => (isMain ? "600" : "400")};
   line-height: ${({ isMain }) => (isMain ? 1.125 + "rem" : 0.75 + "rem")};
   color: ${({ isMain }) => (isMain ? theme.colors.black : theme.colors.grey600)};
   text-overflow: ellipsis;

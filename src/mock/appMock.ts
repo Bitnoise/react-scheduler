@@ -1,5 +1,6 @@
 import { faker } from "@faker-js/faker";
 import dayjs from "dayjs";
+import "dayjs/locale/sv";
 import { SchedulerData, SchedulerProjectData } from "@/types/global";
 import { ParsedDatesRange } from "@/utils/getDatesRange";
 
