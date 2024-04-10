@@ -1,11 +1,14 @@
 import styled from "styled-components";
-import { leftColumnWidth, tileHeight } from "@/constants";
+import {
+  leftColumnWidth
+  //tileHeight
+} from "@/constants";
 import { marginPaddingReset, truncate } from "@/styles";
 import { StyledTextProps } from "./types";
+//  height: ${tileHeight}px;
 
 export const StyledTileWrapper = styled.button`
   ${marginPaddingReset}
-  height: ${tileHeight}px;
   position: absolute;
   outline: none;
   border: none;
@@ -41,6 +44,7 @@ export const StyledText = styled.p<StyledTextProps>`
 export const StyledDescription = styled.p`
   ${marginPaddingReset}
   ${truncate}
+  font-size: 12px;
 `;
 
 export const StyledStickyWrapper = styled.div`
