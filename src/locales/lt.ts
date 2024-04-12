@@ -1,5 +1,5 @@
 export const lt = {
-  feelingEmpty: "I feel so empty...",
+  feelingEmpty: "Jaučiuosi toks tuščias...",
   free: "Laisva",
   loadNext: "Kitas",
   loadPrevious: "Ankstesnis",
