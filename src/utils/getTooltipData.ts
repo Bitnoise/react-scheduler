@@ -35,3 +35,16 @@ export const getTooltipData = (
   );
   return { coords: { x: xPos, y: yPos }, resourceIndex, disposition };
 };
+
+export const focusedData = (
+  startDate: Day,
+  cursorPosition: Coords,
+  zoom: ZoomLevel,
+): dayjs.Dayjs => {
+  const currBoxWidth = zoom === 0 ? weekWidth : dayWidth;
+  const column = Math.ceil(cursorPosition.x / currBoxWidth);
+  return dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`).add(
+    column - 1,
+    zoom === 0 ? "weeks" : "days"
+  );
+};

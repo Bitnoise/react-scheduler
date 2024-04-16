@@ -74,6 +74,25 @@ export const Calendar: FC<CalendarProps> = ({ data, onTileClick, onItemClick, to
       300
     )
   );
+
+
+  const onClickDay = useRef(
+    (
+      e: PointerEvent,
+      startDate: Day,
+      rowsPerItem: number[],
+      projectsPerPerson: SchedulerProjectData[][][],
+      zoom: ZoomLevel
+    ) => {
+      if (!gridRef.current) return;
+      const {left, top} = gridRef.current.getBoundingClientRect();
+      const tooltipCoords = {x: e.clientX - left, y: e.clientY - top};
+      const focusedDate = focusedData(startDate, tooltipCoords, zoom); // TODO: returns date in a good format
+      // TODO: call on click
+    }
+  );
+
+
   const debouncedFilterData = useRef(
     debounce((dataToFilter: SchedulerData, enteredSearchPhrase: string) => {
       reset();
@@ -99,8 +118,29 @@ export const Calendar: FC<CalendarProps> = ({ data, onTileClick, onItemClick, to
   }, []);
 
   useEffect(() => {
-    const handleMouseOver = (e: MouseEvent) =>
+    const handleOnClickDay = (e: PointerEvent) => {
+      console.log("CLICK", e);
+      onClickDay.current(e, startDate, rowsPerItem, projectsPerPerson, zoom);
+    }
+
+    const gridArea = gridRef.current;
+
+    console.log("GRID AREA", gridArea);
+    if (!gridArea) return;
+
+    gridArea.addEventListener("click", handleOnClickDay);
+
+    return () => {
+      gridArea.removeEventListener("click", handleOnClickDay);
+    };
+  }, [debouncedHandleMouseOver, projectsPerPerson, rowsPerItem, startDate, zoom]);
+
+  useEffect(() => {
+    const handleMouseOver = (e: MouseEvent) => {
+      //console.log("OVER", e);
       debouncedHandleMouseOver.current(e, startDate, rowsPerItem, projectsPerPerson, zoom);
+    }
+
     const gridArea = gridRef.current;
 
     if (!gridArea) return;

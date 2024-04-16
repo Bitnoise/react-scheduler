@@ -66,7 +66,7 @@ function App() {
           isLoading={false}
           onTileClick={handleTileClick}
           onFilterData={handleFilterData}
-          config={{ zoom: 0, maxRecordsPerPage: maxRecordsPerPage }}
+          config={{ zoom: 1, maxRecordsPerPage: maxRecordsPerPage }}
           onItemClick={(data) => console.log("clicked: ", data)}
         />
       ) : (
