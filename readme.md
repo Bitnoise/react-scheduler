@@ -138,14 +138,87 @@ const mockedSchedulerData: SchedulerData = [
 
 ##### Scheduler Config Object
 
-| Property Name                        | Type         | Default | Description                                                                                                                                                            |
-| ------------------------------------ | ------------ | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| zoom                                 | `0` or `1`   | 0       | `0` - display grid divided into weeks `1` - display grid divided into days                                                                                             |
-| filterButtonState                    | `number`     | 0       | `< 0` - hides filter button, `0` - state for when filters were not set, `> 0` - state for when some filters were set (allows to also handle `onClearFilterData` event) |
-| maxRecordsPerPage                    | `number`     | 50      | number of items from `SchedulerData` visible per page                                                                                                                  |
-| lang                                 | `en` or `pl` | en      | scheduler's language                                                                                                                                                   |
-| includeTakenHoursOnWeekendsInDayView | `boolean`    | `false` | show weekends as taken when given resource is longer than a week                                                                                                       |
-| showTooltip                          | `boolean`    | `true`  | show tooltip when hovering over tiles                                                                                                                                  |
+| Property Name                        | Type           | Default     | Description                                                                                                                                                            |
+| ------------------------------------ | -------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| zoom                                 | `0` or `1`     | 0           | `0` - display grid divided into weeks `1` - display grid divided into days                                                                                             |
+| filterButtonState                    | `number`       | 0           | `< 0` - hides filter button, `0` - state for when filters were not set, `> 0` - state for when some filters were set (allows to also handle `onClearFilterData` event) |
+| maxRecordsPerPage                    | `number`       | 50          | number of items from `SchedulerData` visible per page                                                                                                                  |
+| lang                                 | `en` or `pl`   | en          | scheduler's language                                                                                                                                                   |
+| includeTakenHoursOnWeekendsInDayView | `boolean`      | `false`     | show weekends as taken when given resource is longer than a week                                                                                                       |
+| showTooltip                          | `boolean`      | `true`      | show tooltip when hovering over tiles                                                                                                                                  |
+| translations                         | `LocaleType[]` | `undefined` | option to add specific langs translations                                                                                                                              |
+
+#### Translation object example
+
+```ts
+import enDayjsTranslations from "dayjs/locale/en";
+
+const langs: LocaleType[] = [
+  {
+    id: "en",
+    lang: {
+      feelingEmpty: "I feel so empty...",
+      free: "Free",
+      loadNext: "Next",
+      loadPrevious: "Previous",
+      over: "over",
+      taken: "Taken",
+      topbar: {
+        filters: "Filters",
+        next: "next",
+        prev: "prev",
+        today: "Today",
+        view: "View"
+      },
+      search: "search",
+      week: "week"
+    },
+    translateCode: "en-EN",
+    dayjsTranslations: enDayjsTranslations
+  }
+];
+
+<Scheduler
+  // ... //
+  config={{
+    lang: "en",
+    translations: langs
+  }}
+/>;
+```
+
+#### Scheduler LocaleType Object
+
+| Property Name     | Type                       | Description                        |
+| ----------------- | -------------------------- | ---------------------------------- |
+| id                | `string`                   | key is needed for selecting lang   |
+| lang              | `Translation`              | object with translations           |
+| translateCode     | `string`                   | code that is saved in localStorage |
+| dayjsTranslations | `string ILocale undefined` | object with translation from dayjs |
+
+#### Scheduler Translation Object
+
+| Property Name | Type     |
+| ------------- | -------- |
+| feelingEmpty  | `string` |
+| free          | `string` |
+| loadNext      | `string` |
+| loadPrevious  | `string` |
+| over          | `string` |
+| taken         | `string` |
+| search        | `string` |
+| week          | `string` |
+| topbar        | `Topbar` |
+
+### Scheduler Topbar Object
+
+| Property Name | Type     |
+| ------------- | -------- |
+| filters       | `string` |
+| next          | `string` |
+| prev          | `string` |
+| today         | `string` |
+| view          | `string` |
 
 ##### Scheduler Data
 
