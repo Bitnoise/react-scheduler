@@ -1,3 +1,5 @@
+import { LocaleType } from "@/context/LocaleProvider/types";
+
 export const allZoomLevel = [0, 1] as const;
 
 export type FilterButtonState = -1 | 0 | 1;
@@ -18,7 +20,7 @@ export type Config = {
   /**
    * Language code: "en" | "pl" | "de"
    */
-  lang?: LangCodes;
+  lang?: LangCodes | string;
   isFiltersButtonVisible?: boolean;
   maxRecordsPerPage?: number;
   /**
@@ -34,6 +36,7 @@ export type Config = {
    * @default true
    */
   showTooltip?: boolean;
+  translations?: LocaleType[];
 };
 
 export type SchedulerData = SchedulerRow[];

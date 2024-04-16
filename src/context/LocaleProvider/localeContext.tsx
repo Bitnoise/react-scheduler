@@ -3,7 +3,7 @@ import { locales } from "./locales";
 import { LocaleContextType } from "./types";
 
 export const localeContext = createContext<LocaleContextType>({
-  locales: locales,
-  currentLocale: locales[0],
+  localesData: locales.getLocales(),
+  currentLocale: locales.getLocales()[0],
   setCurrentLocale: () => {}
 });
