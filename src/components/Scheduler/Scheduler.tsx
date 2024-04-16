@@ -27,6 +27,7 @@ const Scheduler = ({
       filterButtonState: 1,
       includeTakenHoursOnWeekendsInDayView: false,
       showTooltip: true,
+      translations: undefined,
       ...config
     }),
     [config]
@@ -55,7 +56,7 @@ const Scheduler = ({
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <LocaleProvider lang={appConfig.lang}>
+        <LocaleProvider lang={appConfig.lang} translations={appConfig.translations}>
           <CalendarProvider
             data={data}
             isLoading={!!isLoading}
