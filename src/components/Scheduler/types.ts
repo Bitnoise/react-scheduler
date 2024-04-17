@@ -1,5 +1,6 @@
 import {
   Config,
+  FocusedData,
   SchedulerData,
   SchedulerItemClickData,
   SchedulerProjectData
@@ -16,7 +17,7 @@ export type SchedulerProps = {
   onFilterData?: () => void;
   onClearFilterData?: () => void;
   onItemClick?: (data: SchedulerItemClickData) => void;
-  onClickDay?: (e: MouseEvent, data: string) => void;
+  onClickDay?: (e: MouseEvent, data: FocusedData) => void;
 };
 
 export type StyledOutsideWrapperProps = {

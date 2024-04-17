@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { weekWidth, boxHeight, dayWidth } from "@/constants";
-import { Day, Coords, SchedulerProjectData, TooltipData, ZoomLevel } from "@/types/global";
+import { Day, Coords, SchedulerProjectData, TooltipData, ZoomLevel, FocusedData } from "@/types/global";
 import { getOccupancy } from "./getOccupancy";
 
 export const getTooltipData = (
@@ -36,14 +36,20 @@ export const getTooltipData = (
   return { coords: { x: xPos, y: yPos }, resourceIndex, disposition };
 };
 
-export const focusedData = (startDate: Day, cursorPosition: Coords, zoom: ZoomLevel): string => {
+export const focusedData = (startDate: Day, cursorPosition: Coords, zoom: ZoomLevel, rowsPerPerson: number[],
+): FocusedData  => {
   const currBoxWidth = zoom === 0 ? weekWidth : dayWidth;
   const column = Math.ceil(cursorPosition.x / currBoxWidth);
   const data = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`).add(
     column - 1,
     zoom === 0 ? "week" : "day"
   );
+  const dateFormat = data.format("YYYY-MM-DD");
 
-  const dataFormatada = data.format("YYYY-MM-DD");
-  return dataFormatada;
+  const rowPosition = Math.ceil(cursorPosition.y / boxHeight);
+  const resourceIndex = rowsPerPerson.findIndex((_, index, array) => {
+    const sumOfRows = array.slice(0, index + 1).reduce((acc, cur) => acc + cur, 0);
+    return sumOfRows >= rowPosition;
+  });
+  return {date: dateFormat, resourseIndex: resourceIndex};
 };

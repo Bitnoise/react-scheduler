@@ -1,11 +1,11 @@
-import { SchedulerData, SchedulerItemClickData, SchedulerProjectData, SchedulerDayClickData } from "@/types/global";
+import { FocusedData, SchedulerData, SchedulerItemClickData, SchedulerProjectData } from "@/types/global";
 
 export type CalendarProps = {
   data: SchedulerData;
   topBarWidth: number;
   onTileClick?: (data: SchedulerProjectData) => void;
   onItemClick?: (data: SchedulerItemClickData) => void;
-  onClickDay?: (e: MouseEvent, date: string) => void;
+  onClickDay?: (e: MouseEvent, data: FocusedData) => void;
 };
 
 export type StyledSpanProps = {

@@ -4,6 +4,11 @@ export type FilterButtonState = -1 | 0 | 1;
 
 type ZoomLevelTuple = typeof allZoomLevel;
 
+export type FocusedData = {
+  date: string,
+  resourseIndex: number
+}
+
 export type ZoomLevel = ZoomLevelTuple[number];
 export type LangCodes = "en" | "pl" | "de" | "pt-BR";
 export type Config = {
@@ -59,11 +64,6 @@ export type PaginatedSchedulerRow = {
   label: SchedulerRowLabel;
   data: SchedulerProjectData[][];
 };
-
-export type SchedulerDayClickData = {
-  date: string,
-  e: MouseEvent
-}
 
 export type SchedulerRowLabel = {
   icon: string;

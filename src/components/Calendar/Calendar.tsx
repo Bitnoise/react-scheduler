@@ -92,9 +92,9 @@ export const Calendar: FC<CalendarProps> = ({
       if (!gridRef.current) return;
       const { left, top } = gridRef.current.getBoundingClientRect();
       const tooltipCoords = { x: e.clientX - left, y: e.clientY - top };
-      const date = focusedData(startDate, tooltipCoords, zoom);
+      const data = focusedData(startDate, tooltipCoords, zoom, rowsPerItem);
       if (onClickDay) {
-        onClickDay(e, date);
+        onClickDay(e, data);
       }
     }
   );
