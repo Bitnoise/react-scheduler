@@ -36,15 +36,14 @@ export const getTooltipData = (
   return { coords: { x: xPos, y: yPos }, resourceIndex, disposition };
 };
 
-export const focusedData = (
-  startDate: Day,
-  cursorPosition: Coords,
-  zoom: ZoomLevel,
-): dayjs.Dayjs => {
+export const focusedData = (startDate: Day, cursorPosition: Coords, zoom: ZoomLevel): string => {
   const currBoxWidth = zoom === 0 ? weekWidth : dayWidth;
   const column = Math.ceil(cursorPosition.x / currBoxWidth);
-  return dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`).add(
+  const data = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`).add(
     column - 1,
-    zoom === 0 ? "weeks" : "days"
+    zoom === 0 ? "week" : "day"
   );
+
+  const dataFormatada = data.format("YYYY-MM-DD");
+  return dataFormatada;
 };

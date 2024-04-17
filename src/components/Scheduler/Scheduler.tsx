@@ -19,6 +19,7 @@ const Scheduler = ({
   onFilterData,
   onClearFilterData,
   onItemClick,
+  onClickDay,
   isLoading
 }: SchedulerProps) => {
   const appConfig: Config = useMemo(
@@ -65,16 +66,14 @@ const Scheduler = ({
             defaultStartDate={defaultStartDate}
             onFilterData={onFilterData}
             onClearFilterData={onClearFilterData}>
-            <StyledOutsideWrapper
-              showScroll={false}
-              id={outsideWrapperId}
-              ref={outsideWrapperRef}>
+            <StyledOutsideWrapper showScroll={false} id={outsideWrapperId} ref={outsideWrapperRef}>
               <StyledInnerWrapper>
                 <Calendar
                   data={data}
                   onTileClick={onTileClick}
                   topBarWidth={topBarWidth ?? 0}
                   onItemClick={onItemClick}
+                  onClickDay={onClickDay}
                 />
               </StyledInnerWrapper>
             </StyledOutsideWrapper>

@@ -60,6 +60,11 @@ export type PaginatedSchedulerRow = {
   data: SchedulerProjectData[][];
 };
 
+export type SchedulerDayClickData = {
+  date: string,
+  e: MouseEvent
+}
+
 export type SchedulerRowLabel = {
   icon: string;
   title: string;
