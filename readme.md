@@ -210,7 +210,7 @@ const langs: LocaleType[] = [
 | week          | `string` |
 | topbar        | `Topbar` |
 
-### Scheduler Topbar Object
+##### Scheduler Topbar Object
 
 | Property Name | Type     |
 | ------------- | -------- |
