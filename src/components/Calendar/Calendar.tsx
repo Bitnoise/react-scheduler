@@ -13,11 +13,9 @@ import { StyledOuterWrapper, StyledInnerWrapper } from "./styles";
 const initialTooltipData: TooltipData = {
   coords: { x: 0, y: 0 },
   resourceIndex: 0,
-  disposition: {
-    taken: { hours: 0, minutes: 0 },
-    free: { hours: 0, minutes: 0 },
-    overtime: { hours: 0, minutes: 0 }
-  }
+  rowIndex: 0,
+  title: "",
+  subtitle: ""
 };
 
 export const Calendar: FC<CalendarProps> = ({ data, onTileClick, onItemClick, topBarWidth }) => {
@@ -59,16 +57,19 @@ export const Calendar: FC<CalendarProps> = ({ data, onTileClick, onItemClick, to
         const {
           coords: { x, y },
           resourceIndex,
-          disposition
+          rowIndex,
+          title,
+          subtitle
         } = getTooltipData(
           startDate,
           tooltipCoords,
           rowsPerItem,
           projectsPerPerson,
           zoom,
+          data,
           includeTakenHoursOnWeekendsInDayView
         );
-        setTooltipData({ coords: { x, y }, resourceIndex, disposition });
+        setTooltipData({ coords: { x, y }, resourceIndex, rowIndex, title, subtitle });
         setIsVisible(true);
       },
       300
@@ -146,9 +147,10 @@ export const Calendar: FC<CalendarProps> = ({ data, onTileClick, onItemClick, to
         ) : (
           <EmptyBox />
         )}
-        {isVisible && tooltipData?.resourceIndex > -1 && (
-          <Tooltip tooltipData={tooltipData} zoom={zoom} />
-        )}
+        {isVisible &&
+          tooltipData?.resourceIndex > -1 &&
+          tooltipData.title !== undefined &&
+          tooltipData.subtitle !== undefined && <Tooltip tooltipData={tooltipData} zoom={zoom} />}
       </StyledInnerWrapper>
     </StyledOuterWrapper>
   );

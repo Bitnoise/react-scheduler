@@ -161,5 +161,7 @@ export type OccupancyData = {
 export type TooltipData = {
   coords: Coords;
   resourceIndex: number;
-  disposition: OccupancyData;
+  rowIndex: number;
+  title: string | undefined;
+  subtitle: string | undefined;
 };
