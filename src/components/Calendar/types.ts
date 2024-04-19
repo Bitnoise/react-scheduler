@@ -1,4 +1,9 @@
-import { FocusedData, SchedulerData, SchedulerItemClickData, SchedulerProjectData } from "@/types/global";
+import {
+  FocusedData,
+  SchedulerData,
+  SchedulerItemClickData,
+  SchedulerProjectData
+} from "@/types/global";
 
 export type CalendarProps = {
   data: SchedulerData;

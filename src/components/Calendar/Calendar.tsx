@@ -92,8 +92,16 @@ export const Calendar: FC<CalendarProps> = ({
       if (!gridRef.current) return;
       const { left, top } = gridRef.current.getBoundingClientRect();
       const tooltipCoords = { x: e.clientX - left, y: e.clientY - top };
-      const data = focusedData(startDate, tooltipCoords, zoom, rowsPerItem);
-      if (onClickDay) {
+      const data = focusedData(
+        startDate,
+        tooltipCoords,
+        zoom,
+        rowsPerItem,
+        includeTakenHoursOnWeekendsInDayView,
+        projectsPerPerson
+      );
+      if (onClickDay && data.isDayFree) {
+        console.log("oe");
         onClickDay(e, data);
       }
     }

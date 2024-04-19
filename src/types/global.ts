@@ -5,9 +5,10 @@ export type FilterButtonState = -1 | 0 | 1;
 type ZoomLevelTuple = typeof allZoomLevel;
 
 export type FocusedData = {
-  date: string,
-  resourseIndex: number
-}
+  date: string;
+  resourseIndex: number;
+  isDayFree: boolean;
+};
 
 export type ZoomLevel = ZoomLevelTuple[number];
 export type LangCodes = "en" | "pl" | "de" | "pt-BR";
