@@ -61,8 +61,8 @@ export const getTooltipData = (
     }
   });
 
-  const title = data[resourceIndex]?.data[valueIndex]?.title;
-  const subtitle = data[resourceIndex]?.data[valueIndex]?.subtitle;
+  const title = getProjectID?.[valueIndex]?.title;
+  const subtitle = getProjectID?.[valueIndex]?.subtitle;
 
   return {
     coords: { x: xPos, y: yPos },
