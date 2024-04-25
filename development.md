@@ -10,7 +10,7 @@
 
 To set up the project locally for development and testing, please follow these steps:
 
-1. Clone the repository: `git clone git@github.com:Bitnoise/react-scheduler.git`.
+1. Clone the repository: `git clone git@github.com:alefiori/react-scheduler.git`.
 2. Install the dependencies: `yarn install`, depending on your package manager.
 3. Start the development server: `yarn dev`.
 4. Open http://localhost:5173 in your web browser.

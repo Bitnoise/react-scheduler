@@ -1,11 +1,11 @@
 {
-  "name": "@bitnoi.se/react-scheduler",
+  "name": "@alefiori/react-scheduler",
   "version": "0.1.5",
   "type": "module",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Bitnoise/react-scheduler"
+    "url": "https://github.com/alefiori/react-scheduler"
   },
   "keywords": [
     "scheduler",
@@ -15,10 +15,6 @@
     "timeline",
     "calendar"
   ],
-  "author": {
-    "name": "Bitnoise",
-    "url": "https://scheduler.bitnoise.pl/"
-  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
