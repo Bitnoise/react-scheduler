@@ -22,7 +22,7 @@ const Topbar: FC<TopbarProps> = ({ width }) => {
     onClearFilterData
   } = useCalendar();
   const { colors } = useTheme();
-  const { filterButtonState = -1, isFiltersButtonVisible } = config;
+  const { filterButtonState = -1, isFiltersButtonVisible = false } = config;
 
   const handleClearFilters: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
