@@ -86,6 +86,19 @@ export type SchedulerProjectData = {
    * Background color of the tile, given in rgb color model. If not given, default color (rgb(114, 141,226 )) is set. Optional
    */
   bgColor?: string;
+  //added data
+    contact?: number|string;
+    value?: number|string;
+    numberOfGuests?: number;
+    annotation?: string;
+    email?: string;
+    createDate?: Date;
+    numberOfNights?: number;
+    status?: string;
+    //apartment
+    capacity?: number;
+    bathroooms?: number;
+    beds?: number;
 };
 
 export type Day = {
