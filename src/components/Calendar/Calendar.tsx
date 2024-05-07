@@ -116,9 +116,13 @@ export const Calendar: FC<CalendarProps> = ({ data, onTileClick, onItemClick, to
   }, [debouncedHandleMouseOver, handleMouseLeave, projectsPerPerson, rowsPerItem, startDate, zoom]);
 
   useEffect(() => {
-    if (searchPhrase) return;
-
-    setFilteredData(data);
+    if (searchPhrase) {
+      setFilteredData(
+        data.filter((item) => item.label.title.toLowerCase().includes(searchPhrase.toLowerCase()))
+      );
+    } else {
+      setFilteredData(data);
+    }
   }, [data, searchPhrase]);
 
   return (
