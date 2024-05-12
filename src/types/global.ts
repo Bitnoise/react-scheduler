@@ -86,6 +86,10 @@ export type SchedulerProjectData = {
    * Background color of the tile, given in rgb color model. If not given, default color (rgb(114, 141,226 )) is set. Optional
    */
   bgColor?: string;
+  /**
+   * Progress of the project. Set in percent from 0 to 100. Optional
+   */
+  progress?: number;
 };
 
 export type Day = {

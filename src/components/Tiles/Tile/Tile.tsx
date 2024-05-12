@@ -30,7 +30,16 @@ const Tile: FC<TileProps> = ({ row, data, zoom, onTileClick }) => {
       style={{
         left: `${x}px`,
         top: `${y}px`,
-        backgroundColor: `${data.bgColor ?? tileDefaultBgColor}`,
+        background:
+          data.progress === undefined
+            ? `${data.bgColor ?? tileDefaultBgColor}`
+            : `linear-gradient(
+              90deg,
+              ${data.bgColor ?? tileDefaultBgColor} 0%,
+              ${data.bgColor ?? tileDefaultBgColor} ${data.progress}%,
+              #b8c2cc ${data.progress}%,
+              #b8c2cc 100%
+            )`,
         width: `${width}px`,
         color: getTileTextColor(data.bgColor ?? "")
       }}
