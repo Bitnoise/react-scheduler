@@ -46,6 +46,7 @@ export const generateProjects = (
 
     for (let projectIndex = 0; projectIndex < projectsPerYear; projectIndex++) {
       const { startDate, endDate } = getRandomDates(yearIndex);
+      const progress = Math.ceil(Math.random() * 100);
       data.push({
         id: faker.datatype.uuid(),
         startDate,
@@ -54,7 +55,8 @@ export const generateProjects = (
         title,
         subtitle: getRandomWords(),
         description: getRandomWords(amountOfDscWords),
-        bgColor
+        bgColor,
+        progress
       });
     }
   }
