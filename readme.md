@@ -260,7 +260,7 @@ data that is accessible as argument of `onItemClick` callback
 | Property Name | Type | Description |
 | -------- | --------------------- | -------------------------------- |
 | id | `string` | unique row id |
-| label | `string` | row's label, `e.g person's name` |
+| label | `SchedulerRowLabel` | row's label, `e.g person's name, surname, icon` |
 
 ##### Resource Item
 
