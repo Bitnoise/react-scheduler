@@ -21,8 +21,8 @@ export const setProjectsInRows = (
             break;
           }
           if (
-            dayjs(project.startDate).isBefore(datesRange.startDate, "day") &&
-            dayjs(project.endDate).isAfter(datesRange.endDate, "day")
+            dayjs(project.startDate).isBefore(row[i].startDate, "day") &&
+            dayjs(project.endDate).isAfter(row[i].endDate, "day")
           ) {
             isColliding = true;
             break;
