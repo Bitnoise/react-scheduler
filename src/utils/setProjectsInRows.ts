@@ -1,11 +1,7 @@
 import dayjs from "dayjs";
 import { SchedulerProjectData } from "@/types/global";
-import { DatesRange } from "./getDatesRange";
 
-export const setProjectsInRows = (
-  projects: SchedulerProjectData[],
-  datesRange: DatesRange
-): SchedulerProjectData[][] => {
+export const setProjectsInRows = (projects: SchedulerProjectData[]): SchedulerProjectData[][] => {
   const rows: SchedulerProjectData[][] = [];
   for (const project of projects) {
     let isAdded = false;
