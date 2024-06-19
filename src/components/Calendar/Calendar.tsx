@@ -1,9 +1,8 @@
-import { ChangeEvent, FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { ChangeEvent, FC, useCallback, useEffect, useRef, useState } from "react";
 import debounce from "lodash.debounce";
 import { useCalendar } from "@/context/CalendarProvider";
 import { Day, SchedulerData, SchedulerProjectData, TooltipData, ZoomLevel } from "@/types/global";
 import { getTooltipData } from "@/utils/getTooltipData";
-import { getDatesRange } from "@/utils/getDatesRange";
 import { usePagination } from "@/hooks/usePagination";
 import EmptyBox from "../EmptyBox";
 import { Grid, Header, LeftColumn, Tooltip } from "..";
@@ -28,11 +27,9 @@ export const Calendar: FC<CalendarProps> = ({ data, onTileClick, onItemClick, to
   const {
     zoom,
     startDate,
-    date,
     config: { includeTakenHoursOnWeekendsInDayView, showTooltip }
   } = useCalendar();
   const gridRef = useRef<HTMLDivElement>(null);
-  const datesRange = useMemo(() => getDatesRange(date, zoom), [date, zoom]);
   const {
     page,
     projectsPerPerson,
@@ -43,7 +40,7 @@ export const Calendar: FC<CalendarProps> = ({ data, onTileClick, onItemClick, to
     next,
     previous,
     reset
-  } = usePagination(filteredData, datesRange);
+  } = usePagination(filteredData);
   const debouncedHandleMouseOver = useRef(
     debounce(
       (
