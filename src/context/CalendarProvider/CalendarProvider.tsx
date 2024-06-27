@@ -11,7 +11,7 @@ import { isAvailableZoom } from "@/types/guards";
 import { getDatesRange, getParsedDatesRange } from "@/utils/getDatesRange";
 import { parseDay } from "@/utils/dates";
 import { getCols, getVisibleCols } from "@/utils/getCols";
-import { buttonWeeksJump, outsideWrapperId } from "@/constants";
+import { buttonWeeksJump, outsideWrapperId, screenWidthMultiplier } from "@/constants";
 import { getCanvasWidth } from "@/utils/getCanvasWidth";
 import { calendarContext } from "./calendarContext";
 import { CalendarProviderProps } from "./types";
@@ -63,11 +63,13 @@ const CalendarProvider = ({
             left: canvasWidth / 3
           });
 
-        case "middle":
+        case "middle": {
+          const leftOffset = canvasWidth / screenWidthMultiplier / 4; // 1/4 of component's width
           return outsideWrapper.current?.scrollTo({
             behavior,
-            left: canvasWidth / 2
+            left: canvasWidth / 2 - leftOffset
           });
+        }
 
         default:
           return outsideWrapper.current?.scrollTo({
@@ -170,7 +172,7 @@ const CalendarProvider = ({
 
     loadMore("middle");
     debounce(() => {
-      moveHorizontalScroll("middle");
+      moveHorizontalScroll("middle", "smooth");
     }, 300)();
   }, [isLoading, loadMore, moveHorizontalScroll]);
 
