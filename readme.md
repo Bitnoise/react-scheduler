@@ -37,16 +37,41 @@ import "@bitnoi.se/react-scheduler/dist/style.css";
 
 ```ts
 import { Scheduler, SchedulerData } from "@bitnoi.se/react-scheduler";
+import dayjs from "dayjs";
 
 default export function Component() {
   const [filterButtonState, setFilterButtonState] = useState(0);
 
+  const [range, setRange] = useState({
+    startDate: new Date(),
+    endDate: new Date()
+  });
+
+  const handleRangeChange = useCallback((range) => {
+    setRange(range);
+  }, []);
+
+  // Filtering events that are included in current date range
+  // Example can be also found on video https://youtu.be/9oy4rTVEfBQ?t=118&si=52BGKSIYz6bTZ7fx
+  // and in the react-scheduler repo App.tsx file https://github.com/Bitnoise/react-scheduler/blob/master/src/App.tsx
+  const filteredMockedSchedulerData = mockedSchedulerData.map((person) => ({
+        ...person,
+        data: person.data.filter(
+          (project) =>
+            // we use "dayjs" for date calculations, but feel free to use library of your choice
+            dayjs(project.startDate).isBetween(range.startDate, range.endDate) ||
+            dayjs(project.endDate).isBetween(range.startDate, range.endDate) ||
+            (dayjs(project.startDate).isBefore(range.startDate, "day") &&
+              dayjs(project.endDate).isAfter(range.endDate, "day"))
+        )
+      }))
+
   return (
     <section>
       <Scheduler
-        data={mockedSchedulerData}
+        data={filteredMockedSchedulerData}
         isLoading={isLoading}
-        onRangeChange={(newRange) => console.log(newRange)}
+        onRangeChange={handleRangeChange}
         onTileClick={(clickedResource) => console.log(clickedResource)}
         onItemClick={(item) => console.log(item)}
         onFilterData={() => {
