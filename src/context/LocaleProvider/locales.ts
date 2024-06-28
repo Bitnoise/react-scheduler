@@ -4,7 +4,8 @@ import deDayjsTranslations from "dayjs/locale/de";
 import ltDayjsTranslations from "dayjs/locale/lt";
 import frDayjsTranslations from "dayjs/locale/fr";
 import itDayjsTranslations from "dayjs/locale/it";
-import { en, pl, de, lt, fr, it } from "@/locales";
+import ptBRDayjsTranslations from "dayjs/locale/pt-br";
+import { en, pl, de, lt, fr, it, ptBR } from "@/locales";
 import { LocaleType } from "./types";
 
 export const localesData: LocaleType[] = [
@@ -43,6 +44,12 @@ export const localesData: LocaleType[] = [
     lang: pl,
     translateCode: "pl-PL",
     dayjsTranslations: plDayjsTranslations
+  },
+  {
+    id: "pt-BR",
+    lang: ptBR,
+    translateCode: "pt-BR",
+    dayjsTranslations: ptBRDayjsTranslations
   }
 ];
 
