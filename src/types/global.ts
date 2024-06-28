@@ -7,7 +7,9 @@ export type FilterButtonState = -1 | 0 | 1;
 type ZoomLevelTuple = typeof allZoomLevel;
 
 export type ZoomLevel = ZoomLevelTuple[number];
-export type LangCodes = "en" | "pl" | "de";
+
+export type LangCodes = "en" | "pl" | "de" | "lt";
+
 export type Config = {
   zoom: ZoomLevel;
   /**

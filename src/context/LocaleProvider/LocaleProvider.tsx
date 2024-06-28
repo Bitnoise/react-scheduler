@@ -13,11 +13,13 @@ const LocaleProvider = ({ children, lang, translations }: LocaleProviderProps) =
       return l.id === localLang;
     });
 
+
     if (typeof locale?.dayjsTranslations === "object") {
       dayjs.locale(locale.dayjsTranslations);
     }
 
     return locale || localesData[0];
+
   }, [localLang]);
 
   const [currentLocale, setCurrentLocale] = useState<LocaleType>(findLocale());
