@@ -3,7 +3,5 @@ import { locales } from "./locales";
 import { LocaleContextType } from "./types";
 
 export const localeContext = createContext<LocaleContextType>({
-  localesData: locales.getLocales(),
-  currentLocale: locales.getLocales()[0],
-  setCurrentLocale: () => {}
+  currentLocale: locales.getLocales().filter((locale) => locale.id === "en")[0]
 });
