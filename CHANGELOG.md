@@ -1,6 +1,7 @@
 # Release v0.2.1
 
 - added example of scheduler data filtering in readme.md
+- added support for lt locale
 
 # Release v0.2
 
