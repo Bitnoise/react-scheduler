@@ -54,7 +54,8 @@ export const generateProjects = (
         title,
         subtitle: getRandomWords(),
         description: getRandomWords(amountOfDscWords),
-        bgColor
+        bgColor,
+        attendees: ["1","2","3"]
       });
     }
   }
