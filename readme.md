@@ -37,16 +37,41 @@ import "@bitnoi.se/react-scheduler/dist/style.css";
 
 ```ts
 import { Scheduler, SchedulerData } from "@bitnoi.se/react-scheduler";
+import dayjs from "dayjs";
 
 default export function Component() {
   const [filterButtonState, setFilterButtonState] = useState(0);
 
+  const [range, setRange] = useState({
+    startDate: new Date(),
+    endDate: new Date()
+  });
+
+  const handleRangeChange = useCallback((range) => {
+    setRange(range);
+  }, []);
+
+  // Filtering events that are included in current date range
+  // Example can be also found on video https://youtu.be/9oy4rTVEfBQ?t=118&si=52BGKSIYz6bTZ7fx
+  // and in the react-scheduler repo App.tsx file https://github.com/Bitnoise/react-scheduler/blob/master/src/App.tsx
+  const filteredMockedSchedulerData = mockedSchedulerData.map((person) => ({
+        ...person,
+        data: person.data.filter(
+          (project) =>
+            // we use "dayjs" for date calculations, but feel free to use library of your choice
+            dayjs(project.startDate).isBetween(range.startDate, range.endDate) ||
+            dayjs(project.endDate).isBetween(range.startDate, range.endDate) ||
+            (dayjs(project.startDate).isBefore(range.startDate, "day") &&
+              dayjs(project.endDate).isAfter(range.endDate, "day"))
+        )
+      }))
+
   return (
     <section>
       <Scheduler
-        data={mockedSchedulerData}
+        data={filteredMockedSchedulerData}
         isLoading={isLoading}
-        onRangeChange={(newRange) => console.log(newRange)}
+        onRangeChange={handleRangeChange}
         onTileClick={(clickedResource) => console.log(clickedResource)}
         onItemClick={(item) => console.log(item)}
         onFilterData={() => {
@@ -138,13 +163,88 @@ const mockedSchedulerData: SchedulerData = [
 
 ##### Scheduler Config Object
 
-| Property Name                        | Type               | Default | Description                                                                                                                                                            |
-| ------------------------------------ | ------------------ | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| zoom                                 | `0` or `1`         | 0       | `0` - display grid divided into weeks `1` - display grid divided into days                                                                                             |
-| filterButtonState                    | `number`           | 0       | `< 0` - hides filter button, `0` - state for when filters were not set, `> 0` - state for when some filters were set (allows to also handle `onClearFilterData` event) |
-| maxRecordsPerPage                    | `number`           | 50      | number of items from `SchedulerData` visible per page                                                                                                                  |
-| lang                                 | `en`, `pl` or `lt` | en      | scheduler's language                                                                                                                                                   |
-| includeTakenHoursOnWeekendsInDayView | `boolean`          | `false` | show weekends as taken when given resource is longer than a week                                                                                                       |
+| Property Name                        | Type           | Default     | Description                                                                                                                                                            |
+| ------------------------------------ | -------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| zoom                                 | `0` or `1`     | 0           | `0` - display grid divided into weeks `1` - display grid divided into days                                                                                             |
+| filterButtonState                    | `number`       | 0           | `< 0` - hides filter button, `0` - state for when filters were not set, `> 0` - state for when some filters were set (allows to also handle `onClearFilterData` event) |
+| maxRecordsPerPage                    | `number`       | 50          | number of items from `SchedulerData` visible per page                                                                                                                  |
+| lang                                 | `en`, `lt` or `pl`   | en          | scheduler's language                                                                                                                                                   |
+| includeTakenHoursOnWeekendsInDayView | `boolean`      | `false`     | show weekends as taken when given resource is longer than a week                                                                                                       |
+| showTooltip                          | `boolean`      | `true`      | show tooltip when hovering over tiles                                                                                                                                  |
+| translations                         | `LocaleType[]` | `undefined` | option to add specific langs translations                                                                                                                              |
+
+#### Translation object example
+
+```ts
+import enDayjsTranslations from "dayjs/locale/en";
+
+const langs: LocaleType[] = [
+  {
+    id: "en",
+    lang: {
+      feelingEmpty: "I feel so empty...",
+      free: "Free",
+      loadNext: "Next",
+      loadPrevious: "Previous",
+      over: "over",
+      taken: "Taken",
+      topbar: {
+        filters: "Filters",
+        next: "next",
+        prev: "prev",
+        today: "Today",
+        view: "View"
+      },
+      search: "search",
+      week: "week"
+    },
+    translateCode: "en-EN",
+    dayjsTranslations: enDayjsTranslations
+  }
+];
+
+<Scheduler
+  // ... //
+  config={{
+    lang: "en",
+    translations: langs
+  }}
+/>;
+```
+
+#### Scheduler LocaleType Object
+
+| Property Name     | Type                       | Description                        |
+| ----------------- | -------------------------- | ---------------------------------- |
+| id                | `string`                   | key is needed for selecting lang   |
+| lang              | `Translation`              | object with translations           |
+| translateCode     | `string`                   | code that is saved in localStorage |
+| dayjsTranslations | `string ILocale undefined` | object with translation from dayjs |
+
+#### Scheduler Translation Object
+
+| Property Name | Type     |
+| ------------- | -------- |
+| feelingEmpty  | `string` |
+| free          | `string` |
+| loadNext      | `string` |
+| loadPrevious  | `string` |
+| over          | `string` |
+| taken         | `string` |
+| search        | `string` |
+| week          | `string` |
+| topbar        | `Topbar` |
+
+##### Scheduler Topbar Object
+
+| Property Name | Type     |
+| ------------- | -------- |
+| filters       | `string` |
+| next          | `string` |
+| prev          | `string` |
+| today         | `string` |
+| view          | `string` |
+
 
 ##### Scheduler Data
 
@@ -161,7 +261,7 @@ data that is accessible as argument of `onItemClick` callback
 | Property Name | Type | Description |
 | -------- | --------------------- | -------------------------------- |
 | id | `string` | unique row id |
-| label | `string` | row's label, `e.g person's name` |
+| label | `SchedulerRowLabel` | row's label, `e.g person's name, surname, icon` |
 
 ##### Resource Item
 
@@ -209,6 +309,24 @@ import dynamic from "next/dynamic";
 const Scheduler = dynamic(() => import("@bitnoi.se/react-scheduler").then((mod) => mod.Scheduler), {
   ssr: false
 });
+```
+
+- How to customize Scheduler dimensions
+
+Scheduler is position absolutely to take all available space. If you want to have fixed dimensions wrap Scheduler inside a div with position set to relative.
+
+Example using styled components:
+
+```ts
+export const StyledSchedulerFrame = styled.div`
+  position: relative;
+  height: 40vh;
+  width: 40vw;
+`;
+
+<StyledSchedulerFrame>
+    <Scheduler  {...}/>
+</StyledSchedulerFrame>
 ```
 
 ### Known Issues

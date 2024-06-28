@@ -1,23 +1,41 @@
 import { ReactNode } from "react";
-import { en } from "@/locales/en";
 import { LangCodes } from "@/types/global";
 
 export type LocaleContextType = {
   currentLocale: LocaleType;
-  locales: LocaleType[];
+  localesData: LocaleType[];
   setCurrentLocale: (locale: LocaleType) => void;
 };
 
 export type LocaleProviderProps = {
   children: ReactNode;
-  lang?: LangCodes;
+  lang?: LangCodes | string;
+  translations?: LocaleType[];
 };
 
-export type TranslationType = typeof en;
+export type Topbar = {
+  filters: string;
+  next: string;
+  prev: string;
+  today: string;
+  view: string;
+};
+
+export type Translation = {
+  feelingEmpty: string;
+  free: string;
+  loadNext: string;
+  loadPrevious: string;
+  over: string;
+  taken: string;
+  topbar: Topbar;
+  search: string;
+  week: string;
+};
 
 export type LocaleType = {
   id: string;
-  name: string;
-  lang: TranslationType;
+  lang: Translation;
   translateCode: string;
+  dayjsTranslations: string | ILocale | undefined;
 };

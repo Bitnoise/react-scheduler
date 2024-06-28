@@ -10,15 +10,9 @@ import { Coords, ZoomLevel, allZoomLevel } from "@/types/global";
 import { isAvailableZoom } from "@/types/guards";
 import { getDatesRange, getParsedDatesRange } from "@/utils/getDatesRange";
 import { parseDay } from "@/utils/dates";
-import { getCols } from "@/utils/getCols";
-import {
-  buttonWeeksJump,
-  dayWidth,
-  outsideWrapperId,
-  screenWidthMultiplier,
-  scrollWeeksJump,
-  weekWidth
-} from "@/constants";
+import { getCols, getVisibleCols } from "@/utils/getCols";
+import { buttonWeeksJump, outsideWrapperId, screenWidthMultiplier } from "@/constants";
+import { getCanvasWidth } from "@/utils/getCanvasWidth";
 import { calendarContext } from "./calendarContext";
 import { CalendarProviderProps } from "./types";
 dayjs.extend(weekOfYear);
@@ -52,48 +46,39 @@ const CalendarProvider = ({
   const parsedStartDate = parseDay(startDate);
   const outsideWrapper = useRef<HTMLElement | null>(null);
   const [tilesCoords, setTilesCoords] = useState<Coords[]>([{ x: 0, y: 0 }]);
-  const scrollForwardOffsetModifier = 2;
 
   const moveHorizontalScroll = useCallback(
-    (direction: Direction, behavior: ScrollBehavior = "smooth") => {
+    (direction: Direction, behavior: ScrollBehavior = "auto") => {
+      const canvasWidth = getCanvasWidth();
       switch (direction) {
         case "back":
           return outsideWrapper.current?.scrollTo({
             behavior,
-            left: zoom === 0 ? weekWidth * screenWidthMultiplier : dayWidth * screenWidthMultiplier
+            left: canvasWidth / 3
           });
 
         case "forward":
           return outsideWrapper.current?.scrollTo({
             behavior,
-            left:
-              zoom === 0
-                ? window.innerWidth +
-                  (cols / screenWidthMultiplier -
-                    screenWidthMultiplier +
-                    scrollForwardOffsetModifier) *
-                    weekWidth
-                : window.innerWidth +
-                  (cols / screenWidthMultiplier -
-                    screenWidthMultiplier +
-                    scrollForwardOffsetModifier) *
-                    dayWidth
+            left: canvasWidth / 3
           });
 
-        case "middle":
+        case "middle": {
+          const leftOffset = canvasWidth / screenWidthMultiplier / 4; // 1/4 of component's width
           return outsideWrapper.current?.scrollTo({
             behavior,
-            left: window.innerWidth
+            left: canvasWidth / 2 - leftOffset
           });
+        }
 
         default:
           return outsideWrapper.current?.scrollTo({
             behavior,
-            left: window.innerWidth
+            left: canvasWidth / 2
           });
       }
     },
-    [cols, zoom]
+    []
   );
 
   const updateTilesCoords = (coords: Coords[]) => {
@@ -102,13 +87,15 @@ const CalendarProvider = ({
 
   const loadMore = useCallback(
     (direction: Direction) => {
+      const cols = getVisibleCols(zoom);
+      const offset = zoom === 0 ? cols * 7 : cols;
       const load = debounce(() => {
         switch (direction) {
           case "back":
-            setDate((prev) => prev.subtract(scrollWeeksJump, "weeks"));
+            setDate((prev) => prev.subtract(offset, "days"));
             break;
           case "forward":
-            setDate((prev) => prev.add(scrollWeeksJump, "weeks"));
+            setDate((prev) => prev.add(offset, "days"));
             break;
           case "middle":
             setDate(dayjs());
@@ -123,6 +110,7 @@ const CalendarProvider = ({
 
   useEffect(() => {
     outsideWrapper.current = document.getElementById(outsideWrapperId);
+    setCols(getCols(zoom));
   }, []);
 
   useEffect(() => {
@@ -143,7 +131,7 @@ const CalendarProvider = ({
   useEffect(() => {
     if (isInitialized) return;
 
-    moveHorizontalScroll("middle", "auto");
+    moveHorizontalScroll("middle");
     setIsInitialized(true);
     setDate(defaultStartDate);
   }, [defaultStartDate, isInitialized, moveHorizontalScroll]);
@@ -159,7 +147,9 @@ const CalendarProvider = ({
     if (isLoading) return;
 
     loadMore("forward");
-    moveHorizontalScroll("forward");
+    debounce(() => {
+      moveHorizontalScroll("forward");
+    }, 300)();
   }, [isLoading, loadMore, moveHorizontalScroll]);
 
   const handleGoPrev = () => {
@@ -171,16 +161,19 @@ const CalendarProvider = ({
 
   const handleScrollPrev = useCallback(() => {
     if (!isInitialized || isLoading) return;
-
     loadMore("back");
-    moveHorizontalScroll("back");
+    debounce(() => {
+      moveHorizontalScroll("back");
+    }, 300)();
   }, [isInitialized, isLoading, loadMore, moveHorizontalScroll]);
 
   const handleGoToday = useCallback(() => {
     if (isLoading) return;
 
     loadMore("middle");
-    moveHorizontalScroll("middle");
+    debounce(() => {
+      moveHorizontalScroll("middle", "smooth");
+    }, 300)();
   }, [isLoading, loadMore, moveHorizontalScroll]);
 
   const zoomIn = () => changeZoom(zoom + 1);

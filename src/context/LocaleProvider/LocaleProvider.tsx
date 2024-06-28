@@ -1,19 +1,25 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import dayjs from "dayjs";
-import { LangCodes } from "@/types/global";
 import { localeContext } from "./localeContext";
 import { locales } from "./locales";
 import { LocaleProviderProps, LocaleType } from "./types";
 
-const LocaleProvider = ({ children, lang }: LocaleProviderProps) => {
-  const [localLang, setLocalLang] = useState<LangCodes>("en");
+const LocaleProvider = ({ children, lang, translations }: LocaleProviderProps) => {
+  const [localLang, setLocalLang] = useState<string>("en");
+  const localesData = locales.getLocales();
 
   const findLocale = useCallback(() => {
-    const locale = locales.find((l) => {
+    const locale = localesData.find((l) => {
       return l.id === localLang;
     });
-    locale && dayjs.locale(locale?.id);
-    return locale || locales[0];
+
+
+    if (typeof locale?.dayjsTranslations === "object") {
+      dayjs.locale(locale.dayjsTranslations);
+    }
+
+    return locale || localesData[0];
+
   }, [localLang]);
 
   const [currentLocale, setCurrentLocale] = useState<LocaleType>(findLocale());
@@ -24,7 +30,16 @@ const LocaleProvider = ({ children, lang }: LocaleProviderProps) => {
   };
 
   useEffect(() => {
-    const localeId: LangCodes | null = localStorage.getItem("locale") as LangCodes;
+    translations?.forEach((translation) => {
+      const localeData = localesData.find((el) => el.id === translation.id);
+      if (!localeData) {
+        locales.addLocales(translation);
+      }
+    });
+  }, [translations]);
+
+  useEffect(() => {
+    const localeId = localStorage.getItem("locale");
     const language = lang ?? localeId ?? "en";
     localStorage.setItem("locale", language);
     setLocalLang(language);
@@ -34,7 +49,7 @@ const LocaleProvider = ({ children, lang }: LocaleProviderProps) => {
   const { Provider } = localeContext;
 
   return (
-    <Provider value={{ currentLocale, locales, setCurrentLocale: saveCurrentLocale }}>
+    <Provider value={{ currentLocale, localesData, setCurrentLocale: saveCurrentLocale }}>
       {children}
     </Provider>
   );
@@ -47,7 +62,7 @@ const useLanguage = () => {
 
 const useLocales = () => {
   const context = useContext(localeContext);
-  return context.locales;
+  return context.localesData;
 };
 
 const useSetLocale = () => {
