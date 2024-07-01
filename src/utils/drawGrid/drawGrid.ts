@@ -2,6 +2,7 @@ import { Day } from "@/types/global";
 import { canvasWrapperId } from "@/constants";
 import { drawMonthlyView } from "./drawMonthlyView";
 import { drawYearlyView } from "./drawYearlyView";
+import { drawHourlyView } from "./drawHourlyView";
 
 export const drawGrid = (
   ctx: CanvasRenderingContext2D,
@@ -14,7 +15,9 @@ export const drawGrid = (
   const canvasWrapper = document.getElementById(canvasWrapperId);
   if (!canvasWrapper) return;
 
-  if (zoom === 1) {
+  if (zoom === 2) {
+    drawHourlyView(ctx, rows, cols, parsedStartDate);
+  } else if (zoom === 1) {
     drawMonthlyView(ctx, rows, cols, parsedStartDate);
   } else {
     drawYearlyView(ctx, rows, cols, parsedStartDate);

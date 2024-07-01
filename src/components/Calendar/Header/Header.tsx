@@ -4,7 +4,8 @@ import {
   screenWidthMultiplier,
   canvasHeaderWrapperId,
   outsideWrapperId,
-  leftColumnWidth
+  leftColumnWidth,
+  zoom2HeaderHeight
 } from "@/constants";
 import { useCalendar } from "@/context/CalendarProvider";
 import { useLanguage } from "@/context/LocaleProvider";
@@ -16,14 +17,14 @@ import { StyledCanvas, StyledOuterWrapper, StyledWrapper } from "./styles";
 import Topbar from "./Topbar";
 
 const Header: FC<HeaderProps> = ({ zoom, topBarWidth }) => {
-  const { week } = useLanguage();
+  const { week, day } = useLanguage();
   const { date, cols, dayOfYear, startDate } = useCalendar();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const handleResize = useCallback(
     (ctx: CanvasRenderingContext2D) => {
       const width = getCanvasWidth();
-      const height = headerHeight + 1;
+      const height = zoom === 2 ? zoom2HeaderHeight + 1 : headerHeight + 1;
       resizeCanvas(ctx, width, height);
 
       drawHeader(ctx, zoom, cols, startDate, week, dayOfYear);

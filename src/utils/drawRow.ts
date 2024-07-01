@@ -16,7 +16,8 @@ export const drawRow = (config: DrawRowConfig) => {
     isBottomRow,
     fillStyle,
     topText,
-    bottomText
+    bottomText,
+    labelBetweenCells
   } = config;
 
   ctx.beginPath();
@@ -26,7 +27,23 @@ export const drawRow = (config: DrawRowConfig) => {
   if (label && font && textYPos) {
     ctx.fillStyle = defaultFillStyle;
     ctx.fillRect(x, y, width, height);
-    ctx.strokeRect(x + 0.5, y + 0.5, width, height);
+
+    if (labelBetweenCells) {
+      // ctx.strokeStyle = "red";
+      ctx.moveTo(x, y);
+      ctx.lineTo(x + width, y);
+      ctx.stroke();
+
+      ctx.moveTo(x, y + height);
+      ctx.lineTo(x + width, y + height);
+      ctx.stroke();
+
+      ctx.moveTo(x + width / 2, y + height);
+      ctx.lineTo(x + width / 2, y + height - 5);
+      ctx.stroke();
+    } else {
+      ctx.strokeRect(x + 0.5, y + 0.5, width, height);
+    }
 
     ctx.font = font;
 
