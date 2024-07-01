@@ -1,5 +1,5 @@
 {
-  "name": "@papgooner/react-scheduler",
+  "name": "@papgooner/papgooner-react-scheduler",
   "version": "0.0.2",
   "type": "module",
   "license": "MIT",
@@ -16,8 +16,7 @@
     "calendar"
   ],
   "author": {
-    "name": "Bitnoise",
-    "url": "https://scheduler.bitnoise.pl/"
+    "name": "Papgooner"
   },
   "scripts": {
     "dev": "vite",
