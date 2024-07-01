@@ -13,7 +13,7 @@ const Tiles: FC<TilesProps> = ({ data, zoom, onTileClick }) => {
         return person.data.map((projectsPerRow, rowIndex) =>
           projectsPerRow.map((project) => (
             <Tile
-              key={`${project.id} ${rowIndex}`}
+              key={`${project.id}, ${personIndex}`}
               row={rowIndex + rows}
               data={project}
               zoom={zoom}
