@@ -55,7 +55,16 @@ export const generateProjects = (
         subtitle: getRandomWords(),
         description: getRandomWords(amountOfDscWords),
         bgColor,
-        attendees: ["1","2","3"]
+        attendees: [
+          {
+            service_id: "one",
+            name: "one",
+            email: "one",
+            confirmed: true,
+            arrived: true,
+            attended: true
+          }
+        ]
       });
     }
   }

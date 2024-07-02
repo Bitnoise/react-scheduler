@@ -96,7 +96,7 @@ export type SchedulerProjectData = {
     confirmed: boolean;
     arrived: boolean;
     attended: boolean;
-  };
+  }[];
 };
 
 export type Day = {
