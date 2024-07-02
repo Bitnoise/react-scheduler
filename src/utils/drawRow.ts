@@ -29,7 +29,6 @@ export const drawRow = (config: DrawRowConfig) => {
     ctx.fillRect(x, y, width, height);
 
     if (labelBetweenCells) {
-      // ctx.strokeStyle = "red";
       ctx.moveTo(x, y);
       ctx.lineTo(x + width, y);
       ctx.stroke();

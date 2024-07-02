@@ -21,7 +21,7 @@ export const drawHourlyView = (
 
       drawCell(
         ctx,
-        y * zoom2ColumnWidth,
+        y * zoom2ColumnWidth - zoom2ColumnWidth / 2 - 0.5,
         i * boxHeight,
         zoom2ColumnWidth,
         getIsBusinessDay(date),
