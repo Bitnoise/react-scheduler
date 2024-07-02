@@ -71,9 +71,16 @@ export declare type SchedulerProjectData = {
      */
     bgColor?: string;
     /**
-     * Array of attendee id's. Optional
+     * Array of attendee objects. Optional
      */
-    attendees?: string[];
+    attendees?: {
+        service_id: string;
+        name: string;
+        email: string;
+        confirmed: boolean;
+        arrived: boolean;
+        attended: boolean;
+    }[];
 };
 
 export declare type SchedulerProps = {
