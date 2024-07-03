@@ -81,6 +81,12 @@ export declare type SchedulerProjectData = {
         arrived: boolean;
         attended: boolean;
     }[];
+    /**
+     * Unit event belongs too. Optional
+     */
+    unit?: {
+        unit_id: string;
+    }[];
 };
 
 export declare type SchedulerProps = {

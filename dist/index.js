@@ -2585,10 +2585,7 @@ const vr = z.span`
   }, []), y = n + u[s].length, C = ke(
     () => c.slice(n, y),
     [y, c, n]
-  ), h = ke(
-    () => l.slice(n, y),
-    [y, l, n]
-  );
+  ), h = ke(() => !l || !l.length ? [] : l.slice(n, y), [y, l, n]);
   return {
     page: u[s],
     currentPageNum: s,
