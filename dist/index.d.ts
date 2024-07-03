@@ -82,11 +82,9 @@ export declare type SchedulerProjectData = {
         attended: boolean;
     }[];
     /**
-     * Unit event belongs too. Optional
+     * Unit that owns event. Optional
      */
-    unit?: {
-        unit_id: string;
-    }[];
+    unit?: string;
 };
 
 export declare type SchedulerProps = {

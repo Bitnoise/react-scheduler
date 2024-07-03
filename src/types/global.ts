@@ -98,11 +98,9 @@ export type SchedulerProjectData = {
     attended: boolean;
   }[];
   /**
-   * Unit event belongs too. Optional
+   * Unit that owns event. Optional
    */
-  unit?: {
-    unit_id: string;
-  }[];
+  unit?: string;
 };
 
 export type Day = {
