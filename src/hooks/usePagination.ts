@@ -56,10 +56,20 @@ export const usePagination = (data: SchedulerData, datesRange: DatesRange): UseP
     [end, rowsPerPerson, startIndex]
   );
 
-  const projectsPerPage = useMemo(
-    () => projectsPerPerson.slice(startIndex, end),
-    [end, projectsPerPerson, startIndex]
-  );
+  // error appears here: calling .length on undefined
+  // const projectsPerPage = useMemo(
+  //   () => projectsPerPerson.slice(startIndex, end),
+  //   [end, projectsPerPerson, startIndex]
+  // );
+
+const projectsPerPage = useMemo(() => {
+  // Check if projectsPerPerson is defined and has elements
+  if (!projectsPerPerson || !projectsPerPerson.length) {
+    return [];
+  }
+
+  return projectsPerPerson.slice(startIndex, end);
+}, [end, projectsPerPerson, startIndex]);
 
   return {
     page: pages[pageNum],
