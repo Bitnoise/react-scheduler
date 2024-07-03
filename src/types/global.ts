@@ -97,6 +97,10 @@ export type SchedulerProjectData = {
     arrived: boolean;
     attended: boolean;
   }[];
+  /**
+   * Unit that owns event. Optional
+   */
+  unit?: string;
 };
 
 export type Day = {
