@@ -1,4 +1,3 @@
-
 import enDayjsTranslations from "dayjs/locale/en";
 import plDayjsTranslations from "dayjs/locale/pl";
 import deDayjsTranslations from "dayjs/locale/de";
@@ -16,13 +15,13 @@ export const localesData: LocaleType[] = [
   {
     id: "pl",
     lang: pl,
-    translateCode: "pl-PL"
+    translateCode: "pl-PL",
     dayjsTranslations: plDayjsTranslations
   },
   {
     id: "lt",
     lang: lt,
-    translateCode: "lt-LT"
+    translateCode: "lt-LT",
     dayjsTranslations: ltDayjsTranslations
   },
   {
