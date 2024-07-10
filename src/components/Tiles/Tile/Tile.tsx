@@ -40,7 +40,7 @@ const Tile: FC<TileProps> = ({ row, data, zoom, onTileClick }) => {
           <StyledText bold>{data.title}</StyledText>
           <StyledText>{data.subtitle}</StyledText>
           <StyledDescription>{data.description}</StyledDescription>
-          <StyledText>{data.attendees?.length}</StyledText>
+          <StyledText>Attendees: {data.attendees?.length || "0"}</StyledText>
         </StyledStickyWrapper>
       </StyledTextWrapper>
     </StyledTileWrapper>
