@@ -13,33 +13,34 @@ import { Day } from "@/types/global";
 import { drawRow } from "../../drawRow";
 
 export const drawZoom2MonthsOnTop = (ctx: CanvasRenderingContext2D, cols, startDate: Day) => {
-  const yPos = 50;
-  let xPos = 0;
-  let width = 0;
-  let yearIndex = 0;
-  let startMonthIndex = dayjs(
-    `${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`
-  ).month();
-  xPos = -startDate.dayOfMonth * zoom2ColumnWidth + zoom2ColumnWidth;
+  // let yearIndex = 0;
+  let index = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`).month();
+  // xPos = -startDate.dayOfMonth * zoom2ColumnWidth + 0.5 * zoom2ColumnWidth;
 
   for (let i = 0; i < monthsInYear; i++) {
-    if (startMonthIndex > monthsInYear - 1) {
-      startMonthIndex = 0;
-      yearIndex++;
+    if (index > monthsInYear - 1) {
+      index = 0;
+      // yearIndex++;
     }
-    const dayInMonth = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`)
+
+    const middleDay = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`).add(
+      Math.ceil(cols / 2),
+      "hours"
+    );
+
+    const daysInMonth = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`)
       .add(i, "months")
       .daysInMonth();
 
-    const month = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`).add(
+    const month = dayjs(`${startDate.year}-${startDate.month}-${startDate.dayOfMonth}`).add(
       i,
       "months"
     );
 
-    width = cols * zoom2ColumnWidth;
+    const width = 24 * daysInMonth * zoom2ColumnWidth;
+    let xPos =
+      -middleDay.hour() * zoom2ColumnWidth + i * 24 * zoom2ColumnWidth + 0.5 * zoom2ColumnWidth;
     // width = 500;
-
-    console.log("WWW", width);
 
     drawRow({
       ctx,
@@ -53,6 +54,6 @@ export const drawZoom2MonthsOnTop = (ctx: CanvasRenderingContext2D, cols, startD
     });
 
     xPos += width;
-    startMonthIndex++;
+    index++;
   }
 };

@@ -88,7 +88,18 @@ const CalendarProvider = ({
   const loadMore = useCallback(
     (direction: Direction) => {
       const cols = getVisibleCols(zoom);
-      const offset = zoom === 0 ? cols * 7 : cols;
+      let offset;
+      switch (zoom) {
+        case 0:
+          offset = cols * 7;
+          break;
+        case 1:
+          offset = cols;
+          break;
+        case 2:
+          offset = cols / 24;
+          break;
+      }
       const load = debounce(() => {
         switch (direction) {
           case "back":
@@ -146,10 +157,10 @@ const CalendarProvider = ({
   const handleScrollNext = useCallback(() => {
     if (isLoading) return;
 
-    loadMore("forward");
-    debounce(() => {
-      moveHorizontalScroll("forward");
-    }, 300)();
+    // loadMore("forward");
+    // debounce(() => {
+    //   moveHorizontalScroll("forward");
+    // }, 300)();
   }, [isLoading, loadMore, moveHorizontalScroll]);
 
   const handleGoPrev = () => {
@@ -161,10 +172,10 @@ const CalendarProvider = ({
 
   const handleScrollPrev = useCallback(() => {
     if (!isInitialized || isLoading) return;
-    loadMore("back");
-    debounce(() => {
-      moveHorizontalScroll("back");
-    }, 300)();
+    // loadMore("back");
+    // debounce(() => {
+    //   moveHorizontalScroll("back");
+    // }, 300)();
   }, [isInitialized, isLoading, loadMore, moveHorizontalScroll]);
 
   const handleGoToday = useCallback(() => {

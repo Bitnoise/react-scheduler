@@ -12,7 +12,8 @@ function App() {
     peopleCount: 15,
     projectsPerYear: 5,
     yearsCovered: 0,
-    startDate: undefined,
+    // startDate: undefined,
+    startDate: "2024-07-22T10:30:00.000Z",
     maxRecordsPerPage: 50,
     isFullscreen: true
   });
@@ -62,7 +63,7 @@ function App() {
         <Scheduler
           startDate={values.startDate ? new Date(values.startDate).toISOString() : undefined}
           onRangeChange={handleRangeChange}
-          data={filteredData}
+          data={mockedSchedulerData}
           isLoading={false}
           onTileClick={handleTileClick}
           onFilterData={handleFilterData}
@@ -75,7 +76,7 @@ function App() {
             startDate={values.startDate ? new Date(values.startDate).toISOString() : undefined}
             onRangeChange={handleRangeChange}
             isLoading={false}
-            data={filteredData}
+            data={mockedSchedulerData}
             onTileClick={handleTileClick}
             onFilterData={handleFilterData}
             onItemClick={(data) => console.log("clicked: ", data)}
@@ -87,3 +88,36 @@ function App() {
 }
 
 export default App;
+
+const mockedSchedulerData = [
+  {
+    id: "070ac5b5-8369-4cd2-8ba2-0a209130cc60",
+    label: {
+      icon: "https://picsum.photos/24",
+      title: "Joe Biden",
+      subtitle: "Frontend Developer"
+    },
+    data: [
+      {
+        id: "8b71a8a5-33dd-4fc8-9caa-b4a584ba3762",
+        startDate: new Date("2024-07-22T10:30:00.000Z"),
+        endDate: new Date("2024-07-22T11:00:00.000Z"),
+        occupancy: 3600,
+        title: "Daily",
+        subtitle: "Subtitle A",
+        description: "array indexing Salad West Account",
+        bgColor: "rgb(254,165,177)"
+      },
+      {
+        id: "22fbe237-6344-4c8e-affb-64a1750f33bd",
+        startDate: new Date("2024-07-22T15:30:00.000Z"),
+        endDate: new Date("2024-07-22T16:00:00.000Z"),
+        occupancy: 2852,
+        title: "retro",
+        subtitle: "Subtitle B",
+        description: "Tuna Home pascal IP drive",
+        bgColor: "rgb(254,165,177)"
+      }
+    ]
+  }
+];

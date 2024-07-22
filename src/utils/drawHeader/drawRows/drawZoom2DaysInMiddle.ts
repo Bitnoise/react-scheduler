@@ -19,23 +19,28 @@ export const drawZoom2DaysInMiddle = (
   cols: number,
   startDate: Day
 ) => {
-  // let xPos = -(startDate.dayOfMonth - 1) * zoom2ColumnWidth;
-  let xPos = (cols / 2) * zoom2ColumnWidth - 4 * zoom2ColumnWidth;
   const yPos = zoom2HeaderTopRowHeight;
-  const monthIndex = startDate.month;
-  let index = monthIndex;
 
-  const daysInMonth = dayjs(
-    `${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`
-  ).daysInMonth();
+  const daysInRange = Math.floor(cols / 24) + 2; // +2 to make sure we have enough days to draw, one day before and one day after
 
-  console.log("DAYS IN MONTH", `${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`);
-  for (let i = 0; i < daysInMonth; i++) {
-    if (index >= daysInMonth) index = 0;
+  const middleDay = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`).add(
+    Math.ceil(cols / 2),
+    "hours"
+  );
 
-    // console.log("MUU", getDaysInMonths(startDate, i));
-    const width = 24 * zoom2ColumnWidth;
+  // const xPosOffset = -3 * zoom2ColumnWidth;
+  const xPosOffset = (Math.ceil(cols / 2) - dayjs().hour()) * zoom2ColumnWidth;
 
+  // console.log("middleDay", middleDay.format("DD.MM.YYYY HH:mm"));
+  console.log("NOW", dayjs().hour());
+
+  let index = startDate.dayOfMonth;
+  let xPos = xPosOffset + 0.5 * zoom2ColumnWidth;
+  const width = 24 * zoom2ColumnWidth;
+
+  for (let i = 0; i < daysInRange; i++) {
+    // console.log("MMEH", dayjs().day(index).format("dddd DD.MM.YYYY").toUpperCase());
+    console.log("MMEH", dayjs().day(i).format("dddd DD.MM.YYYY").toUpperCase());
     drawRow({
       ctx,
       x: xPos,
@@ -43,8 +48,7 @@ export const drawZoom2DaysInMiddle = (
       width,
       height: zoom2HeaderMiddleRowHeight,
       textYPos: zoom2HeaderTopRowHeight + zoom2HeaderMiddleRowHeight / 2 + 2,
-      label: dayjs().day(index).format("dddd DD.MM.YYYY").toUpperCase(),
-      // label: "DAY",
+      label: dayjs().day(i).format("dddd DD.MM.YYYY").toUpperCase(),
       font: fonts.bottomRow.number
     });
     xPos += width;
