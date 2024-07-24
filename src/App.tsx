@@ -13,7 +13,7 @@ function App() {
     projectsPerYear: 5,
     yearsCovered: 0,
     // startDate: undefined,
-    startDate: "2024-07-22T10:30:00.000Z",
+    startDate: "2024-07-24T10:30:00.000Z",
     maxRecordsPerPage: 50,
     isFullscreen: true
   });
@@ -100,8 +100,8 @@ const mockedSchedulerData = [
     data: [
       {
         id: "8b71a8a5-33dd-4fc8-9caa-b4a584ba3762",
-        startDate: new Date("2024-07-22T10:30:00.000Z"),
-        endDate: new Date("2024-07-22T11:00:00.000Z"),
+        startDate: new Date("2024-07-24T10:30:00.000Z"),
+        endDate: new Date("2024-07-24T11:00:00.000Z"),
         occupancy: 3600,
         title: "Daily",
         subtitle: "Subtitle A",
@@ -110,8 +110,8 @@ const mockedSchedulerData = [
       },
       {
         id: "22fbe237-6344-4c8e-affb-64a1750f33bd",
-        startDate: new Date("2024-07-22T15:30:00.000Z"),
-        endDate: new Date("2024-07-22T16:00:00.000Z"),
+        startDate: new Date("2024-07-24T15:30:00.000Z"),
+        endDate: new Date("2024-07-24T16:00:00.000Z"),
         occupancy: 2852,
         title: "retro",
         subtitle: "Subtitle B",
