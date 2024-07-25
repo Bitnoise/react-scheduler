@@ -13,28 +13,20 @@ export const drawZoom2DaysInMiddle = (
   cols: number,
   startDate: Day
 ) => {
-  const yPos = zoom2HeaderTopRowHeight;
-
-  const daysInRange = Math.floor(cols / 24) + 2; // +2 to make sure we have enough days to draw, one day before and one day after
+  const daysInRange = Math.floor(cols / 24);
 
   const width = 24 * zoom2ColumnWidth;
   const xPosOffset =
-    (Math.floor(cols / 2) - dayjs().hour()) * zoom2ColumnWidth -
-    Math.floor(daysInRange / 2) * width;
+    (Math.ceil(cols / 2) - dayjs().hour()) * zoom2ColumnWidth - Math.ceil(daysInRange / 2) * width;
 
   let xPos = xPosOffset + 0.5 * zoom2ColumnWidth;
 
   for (let i = 0; i < daysInRange; i++) {
-    let day = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth + 1}`);
-    if (i < Math.floor(daysInRange / 2)) {
-      day = day.subtract(Math.floor(daysInRange / 2) - i, "days");
-    } else {
-      day = day.add(i - Math.floor(daysInRange / 2), "days");
-    }
+    const day = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth + i}`);
     drawRow({
       ctx,
       x: xPos,
-      y: yPos,
+      y: zoom2HeaderTopRowHeight,
       width,
       height: zoom2HeaderMiddleRowHeight,
       textYPos: zoom2HeaderTopRowHeight + zoom2HeaderMiddleRowHeight / 2 + 2,
