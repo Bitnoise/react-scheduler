@@ -22,11 +22,10 @@ export const drawZoom2DaysInMiddle = (
     (Math.floor(cols / 2) - dayjs().hour()) * zoom2ColumnWidth -
     Math.floor(daysInRange / 2) * width;
 
-  let index = startDate.dayOfMonth;
   let xPos = xPosOffset + 0.5 * zoom2ColumnWidth;
 
   for (let i = 0; i < daysInRange; i++) {
-    let day = dayjs();
+    let day = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth + 1}`);
     if (i < Math.floor(daysInRange / 2)) {
       day = day.subtract(Math.floor(daysInRange / 2) - i, "days");
     } else {
@@ -43,6 +42,5 @@ export const drawZoom2DaysInMiddle = (
       font: fonts.bottomRow.number
     });
     xPos += width;
-    index++;
   }
 };

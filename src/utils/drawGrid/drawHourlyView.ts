@@ -4,7 +4,13 @@ import { boxHeight, zoom2ColumnWidth } from "@/constants";
 import { getIsBusinessDay } from "../dates";
 import { drawCell } from "./drawCell";
 
-export const drawHourlyView = (ctx: CanvasRenderingContext2D, rows: number, cols: number) => {
+export const drawHourlyView = (
+  ctx: CanvasRenderingContext2D,
+  rows: number,
+  cols: number,
+  startDate: Day
+) => {
+  const date = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth + 1}`);
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j <= cols; j++) {
       let hour;
@@ -19,7 +25,7 @@ export const drawHourlyView = (ctx: CanvasRenderingContext2D, rows: number, cols
         hour = dayjs().subtract(Math.floor(cols / 2) - i, "hours");
       }
 
-      const isCurrentHour = hour.isSame(dayjs(), "hour");
+      const isCurrentHour = date.isSame(dayjs(), "day") && hour.isSame(dayjs(), "hour");
 
       drawCell(
         ctx,

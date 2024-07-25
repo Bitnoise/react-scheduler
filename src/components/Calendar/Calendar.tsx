@@ -117,7 +117,6 @@ export const Calendar: FC<CalendarProps> = ({ data, onTileClick, onItemClick, to
     setFilteredData(data);
   }, [data, searchPhrase]);
 
-  console.log("START DATE", startDate);
   return (
     <StyledOuterWrapper>
       <LeftColumn

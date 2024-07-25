@@ -12,8 +12,7 @@ function App() {
     peopleCount: 15,
     projectsPerYear: 5,
     yearsCovered: 0,
-    // startDate: undefined,
-    startDate: "2024-07-24T10:30:00.000Z",
+    startDate: undefined,
     maxRecordsPerPage: 50,
     isFullscreen: true
   });

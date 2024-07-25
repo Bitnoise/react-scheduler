@@ -97,7 +97,7 @@ const CalendarProvider = ({
           offset = cols;
           break;
         case 2:
-          offset = cols / 24;
+          offset = Math.ceil(cols / 24);
           break;
       }
       const load = debounce(() => {
@@ -157,10 +157,10 @@ const CalendarProvider = ({
   const handleScrollNext = useCallback(() => {
     if (isLoading) return;
 
-    // loadMore("forward");
-    // debounce(() => {
-    //   moveHorizontalScroll("forward");
-    // }, 300)();
+    loadMore("forward");
+    debounce(() => {
+      moveHorizontalScroll("forward");
+    }, 300)();
   }, [isLoading, loadMore, moveHorizontalScroll]);
 
   const handleGoPrev = () => {
@@ -172,10 +172,10 @@ const CalendarProvider = ({
 
   const handleScrollPrev = useCallback(() => {
     if (!isInitialized || isLoading) return;
-    // loadMore("back");
-    // debounce(() => {
-    //   moveHorizontalScroll("back");
-    // }, 300)();
+    loadMore("back");
+    debounce(() => {
+      moveHorizontalScroll("back");
+    }, 300)();
   }, [isInitialized, isLoading, loadMore, moveHorizontalScroll]);
 
   const handleGoToday = useCallback(() => {
@@ -201,6 +201,10 @@ const CalendarProvider = ({
   const handleFilterData = () => onFilterData?.();
 
   const { Provider } = calendarContext;
+
+  // debugger;
+
+  console.log("DATE", date);
 
   return (
     <Provider

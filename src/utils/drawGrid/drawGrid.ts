@@ -16,7 +16,7 @@ export const drawGrid = (
   if (!canvasWrapper) return;
 
   if (zoom === 2) {
-    drawHourlyView(ctx, rows, cols);
+    drawHourlyView(ctx, rows, cols, parsedStartDate);
   } else if (zoom === 1) {
     drawMonthlyView(ctx, rows, cols, parsedStartDate);
   } else {
