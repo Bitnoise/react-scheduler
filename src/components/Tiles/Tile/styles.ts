@@ -11,7 +11,7 @@ export const StyledTileWrapper = styled.button`
   border: none;
   border-radius: 4px;
   text-align: left;
-  color: white;
+  color: ${({ theme }) => theme.colors.textPrimary};
   width: 100%;
   cursor: pointer;
 `;

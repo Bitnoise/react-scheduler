@@ -1,9 +1,7 @@
-import { theme } from "@/styles";
+import { Theme } from "@/styles";
 import { DrawRowConfig } from "@/types/global";
 
-const defaultFillStyle = theme.colors.white;
-
-export const drawRow = (config: DrawRowConfig) => {
+export const drawRow = (config: DrawRowConfig, theme: Theme) => {
   const {
     ctx,
     x,
@@ -20,11 +18,11 @@ export const drawRow = (config: DrawRowConfig) => {
   } = config;
 
   ctx.beginPath();
-  ctx.strokeStyle = theme.colors.grey400;
+  ctx.strokeStyle = theme.colors.border;
   ctx.setLineDash([]);
 
   if (label && font && textYPos) {
-    ctx.fillStyle = defaultFillStyle;
+    ctx.fillStyle = theme.colors.gridBackground;
     ctx.fillRect(x, y, width, height);
     ctx.strokeRect(x + 0.5, y + 0.5, width, height);
 
@@ -32,7 +30,7 @@ export const drawRow = (config: DrawRowConfig) => {
 
     const textXPos = x + width / 2 - ctx.measureText(label).width / 2;
     ctx.textBaseline = "middle";
-    ctx.fillStyle = theme.colors.grey600;
+    ctx.fillStyle = theme.colors.placeholder;
     ctx.fillText(label, textXPos, textYPos);
   }
   if (isBottomRow && fillStyle && topText && bottomText) {

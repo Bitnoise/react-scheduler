@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { theme } from "@/styles";
 import { boxHeight } from "@/constants";
 import { StyledLeftColumnItemWrapperProps, StyledTextProps } from "./types";
 
@@ -10,11 +9,11 @@ export const StyledWrapper = styled.div<StyledLeftColumnItemWrapperProps>`
   width: 100%;
   min-height: ${boxHeight}px;
   height: calc(${boxHeight}px * ${({ rows }) => rows});
-  border-top: 1px solid ${({ theme }) => theme.colors.grey400};
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
   transition: 0.5s ease;
   cursor: ${({ clickable }) => (clickable ? "pointer" : "auto")};
   &:hover {
-    background-color: ${({ theme }) => theme.colors.blue200};
+    background-color: ${({ theme }) => theme.colors.hover};
   }
 `;
 
@@ -47,7 +46,7 @@ export const StyledText = styled.p<StyledTextProps>`
   font-size: ${({ isMain }) => (isMain ? 0.75 + "rem" : 0.625 + "rem")};
   letter-spacing: ${({ isMain }) => (isMain ? 1 + "px" : 0.5 + "px")};
   line-height: ${({ isMain }) => (isMain ? 1.125 + "rem" : 0.75 + "rem")};
-  color: ${({ isMain }) => (isMain ? theme.colors.black : theme.colors.grey600)};
+  color: ${({ isMain, theme }) => (isMain ? theme.colors.textPrimary : theme.colors.placeholder)};
   text-overflow: ellipsis;
   display: inline-block;
   max-width: 144px;

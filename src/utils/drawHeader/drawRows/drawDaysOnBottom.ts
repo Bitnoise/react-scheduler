@@ -11,11 +11,17 @@ import {
   headerWeekHeight
 } from "@/constants";
 import { parseDay } from "@/utils/dates";
+import { Theme } from "@/styles";
 import { drawRow } from "../../drawRow";
 import { getBoxFillStyle } from "../../getBoxFillStyle";
 import { getTextStyle } from "../../getTextStyle";
 
-export const drawDaysOnBottom = (ctx: CanvasRenderingContext2D, cols: number, startDate: Day) => {
+export const drawDaysOnBottom = (
+  ctx: CanvasRenderingContext2D,
+  cols: number,
+  startDate: Day,
+  theme: Theme
+) => {
   const dayNameYPos = headerHeight - headerDayHeight / dayNameYoffset;
   const dayNumYPos = headerHeight - headerDayHeight / dayNumYOffset;
   const yPos = headerMonthHeight + headerWeekHeight;
@@ -25,31 +31,46 @@ export const drawDaysOnBottom = (ctx: CanvasRenderingContext2D, cols: number, st
     const day = parseDay(
       dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`).add(i, "days")
     );
-    drawRow({
-      ctx,
-      x: xPos,
-      y: yPos,
-      width: dayWidth,
-      height: headerDayHeight,
-      isBottomRow: true,
-      fillStyle: getBoxFillStyle({ isCurrent: day.isCurrentDay, isBusinessDay: day.isBusinessDay }),
-      topText: {
-        y: dayNameYPos,
-        label: day.dayName.toUpperCase(),
-        font: fonts.bottomRow.name,
-        color: getTextStyle({ isCurrent: day.isCurrentDay, isBusinessDay: day.isBusinessDay })
+    drawRow(
+      {
+        ctx,
+        x: xPos,
+        y: yPos,
+        width: dayWidth,
+        height: headerDayHeight,
+        isBottomRow: true,
+        fillStyle: getBoxFillStyle(
+          {
+            isCurrent: day.isCurrentDay,
+            isBusinessDay: day.isBusinessDay
+          },
+          theme
+        ),
+        topText: {
+          y: dayNameYPos,
+          label: day.dayName.toUpperCase(),
+          font: fonts.bottomRow.name,
+          color: getTextStyle(
+            { isCurrent: day.isCurrentDay, isBusinessDay: day.isBusinessDay },
+            theme
+          )
+        },
+        bottomText: {
+          y: dayNumYPos,
+          label: `${day.dayOfMonth}`,
+          font: fonts.bottomRow.number,
+          color: getTextStyle(
+            {
+              isCurrent: day.isCurrentDay,
+              isBusinessDay: day.isBusinessDay,
+              variant: "bottomRow"
+            },
+            theme
+          )
+        }
       },
-      bottomText: {
-        y: dayNumYPos,
-        label: `${day.dayOfMonth}`,
-        font: fonts.bottomRow.number,
-        color: getTextStyle({
-          isCurrent: day.isCurrentDay,
-          isBusinessDay: day.isBusinessDay,
-          variant: "bottomRow"
-        })
-      }
-    });
+      theme
+    );
 
     xPos += dayWidth;
   }

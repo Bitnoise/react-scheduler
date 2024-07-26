@@ -1,4 +1,5 @@
 import { Day } from "@/types/global";
+import { Theme } from "@/styles";
 import { drawDaysOnBottom } from "./drawRows/drawDaysOnBottom";
 import { drawMonthsInMiddle } from "./drawRows/drawMonthsInMiddle";
 import { drawMonthsOnTop } from "./drawRows/drawMonthsOnTop";
@@ -12,15 +13,16 @@ export const drawHeader = (
   cols: number,
   startDate: Day,
   weekLabel: string,
-  dayOfYear: number
+  dayOfYear: number,
+  theme: Theme
 ) => {
   if (zoom === 0) {
-    drawYearsOnTop(ctx, startDate, dayOfYear);
-    drawMonthsInMiddle(ctx, cols, startDate);
-    drawWeeksOnBottom(ctx, cols, startDate, weekLabel);
+    drawYearsOnTop(ctx, startDate, dayOfYear, theme);
+    drawMonthsInMiddle(ctx, cols, startDate, theme);
+    drawWeeksOnBottom(ctx, cols, startDate, weekLabel, theme);
   } else {
-    drawMonthsOnTop(ctx, startDate);
-    drawWeeksInMiddle(ctx, startDate, weekLabel);
-    drawDaysOnBottom(ctx, cols, startDate);
+    drawMonthsOnTop(ctx, startDate, theme);
+    drawWeeksInMiddle(ctx, startDate, weekLabel, theme);
+    drawDaysOnBottom(ctx, cols, startDate, theme);
   }
 };

@@ -1,4 +1,4 @@
-import { prefixId, theme } from "./styles";
+import { prefixId } from "./styles";
 
 export const dayWidth = 50;
 export const headerMonthHeight = 24;
@@ -11,7 +11,6 @@ export const leftColumnWidth = 196;
 export const singleDayWidth = 12;
 export const weeksInYear = 52;
 export const navHeight = 44;
-export const daysFillStyle = theme.colors.blue100;
 export const fonts = {
   topRow: "600 14px Inter",
   middleRow: "400 10px Inter",
@@ -44,4 +43,3 @@ export const topRowTextYPos = headerMonthHeight / 2 + 2;
 export const middleRowTextYPos = headerWeekHeight / 2 + headerMonthHeight + 1;
 export const buttonWeeksJump = 2;
 export const minutesInHour = 60;
-export const tileDefaultBgColor = "rgb(114,141,226)";

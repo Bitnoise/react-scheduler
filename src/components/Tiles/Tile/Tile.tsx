@@ -1,8 +1,8 @@
 import { FC } from "react";
+import { useTheme } from "styled-components";
 import { useCalendar } from "@/context/CalendarProvider";
 import { getDatesRange } from "@/utils/getDatesRange";
 import { getTileProperties } from "@/utils/getTileProperties";
-import { tileDefaultBgColor } from "@/constants";
 import { getTileTextColor } from "@/utils/getTileTextColor";
 import {
   StyledDescription,
@@ -25,12 +25,14 @@ const Tile: FC<TileProps> = ({ row, data, zoom, onTileClick }) => {
     zoom
   );
 
+  const { colors } = useTheme();
+
   return (
     <StyledTileWrapper
       style={{
         left: `${x}px`,
         top: `${y}px`,
-        backgroundColor: `${data.bgColor ?? tileDefaultBgColor}`,
+        backgroundColor: `${data.bgColor ?? colors.defaultTile}`,
         width: `${width}px`,
         color: getTileTextColor(data.bgColor ?? "")
       }}

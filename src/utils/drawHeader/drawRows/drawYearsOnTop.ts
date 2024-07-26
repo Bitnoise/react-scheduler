@@ -1,11 +1,13 @@
 import { fonts, headerMonthHeight, singleDayWidth, topRowTextYPos } from "@/constants";
+import { Theme } from "@/styles";
 import { Day } from "@/types/global";
 import { daysInYear } from "@/utils/dates";
 import { drawRow } from "@/utils/drawRow";
 export const drawYearsOnTop = (
   ctx: CanvasRenderingContext2D,
   startDate: Day,
-  dayOfYear: number
+  dayOfYear: number,
+  theme: Theme
 ) => {
   const yPos = 0;
   const year = startDate.year;
@@ -24,16 +26,19 @@ export const drawYearsOnTop = (
       width = Math.ceil((canvasWidth - totalWidthOfElements) / singleDayWidth) * singleDayWidth;
     }
 
-    drawRow({
-      ctx,
-      x: xPos,
-      y: yPos,
-      width,
-      height: headerMonthHeight,
-      textYPos: topRowTextYPos,
-      label: (year + index).toString(),
-      font: fonts.topRow
-    });
+    drawRow(
+      {
+        ctx,
+        x: xPos,
+        y: yPos,
+        width,
+        height: headerMonthHeight,
+        textYPos: topRowTextYPos,
+        label: (year + index).toString(),
+        font: fonts.topRow
+      },
+      theme
+    );
 
     xPos += width;
     totalWidthOfElements += width;
