@@ -19,7 +19,13 @@ const initialTooltipData: TooltipData = {
   }
 };
 
-export const Calendar: FC<CalendarProps> = ({ data, onTileClick, onItemClick, topBarWidth }) => {
+export const Calendar: FC<CalendarProps> = ({
+  data,
+  onTileClick,
+  onItemClick,
+  toggleTheme,
+  topBarWidth
+}) => {
   const [tooltipData, setTooltipData] = useState<TooltipData>(initialTooltipData);
   const [filteredData, setFilteredData] = useState(data);
   const [isVisible, setIsVisible] = useState(false);
@@ -27,7 +33,7 @@ export const Calendar: FC<CalendarProps> = ({ data, onTileClick, onItemClick, to
   const {
     zoom,
     startDate,
-    config: { includeTakenHoursOnWeekendsInDayView, showTooltip }
+    config: { includeTakenHoursOnWeekendsInDayView, showTooltip, showThemeToggle }
   } = useCalendar();
   const gridRef = useRef<HTMLDivElement>(null);
   const {
@@ -131,7 +137,12 @@ export const Calendar: FC<CalendarProps> = ({ data, onTileClick, onItemClick, to
         onItemClick={onItemClick}
       />
       <StyledInnerWrapper>
-        <Header zoom={zoom} topBarWidth={topBarWidth} />
+        <Header
+          zoom={zoom}
+          topBarWidth={topBarWidth}
+          showThemeToggle={showThemeToggle}
+          toggleTheme={toggleTheme}
+        />
         {data.length ? (
           <Grid
             data={page}

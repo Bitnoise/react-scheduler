@@ -17,4 +17,5 @@ export const StyledText = styled.p`
   font-size: 20px;
   letter-spacing: 1px;
   line-height: 1px;
+  color: ${({ theme }) => theme.colors.textPrimary};
 `;

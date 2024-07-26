@@ -10,6 +10,8 @@ import { ReactComponent as arrowUp } from "./svgs/arrow-up.svg";
 import { ReactComponent as arrowDown } from "./svgs/arrow-down.svg";
 import { ReactComponent as search } from "./svgs/search.svg";
 import { ReactComponent as close } from "./svgs/close.svg";
+import { ReactComponent as moon } from "./svgs/moon.svg";
+import { ReactComponent as sun } from "./svgs/sun.svg";
 import { Icon, IconsNames } from "./types";
 
 const icons: { [key in IconsNames]: Icon } = {
@@ -24,7 +26,9 @@ const icons: { [key in IconsNames]: Icon } = {
   arrowDown,
   arrowUp,
   search,
-  close
+  close,
+  moon,
+  sun
 };
 
 export default icons;
