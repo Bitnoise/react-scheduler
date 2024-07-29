@@ -41,6 +41,16 @@ const Scheduler = ({
     themeMode === "light" ? setThemeMode("dark") : setThemeMode("light");
   };
 
+  const currentTheme = themeMode === "light" ? theme : darkTheme;
+  const customColors = appConfig.theme ? appConfig.theme[currentTheme.mode] : {};
+  const mergedTheme = {
+    ...currentTheme,
+    colors: {
+      ...currentTheme.colors,
+      ...customColors
+    }
+  };
+
   useEffect(() => {
     const handleResize = () => {
       if (outsideWrapperRef.current) {
@@ -59,7 +69,7 @@ const Scheduler = ({
   return (
     <>
       <GlobalStyle />
-      <ThemeProvider theme={themeMode === "light" ? theme : darkTheme}>
+      <ThemeProvider theme={mergedTheme}>
         <LocaleProvider lang={appConfig.lang} translations={appConfig.translations}>
           <CalendarProvider
             data={data}

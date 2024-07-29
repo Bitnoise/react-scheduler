@@ -1,4 +1,5 @@
 import { LocaleType } from "@/context/LocaleProvider/types";
+import { ColorType } from "@/styles";
 
 export const allZoomLevel = [0, 1] as const;
 
@@ -49,6 +50,12 @@ export type Config = {
    * @default "light"
    */
   defaultTheme?: "light" | "dark";
+  theme?: Theme;
+};
+
+export type Theme = {
+  light?: Partial<Record<ColorType, string>>;
+  dark?: Partial<Record<ColorType, string>>;
 };
 
 export type SchedulerData = SchedulerRow[];

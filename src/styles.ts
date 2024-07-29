@@ -21,7 +21,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 
-type ColorType =
+export type ColorType =
   | "background"
   | "gridBackground"
   | "primary"
