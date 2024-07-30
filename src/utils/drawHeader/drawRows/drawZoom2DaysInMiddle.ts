@@ -13,11 +13,12 @@ export const drawZoom2DaysInMiddle = (
   cols: number,
   startDate: Day
 ) => {
-  const daysInRange = Math.floor(cols / 24);
+  const daysInRange = Math.floor(cols / 24) + 2;
 
   const width = 24 * zoom2ColumnWidth;
   const xPosOffset =
-    (Math.ceil(cols / 2) - dayjs().hour()) * zoom2ColumnWidth - Math.ceil(daysInRange / 2) * width;
+    (Math.floor(cols / 2) - dayjs().hour()) * zoom2ColumnWidth -
+    Math.floor(daysInRange / 2) * width;
 
   let xPos = xPosOffset + 0.5 * zoom2ColumnWidth;
 
