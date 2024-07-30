@@ -1,12 +1,5 @@
 import dayjs from "dayjs";
-import {
-  fonts,
-  leftColumnWidth,
-  outsideWrapperId,
-  screenWidthMultiplier,
-  topRowTextYPos,
-  zoom2HeaderTopRowHeight
-} from "@/constants";
+import { fonts, topRowTextYPos, zoom2ColumnWidth, zoom2HeaderTopRowHeight } from "@/constants";
 import { Day } from "@/types/global";
 import { drawRow } from "../../drawRow";
 
@@ -15,19 +8,51 @@ export const drawZoom2MonthsOnTop = (
   cols: number,
   startDate: Day
 ) => {
-  const month = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth + 1}`);
+  const daysInRange = Math.ceil(cols / 24);
+  const startDay = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`);
+  const endDate = startDay.add(daysInRange - 1, "days");
+  const startMonth = startDay.month();
+  const endMonth = endDate.add(1, "day").month();
+  const monthsInRange = startMonth === endMonth ? 1 : 2;
 
-  const wrapperWidth = document.getElementById(outsideWrapperId)?.clientWidth || 0;
-  const componentWidth = wrapperWidth - leftColumnWidth;
+  const endOfMonthPosition =
+    (startMonth !== startDay.add(2, "day").month() ? 1 : 0) +
+    (startMonth !== startDay.add(1, "day").month() ? 1 : 0);
 
-  drawRow({
-    ctx,
-    x: 0,
-    y: 0,
-    width: componentWidth * screenWidthMultiplier,
-    height: zoom2HeaderTopRowHeight,
-    textYPos: topRowTextYPos,
-    label: month.format("MMMM").toUpperCase(),
-    font: fonts.topRow
-  });
+  let shift = 24;
+  switch (endOfMonthPosition) {
+    case 0:
+      shift = 24;
+      break;
+    case 1:
+      shift = 0;
+      break;
+    case 2:
+      shift = -24;
+  }
+
+  const firstWidth =
+    monthsInRange === 1
+      ? cols * zoom2ColumnWidth
+      : (Math.floor(cols / 2) + -dayjs().hour() + shift) * zoom2ColumnWidth +
+        0.5 * zoom2ColumnWidth;
+
+  for (let i = 0; i < monthsInRange; i++) {
+    const monthLabel = dayjs(`${startDate.year}-${startDate.month + i + 1}-01`)
+      .format("MMMM")
+      .toUpperCase();
+    const xPos = monthsInRange === 1 ? 0 : i * firstWidth;
+    const width = i === 0 ? firstWidth : zoom2ColumnWidth * cols * 1.5;
+
+    drawRow({
+      ctx,
+      x: xPos,
+      y: 0,
+      width,
+      height: zoom2HeaderTopRowHeight,
+      textYPos: topRowTextYPos,
+      label: monthLabel,
+      font: fonts.topRow
+    });
+  }
 };
