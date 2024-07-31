@@ -100,6 +100,7 @@ export type SchedulerProjectData = {
 };
 
 export type Day = {
+  hour: number;
   dayName: string;
   dayOfMonth: number;
   weekOfYear: number;

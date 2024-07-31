@@ -15,34 +15,19 @@ export const drawZoom2MonthsOnTop = (
   const endMonth = endDate.add(1, "day").month();
   const monthsInRange = startMonth === endMonth ? 1 : 2;
 
-  const endOfMonthPosition =
-    (startMonth !== startDay.add(2, "day").month() ? 1 : 0) +
-    (startMonth !== startDay.add(1, "day").month() ? 1 : 0);
-
-  let shift = 24;
-  switch (endOfMonthPosition) {
-    case 0:
-      shift = 24;
-      break;
-    case 1:
-      shift = 0;
-      break;
-    case 2:
-      shift = -24;
-  }
-
-  const firstWidth =
-    monthsInRange === 1
-      ? cols * zoom2ColumnWidth
-      : (Math.floor(cols / 2) + -dayjs().hour() + shift) * zoom2ColumnWidth +
-        0.5 * zoom2ColumnWidth;
+  let xPos = 0.5 * zoom2ColumnWidth;
 
   for (let i = 0; i < monthsInRange; i++) {
-    const monthLabel = dayjs(`${startDate.year}-${startDate.month + i + 1}-01`)
-      .format("MMMM")
-      .toUpperCase();
-    const xPos = monthsInRange === 1 ? 0 : i * firstWidth;
-    const width = i === 0 ? firstWidth : zoom2ColumnWidth * cols * 1.5;
+    const startDateHour = dayjs(
+      `${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}T${startDate.hour}:00:00`
+    );
+    const firstDayOfAMonth = dayjs(`${startDate.year}-${startDate.month + i + 1}-01T:23:59:59`);
+    const lastDayOfAMonth = firstDayOfAMonth.endOf("month");
+    const monthLabel = lastDayOfAMonth.format("MMMM").toUpperCase();
+
+    const diff = lastDayOfAMonth.diff(startDateHour, "hour") + 1;
+
+    const width = i === 0 ? diff * zoom2ColumnWidth : cols * zoom2ColumnWidth;
 
     drawRow({
       ctx,
@@ -54,5 +39,6 @@ export const drawZoom2MonthsOnTop = (
       label: monthLabel,
       font: fonts.topRow
     });
+    xPos += width;
   }
 };

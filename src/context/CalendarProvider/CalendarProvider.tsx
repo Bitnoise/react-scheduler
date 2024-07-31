@@ -204,10 +204,6 @@ const CalendarProvider = ({
 
   const { Provider } = calendarContext;
 
-  // debugger;
-
-  console.log("DATE", date);
-
   return (
     <Provider
       value={{

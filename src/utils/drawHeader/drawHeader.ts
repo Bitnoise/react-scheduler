@@ -28,6 +28,6 @@ export const drawHeader = (
   } else if (zoom === 2) {
     drawZoom2MonthsOnTop(ctx, cols, startDate);
     drawZoom2DaysInMiddle(ctx, cols, startDate);
-    drawZoom2HoursOnBottom(ctx, cols);
+    drawZoom2HoursOnBottom(ctx, cols, startDate);
   }
 };

@@ -15,7 +15,7 @@ export const getTileXAndWidth = (item: DatesRange, range: DatesRange, zoom: numb
     switch (zoom) {
       case 2:
         position =
-          (item.startDate.diff(range.startDate, "minute") / 60) * cellWidth - cellWidth / 2;
+          (item.startDate.diff(range.startDate, "minute") / 60 + 1) * cellWidth - cellWidth / 2;
         break;
       default: {
         position = (item.startDate.diff(range.startDate, "day") + 1) * cellWidth;
@@ -25,28 +25,53 @@ export const getTileXAndWidth = (item: DatesRange, range: DatesRange, zoom: numb
   };
 
   if (item.startDate.isAfter(range.startDate) && item.endDate.isBefore(range.endDate)) {
-    let width = item.endDate.diff(item.startDate, "day") * cellWidth + cellWidth;
+    let width;
     switch (zoom) {
       case 2:
         width = (item.endDate.diff(item.startDate, "minute") / 60) * cellWidth;
+        break;
+      default:
+        width = item.endDate.diff(item.startDate, "day") * cellWidth + cellWidth;
     }
 
     return { x: getX(), width };
   }
 
   if (item.startDate.isBefore(range.startDate) && item.endDate.isBefore(range.endDate)) {
-    const width = item.endDate.diff(range.startDate, "day") * cellWidth + cellWidth;
+    let width;
+    switch (zoom) {
+      case 2:
+        width = (item.endDate.diff(range.startDate, "minute") / 60) * cellWidth + 0.5 * cellWidth;
+        break;
+      default:
+        width = item.endDate.diff(range.startDate, "day") * cellWidth + cellWidth;
+    }
 
     return { x: getX(), width };
   }
 
   if (item.startDate.isAfter(range.startDate) && item.endDate.isAfter(range.endDate)) {
-    const width = range.endDate.diff(item.startDate, "day") * cellWidth + cellWidth;
+    let width;
+    switch (zoom) {
+      case 2:
+        width = (range.endDate.diff(item.startDate, "minute") / 60) * cellWidth;
+        break;
+      default:
+        width = range.endDate.diff(item.startDate, "day") * cellWidth + cellWidth;
+    }
+
     return { x: getX(), width };
   }
 
   if (item.startDate.isBefore(range.startDate) && item.endDate.isAfter(range.endDate)) {
-    const width = range.endDate.diff(range.startDate, "day") * cellWidth + cellWidth;
+    let width;
+    switch (zoom) {
+      case 2:
+        width = (range.endDate.diff(range.startDate, "minute") / 60) * cellWidth;
+        break;
+      default:
+        width = range.endDate.diff(range.startDate, "day") * cellWidth + cellWidth;
+    }
 
     return { x: getX(), width };
   }

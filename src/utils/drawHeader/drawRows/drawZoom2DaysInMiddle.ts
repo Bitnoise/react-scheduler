@@ -16,14 +16,20 @@ export const drawZoom2DaysInMiddle = (
   const daysInRange = Math.floor(cols / 24) + 2;
 
   const width = 24 * zoom2ColumnWidth;
-  const xPosOffset =
-    (Math.floor(cols / 2) - dayjs().hour()) * zoom2ColumnWidth -
-    Math.floor(daysInRange / 2) * width;
 
+  const startDateHour = dayjs(
+    `${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}T${startDate.hour}:00:00`
+  );
+
+  const xPosOffset = -startDateHour.hour() * zoom2ColumnWidth;
   let xPos = xPosOffset + 0.5 * zoom2ColumnWidth;
 
   for (let i = 0; i < daysInRange; i++) {
-    const day = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth + i}`);
+    const dayLabel = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`)
+      .add(i, "day")
+      .format("dddd DD.MM.YYYY")
+      .toUpperCase();
+
     drawRow({
       ctx,
       x: xPos,
@@ -31,7 +37,7 @@ export const drawZoom2DaysInMiddle = (
       width,
       height: zoom2HeaderMiddleRowHeight,
       textYPos: zoom2HeaderTopRowHeight + zoom2HeaderMiddleRowHeight / 2 + 2,
-      label: day.format("dddd DD.MM.YYYY").toUpperCase(),
+      label: dayLabel,
       font: fonts.bottomRow.number
     });
     xPos += width;

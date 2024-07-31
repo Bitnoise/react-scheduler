@@ -6,24 +6,26 @@ import {
   zoom2HeaderTopRowHeight,
   zoom2HeaderMiddleRowHeight
 } from "@/constants";
+import { Day } from "@/types/global";
 import { drawRow } from "../../drawRow";
 
-export const drawZoom2HoursOnBottom = (ctx: CanvasRenderingContext2D, cols: number) => {
+export const drawZoom2HoursOnBottom = (
+  ctx: CanvasRenderingContext2D,
+  cols: number,
+  startDate: Day
+) => {
   let xPos = 0;
   const yPos = zoom2HeaderTopRowHeight + zoom2HeaderMiddleRowHeight;
-  const now = dayjs();
+
+  const startDateHour = dayjs(
+    `${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}T${startDate.hour}:00:00`
+  );
+  const width = zoom2ColumnWidth;
 
   for (let i = 0; i < cols; i++) {
-    const width = zoom2ColumnWidth;
+    const hour = startDateHour.add(i, "hours");
 
-    let hour;
-    if (i === Math.floor(cols / 2)) {
-      hour = now;
-    } else if (i > Math.floor(cols / 2)) {
-      hour = now.add(i - Math.floor(cols / 2), "hours");
-    } else {
-      hour = now.subtract(Math.floor(cols / 2) - i, "hours");
-    }
+    xPos = i * zoom2ColumnWidth;
 
     drawRow({
       ctx,

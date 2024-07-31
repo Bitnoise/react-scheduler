@@ -13,6 +13,7 @@ export type ParsedDatesRange = {
 
 export const getDatesRange = (date: dayjs.Dayjs, zoom: number): DatesRange => {
   const colsOffset = getCols(zoom) / 2;
+
   let startDate;
   switch (zoom) {
     case 1: {
