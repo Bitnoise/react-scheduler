@@ -36,7 +36,7 @@ export const getDatesRange = (date: dayjs.Dayjs, zoom: number): DatesRange => {
       break;
     }
     case 2: {
-      endDate = date.add(colsOffset * 2, "hours");
+      endDate = date.add(colsOffset, "hours");
       break;
     }
     default: {
