@@ -7,7 +7,7 @@ import { usePagination } from "@/hooks/usePagination";
 import EmptyBox from "../EmptyBox";
 import { Grid, Header, LeftColumn, Tooltip } from "..";
 import { CalendarProps } from "./types";
-import { StyledOuterWrapper, StyledInnerWrapper } from "./styles";
+import { StyledOuterWrapper, StyledInnerWrapper, StyledEmptyBoxWrapper } from "./styles";
 
 const initialTooltipData: TooltipData = {
   coords: { x: 0, y: 0 },
@@ -152,7 +152,9 @@ export const Calendar: FC<CalendarProps> = ({
             onTileClick={onTileClick}
           />
         ) : (
-          <EmptyBox />
+          <StyledEmptyBoxWrapper width={topBarWidth}>
+            <EmptyBox />
+          </StyledEmptyBoxWrapper>
         )}
         {showTooltip && isVisible && tooltipData?.resourceIndex > -1 && (
           <Tooltip tooltipData={tooltipData} zoom={zoom} />
