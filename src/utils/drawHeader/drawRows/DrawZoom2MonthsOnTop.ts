@@ -7,12 +7,14 @@ import {
   zoom2HeaderTopRowHeight
 } from "@/constants";
 import { Day } from "@/types/global";
+import { Theme } from "@/styles";
 import { drawRow } from "../../drawRow";
 
 export const drawZoom2MonthsOnTop = (
   ctx: CanvasRenderingContext2D,
   cols: number,
-  startDate: Day
+  startDate: Day,
+  theme: Theme
 ) => {
   const daysInRange = Math.ceil(cols / hoursInDay);
   const startDay = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`);
@@ -35,16 +37,19 @@ export const drawZoom2MonthsOnTop = (
 
     const width = i === 0 ? diff * zoom2ColumnWidth : cols * zoom2ColumnWidth;
 
-    drawRow({
-      ctx,
-      x: xPos,
-      y: 0,
-      width,
-      height: zoom2HeaderTopRowHeight,
-      textYPos: topRowTextYPos,
-      label: monthLabel,
-      font: fonts.topRow
-    });
+    drawRow(
+      {
+        ctx,
+        x: xPos,
+        y: 0,
+        width,
+        height: zoom2HeaderTopRowHeight,
+        textYPos: topRowTextYPos,
+        label: monthLabel,
+        font: fonts.topRow
+      },
+      theme
+    );
     xPos += width;
   }
 };

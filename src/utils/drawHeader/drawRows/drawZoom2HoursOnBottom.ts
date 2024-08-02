@@ -7,12 +7,14 @@ import {
   zoom2HeaderMiddleRowHeight
 } from "@/constants";
 import { Day } from "@/types/global";
+import { Theme } from "@/styles";
 import { drawRow } from "../../drawRow";
 
 export const drawZoom2HoursOnBottom = (
   ctx: CanvasRenderingContext2D,
   cols: number,
-  startDate: Day
+  startDate: Day,
+  theme: Theme
 ) => {
   let xPos = 0;
   const yPos = zoom2HeaderTopRowHeight + zoom2HeaderMiddleRowHeight;
@@ -25,18 +27,21 @@ export const drawZoom2HoursOnBottom = (
   for (let i = 0; i < cols; i++) {
     const hourLabel = startDateHour.add(i, "hours").format("HH:00").toUpperCase();
 
-    drawRow({
-      ctx,
-      x: xPos,
-      y: yPos,
-      width,
-      height: zoom2HeaderBottomRowHeight,
-      label: hourLabel,
-      font: fonts.bottomRow.number,
-      textYPos:
-        zoom2HeaderTopRowHeight + zoom2HeaderMiddleRowHeight + zoom2HeaderBottomRowHeight / 2 + 2,
-      labelBetweenCells: true
-    });
+    drawRow(
+      {
+        ctx,
+        x: xPos,
+        y: yPos,
+        width,
+        height: zoom2HeaderBottomRowHeight,
+        label: hourLabel,
+        font: fonts.bottomRow.number,
+        textYPos:
+          zoom2HeaderTopRowHeight + zoom2HeaderMiddleRowHeight + zoom2HeaderBottomRowHeight / 2 + 2,
+        labelBetweenCells: true
+      },
+      theme
+    );
 
     xPos += zoom2ColumnWidth;
   }

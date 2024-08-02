@@ -7,12 +7,14 @@ import {
   zoom2HeaderTopRowHeight
 } from "@/constants";
 import { Day } from "@/types/global";
+import { Theme } from "@/styles";
 import { drawRow } from "../../drawRow";
 
 export const drawZoom2DaysInMiddle = (
   ctx: CanvasRenderingContext2D,
   cols: number,
-  startDate: Day
+  startDate: Day,
+  theme: Theme
 ) => {
   const daysInRange = Math.floor(cols / hoursInDay) + 2;
 
@@ -31,16 +33,19 @@ export const drawZoom2DaysInMiddle = (
       .format("dddd DD.MM.YYYY")
       .toUpperCase();
 
-    drawRow({
-      ctx,
-      x: xPos,
-      y: zoom2HeaderTopRowHeight,
-      width,
-      height: zoom2HeaderMiddleRowHeight,
-      textYPos: zoom2HeaderTopRowHeight + zoom2HeaderMiddleRowHeight / 2 + 2,
-      label: dayLabel,
-      font: fonts.bottomRow.number
-    });
+    drawRow(
+      {
+        ctx,
+        x: xPos,
+        y: zoom2HeaderTopRowHeight,
+        width,
+        height: zoom2HeaderMiddleRowHeight,
+        textYPos: zoom2HeaderTopRowHeight + zoom2HeaderMiddleRowHeight / 2 + 2,
+        label: dayLabel,
+        font: fonts.bottomRow.number
+      },
+      theme
+    );
     xPos += width;
   }
 };

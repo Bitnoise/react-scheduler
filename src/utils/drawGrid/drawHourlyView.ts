@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { Day } from "@/types/global";
+import { Theme } from "@/styles";
 import { boxHeight, zoom2ColumnWidth } from "@/constants";
 import { getIsBusinessDay } from "../dates";
 import { drawCell } from "./drawCell";
@@ -8,7 +9,8 @@ export const drawHourlyView = (
   ctx: CanvasRenderingContext2D,
   rows: number,
   cols: number,
-  startDate: Day
+  startDate: Day,
+  theme: Theme
 ) => {
   const date = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth + 1}`);
   for (let i = 0; i < rows; i++) {
@@ -33,7 +35,8 @@ export const drawHourlyView = (
         i * boxHeight,
         zoom2ColumnWidth,
         getIsBusinessDay(hour),
-        isCurrentHour
+        isCurrentHour,
+        theme
       );
     }
   }

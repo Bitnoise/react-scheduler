@@ -25,7 +25,7 @@ export const drawGrid = (
       drawMonthlyView(ctx, rows, cols, parsedStartDate, theme);
       break;
     case 2:
-      drawHourlyView(ctx, rows, cols, parsedStartDate);
+      drawHourlyView(ctx, rows, cols, parsedStartDate, theme);
       break;
   }
 };
