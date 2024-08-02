@@ -16,6 +16,7 @@ export const getDaysInMonths = (date: Day, iterator: number) =>
 
 export const parseDay = (data: dayjs.Dayjs): Day => {
   return {
+    hour: data.hour(),
     dayName: data.format("ddd"),
     dayOfMonth: data.date(),
     weekOfYear: data.isoWeek(),

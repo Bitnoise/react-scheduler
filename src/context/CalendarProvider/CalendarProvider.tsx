@@ -11,7 +11,13 @@ import { isAvailableZoom } from "@/types/guards";
 import { getDatesRange, getParsedDatesRange } from "@/utils/getDatesRange";
 import { parseDay } from "@/utils/dates";
 import { getCols, getVisibleCols } from "@/utils/getCols";
-import { buttonWeeksJump, outsideWrapperId, screenWidthMultiplier } from "@/constants";
+import {
+  buttonWeeksJump,
+  hoursInDay,
+  outsideWrapperId,
+  screenWidthMultiplier,
+  zoom2ButtonJump
+} from "@/constants";
 import { getCanvasWidth } from "@/utils/getCanvasWidth";
 import { calendarContext } from "./calendarContext";
 import { CalendarProviderProps } from "./types";
@@ -88,7 +94,18 @@ const CalendarProvider = ({
   const loadMore = useCallback(
     (direction: Direction) => {
       const cols = getVisibleCols(zoom);
-      const offset = zoom === 0 ? cols * 7 : cols;
+      let offset;
+      switch (zoom) {
+        case 0:
+          offset = cols * 7;
+          break;
+        case 1:
+          offset = cols;
+          break;
+        case 2:
+          offset = Math.ceil(cols / hoursInDay);
+          break;
+      }
       const load = debounce(() => {
         switch (direction) {
           case "back":
@@ -139,7 +156,9 @@ const CalendarProvider = ({
   const handleGoNext = () => {
     if (isLoading) return;
 
-    setDate((prev) => prev.add(buttonWeeksJump, "weeks"));
+    setDate((prev) =>
+      zoom === 2 ? prev.add(zoom2ButtonJump, "hours") : prev.add(buttonWeeksJump, "weeks")
+    );
     onRangeChange?.(range);
   };
 
@@ -155,7 +174,9 @@ const CalendarProvider = ({
   const handleGoPrev = () => {
     if (isLoading) return;
 
-    setDate((prev) => prev.subtract(buttonWeeksJump, "weeks"));
+    setDate((prev) =>
+      zoom === 2 ? prev.subtract(zoom2ButtonJump, "hours") : prev.subtract(buttonWeeksJump, "weeks")
+    );
     onRangeChange?.(range);
   };
 
