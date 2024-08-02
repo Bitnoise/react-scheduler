@@ -21,36 +21,83 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 
-type ColorType =
-  | "black"
-  | "grey400"
-  | "grey600"
-  | "blue900"
-  | "blue100"
-  | "blue300"
-  | "blue400"
-  | "blue200"
-  | "red400"
-  | "white";
+export type ColorType =
+  | "background"
+  | "gridBackground"
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "textPrimary"
+  | "textSecondary"
+  | "accent"
+  | "disabled"
+  | "border"
+  | "placeholder"
+  | "warning"
+  | "button"
+  | "tooltip"
+  | "defaultTile"
+  | "hover";
 
 export type Theme = {
   colors: Record<ColorType, string>;
   navHeight: string;
+  mode: "light" | "dark";
 };
 
 export const theme: DefaultTheme = {
+  mode: "light",
   navHeight: "44px",
   colors: {
-    black: "#1C222F",
-    grey400: "#D2D2D2",
-    grey600: "#777777",
-    blue900: "#3B3C5F",
-    blue100: "#F8F8FD",
-    blue300: "#C9E5FF",
-    blue400: "#0A11EB",
-    blue200: "#E6F3FF",
-    red400: "#EF4444",
-    white: "#FFFFFF"
+    background: "#FFFFFF",
+    gridBackground: "#FFFFFF",
+
+    primary: "#F8F8FD",
+    secondary: "#E6F3FF",
+    tertiary: "#C9E5FF",
+
+    textPrimary: "#1C222F",
+    textSecondary: "#FFFFFF",
+    placeholder: "#777777",
+
+    button: "#FFFFFF",
+    border: "#D2D2D2",
+    tooltip: "#3B3C5F",
+    hover: "#E6F3FF",
+    disabled: "#777777",
+    warning: "#EF4444",
+
+    defaultTile: "#728DE2",
+
+    accent: "#0A11EB"
+  }
+};
+
+export const darkTheme: Theme = {
+  mode: "dark",
+  navHeight: "44px",
+  colors: {
+    background: "#161B22",
+    gridBackground: "#1E252E",
+
+    primary: "#303b49",
+    secondary: "#444e5b",
+    tertiary: "#6E757F",
+
+    textPrimary: "#DADCE0",
+    textSecondary: "#EAEBED",
+    placeholder: "#bbbbbb",
+
+    button: "#60676f",
+    border: "#2C333A",
+    hover: "#303439",
+    tooltip: "#3B3C5F",
+    disabled: "#38414a",
+    warning: "#FF4C4C",
+
+    defaultTile: "#728DE2",
+
+    accent: "#1798c2"
   }
 };
 

@@ -28,7 +28,7 @@ const IconButton = ({
         iconName={iconName}
         width={width}
         height={height}
-        fill={isDisabled ? colors.grey600 : fill}
+        fill={isDisabled ? colors.disabled : fill}
         className={className}
       />
       {children}

@@ -1,4 +1,5 @@
 import { forwardRef, useCallback, useEffect, useRef } from "react";
+import { useTheme } from "styled-components";
 import { drawGrid } from "@/utils/drawGrid/drawGrid";
 import { boxHeight, canvasWrapperId, leftColumnWidth, outsideWrapperId } from "@/constants";
 import { Loader, Tiles } from "@/components";
@@ -17,14 +18,16 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
   const refRight = useRef<HTMLSpanElement>(null);
   const refLeft = useRef<HTMLSpanElement>(null);
 
+  const theme = useTheme();
+
   const handleResize = useCallback(
     (ctx: CanvasRenderingContext2D) => {
       const width = getCanvasWidth();
       const height = rows * boxHeight + 1;
       resizeCanvas(ctx, width, height);
-      drawGrid(ctx, zoom, rows, cols, startDate);
+      drawGrid(ctx, zoom, rows, cols, startDate, theme);
     },
-    [cols, startDate, rows, zoom]
+    [cols, startDate, rows, zoom, theme]
   );
 
   useEffect(() => {

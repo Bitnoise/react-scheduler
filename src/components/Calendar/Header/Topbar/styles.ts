@@ -21,7 +21,7 @@ export const Wrapper = styled.div<TopbarProps>`
   align-items: center;
   height: ${({ theme }) => theme.navHeight};
   padding: 0.625rem 1rem;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.background};
   z-index: 3;
 `;
 
@@ -37,6 +37,7 @@ export const NavBtn = styled.button`
   gap: 0.25rem;
   font-size: 0.875rem;
   font-weight: 400;
+  color: ${({ theme }) => theme.colors.textPrimary};
   :not(:disabled) {
     cursor: pointer;
   }
@@ -48,6 +49,7 @@ export const Today = styled.button`
   font-weight: 600;
   cursor: pointer;
   line-height: 1.5rem;
+  color: ${({ theme }) => theme.colors.textPrimary};
 
   &::before,
   &::after {
@@ -55,7 +57,7 @@ export const Today = styled.button`
     position: absolute;
     width: 1px;
     height: 1.5rem;
-    background-color: ${({ theme }) => theme.colors.blue900};
+    background-color: ${({ theme }) => theme.colors.textPrimary};
   }
   &::before {
     left: -1.125rem;
@@ -71,8 +73,15 @@ export const Zoom = styled.div`
   gap: 0.5rem;
   font-weight: 600;
   font-size: 0.875rem;
+  color: ${({ theme }) => theme.colors.textPrimary};
 `;
 
 export const Filters = styled.div`
   display: flex;
+`;
+
+export const OptionsContainer = styled.div`
+  display: flex;
+  align-items: "center";
+  gap: 1.25rem;
 `;

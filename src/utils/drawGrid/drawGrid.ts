@@ -1,5 +1,6 @@
 import { Day } from "@/types/global";
 import { canvasWrapperId } from "@/constants";
+import { Theme } from "@/styles";
 import { drawMonthlyView } from "./drawMonthlyView";
 import { drawYearlyView } from "./drawYearlyView";
 import { drawHourlyView } from "./drawHourlyView";
@@ -9,7 +10,8 @@ export const drawGrid = (
   zoom: number,
   rows: number,
   cols: number,
-  parsedStartDate: Day
+  parsedStartDate: Day,
+  theme: Theme
 ) => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   const canvasWrapper = document.getElementById(canvasWrapperId);
@@ -17,10 +19,10 @@ export const drawGrid = (
 
   switch (zoom) {
     case 0:
-      drawYearlyView(ctx, rows, cols, parsedStartDate);
+      drawYearlyView(ctx, rows, cols, parsedStartDate, theme);
       break;
     case 1:
-      drawMonthlyView(ctx, rows, cols, parsedStartDate);
+      drawMonthlyView(ctx, rows, cols, parsedStartDate, theme);
       break;
     case 2:
       drawHourlyView(ctx, rows, cols, parsedStartDate);

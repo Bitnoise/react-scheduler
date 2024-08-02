@@ -9,11 +9,13 @@ import {
   weeksInYear
 } from "@/constants";
 import { drawRow } from "@/utils/drawRow";
+import { Theme } from "@/styles";
 
 export const drawWeeksInMiddle = (
   ctx: CanvasRenderingContext2D,
   startDate: Day,
-  weekLabel: string
+  weekLabel: string,
+  theme: Theme
 ) => {
   const width = 7 * dayWidth;
   const yPos = headerMonthHeight;
@@ -32,16 +34,19 @@ export const drawWeeksInMiddle = (
 
     if (day !== 1 && i === 0) xPos = -day * dayWidth + dayWidth;
 
-    drawRow({
-      ctx,
-      x: xPos,
-      y: yPos,
-      width,
-      height: headerWeekHeight,
-      textYPos: middleRowTextYPos,
-      label: `${weekLabel.toUpperCase()} ${weekIndex}`,
-      font: fonts.middleRow
-    });
+    drawRow(
+      {
+        ctx,
+        x: xPos,
+        y: yPos,
+        width,
+        height: headerWeekHeight,
+        textYPos: middleRowTextYPos,
+        label: `${weekLabel.toUpperCase()} ${weekIndex}`,
+        font: fonts.middleRow
+      },
+      theme
+    );
 
     xPos += width;
   }

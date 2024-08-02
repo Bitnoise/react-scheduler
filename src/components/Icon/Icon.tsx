@@ -12,7 +12,7 @@ const Icon = ({ iconName, width, height, fill, className }: IconProps) => {
   return (
     <IconComponent
       style={{ transition: ".5s ease" }}
-      fill={fill ?? colors.blue400}
+      fill={fill ?? colors.accent}
       width={width}
       height={height}
       className={className}

@@ -9,7 +9,7 @@ export const StyledOutsideWrapper = styled.div<StyledOutsideWrapperProps>`
   right: 0;
   display: flex;
   overflow-x: ${({ showScroll }) => (showScroll ? "scroll" : "hidden")};
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.gridBackground};
 `;
 export const StyledInnerWrapper = styled.div`
   position: relative;

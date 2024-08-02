@@ -1,4 +1,5 @@
 import { FC, useCallback, useEffect, useRef } from "react";
+import { useTheme } from "styled-components";
 import { headerHeight, canvasHeaderWrapperId, zoom2HeaderHeight } from "@/constants";
 import { useCalendar } from "@/context/CalendarProvider";
 import { useLanguage } from "@/context/LocaleProvider";
@@ -9,10 +10,12 @@ import { HeaderProps } from "./types";
 import { StyledCanvas, StyledOuterWrapper, StyledWrapper } from "./styles";
 import Topbar from "./Topbar";
 
-const Header: FC<HeaderProps> = ({ zoom, topBarWidth }) => {
+const Header: FC<HeaderProps> = ({ zoom, topBarWidth, showThemeToggle, toggleTheme }) => {
   const { week } = useLanguage();
   const { date, cols, dayOfYear, startDate } = useCalendar();
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const theme = useTheme();
 
   const handleResize = useCallback(
     (ctx: CanvasRenderingContext2D) => {
@@ -21,9 +24,9 @@ const Header: FC<HeaderProps> = ({ zoom, topBarWidth }) => {
       const height = currentHeaderHeight + 1;
       resizeCanvas(ctx, width, height);
 
-      drawHeader(ctx, zoom, cols, startDate, week, dayOfYear);
+      drawHeader(ctx, zoom, cols, startDate, week, dayOfYear, theme);
     },
-    [cols, dayOfYear, startDate, week, zoom]
+    [cols, dayOfYear, startDate, week, zoom, theme]
   );
 
   useEffect(() => {
@@ -48,7 +51,7 @@ const Header: FC<HeaderProps> = ({ zoom, topBarWidth }) => {
 
   return (
     <StyledOuterWrapper>
-      <Topbar width={topBarWidth} />
+      <Topbar width={topBarWidth} showThemeToggle={showThemeToggle} toggleTheme={toggleTheme} />
       <StyledWrapper id={canvasHeaderWrapperId}>
         <StyledCanvas ref={canvasRef} />
       </StyledWrapper>

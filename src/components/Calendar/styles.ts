@@ -13,3 +13,14 @@ export const StyledInnerWrapper = styled.div`
   flex-direction: column;
   contain: paint;
 `;
+
+export const StyledEmptyBoxWrapper = styled.div<{ width: number }>`
+  width: calc(${({ width }) => width}px - ${leftColumnWidth}px);
+  position: sticky;
+  top: 0;
+  height: 100%;
+  left: ${leftColumnWidth}px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
