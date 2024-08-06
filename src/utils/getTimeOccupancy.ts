@@ -5,7 +5,18 @@ export const getTimeOccupancy = (
   timeUnits: TimeUnits,
   zoom: number
 ): Omit<OccupancyData, "taken"> => {
-  const maxHours = zoom === 0 ? maxHoursPerWeek : maxHoursPerDay;
+  let maxHours = maxHoursPerDay;
+  switch (zoom) {
+    case 0:
+      maxHours = maxHoursPerWeek;
+      break;
+    case 1:
+      maxHours = maxHoursPerDay;
+      break;
+    case 2:
+      maxHours = 1;
+      break;
+  }
 
   const getFreeTime = () => {
     let hours = maxHours - timeUnits.hours - 1;
