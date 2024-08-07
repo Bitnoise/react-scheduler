@@ -1,6 +1,6 @@
 import { FC, useCallback, useEffect, useRef } from "react";
 import { useTheme } from "styled-components";
-import { headerHeight, canvasHeaderWrapperId } from "@/constants";
+import { headerHeight, canvasHeaderWrapperId, zoom2HeaderHeight } from "@/constants";
 import { useCalendar } from "@/context/CalendarProvider";
 import { useLanguage } from "@/context/LocaleProvider";
 import { drawHeader } from "@/utils/drawHeader/drawHeader";
@@ -20,7 +20,8 @@ const Header: FC<HeaderProps> = ({ zoom, topBarWidth, showThemeToggle, toggleThe
   const handleResize = useCallback(
     (ctx: CanvasRenderingContext2D) => {
       const width = getCanvasWidth();
-      const height = headerHeight + 1;
+      const currentHeaderHeight = zoom === 2 ? zoom2HeaderHeight : headerHeight;
+      const height = currentHeaderHeight + 1;
       resizeCanvas(ctx, width, height);
 
       drawHeader(ctx, zoom, cols, startDate, week, dayOfYear, theme);

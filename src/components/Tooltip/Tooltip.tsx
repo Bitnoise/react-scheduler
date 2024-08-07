@@ -1,5 +1,5 @@
 import { FC, useLayoutEffect, useRef } from "react";
-import { dayWidth, weekWidth } from "@/constants";
+import { dayWidth, weekWidth, zoom2ColumnWidth } from "@/constants";
 import { useLanguage } from "@/context/LocaleProvider";
 import Icon from "../Icon";
 import {
@@ -19,7 +19,18 @@ const Tooltip: FC<TooltipProps> = ({ tooltipData, zoom }) => {
 
   const { coords, disposition } = tooltipData;
   const tooltipRef = useRef<HTMLDivElement>(null);
-  const width = zoom === 0 ? weekWidth : dayWidth;
+  let width = weekWidth;
+  switch (zoom) {
+    case 0:
+      width = weekWidth;
+      break;
+    case 1:
+      width = dayWidth;
+      break;
+    case 2:
+      width = zoom2ColumnWidth;
+      break;
+  }
 
   useLayoutEffect(() => {
     // re calculate tooltip width before repaint
@@ -27,7 +38,15 @@ const Tooltip: FC<TooltipProps> = ({ tooltipData, zoom }) => {
 
     const { width: tooltipWidth } = tooltipRef.current.getBoundingClientRect();
 
-    const xOffset = tooltipWidth / 2 + width / 2;
+    let xOffset;
+    switch (zoom) {
+      case 2:
+        xOffset = tooltipWidth / 2 + width;
+        break;
+      default:
+        xOffset = tooltipWidth / 2 + width / 2;
+        break;
+    }
     tooltipRef.current.style.left = `${coords.x - xOffset}px`;
     tooltipRef.current.style.top = `${coords.y + 8}px`;
 
