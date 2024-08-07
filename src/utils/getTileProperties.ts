@@ -12,34 +12,24 @@ export const getTileProperties = (
   zoom: number
 ): TileProperties => {
   const y = row * boxHeight + tileYOffset;
-  let parsedResourceStartDate;
-  let parsedResourceEndDate;
-
-  switch (zoom) {
-    case 2: {
-      parsedResourceStartDate = dayjs(resourceStartDate);
-      parsedResourceEndDate = dayjs(resourceEndDate);
-      break;
-    }
-    default: {
-      parsedResourceStartDate = dayjs(resourceStartDate).hour(0).minute(0);
-      parsedResourceEndDate = dayjs(resourceEndDate).hour(23).minute(59);
-      break;
-    }
-  }
-
   const rangeStartHour = startDate.hour();
   const rangeEndHour = endDate.hour();
+  let parsedResourceStartDate;
+  let parsedResourceEndDate;
   let parsedStartDate;
   let parsedEndDate;
 
   switch (zoom) {
     case 2: {
+      parsedResourceStartDate = dayjs(resourceStartDate);
+      parsedResourceEndDate = dayjs(resourceEndDate);
       parsedStartDate = dayjs(startDate).hour(rangeStartHour).minute(0);
       parsedEndDate = dayjs(endDate).hour(rangeEndHour).minute(0);
       break;
     }
     default: {
+      parsedResourceStartDate = dayjs(resourceStartDate).hour(0).minute(0);
+      parsedResourceEndDate = dayjs(resourceEndDate).hour(23).minute(59);
       parsedStartDate = startDate;
       parsedEndDate = endDate;
       break;
