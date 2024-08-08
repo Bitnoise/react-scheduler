@@ -94,7 +94,7 @@ const CalendarProvider = ({
   const loadMore = useCallback(
     (direction: Direction) => {
       const cols = getVisibleCols(zoom);
-      let offset;
+      let offset: number;
       switch (zoom) {
         case 0:
           offset = cols * 7;
