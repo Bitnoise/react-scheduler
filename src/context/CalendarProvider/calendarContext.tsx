@@ -20,6 +20,7 @@ export const calendarContext = createContext<CalendarContextType>({
   isLoading: false,
   cols: 0,
   startDate: {
+    hour: 0,
     dayName: "",
     dayOfMonth: 0,
     weekOfYear: 0,
