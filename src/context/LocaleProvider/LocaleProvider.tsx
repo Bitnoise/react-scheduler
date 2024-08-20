@@ -5,27 +5,46 @@ import { locales } from "./locales";
 import { LocaleProviderProps } from "./types";
 
 const LocaleProvider = ({ children, lang, translations }: LocaleProviderProps) => {
-  const [currentLocale, setCurrentLocale] = useState(
-    locales.getLocales().filter((locale) => locale.id === "en")[0]
-  );
+  const [localLang, setLocalLang] = useState<string>("en");
+  const localesData = locales.getLocales();
 
-  useEffect(() => {
-    const overwrittenLocalesData = locales.locales.map((locale) => {
-      let localeTemp = locale;
-      translations?.forEach((translation) => {
-        if (locale.id === translation.id) {
-          localeTemp = translation;
-        }
-      });
-      return localeTemp;
+  const findLocale = useCallback(() => {
+    const locale = localesData.find((l) => {
+      return l.id === localLang;
     });
 
-    const location = overwrittenLocalesData?.find((locale) => locale.id === lang);
-    if (location) {
-      setCurrentLocale(location);
-      dayjs.locale(location.dayjsTranslations);
+    if (typeof locale?.dayjsTranslations === "object") {
+      dayjs.locale(locale.dayjsTranslations);
     }
-  }, [translations, lang]);
+
+    return locale || localesData[0];
+  }, [localLang, localesData]);
+
+  const [currentLocale, setCurrentLocale] = useState<LocaleType>(findLocale());
+
+  const saveCurrentLocale = (locale: LocaleType) => {
+    localStorage.setItem("locale", locale.translateCode);
+    setCurrentLocale(locale);
+  };
+
+  useEffect(() => {
+    translations?.forEach((translation) => {
+      const localeData = localesData.find((el) => el.id === translation.id);
+      if (!localeData) {
+        locales.addLocales(translation);
+      }
+    });
+  }, [localesData, translations]);
+
+  useEffect(() => {
+    const localeId = localStorage.getItem("locale");
+    const language = lang ?? localeId ?? "en";
+    localStorage.setItem("locale", language);
+    setLocalLang(language);
+    setCurrentLocale(findLocale());
+  }, [findLocale, lang]);
+
+  const { Provider } = localeContext;
 
   return (
     <localeContext.Provider
