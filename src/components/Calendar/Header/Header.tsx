@@ -1,11 +1,5 @@
 import { FC, useCallback, useEffect, useRef } from "react";
-import {
-  headerHeight,
-  screenWidthMultiplier,
-  canvasHeaderWrapperId,
-  outsideWrapperId,
-  leftColumnWidth
-} from "@/constants";
+import { headerHeight, canvasHeaderWrapperId } from "@/constants";
 import { useCalendar } from "@/context/CalendarProvider";
 import { useLanguage } from "@/context/LocaleProvider";
 import { drawHeader } from "@/utils/drawHeader/drawHeader";
