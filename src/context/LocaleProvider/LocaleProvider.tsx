@@ -18,7 +18,7 @@ const LocaleProvider = ({ children, lang, translations }: LocaleProviderProps) =
     }
 
     return locale || localesData[0];
-  }, [localLang]);
+  }, [localLang, localesData]);
 
   const [currentLocale, setCurrentLocale] = useState<LocaleType>(findLocale());
 
@@ -34,7 +34,7 @@ const LocaleProvider = ({ children, lang, translations }: LocaleProviderProps) =
         locales.addLocales(translation);
       }
     });
-  }, [translations]);
+  }, [localesData, translations]);
 
   useEffect(() => {
     const localeId = localStorage.getItem("locale");
