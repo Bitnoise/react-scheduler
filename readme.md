@@ -190,7 +190,7 @@ const mockedSchedulerData: SchedulerData = [
 
 | Property Name                        | Type               | Default     | Description                                                                                                                                                            |
 | ------------------------------------ | ------------------ | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| zoom                                 | `0` or `1          | 0           | `0` - display grid divided into weeks `1` - display grid divided into days                                                                                             |
+| zoom                                 | `0` or `1` or `2`  | 0           | `0` - display grid divided into weeks `1` - display grid divided into days `2` - display grid divided into hours                                                       |
 | filterButtonState                    | `number`           | 0           | `< 0` - hides filter button, `0` - state for when filters were not set, `> 0` - state for when some filters were set (allows to also handle `onClearFilterData` event) |
 | maxRecordsPerPage                    | `number`           | 50          | number of items from `SchedulerData` visible per page                                                                                                                  |
 | lang                                 | `en`, `lt` or `pl` | en          | scheduler's language                                                                                                                                                   |
