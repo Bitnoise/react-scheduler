@@ -13,14 +13,12 @@ const LocaleProvider = ({ children, lang, translations }: LocaleProviderProps) =
       return l.id === localLang;
     });
 
-
     if (typeof locale?.dayjsTranslations === "object") {
       dayjs.locale(locale.dayjsTranslations);
     }
 
     return locale || localesData[0];
-
-  }, [localLang]);
+  }, [localLang, localesData]);
 
   const [currentLocale, setCurrentLocale] = useState<LocaleType>(findLocale());
 
@@ -36,7 +34,7 @@ const LocaleProvider = ({ children, lang, translations }: LocaleProviderProps) =
         locales.addLocales(translation);
       }
     });
-  }, [translations]);
+  }, [localesData, translations]);
 
   useEffect(() => {
     const localeId = localStorage.getItem("locale");

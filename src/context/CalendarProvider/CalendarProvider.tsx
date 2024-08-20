@@ -105,13 +105,13 @@ const CalendarProvider = ({
       }, 300);
       load();
     },
-    [onRangeChange, range]
+    [onRangeChange, range, zoom]
   );
 
   useEffect(() => {
     outsideWrapper.current = document.getElementById(outsideWrapperId);
     setCols(getCols(zoom));
-  }, []);
+  }, [zoom]);
 
   useEffect(() => {
     const handleResize = () => setCols(getCols(zoom));
