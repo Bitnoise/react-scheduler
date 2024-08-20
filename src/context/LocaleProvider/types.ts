@@ -3,8 +3,6 @@ import { LangCodes } from "@/types/global";
 
 export type LocaleContextType = {
   currentLocale: LocaleType;
-  localesData: LocaleType[];
-  setCurrentLocale: (locale: LocaleType) => void;
 };
 
 export type LocaleProviderProps = {
