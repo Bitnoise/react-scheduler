@@ -53,4 +53,5 @@ export const StyledText = styled.p<StyledTextProps>`
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
+  text-align: left;
 `;
