@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { localeContext } from "./localeContext";
 import { locales } from "./locales";
