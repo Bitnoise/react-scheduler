@@ -5,7 +5,10 @@ import ltDayjsTranslations from "dayjs/locale/lt";
 import frDayjsTranslations from "dayjs/locale/fr";
 import itDayjsTranslations from "dayjs/locale/it";
 import ptBRDayjsTranslations from "dayjs/locale/pt-br";
-import { en, pl, de, lt, fr, it, ptBR } from "@/locales";
+import { roDayjsTranslations } from "dayjs/locale/ro";
+import { heDayjsTranslations } from "dayjs/locale/he";
+import { esDayjsTranslations } from "dayjs/locale/es";
+import { en, pl, de, lt, fr, it, ptBR, es, he, ro } from "@/locales";
 import { LocaleType } from "./types";
 
 export const localesData: LocaleType[] = [
@@ -38,6 +41,30 @@ export const localesData: LocaleType[] = [
     lang: lt,
     translateCode: "lt-LT",
     dayjsTranslations: ltDayjsTranslations
+  },
+  {
+    id: "de",
+    lang: de,
+    translateCode: "de-DE",
+    dayjsTranslations: deDayjsTranslations
+  },
+  {
+    id: "es",
+    lang: es,
+    translateCode: "es-ES",
+    dayjsTranslations: esDayjsTranslations
+  },
+  {
+    id: "he",
+    lang: he,
+    translateCode: "he_IL",
+    dayjsTranslations: heDayjsTranslations
+  },
+  {
+    id: "ro",
+    lang: ro,
+    translateCode: "ro_RO",
+    dayjsTranslations: roDayjsTranslations
   },
   {
     id: "pl",
