@@ -5,9 +5,9 @@ import ltDayjsTranslations from "dayjs/locale/lt";
 import frDayjsTranslations from "dayjs/locale/fr";
 import itDayjsTranslations from "dayjs/locale/it";
 import ptBRDayjsTranslations from "dayjs/locale/pt-br";
-import { roDayjsTranslations } from "dayjs/locale/ro";
-import { heDayjsTranslations } from "dayjs/locale/he";
-import { esDayjsTranslations } from "dayjs/locale/es";
+import roDayjsTranslations from "dayjs/locale/ro";
+import heDayjsTranslations from "dayjs/locale/he";
+import esDayjsTranslations from "dayjs/locale/es";
 import { en, pl, de, lt, fr, it, ptBR, es, he, ro } from "@/locales";
 import { LocaleType } from "./types";
 
