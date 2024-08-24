@@ -51,7 +51,7 @@ const Tooltip: FC<TooltipProps> = ({ tooltipData, zoom }) => {
     tooltipRef.current.style.top = `${coords.y + 8}px`;
 
     // disposition.overtime affects tooltip's width, thus it's needed to recalculate it's coords whenever overtime changes
-  }, [coords.x, width, disposition.overtime, coords.y]);
+  }, [coords.x, width, disposition.overtime, coords.y, zoom]);
 
   return (
     <StyledTooltipWrapper ref={tooltipRef}>

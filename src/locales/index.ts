@@ -5,3 +5,6 @@ export { lt } from "./lt";
 export { fr } from "./fr";
 export { it } from "./it";
 export { ptBR } from "./ptBR";
+export { he } from "./he";
+export { ro } from "./ro";
+export { es } from "./es";
