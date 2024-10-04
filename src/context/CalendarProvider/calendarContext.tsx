@@ -8,6 +8,7 @@ export const calendarContext = createContext<CalendarContextType>({
   handleGoPrev: () => {},
   handleScrollPrev: () => {},
   handleGoToday: () => {},
+  handleGoDate: () => {},
   zoomIn: () => {},
   zoomOut: () => {},
   handleFilterData: () => {},

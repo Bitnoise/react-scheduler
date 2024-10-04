@@ -12,6 +12,7 @@ import { ReactComponent as search } from "./svgs/search.svg";
 import { ReactComponent as close } from "./svgs/close.svg";
 import { ReactComponent as moon } from "./svgs/moon.svg";
 import { ReactComponent as sun } from "./svgs/sun.svg";
+import { ReactComponent as calendar } from "./svgs/calendar.svg";
 import { Icon, IconsNames } from "./types";
 
 const icons: { [key in IconsNames]: Icon } = {
@@ -28,7 +29,8 @@ const icons: { [key in IconsNames]: Icon } = {
   search,
   close,
   moon,
-  sun
+  sun,
+  calendar
 };
 
 export default icons;
