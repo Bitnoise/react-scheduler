@@ -8,7 +8,7 @@ import { outsideWrapperId } from "@/constants";
 import { UsePaginationData } from "./types";
 
 export const usePagination = (data: SchedulerData): UsePaginationData => {
-  const { recordsThreshold } = useCalendar();
+  const { recordsThreshold, zoom } = useCalendar();
   const [startIndex, setStartIndex] = useState(0);
   const [pageNum, setPage] = useState(0);
   const outsideWrapper = useRef<HTMLElement | null>(null);
@@ -17,7 +17,10 @@ export const usePagination = (data: SchedulerData): UsePaginationData => {
     outsideWrapper.current = document.getElementById(outsideWrapperId);
   }, []);
 
-  const { projectsPerPerson, rowsPerPerson } = useMemo(() => projectsOnGrid(data), [data]);
+  const { projectsPerPerson, rowsPerPerson } = useMemo(
+    () => projectsOnGrid(data, zoom),
+    [data, zoom]
+  );
 
   const pages = useMemo(
     () => splitToPages(data, projectsPerPerson, rowsPerPerson, recordsThreshold),
