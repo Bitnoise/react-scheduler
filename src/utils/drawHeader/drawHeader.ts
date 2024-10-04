@@ -17,7 +17,9 @@ export const drawHeader = (
   startDate: Day,
   weekLabel: string,
   dayOfYear: number,
-  theme: Theme
+  theme: Theme,
+  dateFormat = "dddd DD.MM.YYYY",
+  timeFormat = "HH:00"
 ) => {
   switch (zoom) {
     case 0:
@@ -32,8 +34,8 @@ export const drawHeader = (
       break;
     case 2:
       drawZoom2MonthsOnTop(ctx, cols, startDate, theme);
-      drawZoom2DaysInMiddle(ctx, cols, startDate, theme);
-      drawZoom2HoursOnBottom(ctx, cols, startDate, theme);
+      drawZoom2DaysInMiddle(ctx, cols, startDate, theme, dateFormat);
+      drawZoom2HoursOnBottom(ctx, cols, startDate, theme, timeFormat);
       break;
   }
 };

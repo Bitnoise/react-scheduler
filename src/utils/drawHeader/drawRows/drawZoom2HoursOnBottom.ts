@@ -14,7 +14,8 @@ export const drawZoom2HoursOnBottom = (
   ctx: CanvasRenderingContext2D,
   cols: number,
   startDate: Day,
-  theme: Theme
+  theme: Theme,
+  timeFormat: string
 ) => {
   let xPos = 0;
   const yPos = zoom2HeaderTopRowHeight + zoom2HeaderMiddleRowHeight;
@@ -25,7 +26,7 @@ export const drawZoom2HoursOnBottom = (
   const width = zoom2ColumnWidth;
 
   for (let i = 0; i < cols; i++) {
-    const hourLabel = startDateHour.add(i, "hours").format("HH:00").toUpperCase();
+    const hourLabel = startDateHour.add(i, "hours").format(timeFormat).toUpperCase();
 
     drawRow(
       {

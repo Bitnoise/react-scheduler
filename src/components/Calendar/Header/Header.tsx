@@ -12,7 +12,8 @@ import Topbar from "./Topbar";
 
 const Header: FC<HeaderProps> = ({ zoom, topBarWidth, showThemeToggle, toggleTheme }) => {
   const { week } = useLanguage();
-  const { date, cols, dayOfYear, startDate } = useCalendar();
+  const { date, cols, dayOfYear, startDate, config } = useCalendar();
+  const { dateFormat, timeFormat } = config;
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const theme = useTheme();
@@ -24,9 +25,9 @@ const Header: FC<HeaderProps> = ({ zoom, topBarWidth, showThemeToggle, toggleThe
       const height = currentHeaderHeight + 1;
       resizeCanvas(ctx, width, height);
 
-      drawHeader(ctx, zoom, cols, startDate, week, dayOfYear, theme);
+      drawHeader(ctx, zoom, cols, startDate, week, dayOfYear, theme, dateFormat, timeFormat);
     },
-    [cols, dayOfYear, startDate, week, zoom, theme]
+    [cols, dayOfYear, startDate, week, zoom, theme, dateFormat, timeFormat]
   );
 
   useEffect(() => {

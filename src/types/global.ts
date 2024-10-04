@@ -51,6 +51,8 @@ export type Config = {
    */
   defaultTheme?: "light" | "dark";
   theme?: Theme;
+  dateFormat?: string;
+  timeFormat?: string;
 };
 
 export type Theme = {
