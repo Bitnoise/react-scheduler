@@ -1,5 +1,7 @@
 import { useTheme } from "styled-components";
 import { FC, MouseEventHandler } from "react";
+import DatePicker from "react-datepicker";
+import dayjs from "dayjs";
 import { Icon, IconButton, Toggle } from "@/components";
 import { useCalendar } from "@/context/CalendarProvider";
 import { useLanguage } from "@/context/LocaleProvider";
@@ -10,7 +12,9 @@ import {
   Today,
   Zoom,
   Filters,
-  OptionsContainer
+  OptionsContainer,
+  TodayWrapper,
+  NavCalendarButton
 } from "./styles";
 import { TopbarProps } from "./types";
 
@@ -22,6 +26,7 @@ const Topbar: FC<TopbarProps> = ({ width, showThemeToggle, toggleTheme }) => {
     handleGoNext,
     handleGoPrev,
     handleGoToday,
+    handleGoDate,
     zoomIn,
     zoomOut,
     isNextZoom,
@@ -61,7 +66,18 @@ const Topbar: FC<TopbarProps> = ({ width, showThemeToggle, toggleTheme }) => {
           <Icon iconName="arrowLeft" height="15" fill={colors.textPrimary} />
           {topbar.prev}
         </NavBtn>
-        <Today onClick={handleGoToday}>{topbar.today}</Today>
+        <TodayWrapper>
+          <Today onClick={handleGoToday}>{topbar.today}</Today>
+          <DatePicker
+            selected={new Date()}
+            onSelect={(date) => handleGoDate(dayjs(date))}
+            customInput={
+              <NavCalendarButton>
+                <Icon iconName="calendar" height="15" fill={colors.textPrimary} />
+              </NavCalendarButton>
+            }
+          />
+        </TodayWrapper>
         <NavBtn disabled={!data?.length} onClick={handleGoNext}>
           {topbar.next}
           <Icon iconName="arrowRight" height="15" fill={colors.textPrimary} />

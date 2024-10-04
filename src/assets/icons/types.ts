@@ -14,6 +14,7 @@ export type IconsNames =
   | "search"
   | "close"
   | "moon"
-  | "sun";
+  | "sun"
+  | "calendar";
 
 export type Icon = FunctionComponent<ComponentProps<"svg"> & { title?: string }>;
