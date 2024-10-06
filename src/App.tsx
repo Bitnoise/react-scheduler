@@ -69,12 +69,7 @@ function App() {
           config={{
             zoom: 0,
             maxRecordsPerPage: maxRecordsPerPage,
-            showThemeToggle: true,
-            customTooltip: (_, project) => (
-              <div>
-                {project?.title} | {project?.subtitle}
-              </div>
-            )
+            showThemeToggle: true
           }}
           onItemClick={(data) => console.log("clicked: ", data)}
         />
