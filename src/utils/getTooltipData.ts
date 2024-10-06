@@ -50,5 +50,21 @@ export const getTooltipData = (
     zoom,
     includeTakenHoursOnWeekendsInDayView
   );
-  return { coords: { x: xPos, y: yPos }, resourceIndex, disposition };
+  const project = resourcesData[resourceIndex].flat(2).find((item) => {
+    if (zoom === 1) {
+      return dayjs(focusedDate).isBetween(item.startDate, item.endDate, "day", "[]");
+    } else if (zoom === 2) {
+      return dayjs(focusedDate).isBetween(item.startDate, item.endDate, "hour", "[]");
+    } else {
+      return (
+        dayjs(item.startDate).isBetween(
+          dayjs(focusedDate),
+          dayjs(focusedDate).add(6, "days"),
+          "day",
+          "[]"
+        ) || dayjs(focusedDate).isBetween(dayjs(item.startDate), dayjs(item.endDate), "day", "[]")
+      );
+    }
+  });
+  return { coords: { x: xPos, y: yPos }, resourceIndex, disposition, project };
 };
