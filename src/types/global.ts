@@ -51,7 +51,10 @@ export type Config = {
    */
   defaultTheme?: "light" | "dark";
   theme?: Theme;
+  customTooltip?: CustomTooltipFunction;
 };
+
+export type CustomTooltipFunction = (tooltipData: TooltipData) => JSX.Element | string;
 
 export type Theme = {
   light?: Partial<Record<ColorType, string>>;
@@ -192,4 +195,5 @@ export type TooltipData = {
   coords: Coords;
   resourceIndex: number;
   disposition: OccupancyData;
+  project?: SchedulerProjectData;
 };
