@@ -39,13 +39,18 @@ const CalendarProvider = ({
   onFilterData,
   onClearFilterData
 }: CalendarProviderProps) => {
-  const { zoom: configZoom, maxRecordsPerPage = 50 } = config;
+  const {
+    zoom: configZoom,
+    maxRecordsPerPage = 50,
+    minZoom = 0,
+    maxZoom = allZoomLevel[allZoomLevel.length - 1]
+  } = config;
   const [zoom, setZoom] = useState<ZoomLevel>(configZoom);
   const [date, setDate] = useState(dayjs());
   const [isInitialized, setIsInitialized] = useState(false);
   const [cols, setCols] = useState(getCols(zoom));
-  const isNextZoom = allZoomLevel[zoom] !== allZoomLevel[allZoomLevel.length - 1];
-  const isPrevZoom = zoom !== 0;
+  const isNextZoom = zoom < maxZoom;
+  const isPrevZoom = zoom > minZoom;
   const range = useMemo(() => getParsedDatesRange(date, zoom), [date, zoom]);
   const startDate = getDatesRange(date, zoom).startDate;
   const dayOfYear = dayjs(startDate).dayOfYear();

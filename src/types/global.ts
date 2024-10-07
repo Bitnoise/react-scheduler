@@ -51,6 +51,8 @@ export type Config = {
    */
   defaultTheme?: "light" | "dark";
   theme?: Theme;
+  minZoom?: (typeof allZoomLevel)[number];
+  maxZoom?: (typeof allZoomLevel)[number];
 };
 
 export type Theme = {
