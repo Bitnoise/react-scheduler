@@ -1,7 +1,6 @@
 import { FC, useLayoutEffect, useRef } from "react";
 import { dayWidth, weekWidth, zoom2ColumnWidth } from "@/constants";
 import { useLanguage } from "@/context/LocaleProvider";
-import { CustomTooltipFunction } from "@/types/global";
 import Icon from "../Icon";
 import {
   StyledContentWrapper,

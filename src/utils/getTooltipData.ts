@@ -40,6 +40,8 @@ export const getTooltipData = (
     const sumOfRows = array.slice(0, index + 1).reduce((acc, cur) => acc + cur, 0);
     return sumOfRows >= rowPosition;
   });
+  const rowPositionForPerson =
+    rowPosition - rowsPerPerson.slice(0, resourceIndex).reduce((acc, cur) => acc + cur, 0) - 1;
   const xPos = zoom === 2 ? (column + 1) * currBoxWidth : column * currBoxWidth;
   const yPos = (rowPosition - 1) * boxHeight + boxHeight;
 
@@ -50,7 +52,7 @@ export const getTooltipData = (
     zoom,
     includeTakenHoursOnWeekendsInDayView
   );
-  const project = resourcesData[resourceIndex].flat(2).find((item) => {
+  const project = resourcesData[resourceIndex][rowPositionForPerson].find((item) => {
     if (zoom === 1) {
       return dayjs(focusedDate).isBetween(item.startDate, item.endDate, "day", "[]");
     } else if (zoom === 2) {
