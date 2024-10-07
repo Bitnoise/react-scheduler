@@ -159,12 +159,7 @@ export const Calendar: FC<CalendarProps> = ({
           </StyledEmptyBoxWrapper>
         )}
         {showTooltip && isVisible && tooltipData?.resourceIndex > -1 && (
-          <Tooltip
-            tooltipData={tooltipData}
-            project={tooltipData?.project}
-            zoom={zoom}
-            customTooltip={customTooltip}
-          />
+          <Tooltip tooltipData={tooltipData} zoom={zoom} customTooltip={customTooltip} />
         )}
       </StyledInnerWrapper>
     </StyledOuterWrapper>

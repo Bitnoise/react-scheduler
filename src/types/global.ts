@@ -54,10 +54,7 @@ export type Config = {
   customTooltip?: CustomTooltipFunction;
 };
 
-export type CustomTooltipFunction = (
-  tooltipData: TooltipData,
-  project?: SchedulerProjectData
-) => JSX.Element;
+export type CustomTooltipFunction = (tooltipData: TooltipData) => JSX.Element | string;
 
 export type Theme = {
   light?: Partial<Record<ColorType, string>>;

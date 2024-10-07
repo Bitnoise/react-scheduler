@@ -14,9 +14,9 @@ import {
 } from "./styles";
 import { TooltipProps } from "./types";
 
-const Tooltip: FC<TooltipProps> = ({ tooltipData, project, zoom, customTooltip }) => {
+const Tooltip: FC<TooltipProps> = ({ tooltipData, zoom, customTooltip }) => {
   const { taken, free, over } = useLanguage();
-  const { coords, disposition } = tooltipData;
+  const { coords, disposition, project } = tooltipData;
   const tooltipRef = useRef<HTMLDivElement>(null);
   let width = weekWidth;
   switch (zoom) {
@@ -56,7 +56,7 @@ const Tooltip: FC<TooltipProps> = ({ tooltipData, project, zoom, customTooltip }
     <StyledTooltipWrapper ref={tooltipRef}>
       <StyledTooltipContent>
         {customTooltip ? (
-          customTooltip(tooltipData, project)
+          customTooltip(tooltipData)
         ) : (
           <StyledContentWrapper>
             <StyledInnerWrapper>
