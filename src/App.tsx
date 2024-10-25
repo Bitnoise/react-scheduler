@@ -1,6 +1,5 @@
-import { useCallback, useMemo, useState } from "react";
-import dayjs from "dayjs";
-import { createMockData } from "./mock/appMock";
+import { useCallback, useState } from "react";
+import { mockDataWithSeats } from "./mock/appMockWithSeats";
 import { ParsedDatesRange } from "./utils/getDatesRange";
 import { ConfigFormValues, SchedulerProjectData } from "./types/global";
 import ConfigPanel from "./components/ConfigPanel";
@@ -17,12 +16,7 @@ function App() {
     isFullscreen: true
   });
 
-  const { peopleCount, projectsPerYear, yearsCovered, isFullscreen, maxRecordsPerPage } = values;
-
-  const mocked = useMemo(
-    () => createMockData(+peopleCount, +yearsCovered, +projectsPerYear),
-    [peopleCount, projectsPerYear, yearsCovered]
-  );
+  const { isFullscreen, maxRecordsPerPage } = values;
 
   const [range, setRange] = useState<ParsedDatesRange>({
     startDate: new Date(),
@@ -32,21 +26,6 @@ function App() {
   const handleRangeChange = useCallback((range: ParsedDatesRange) => {
     setRange(range);
   }, []);
-
-  const filteredData = useMemo(
-    () =>
-      mocked.map((person) => ({
-        ...person,
-        data: person.data.filter(
-          (project) =>
-            dayjs(project.startDate).isBetween(range.startDate, range.endDate) ||
-            dayjs(project.endDate).isBetween(range.startDate, range.endDate) ||
-            (dayjs(project.startDate).isBefore(range.startDate, "day") &&
-              dayjs(project.endDate).isAfter(range.endDate, "day"))
-        )
-      })),
-    [mocked, range.endDate, range.startDate]
-  );
 
   const handleFilterData = () => console.log(`Filters button was clicked.`);
 
@@ -62,7 +41,7 @@ function App() {
         <Scheduler
           startDate={values.startDate ? new Date(values.startDate).toISOString() : undefined}
           onRangeChange={handleRangeChange}
-          data={filteredData}
+          data={mockDataWithSeats}
           isLoading={false}
           onTileClick={handleTileClick}
           onFilterData={handleFilterData}
@@ -75,7 +54,7 @@ function App() {
             startDate={values.startDate ? new Date(values.startDate).toISOString() : undefined}
             onRangeChange={handleRangeChange}
             isLoading={false}
-            data={filteredData}
+            data={mockDataWithSeats}
             onTileClick={handleTileClick}
             onFilterData={handleFilterData}
             onItemClick={(data) => console.log("clicked: ", data)}

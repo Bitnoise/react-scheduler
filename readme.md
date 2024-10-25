@@ -1,5 +1,4 @@
 <div align="center">
-  <img src="logo.svg" style="height: 60px" alt="@bitnoise/react-scheduler">
   <hr />
   <p align="center">
     ✨ <a href="https://scheduler.bitnoise.pl/">https://scheduler.bitnoise.pl/</a> ✨

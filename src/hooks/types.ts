@@ -16,7 +16,7 @@ export type UsePaginationData = {
   /**
    * Sorted resources per item.
    */
-  projectsPerPerson: SchedulerProjectData[][][];
+  projectsPerPerson: SchedulerProjectData[][][][];
   /**
    * Amount of rows per item
    */

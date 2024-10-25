@@ -40,8 +40,6 @@ const Tile: FC<TileProps> = ({ row, data, zoom, onTileClick }) => {
       <StyledTextWrapper>
         <StyledStickyWrapper>
           <StyledText bold>{data.title}</StyledText>
-          <StyledText>{data.subtitle}</StyledText>
-          <StyledDescription>{data.description}</StyledDescription>
         </StyledStickyWrapper>
       </StyledTextWrapper>
     </StyledTileWrapper>

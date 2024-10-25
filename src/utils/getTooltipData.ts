@@ -7,7 +7,7 @@ export const getTooltipData = (
   startDate: Day,
   cursorPosition: Coords,
   rowsPerPerson: number[],
-  resourcesData: SchedulerProjectData[][][],
+  resourcesData: SchedulerProjectData[][][][],
   zoom: ZoomLevel,
   includeTakenHoursOnWeekendsInDayView = false
 ): TooltipData => {

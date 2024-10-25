@@ -26,8 +26,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
-    "typecheck": "tsc -b",
-    "prepare": "husky install"
+    "typecheck": "tsc -b"
   },
   "main": "dist/index.umd.js",
   "modules": "dist/index.js",
@@ -47,11 +46,6 @@
   ],
   "publishConfig": {
     "access": "public"
-  },
-  "lint-staged": {
-    "**/*.{ts,tsx}": [
-      "yarn run lint"
-    ]
   },
   "dependencies": {
     "dayjs": "1.11.7",
@@ -82,8 +76,6 @@
     "eslint-plugin-prettier": "4.2.1",
     "eslint-plugin-react": "7.32.2",
     "eslint-plugin-react-hooks": "4.6.0",
-    "husky": "8.0.0",
-    "lint-staged": "13.2.0",
     "prettier": "2.8.7",
     "rollup-plugin-visualizer": "5.9.0",
     "typescript": "4.9.3",
