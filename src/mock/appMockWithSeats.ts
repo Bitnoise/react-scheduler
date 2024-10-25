@@ -1,221 +1,315 @@
 export const mockDataWithSeats = [
   {
-    id: "070ac5b5-8369-4cd2-8ba2-0a209130cc60",
+    id: "room-1",
     label: {
       icon: "https://picsum.photos/24",
       title: "Classroom One",
-      subtitle: "Class description",
+      subtitle: "Physics Fundamentals",
       bgColor: "rgb(254,165,177)"
     },
     seats: [
       {
-        id: "070ac5b5-8369-4cd2-8ba2-0a209130cc60-seat1",
-        label: {
-          icon: "https://picsum.photos/24",
-          title: "Seat one",
-          subtitle: ""
-        },
+        id: "room-1-seat1",
+        label: { icon: "https://picsum.photos/24", title: "Seat one", subtitle: "Near the board" },
         data: [
           {
-            id: "8b71a8a5-33dd-4fc8-9caa-b4a584ba3762",
-            startDate: new Date("2024-10-1"),
-            endDate: new Date("2024-10-7"),
-            occupancy: 3600,
-            title: "Project A",
-            subtitle: "Subtitle A",
-            description: "array indexing Salad West Account",
-            bgColor: "rgb(254,165,177)"
-          },
-          {
-            id: "22fbe237-6344-4c8e-affb-64a1750f33bd",
-            startDate: new Date("2024-10-9"),
-            endDate: new Date("2024-10-17"),
-            occupancy: 2852,
-            title: "Project B",
-            subtitle: "Subtitle B",
-            description: "Tuna Home pascal IP drive",
-            bgColor: "rgb(254,165,177)"
-          },
-          {
-            id: "1e2a4bbf-1b8f-4d3e-b2e4-0ec4f7e98c8e",
-            startDate: new Date("2024-10-5"),
-            endDate: new Date("2024-10-12"),
-            occupancy: 1800,
-            title: "Project C",
-            subtitle: "Subtitle C",
-            description: "Overview of data structures",
-            bgColor: "rgb(254,165,177)"
-          }
-        ]
-      },
-      {
-        id: "070ac5b5-8369-4cd2-8ba2-0a209130cc60-seat2",
-        label: {
-          icon: "https://picsum.photos/24",
-          title: "Seat two",
-          subtitle: ""
-        },
-        data: [
-          {
-            id: "afc1a0b5-1234-4fbc-bd2e-2386dc13f253sadasd",
-            startDate: new Date("2024-10-15"),
-            endDate: new Date("2024-10-30"),
-            occupancy: 2200,
-            title: "Project D",
-            subtitle: "Subtitle D",
-            description: "Advanced algorithms",
-            bgColor: "rgb(254,165,177)"
-          },
-          {
-            id: "fd6a7b55-5f69-4c7c-a88c-d5d77cc1d4d6asdaadadad",
-            startDate: new Date("2024-10-5"),
-            endDate: new Date("2024-10-28"),
-            occupancy: 1500,
-            title: "Project E",
-            subtitle: "Subtitle E",
-            description: "Machine learning basics",
-            bgColor: "rgb(254,165,177)"
-          },
-          {
-            id: "c1a19eab-47c7-44d2-b3ab-501df1f4f6c5asdasdasd",
+            id: "project1-room1-seat1",
             startDate: new Date("2024-10-01"),
-            endDate: new Date("2024-10-30"),
-            occupancy: 2700,
-            title: "Project F",
-            subtitle: "Subtitle F",
-            description: "Web development 101",
-            bgColor: "rgb(254,165,177)"
+            endDate: new Date("2024-10-05"),
+            occupancy: 2000,
+            title: "Project A",
+            subtitle: "Mechanics",
+            description: "Newtonian mechanics",
+            bgColor: "rgb(200,200,250)"
           }
         ]
       },
       {
-        id: "070ac5b5-8369-4cd2-8ba2-0a209130cc60-seat3asdasd",
-        label: {
-          icon: "https://picsum.photos/24",
-          title: "Seat three",
-          subtitle: ""
-        },
+        id: "room-1-seat2",
+        label: { icon: "https://picsum.photos/24", title: "Seat two", subtitle: "Middle row" },
         data: [
           {
-            id: "c1a7e74f-43bc-42a4-9782-f11e26f4f0daadasd",
-            startDate: new Date("2024-10-11"),
-            endDate: new Date("2024-10-17"),
-            occupancy: 2900,
-            title: "Project G",
-            subtitle: "Subtitle G",
-            description: "Introduction to databases",
-            bgColor: "rgb(254,165,177)"
-          },
-          {
-            id: "5e9d63be-4564-4019-8c3f-8bb2a01254c1asdads",
-            startDate: new Date("2024-10-12"),
-            endDate: new Date("2024-10-19"),
-            occupancy: 2400,
-            title: "Project H",
-            subtitle: "Subtitle H",
-            description: "Data visualization techniques",
-            bgColor: "rgb(254,165,177)"
-          },
-          {
-            id: "aeb48e12-c678-4e34-8ab5-6b2a2f77bdf1asdasda",
-            startDate: new Date("2024-10-12"),
-            endDate: new Date("2024-10-21"),
+            id: "project2-room1-seat2",
+            startDate: new Date("2024-10-06"),
+            endDate: new Date("2024-10-10"),
             occupancy: 1500,
-            title: "Project I",
-            subtitle: "Subtitle I",
-            description: "Basics of user experience",
-            bgColor: "rgb(254,165,177)"
+            title: "Project B",
+            subtitle: "Thermodynamics",
+            description: "Heat and temperature",
+            bgColor: "rgb(250,200,200)"
           }
         ]
       }
     ]
   },
   {
-    id: "070ac5b5-8369-4cd2-8ba2-0a209130cc62",
+    id: "room-2",
     label: {
       icon: "https://picsum.photos/24",
-      title: "Classroom Three",
-      subtitle: "Class description",
-      bgColor: "rgb(254,165,177)"
+      title: "Classroom Two",
+      subtitle: "Chemistry Basics",
+      bgColor: "rgb(177,220,240)"
     },
     seats: [
       {
-        id: "070ac5b5-8369-4cd2-8ba2-0a209130cc62-seat1",
-        label: {
-          icon: "https://picsum.photos/24",
-          title: "Seat one",
-          subtitle: ""
-        },
+        id: "room-2-seat1",
+        label: { icon: "https://picsum.photos/24", title: "Seat one", subtitle: "Front row" },
         data: [
           {
-            id: "7a1e450b-81c2-45cf-82cb-79b0f716f1f3",
-            startDate: new Date("2024-09-10T10:00:00.000Z"),
-            endDate: new Date("2024-10-10T15:00:00.000Z"),
-            occupancy: 1800,
-            title: "Project S",
-            subtitle: "Subtitle S",
-            description: "Computer networks basics",
-            bgColor: "rgb(254,165,177)"
-          },
-          {
-            id: "d8e4d9cf-5e43-4d55-b8e2-e839eb71f341",
-            startDate: new Date("2024-10-01T12:00:00.000Z"),
-            endDate: new Date("2024-10-30T17:00:00.000Z"),
-            occupancy: 1600,
-            title: "Project T",
-            subtitle: "Subtitle T",
-            description: "Cybersecurity essentials",
-            bgColor: "rgb(254,165,177)"
-          },
-          {
-            id: "20e9d582-7b4d-485e-8c2e-fcabc88c8a72",
-            startDate: new Date("2024-11-01T09:00:00.000Z"),
-            endDate: new Date("2024-11-30T11:00:00.000Z"),
-            occupancy: 1900,
-            title: "Project U",
-            subtitle: "Subtitle U",
-            description: "Digital marketing strategies",
-            bgColor: "rgb(254,165,177)"
+            id: "project1-room2-seat1",
+            startDate: new Date("2024-11-01"),
+            endDate: new Date("2024-11-05"),
+            occupancy: 1500,
+            title: "Project C",
+            subtitle: "Organic Chemistry",
+            description: "Structure of organic molecules",
+            bgColor: "rgb(220,150,255)"
           }
         ]
       },
       {
-        id: "070ac5b5-8369-4cd2-8ba2-0a209130cc62-seat2",
+        id: "room-2-seat2",
+        label: { icon: "https://picsum.photos/24", title: "Seat two", subtitle: "Near windows" },
+        data: [
+          {
+            id: "project2-room2-seat2",
+            startDate: new Date("2024-11-06"),
+            endDate: new Date("2024-11-12"),
+            occupancy: 2200,
+            title: "Project D",
+            subtitle: "Inorganic Chemistry",
+            description: "Metallic bonding",
+            bgColor: "rgb(230,230,200)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "room-3",
+    label: {
+      icon: "https://picsum.photos/24",
+      title: "Classroom Three",
+      subtitle: "Mathematics",
+      bgColor: "rgb(190,230,240)"
+    },
+    seats: [
+      {
+        id: "room-3-seat1",
         label: {
           icon: "https://picsum.photos/24",
-          title: "Seat two",
-          subtitle: ""
+          title: "Seat one",
+          subtitle: "Near the teacher"
         },
         data: [
           {
-            id: "bb32a3e2-1a74-4eb0-b417-fbd5b1d115e0",
-            startDate: new Date("2024-09-12T14:00:00.000Z"),
-            endDate: new Date("2024-10-15T16:00:00.000Z"),
-            occupancy: 2000,
-            title: "Project V",
-            subtitle: "Subtitle V",
-            description: "Data analysis techniques",
-            bgColor: "rgb(254,165,177)"
-          },
-          {
-            id: "7c8852e2-d472-4a9d-8358-3206a19d4f44",
-            startDate: new Date("2024-10-15T11:00:00.000Z"),
-            endDate: new Date("2024-11-10T13:00:00.000Z"),
+            id: "project1-room3-seat1",
+            startDate: new Date("2024-12-01"),
+            endDate: new Date("2024-12-10"),
             occupancy: 1700,
-            title: "Project W",
-            subtitle: "Subtitle W",
-            description: "Ethical hacking basics",
-            bgColor: "rgb(254,165,177)"
+            title: "Project E",
+            subtitle: "Algebra",
+            description: "Introduction to algebra",
+            bgColor: "rgb(150,250,190)"
           },
           {
-            id: "f7b64843-d68c-4c0e-bf68-43d56e9d2eb6",
-            startDate: new Date("2024-11-05T09:00:00.000Z"),
-            endDate: new Date("2024-12-05T11:00:00.000Z"),
-            occupancy: 2200,
-            title: "Project X",
-            subtitle: "Subtitle X",
-            description: "Virtual reality applications",
-            bgColor: "rgb(254,165,177)"
+            id: "project2-room3-seat1",
+            startDate: new Date("2024-12-11"),
+            endDate: new Date("2024-12-20"),
+            occupancy: 1800,
+            title: "Project F",
+            subtitle: "Calculus",
+            description: "Basics of calculus",
+            bgColor: "rgb(250,210,180)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "room-4",
+    label: {
+      icon: "https://picsum.photos/24",
+      title: "Classroom Four",
+      subtitle: "Biology",
+      bgColor: "rgb(210,180,255)"
+    },
+    seats: [
+      {
+        id: "room-4-seat1",
+        label: { icon: "https://picsum.photos/24", title: "Seat one", subtitle: "Corner seat" },
+        data: [
+          {
+            id: "project1-room4-seat1",
+            startDate: new Date("2024-10-15"),
+            endDate: new Date("2024-10-25"),
+            occupancy: 1400,
+            title: "Project G",
+            subtitle: "Genetics",
+            description: "DNA and heredity",
+            bgColor: "rgb(200,220,240)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "room-5",
+    label: {
+      icon: "https://picsum.photos/24",
+      title: "Classroom Five",
+      subtitle: "History",
+      bgColor: "rgb(240,230,180)"
+    },
+    seats: [
+      {
+        id: "room-5-seat1",
+        label: { icon: "https://picsum.photos/24", title: "Seat one", subtitle: "Front row" },
+        data: [
+          {
+            id: "project1-room5-seat1",
+            startDate: new Date("2024-09-01"),
+            endDate: new Date("2024-09-10"),
+            occupancy: 2000,
+            title: "Project H",
+            subtitle: "Ancient History",
+            description: "Civilizations and cultures",
+            bgColor: "rgb(240,210,150)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "room-6",
+    label: {
+      icon: "https://picsum.photos/24",
+      title: "Classroom Six",
+      subtitle: "Literature",
+      bgColor: "rgb(220,240,200)"
+    },
+    seats: [
+      {
+        id: "room-6-seat1",
+        label: { icon: "https://picsum.photos/24", title: "Seat one", subtitle: "Back row" },
+        data: [
+          {
+            id: "project1-room6-seat1",
+            startDate: new Date("2024-11-20"),
+            endDate: new Date("2024-12-01"),
+            occupancy: 2100,
+            title: "Project I",
+            subtitle: "Poetry",
+            description: "Romantic era poets",
+            bgColor: "rgb(240,200,190)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "room-7",
+    label: {
+      icon: "https://picsum.photos/24",
+      title: "Classroom Seven",
+      subtitle: "Computer Science",
+      bgColor: "rgb(210,190,250)"
+    },
+    seats: [
+      {
+        id: "room-7-seat1",
+        label: { icon: "https://picsum.photos/24", title: "Seat one", subtitle: "Near projector" },
+        data: [
+          {
+            id: "project1-room7-seat1",
+            startDate: new Date("2024-08-01"),
+            endDate: new Date("2024-08-10"),
+            occupancy: 1600,
+            title: "Project J",
+            subtitle: "Programming Basics",
+            description: "Intro to programming",
+            bgColor: "rgb(150,210,240)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "room-8",
+    label: {
+      icon: "https://picsum.photos/24",
+      title: "Classroom Eight",
+      subtitle: "Geography",
+      bgColor: "rgb(210,250,190)"
+    },
+    seats: [
+      {
+        id: "room-8-seat1",
+        label: { icon: "https://picsum.photos/24", title: "Seat one", subtitle: "Middle row" },
+        data: [
+          {
+            id: "project1-room8-seat1",
+            startDate: new Date("2024-06-01"),
+            endDate: new Date("2024-06-10"),
+            occupancy: 2300,
+            title: "Project K",
+            subtitle: "World Geography",
+            description: "Continents and countries",
+            bgColor: "rgb(240,210,200)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "room-9",
+    label: {
+      icon: "https://picsum.photos/24",
+      title: "Classroom Nine",
+      subtitle: "Physics Lab",
+      bgColor: "rgb(200,230,240)"
+    },
+    seats: [
+      {
+        id: "room-9-seat1",
+        label: { icon: "https://picsum.photos/24", title: "Seat one", subtitle: "Front row" },
+        data: [
+          {
+            id: "project1-room9-seat1",
+            startDate: new Date("2024-05-15"),
+            endDate: new Date("2024-05-25"),
+            occupancy: 2500,
+            title: "Project L",
+            subtitle: "Fluid Mechanics",
+            description: "Properties of fluids",
+            bgColor: "rgb(200,180,230)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "room-10",
+    label: {
+      icon: "https://picsum.photos/24",
+      title: "Classroom Ten",
+      subtitle: "Philosophy",
+      bgColor: "rgb(250,210,210)"
+    },
+    seats: [
+      {
+        id: "room-10-seat1",
+        label: { icon: "https://picsum.photos/24", title: "Seat one", subtitle: "Side row" },
+        data: [
+          {
+            id: "project1-room10-seat1",
+            startDate: new Date("2024-07-01"),
+            endDate: new Date("2024-07-10"),
+            occupancy: 1800,
+            title: "Project M",
+            subtitle: "Ethics",
+            description: "Principles of moral philosophy",
+            bgColor: "rgb(240,250,200)"
           }
         ]
       }
