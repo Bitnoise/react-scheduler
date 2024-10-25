@@ -21,6 +21,10 @@ export type StyledLeftColumnItemWrapperProps = {
   clickable: boolean;
 };
 
+export type StyledRoomWrapperProps = {
+  bgColor: string;
+};
+
 export type StyledSeatWrapperProps = {
   rows: number;
 };

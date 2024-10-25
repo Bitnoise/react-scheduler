@@ -11,7 +11,7 @@ import { LeftColumnItemProps } from "./types";
 const LeftColumnItem: FC<LeftColumnItemProps> = ({ id, item, rows, seats, onItemClick }) => {
   return (
     <StyledWrapper rows={rows} clickable={typeof onItemClick === "function"}>
-      <StyledRoomWrapper>
+      <StyledRoomWrapper bgColor={item.bgColor}>
         <StyledTextWrapper>{item.title}</StyledTextWrapper>
       </StyledRoomWrapper>
       {seats.map((seat, i) => {

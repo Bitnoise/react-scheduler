@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import { boxHeight } from "@/constants";
-import { StyledLeftColumnItemWrapperProps, StyledTextProps, StyledSeatWrapperProps } from "./types";
+import {
+  StyledLeftColumnItemWrapperProps,
+  StyledTextProps,
+  StyledSeatWrapperProps,
+  StyledRoomWrapperProps
+} from "./types";
 
 export const StyledWrapper = styled.div<StyledLeftColumnItemWrapperProps>`
   display: flex;
@@ -16,12 +21,12 @@ export const StyledWrapper = styled.div<StyledLeftColumnItemWrapperProps>`
   }
 `;
 
-export const StyledRoomWrapper = styled.div`
+export const StyledRoomWrapper = styled.div<StyledRoomWrapperProps>`
   min-height: ${boxHeight}px;
   height: ${boxHeight}px;
   width: 100%;
   padding: 0.813rem 0 0 1rem;
-  background-color: #32a852;
+  background-color: ${({ bgColor }) => bgColor};
 `;
 
 export const StyledSeatWrapper = styled.div<StyledSeatWrapperProps>`
