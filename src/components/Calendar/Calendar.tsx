@@ -53,7 +53,7 @@ export const Calendar: FC<CalendarProps> = ({
         e: MouseEvent,
         startDate: Day,
         rowsPerItem: number[],
-        projectsPerPerson: SchedulerProjectData[][][],
+        projectsPerPerson: SchedulerProjectData[][][][],
         zoom: ZoomLevel
       ) => {
         if (!gridRef.current) return;
@@ -148,6 +148,7 @@ export const Calendar: FC<CalendarProps> = ({
             data={page}
             zoom={zoom}
             rows={totalRowsPerPage}
+            rowsPerItem={rowsPerItem}
             ref={gridRef}
             onTileClick={onTileClick}
           />

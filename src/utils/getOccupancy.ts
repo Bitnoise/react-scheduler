@@ -5,7 +5,7 @@ import { getDayOccupancy } from "./getDayOccupancy";
 import { getHourOccupancy } from "./getHourOccupancy";
 
 export const getOccupancy = (
-  resource: SchedulerProjectData[][],
+  resource: SchedulerProjectData[][][],
   resourceIndex: number,
   focusedDate: dayjs.Dayjs,
   zoom: ZoomLevel,

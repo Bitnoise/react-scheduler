@@ -1,35 +1,26 @@
 import { FC } from "react";
-import { Icon } from "@/components";
 import {
-  StyledImage,
-  StyledImageWrapper,
-  StyledInnerWrapper,
   StyledText,
   StyledTextWrapper,
+  StyledSeatWrapper,
+  StyledRoomWrapper,
   StyledWrapper
 } from "./styles";
 import { LeftColumnItemProps } from "./types";
 
-const LeftColumnItem: FC<LeftColumnItemProps> = ({ id, item, rows, onItemClick }) => {
+const LeftColumnItem: FC<LeftColumnItemProps> = ({ id, item, rows, seats, onItemClick }) => {
   return (
-    <StyledWrapper
-      title={item.title + " | " + item.subtitle}
-      clickable={typeof onItemClick === "function"}
-      rows={rows}
-      onClick={() => onItemClick?.({ id, label: item })}>
-      <StyledInnerWrapper>
-        <StyledImageWrapper>
-          {item.icon ? (
-            <StyledImage src={item.icon} alt="Icon"></StyledImage>
-          ) : (
-            <Icon iconName="defaultAvatar" />
-          )}
-        </StyledImageWrapper>
-        <StyledTextWrapper>
-          <StyledText isMain>{item.title}</StyledText>
-          <StyledText>{item.subtitle}</StyledText>
-        </StyledTextWrapper>
-      </StyledInnerWrapper>
+    <StyledWrapper rows={rows} clickable={typeof onItemClick === "function"}>
+      <StyledRoomWrapper>
+        <StyledTextWrapper>{item.title}</StyledTextWrapper>
+      </StyledRoomWrapper>
+      {seats.map((seat, i) => {
+        return (
+          <StyledSeatWrapper rows={seat.data.length} key={i}>
+            <StyledText>{seat.label.title}</StyledText>
+          </StyledSeatWrapper>
+        );
+      })}
     </StyledWrapper>
   );
 };

@@ -7,7 +7,7 @@ import {
 
 export const splitToPages = (
   data: SchedulerData,
-  projectsPerPerson: SchedulerProjectData[][][],
+  projectsPerPerson: SchedulerProjectData[][][][],
   rowsPerPerson: number[],
   recordsThreshold: number
 ) => {
@@ -19,7 +19,13 @@ export const splitToPages = (
 
   if (projectsPerPerson.length > recordsThreshold) {
     projectsPerPerson.forEach((projects, i) => {
-      const newItem = { id: data[i].id, label: data[i].label, data: projects };
+      const seats: any = structuredClone(data[i].seats);
+      const numberOfSeats = seats.length;
+      for (let j = 0; j <= numberOfSeats - 1; j++) {
+        seats[j].data = structuredClone(projects[j]);
+      }
+
+      const newItem = { id: data[i].id, label: data[i].label, seats: seats };
 
       if (pageRecords >= recordsThreshold) {
         pages.push(singlePage);
@@ -35,10 +41,15 @@ export const splitToPages = (
     if (rowsPerPerson.slice(leftIndex).length <= recordsThreshold) {
       singlePage = [];
       projectsPerPerson.slice(leftIndex).forEach((projects, i) => {
+        const seats: any = structuredClone(data[i].seats);
+        const numberOfSeats = seats.length;
+        for (let j = 0; j <= numberOfSeats - 1; j++) {
+          seats[j].data = structuredClone(projects[j]);
+        }
         const newItem = {
           id: data[i + leftIndex].id,
           label: data[i + leftIndex].label,
-          data: projects
+          seats: seats
         };
         singlePage.push(newItem);
 
@@ -49,7 +60,13 @@ export const splitToPages = (
     return pages;
   }
   projectsPerPerson.forEach((projects, i) => {
-    const newItem = { id: data[i].id, label: data[i].label, data: projects };
+    const seats: any = structuredClone(data[i].seats);
+    const numberOfSeats = seats.length;
+    for (let j = 0; j <= numberOfSeats - 1; j++) {
+      seats[j].data = structuredClone(projects[j]);
+    }
+
+    const newItem = { id: data[i].id, label: data[i].label, seats: seats };
     singlePage.push(newItem);
   });
 

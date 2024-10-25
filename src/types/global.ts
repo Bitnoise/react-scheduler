@@ -63,6 +63,12 @@ export type SchedulerData = SchedulerRow[];
 export type SchedulerRow = {
   id: string;
   label: SchedulerRowLabel;
+  seats: SchedulerRowSeats[];
+};
+
+export type SchedulerRowSeats = {
+  id: string;
+  label: SchedulerRowLabel;
   data: SchedulerProjectData[];
 };
 
@@ -71,6 +77,12 @@ export type SchedulerItemClickData = Omit<SchedulerRow, "data">;
 export type PaginatedSchedulerData = PaginatedSchedulerRow[];
 
 export type PaginatedSchedulerRow = {
+  id: string;
+  label: SchedulerRowLabel;
+  seats: PaginatedSchedulerRowSeats[];
+};
+
+export type PaginatedSchedulerRowSeats = {
   id: string;
   label: SchedulerRowLabel;
   data: SchedulerProjectData[][];

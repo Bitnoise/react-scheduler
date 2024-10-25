@@ -21,7 +21,6 @@ const LeftColumn: FC<LeftColumnProps> = ({
   const { search } = useLanguage();
 
   const toggleFocus = () => setIsInputFocused((prev) => !prev);
-
   return (
     <StyledWrapper>
       <StyledLeftColumnHeader>
@@ -50,6 +49,7 @@ const LeftColumn: FC<LeftColumnProps> = ({
           item={item.label}
           key={item.id}
           rows={rows[index]}
+          seats={item.seats}
           onItemClick={onItemClick}
         />
       ))}

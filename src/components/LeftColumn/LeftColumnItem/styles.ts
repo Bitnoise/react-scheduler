@@ -1,20 +1,35 @@
 import styled from "styled-components";
 import { boxHeight } from "@/constants";
-import { StyledLeftColumnItemWrapperProps, StyledTextProps } from "./types";
+import { StyledLeftColumnItemWrapperProps, StyledTextProps, StyledSeatWrapperProps } from "./types";
 
 export const StyledWrapper = styled.div<StyledLeftColumnItemWrapperProps>`
   display: flex;
   align-items: ${({ rows }) => (rows > 1 ? "start" : "center")};
-  padding: 0.813rem 0 0.813rem 1rem;
+  flex-direction: column;
   width: 100%;
   min-height: ${boxHeight}px;
   height: calc(${boxHeight}px * ${({ rows }) => rows});
-  border-top: 1px solid ${({ theme }) => theme.colors.border};
   transition: 0.5s ease;
   cursor: ${({ clickable }) => (clickable ? "pointer" : "auto")};
   &:hover {
     background-color: ${({ theme }) => theme.colors.hover};
   }
+`;
+
+export const StyledRoomWrapper = styled.div`
+  min-height: ${boxHeight}px;
+  height: ${boxHeight}px;
+  width: 100%;
+  padding: 0.813rem 0 0 1rem;
+  background-color: #32a852;
+`;
+
+export const StyledSeatWrapper = styled.div<StyledSeatWrapperProps>`
+  min-height: ${boxHeight}px;
+  height: calc(${boxHeight}px * ${({ rows }) => rows});
+  width: 100%;
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
+  padding: 0.813rem 0 0 1rem;
 `;
 
 export const StyledInnerWrapper = styled.div`
