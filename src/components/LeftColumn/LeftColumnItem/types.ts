@@ -22,7 +22,7 @@ export type StyledLeftColumnItemWrapperProps = {
 };
 
 export type StyledRoomWrapperProps = {
-  bgColor: string;
+  bgColor?: string;
 };
 
 export type StyledSeatWrapperProps = {

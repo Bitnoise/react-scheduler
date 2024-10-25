@@ -92,7 +92,7 @@ export type SchedulerRowLabel = {
   icon: string;
   title: string;
   subtitle: string;
-  bgColor: string;
+  bgColor?: string;
 };
 export type SchedulerProjectData = {
   /**
