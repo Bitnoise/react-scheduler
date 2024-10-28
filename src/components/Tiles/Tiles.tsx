@@ -21,6 +21,8 @@ const Tiles: FC<TilesProps> = ({ data, zoom, rowsPerItem, onTileClick }) => {
                 row={rows + rowIndex + pointer}
                 data={item}
                 zoom={zoom}
+                room={room.id}
+                seat={seat.id}
                 onTileClick={onTileClick}
               />
             ))

@@ -39,6 +39,11 @@ export const mockDataWithSeats = [
             bgColor: "rgb(250,200,200)"
           }
         ]
+      },
+      {
+        id: "room-1-seat3",
+        label: { icon: "https://picsum.photos/24", title: "Seat tree", subtitle: "Near the board" },
+        data: []
       }
     ]
   },
@@ -51,6 +56,11 @@ export const mockDataWithSeats = [
       bgColor: "rgb(177,220,240)"
     },
     seats: [
+      {
+        id: "room-2-seat0",
+        label: { icon: "https://picsum.photos/24", title: "Seat 0", subtitle: "Front row" },
+        data: []
+      },
       {
         id: "room-2-seat1",
         label: { icon: "https://picsum.photos/24", title: "Seat one", subtitle: "Front row" },

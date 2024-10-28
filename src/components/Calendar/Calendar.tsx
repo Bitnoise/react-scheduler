@@ -23,6 +23,7 @@ export const Calendar: FC<CalendarProps> = ({
   data,
   onTileClick,
   onItemClick,
+  onItemDrop,
   toggleTheme,
   topBarWidth
 }) => {
@@ -151,6 +152,7 @@ export const Calendar: FC<CalendarProps> = ({
             rowsPerItem={rowsPerItem}
             ref={gridRef}
             onTileClick={onTileClick}
+            onItemDrop={onItemDrop}
           />
         ) : (
           <StyledEmptyBoxWrapper width={topBarWidth}>

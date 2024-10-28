@@ -1,4 +1,4 @@
-import { PaginatedSchedulerData, SchedulerProjectData } from "@/types/global";
+import { PaginatedSchedulerData, SchedulerProjectData, From, To } from "@/types/global";
 
 export type GridProps = {
   zoom: number;
@@ -6,6 +6,7 @@ export type GridProps = {
   data: PaginatedSchedulerData;
   rowsPerItem: number[];
   onTileClick?: (data: SchedulerProjectData) => void;
+  onItemDrop: (from: From, to: To) => void;
 };
 
 export type StyledSpanProps = {

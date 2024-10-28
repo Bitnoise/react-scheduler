@@ -6,11 +6,12 @@ import { Loader, Tiles } from "@/components";
 import { useCalendar } from "@/context/CalendarProvider";
 import { resizeCanvas } from "@/utils/resizeCanvas";
 import { getCanvasWidth } from "@/utils/getCanvasWidth";
+import { DropZones } from "../DropZones";
 import { GridProps } from "./types";
 import { StyledCanvas, StyledInnerWrapper, StyledSpan, StyledWrapper } from "./styles";
 
 const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
-  { zoom, rows, data, rowsPerItem, onTileClick },
+  { zoom, rows, data, rowsPerItem, onTileClick, onItemDrop },
   ref
 ) {
   const { handleScrollNext, handleScrollPrev, date, isLoading, cols, startDate } = useCalendar();
@@ -78,11 +79,12 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
   }, [handleScrollPrev]);
 
   return (
-    <StyledWrapper id={canvasWrapperId}>
+    <StyledWrapper id={canvasWrapperId} className="container">
       <StyledInnerWrapper ref={ref}>
         <StyledSpan position="left" ref={refLeft} />
         <Loader isLoading={isLoading} position="left" />
         <StyledCanvas ref={canvasRef} />
+        <DropZones data={data} rowsPerItem={rowsPerItem} onItemDrop={onItemDrop} />
         <Tiles data={data} zoom={zoom} rowsPerItem={rowsPerItem} onTileClick={onTileClick} />
         <StyledSpan ref={refRight} position="right" />
         <Loader isLoading={isLoading} position="right" />

@@ -18,6 +18,8 @@ function App() {
 
   const { isFullscreen, maxRecordsPerPage } = values;
 
+  const [data, setData] = useState(mockDataWithSeats);
+
   const [range, setRange] = useState<ParsedDatesRange>({
     startDate: new Date(),
     endDate: new Date()
@@ -27,12 +29,41 @@ function App() {
     setRange(range);
   }, []);
 
-  const handleFilterData = () => console.log(`Filters button was clicked.`);
+  const onItemDrop = (from, to) => {
+    setData((prevData) => {
+      return prevData.map((room) => {
+        if (room.id === from.fromRoom || room.id === to.toRoom) {
+          return {
+            ...room,
+            seats: room.seats.map((seat) => {
+              if (room.id === from.fromRoom && seat.id === from.fromSeat) {
+                return {
+                  ...seat,
+                  data: seat.data.filter((item) => item.id !== from.id)
+                };
+              }
 
-  const handleTileClick = (data: SchedulerProjectData) =>
-    console.log(
-      `Item ${data.title} - ${data.subtitle} was clicked. \n==============\nStart date: ${data.startDate} \n==============\nEnd date: ${data.endDate}\n==============\nOccupancy: ${data.occupancy}`
-    );
+              if (room.id === to.toRoom && seat.id === to.toSeat) {
+                const currentItem = prevData
+                  .find((r) => r.id === from.fromRoom)
+                  ?.seats.find((s) => s.id === from.fromSeat)
+                  ?.data.find((item) => item.id === from.id);
+
+                return {
+                  ...seat,
+                  data: [...seat.data, currentItem]
+                };
+              }
+
+              return seat;
+            })
+          };
+        }
+
+        return room;
+      });
+    });
+  };
 
   return (
     <>
@@ -41,10 +72,9 @@ function App() {
         <Scheduler
           startDate={values.startDate ? new Date(values.startDate).toISOString() : undefined}
           onRangeChange={handleRangeChange}
-          data={mockDataWithSeats}
+          data={data}
           isLoading={false}
-          onTileClick={handleTileClick}
-          onFilterData={handleFilterData}
+          onItemDrop={onItemDrop}
           config={{ zoom: 0, maxRecordsPerPage: maxRecordsPerPage, showThemeToggle: true }}
           onItemClick={(data) => console.log("clicked: ", data)}
         />
@@ -54,10 +84,9 @@ function App() {
             startDate={values.startDate ? new Date(values.startDate).toISOString() : undefined}
             onRangeChange={handleRangeChange}
             isLoading={false}
-            data={mockDataWithSeats}
-            onTileClick={handleTileClick}
-            onFilterData={handleFilterData}
+            data={data}
             onItemClick={(data) => console.log("clicked: ", data)}
+            onItemDrop={onItemDrop}
           />
         </StyledSchedulerFrame>
       )}

@@ -1,19 +1,13 @@
-import { FC } from "react";
+import { DragEvent, FC } from "react";
 import { useTheme } from "styled-components";
 import { useCalendar } from "@/context/CalendarProvider";
 import { getDatesRange } from "@/utils/getDatesRange";
 import { getTileProperties } from "@/utils/getTileProperties";
 import { getTileTextColor } from "@/utils/getTileTextColor";
-import {
-  StyledDescription,
-  StyledStickyWrapper,
-  StyledText,
-  StyledTextWrapper,
-  StyledTileWrapper
-} from "./styles";
+import { StyledStickyWrapper, StyledText, StyledTextWrapper, StyledTileWrapper } from "./styles";
 import { TileProps } from "./types";
 
-const Tile: FC<TileProps> = ({ row, data, zoom, onTileClick }) => {
+const Tile: FC<TileProps> = ({ row, data, zoom, room, seat, onTileClick }) => {
   const { date } = useCalendar();
   const datesRange = getDatesRange(date, zoom);
   const { y, x, width } = getTileProperties(
@@ -27,8 +21,17 @@ const Tile: FC<TileProps> = ({ row, data, zoom, onTileClick }) => {
 
   const { colors } = useTheme();
 
+  const dragStart = (
+    event: DragEvent<HTMLButtonElement>,
+    meta: { fromRoom: string; fromSeat: string; id: string }
+  ) => {
+    event.dataTransfer.setData("application/json", JSON.stringify(meta));
+  };
+
   return (
     <StyledTileWrapper
+      draggable={true}
+      className="draggable"
       style={{
         left: `${x}px`,
         top: `${y}px`,
@@ -36,6 +39,7 @@ const Tile: FC<TileProps> = ({ row, data, zoom, onTileClick }) => {
         width: `${width}px`,
         color: getTileTextColor(data.bgColor ?? "")
       }}
+      onDragStart={(event) => dragStart(event, { fromRoom: room, fromSeat: seat, id: data.id })}
       onClick={() => onTileClick?.(data)}>
       <StyledTextWrapper>
         <StyledStickyWrapper>

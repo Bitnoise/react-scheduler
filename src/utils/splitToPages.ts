@@ -63,7 +63,7 @@ export const splitToPages = (
     const seats: any = structuredClone(data[i].seats);
     const numberOfSeats = seats.length;
     for (let j = 0; j <= numberOfSeats - 1; j++) {
-      seats[j].data = structuredClone(projects[j]);
+      seats[j].data = structuredClone(projects[j]) ?? [];
     }
 
     const newItem = { id: data[i].id, label: data[i].label, seats: seats };

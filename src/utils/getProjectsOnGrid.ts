@@ -9,9 +9,14 @@ export const projectsOnGrid = (data: SchedulerData) => {
     let numberOfRows = 0;
 
     curr.seats.forEach((seat) => {
-      const projectsInRows = setProjectsInRows(seat.data);
-      seats.push(projectsInRows);
-      numberOfRows += projectsInRows.length;
+      if (!seat.data.length) {
+        seats.push([[]]);
+        numberOfRows += 1;
+      } else {
+        const projectsInRows = setProjectsInRows(seat.data);
+        seats.push(projectsInRows);
+        numberOfRows += projectsInRows.length;
+      }
     });
 
     acc[0].push(seats);

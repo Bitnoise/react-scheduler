@@ -7,6 +7,7 @@ export const StyledTileWrapper = styled.button`
   ${marginPaddingReset}
   height: ${tileHeight}px;
   position: absolute;
+  z-index: 9;
   outline: none;
   border: none;
   border-radius: 4px;
