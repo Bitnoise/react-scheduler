@@ -1,7 +1,8 @@
-import React from "react";
+import { From, To } from "@/types/global";
 
 export type DropZoneProps = {
   topPosition: number;
-  onDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
-  onDrop: (event: React.DragEvent<HTMLDivElement>) => void;
+  roomId: string;
+  seatId: string;
+  onItemDrop: (from: From, to: To) => void;
 };
