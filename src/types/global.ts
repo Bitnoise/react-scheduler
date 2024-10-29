@@ -14,12 +14,16 @@ export type LangCodes = "en" | "pl" | "de" | "lt";
 export type From = {
   fromRoom: string;
   fromSeat: string;
+  start: Date;
+  end: Date;
   id: string;
 };
 
 export type To = {
   toRoom: string;
   toSeat: string;
+  start: Date;
+  end: Date;
   id?: string;
 };
 

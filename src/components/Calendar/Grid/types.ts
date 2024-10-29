@@ -1,7 +1,7 @@
-import { PaginatedSchedulerData, SchedulerProjectData, From, To } from "@/types/global";
+import { PaginatedSchedulerData, SchedulerProjectData, From, To, ZoomLevel } from "@/types/global";
 
 export type GridProps = {
-  zoom: number;
+  zoom: ZoomLevel;
   rows: number;
   data: PaginatedSchedulerData;
   rowsPerItem: number[];

@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { mockDataWithSeats } from "./mock/appMockWithSeats";
 import { ParsedDatesRange } from "./utils/getDatesRange";
-import { ConfigFormValues, SchedulerProjectData } from "./types/global";
+import { ConfigFormValues, From, To, SchedulerData } from "./types/global";
 import ConfigPanel from "./components/ConfigPanel";
 import { StyledSchedulerFrame } from "./styles";
 import { Scheduler } from ".";
@@ -18,7 +18,7 @@ function App() {
 
   const { isFullscreen, maxRecordsPerPage } = values;
 
-  const [data, setData] = useState(mockDataWithSeats);
+  const [data, setData] = useState<SchedulerData>(mockDataWithSeats);
 
   const [range, setRange] = useState<ParsedDatesRange>({
     startDate: new Date(),
@@ -29,7 +29,7 @@ function App() {
     setRange(range);
   }, []);
 
-  const onItemDrop = (from, to) => {
+  const onItemDrop = (from: From, to: To) => {
     setData((prevData) => {
       return prevData.map((room) => {
         if (room.id === from.fromRoom || room.id === to.toRoom) {
@@ -49,10 +49,12 @@ function App() {
                   ?.seats.find((s) => s.id === from.fromSeat)
                   ?.data.find((item) => item.id === from.id);
 
-                return {
-                  ...seat,
-                  data: [...seat.data, currentItem]
-                };
+                if (currentItem) {
+                  return {
+                    ...seat,
+                    data: [...seat.data, { ...currentItem, startDate: to.start, endDate: to.end }]
+                  };
+                }
               }
 
               return seat;

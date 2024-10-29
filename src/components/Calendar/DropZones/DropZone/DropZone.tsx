@@ -1,13 +1,21 @@
 import { FC, useState } from "react";
+import { useCalendar } from "@/context/CalendarProvider";
+import { getFocusedDate } from "@/utils/getFocusedDate";
 import { DropZoneProps } from "./types";
 import { StyledDropZone } from "./styles";
 
-const DropZone: FC<DropZoneProps> = ({ topPosition, roomId, seatId, onItemDrop }) => {
+const DropZone: FC<DropZoneProps> = ({ topPosition, roomId, seatId, zoom, onItemDrop }) => {
+  const { startDate } = useCalendar();
   const [isDraggedOver, setIsDraggedOver] = useState(false);
 
   const drop = (event: React.DragEvent<HTMLDivElement>, room: string, seat: string) => {
     const item = JSON.parse(event.dataTransfer.getData("application/json"));
-    onItemDrop(item, { toRoom: room, toSeat: seat, id: item.id });
+    const dropZoneRect = event.currentTarget.getBoundingClientRect();
+
+    const position = event.clientX - dropZoneRect.left;
+    const date = getFocusedDate(startDate, position, zoom, item.fromStart, item.fromEnd);
+    onItemDrop(item, { toRoom: room, toSeat: seat, id: item.id, start: date.start, end: date.end });
+
     setIsDraggedOver(false);
   };
 

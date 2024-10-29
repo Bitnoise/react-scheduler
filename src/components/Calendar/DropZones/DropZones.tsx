@@ -3,7 +3,7 @@ import { FC, useMemo } from "react";
 import { DropZonesProps } from "./types";
 import { DropZone } from "./DropZone";
 
-const DropZones: FC<DropZonesProps> = ({ data, rowsPerItem, onItemDrop }) => {
+const DropZones: FC<DropZonesProps> = ({ data, rowsPerItem, zoom, onItemDrop }) => {
   const placeDropZones = useMemo(() => {
     let rows = 0;
     return data.map((room, roomIndex) => {
@@ -21,12 +21,13 @@ const DropZones: FC<DropZonesProps> = ({ data, rowsPerItem, onItemDrop }) => {
             topPosition={topPosition}
             roomId={room.id}
             seatId={seat.id}
+            zoom={zoom}
             onItemDrop={onItemDrop}
           />
         );
       });
     });
-  }, [data, rowsPerItem]);
+  }, [data, rowsPerItem, zoom]);
 
   return <>{placeDropZones}</>;
 };

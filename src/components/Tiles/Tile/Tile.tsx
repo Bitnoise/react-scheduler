@@ -23,7 +23,7 @@ const Tile: FC<TileProps> = ({ row, data, zoom, room, seat, onTileClick }) => {
 
   const dragStart = (
     event: DragEvent<HTMLButtonElement>,
-    meta: { fromRoom: string; fromSeat: string; id: string }
+    meta: { fromRoom: string; fromSeat: string; id: string; width: number }
   ) => {
     event.dataTransfer.setData("application/json", JSON.stringify(meta));
   };
@@ -39,7 +39,15 @@ const Tile: FC<TileProps> = ({ row, data, zoom, room, seat, onTileClick }) => {
         width: `${width}px`,
         color: getTileTextColor(data.bgColor ?? "")
       }}
-      onDragStart={(event) => dragStart(event, { fromRoom: room, fromSeat: seat, id: data.id })}
+      onDragStart={(event) =>
+        dragStart(event, {
+          id: data.id,
+          fromRoom: room,
+          fromSeat: seat,
+          fromStart: data.startDate,
+          fromEnd: data.endDate
+        })
+      }
       onClick={() => onTileClick?.(data)}>
       <StyledTextWrapper>
         <StyledStickyWrapper>
