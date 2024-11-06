@@ -1,11 +1,11 @@
 {
-  "name": "@david0802/react-scheduler",
-  "version": "0.2.5",
+  "name": "@iot_greatech/react-scheduler",
+  "version": "0.2.8",
   "type": "module",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/davidluan/react-scheduler"
+    "url": "https://github.com/GreatechIOT/react-scheduler"
   },
   "keywords": [
     "scheduler",
@@ -16,7 +16,7 @@
     "calendar"
   ],
   "author": {
-    "name": "David"
+    "name": "IoT"
   },
   "scripts": {
     "dev": "vite",
