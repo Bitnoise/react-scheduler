@@ -28,6 +28,8 @@ const Scheduler = ({
       includeTakenHoursOnWeekendsInDayView: false,
       showTooltip: true,
       translations: undefined,
+      dateFormat: "dddd DD.MM.YYYY",
+      timeFormat: "HH:00",
       ...config
     }),
     [config]

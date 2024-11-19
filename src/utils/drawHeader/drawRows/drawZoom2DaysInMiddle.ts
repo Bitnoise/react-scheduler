@@ -14,7 +14,8 @@ export const drawZoom2DaysInMiddle = (
   ctx: CanvasRenderingContext2D,
   cols: number,
   startDate: Day,
-  theme: Theme
+  theme: Theme,
+  dateFormat: string
 ) => {
   const daysInRange = Math.floor(cols / hoursInDay) + 2;
 
@@ -30,7 +31,7 @@ export const drawZoom2DaysInMiddle = (
   for (let i = 0; i < daysInRange; i++) {
     const dayLabel = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`)
       .add(i, "day")
-      .format("dddd DD.MM.YYYY")
+      .format(dateFormat)
       .toUpperCase();
 
     drawRow(
