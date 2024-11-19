@@ -9,6 +9,7 @@ export type CalendarContextType = {
   handleGoPrev: () => void;
   handleScrollPrev: () => void;
   handleGoToday: () => void;
+  handleGoDate: (date: dayjs.Dayjs) => void;
   zoomIn: () => void;
   zoomOut: () => void;
   handleFilterData: () => void;
