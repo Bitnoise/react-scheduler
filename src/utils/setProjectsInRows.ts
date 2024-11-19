@@ -1,7 +1,11 @@
 import dayjs from "dayjs";
 import { SchedulerProjectData } from "@/types/global";
 
-export const setProjectsInRows = (projects: SchedulerProjectData[]): SchedulerProjectData[][] => {
+export const setProjectsInRows = (
+  projects: SchedulerProjectData[],
+  zoom: number
+): SchedulerProjectData[][] => {
+  const comparisonUnit = zoom === 2 ? null : "day";
   const rows: SchedulerProjectData[][] = [];
   for (const project of projects) {
     let isAdded = false;
@@ -10,8 +14,13 @@ export const setProjectsInRows = (projects: SchedulerProjectData[]): SchedulerPr
         let isColliding = false;
         for (let i = 0; i < row.length; i++) {
           if (
-            dayjs(project.startDate).isBetween(row[i].startDate, row[i].endDate, null, "[]") ||
-            dayjs(project.endDate).isBetween(row[i].startDate, row[i].endDate, null, "[]")
+            dayjs(project.startDate).isBetween(
+              row[i].startDate,
+              row[i].endDate,
+              comparisonUnit,
+              "[]"
+            ) ||
+            dayjs(project.endDate).isBetween(row[i].startDate, row[i].endDate, comparisonUnit, "[]")
           ) {
             isColliding = true;
             break;
