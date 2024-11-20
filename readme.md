@@ -50,7 +50,7 @@ import "@bitnoi.se/react-scheduler/dist/style.css";
 import { Scheduler, SchedulerData } from "@bitnoi.se/react-scheduler";
 import dayjs from "dayjs";
 
-default export function Component() {
+export default function Component() {
   const [filterButtonState, setFilterButtonState] = useState(0);
 
   const [range, setRange] = useState({
