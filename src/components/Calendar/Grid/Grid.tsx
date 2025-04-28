@@ -80,12 +80,12 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
   return (
     <StyledWrapper id={canvasWrapperId}>
       <StyledInnerWrapper ref={ref}>
-        <StyledSpan position="left" ref={refLeft} />
-        <Loader isLoading={isLoading} position="left" />
+        <StyledSpan $position="left" ref={refLeft} />
+        <Loader isLoading={isLoading} $position="left" />
         <StyledCanvas ref={canvasRef} />
         <Tiles data={data} zoom={zoom} onTileClick={onTileClick} />
-        <StyledSpan ref={refRight} position="right" />
-        <Loader isLoading={isLoading} position="right" />
+        <StyledSpan ref={refRight} $position="right" />
+        <Loader isLoading={isLoading} $position="right" />
       </StyledInnerWrapper>
     </StyledWrapper>
   );

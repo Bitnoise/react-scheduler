@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 type WrapperProps = {
-  isExpanded: boolean;
+  $isExpanded: boolean;
 };
 
 export const StyledWrapper = styled.div<WrapperProps>`
@@ -10,7 +10,7 @@ export const StyledWrapper = styled.div<WrapperProps>`
   padding: 0 0.5rem;
   height: 125px;
   position: fixed;
-  top: ${({ isExpanded }) => (isExpanded ? 0 : "-129px")};
+  top: ${({ $isExpanded }) => ($isExpanded ? 0 : "-129px")};
   display: flex;
   flex-direction: column;
   background-color: white;

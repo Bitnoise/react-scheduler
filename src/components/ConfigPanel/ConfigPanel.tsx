@@ -42,7 +42,7 @@ const ConfigPanel: FC<ConfigPanelProps> = ({ values, onSubmit }) => {
   };
 
   return (
-    <StyledWrapper onMouseLeave={() => setIsExpanded(false)} isExpanded={isExpanded}>
+    <StyledWrapper onMouseLeave={() => setIsExpanded(false)} $isExpanded={isExpanded}>
       <StyledForm onSubmit={handleSubmit}>
         <StyledInnerWrapper>
           <StyledLabel htmlFor={formFieldsIds.peopleCount}>People count: </StyledLabel>
@@ -88,7 +88,8 @@ const ConfigPanel: FC<ConfigPanelProps> = ({ values, onSubmit }) => {
             value={inputValues.startDate ?? ""}
             type="date"
             onChange={handleDateChange}
-            title="When do you want to start your scheduler? Default: today"></StyledInput>
+            title="When do you want to start your scheduler? Default: today"
+          ></StyledInput>
         </StyledInnerWrapper>
         <StyledInnerWrapper>
           <StyledLabel htmlFor={formFieldsIds.maxRecordsPerPage}>Records/page: </StyledLabel>

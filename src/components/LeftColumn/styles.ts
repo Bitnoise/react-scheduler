@@ -45,7 +45,7 @@ export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
   width: calc(100% - 20px); //20px = 10px margin each side
   background-color: ${({ theme }) => theme.colors.primary};
   border: 1px solid
-    ${({ theme, isFocused }) => (isFocused ? theme.colors.accent : theme.colors.border)};
+    ${({ theme, $isFocused }) => ($isFocused ? theme.colors.accent : theme.colors.border)};
   border-radius: 4px;
   display: flex;
   justify-content: space-between;

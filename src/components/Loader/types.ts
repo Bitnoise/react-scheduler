@@ -1,5 +1,5 @@
 export interface StyledWrapperProps {
-  position: "left" | "right";
+  $position: "left" | "right";
 }
 
 export interface LoaderProps extends StyledWrapperProps {

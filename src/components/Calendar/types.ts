@@ -9,7 +9,7 @@ export type CalendarProps = {
 };
 
 export type StyledSpanProps = {
-  position: "left" | "right";
+  $position: "left" | "right";
 };
 
 export type ProjectsData = [projectsPerPerson: SchedulerProjectData[][][], rowsPerPerson: number[]];

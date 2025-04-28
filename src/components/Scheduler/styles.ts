@@ -8,7 +8,7 @@ export const StyledOutsideWrapper = styled.div<StyledOutsideWrapperProps>`
   left: 0;
   right: 0;
   display: flex;
-  overflow-x: ${({ showScroll }) => (showScroll ? "scroll" : "hidden")};
+  overflow-x: ${({ $showScroll }) => ($showScroll ? "scroll" : "hidden")};
   background-color: ${({ theme }) => theme.colors.gridBackground};
 `;
 export const StyledInnerWrapper = styled.div`

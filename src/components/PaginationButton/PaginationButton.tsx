@@ -4,23 +4,23 @@ import { PaginationButtonProps } from "./types";
 import { StyledButton, StyledIconWrapper, StyledText, StyledWrapper } from "./styles";
 
 const PaginationButton: FC<PaginationButtonProps> = ({
-  intent,
+  $intent,
   onClick,
   icon,
-  isVisible,
+  $isVisible,
   pageNum,
   pagesAmount
 }) => {
   const { loadNext, loadPrevious } = useLanguage();
 
   const buttonText =
-    intent === "next"
+    $intent === "next"
       ? `${loadNext} ${pageNum + 2}/${pagesAmount}`
       : `${loadPrevious} ${pageNum}/${pagesAmount}`;
 
   return (
-    <StyledWrapper intent={intent}>
-      <StyledButton onClick={onClick} isVisible={isVisible}>
+    <StyledWrapper $intent={$intent}>
+      <StyledButton onClick={onClick} $isVisible={$isVisible}>
         {icon && <StyledIconWrapper>{icon}</StyledIconWrapper>}
         <StyledText>{buttonText}</StyledText>
       </StyledButton>

@@ -3,13 +3,13 @@ import { Theme } from "@/styles";
 import { IconButtonVariant } from "./types";
 
 type ButtonWrapperProps = {
-  isFullRounded?: boolean;
-  hasChildren?: boolean;
+  $isFullRounded?: boolean;
+  $hasChildren?: boolean;
   disabled?: boolean;
-  variant: IconButtonVariant;
+  $variant: IconButtonVariant;
 };
 
-const variantStyles = (theme: Theme, variant: IconButtonVariant, disabled?: boolean) =>
+const variantStyles = (theme: Theme, $variant: IconButtonVariant, disabled?: boolean) =>
   ({
     outlined: {
       color: disabled ? theme.colors.disabled : theme.colors.accent,
@@ -21,7 +21,7 @@ const variantStyles = (theme: Theme, variant: IconButtonVariant, disabled?: bool
       background: disabled ? theme.colors.disabled : theme.colors.accent,
       border: "1px solid transparent"
     }
-  }[variant]);
+  })[$variant];
 
 export const ButtonWrapper = styled.button<ButtonWrapperProps>`
   outline: none;
@@ -30,11 +30,11 @@ export const ButtonWrapper = styled.button<ButtonWrapperProps>`
   justify-content: center;
   min-width: 24px;
   min-height: 24px;
-  border-radius: ${({ isFullRounded }) => (isFullRounded ? "50%" : "4px")};
+  border-radius: ${({ $isFullRounded }) => ($isFullRounded ? "50%" : "4px")};
   cursor: ${({ disabled }) => (disabled ? "auto" : "pointer")};
   font-size: 14px;
   gap: 4px;
-  padding: ${({ hasChildren }) => (hasChildren ? "0 10px" : "0")};
+  padding: ${({ $hasChildren }) => ($hasChildren ? "0 10px" : "0")};
   transition: 0.5s ease;
-  ${({ theme, variant, disabled }) => variantStyles(theme, variant, disabled)}
+  ${({ theme, $variant, disabled }) => variantStyles(theme, $variant, disabled)}
 `;

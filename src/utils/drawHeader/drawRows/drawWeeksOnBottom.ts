@@ -40,7 +40,7 @@ export const drawWeeksOnBottom = (
         width: weekWidth,
         height: headerDayHeight,
         isBottomRow: true,
-        fillStyle: getBoxFillStyle({ isCurrent: isCurrWeek, variant: "yearView" }, theme),
+        fillStyle: getBoxFillStyle({ isCurrent: isCurrWeek, $variant: "yearView" }, theme),
         topText: {
           y: dayNameYPos,
           label: week.isoWeek().toString(),

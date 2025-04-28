@@ -6,7 +6,7 @@ export type IconButtonVariant = "outlined" | "filled";
 export type IconButtonProps = {
   onClick?: () => void;
   children?: ReactNode;
-  isFullRounded?: boolean;
+  $isFullRounded?: boolean;
   isDisabled?: boolean;
-  variant?: IconButtonVariant;
+  $variant?: IconButtonVariant;
 } & IconProps;

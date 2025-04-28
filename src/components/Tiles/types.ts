@@ -1,4 +1,5 @@
 import { PaginatedSchedulerData, SchedulerProjectData } from "@/types/global";
+import React from "react";
 
 export type TilesProps = {
   zoom: number;
@@ -6,4 +7,4 @@ export type TilesProps = {
   onTileClick?: (data: SchedulerProjectData) => void;
 };
 
-export type PlacedTiles = JSX.Element[];
+export type PlacedTiles = React.ReactElement[];

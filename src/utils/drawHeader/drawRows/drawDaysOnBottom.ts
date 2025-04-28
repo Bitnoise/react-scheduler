@@ -63,7 +63,7 @@ export const drawDaysOnBottom = (
             {
               isCurrent: day.isCurrentDay,
               isBusinessDay: day.isBusinessDay,
-              variant: "bottomRow"
+              $variant: "bottomRow"
             },
             theme
           )

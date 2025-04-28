@@ -17,6 +17,6 @@ export const StyledSpan = styled.span<StyledSpanProps>`
   height: 100%;
   position: absolute;
   top: 0;
-  left: ${({ position }) => (position === "left" ? 0 : "auto")};
-  right: ${({ position }) => (position === "right" ? 0 : "auto")};
+  left: ${({ $position }) => ($position === "left" ? 0 : "auto")};
+  right: ${({ $position }) => ($position === "right" ? 0 : "auto")};
 `;

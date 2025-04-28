@@ -25,7 +25,7 @@ const LeftColumn: FC<LeftColumnProps> = ({
   return (
     <StyledWrapper>
       <StyledLeftColumnHeader>
-        <StyledInputWrapper isFocused={isInputFocused}>
+        <StyledInputWrapper $isFocused={isInputFocused}>
           <StyledInput
             placeholder={search}
             value={searchInputValue}
@@ -36,8 +36,8 @@ const LeftColumn: FC<LeftColumnProps> = ({
           <Icon iconName="search" />
         </StyledInputWrapper>
         <PaginationButton
-          intent="previous"
-          isVisible={pageNum !== 0}
+          $intent="previous"
+          $isVisible={pageNum !== 0}
           onClick={onLoadPrevious}
           icon={<Icon iconName="arrowUp" width="16" height="16" />}
           pageNum={pageNum}
@@ -54,8 +54,8 @@ const LeftColumn: FC<LeftColumnProps> = ({
         />
       ))}
       <PaginationButton
-        intent="next"
-        isVisible={pageNum !== pagesAmount - 1}
+        $intent="next"
+        $isVisible={pageNum !== pagesAmount - 1}
         onClick={onLoadNext}
         icon={<Icon iconName="arrowDown" width="16" height="16" />}
         pageNum={pageNum}

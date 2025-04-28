@@ -131,7 +131,7 @@ export type Day = {
 export type TextAndBoxStyleConfig = {
   isCurrent: boolean;
   isBusinessDay?: boolean;
-  variant?: "yearView" | "bottomRow";
+  $variant?: "yearView" | "bottomRow";
 };
 
 type BottomRowText = {

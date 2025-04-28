@@ -36,10 +36,11 @@ const Tile: FC<TileProps> = ({ row, data, zoom, onTileClick }) => {
         width: `${width}px`,
         color: getTileTextColor(data.bgColor ?? "")
       }}
-      onClick={() => onTileClick?.(data)}>
+      onClick={() => onTileClick?.(data)}
+    >
       <StyledTextWrapper>
         <StyledStickyWrapper>
-          <StyledText bold>{data.title}</StyledText>
+          <StyledText $bold="600">{data.title}</StyledText>
           <StyledText>{data.subtitle}</StyledText>
           <StyledDescription>{data.description}</StyledDescription>
         </StyledStickyWrapper>

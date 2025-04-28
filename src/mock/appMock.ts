@@ -10,14 +10,17 @@ export const mockedOnRangeChange = (range: ParsedDatesRange, data: SchedulerData
 };
 
 const getRandomWords = (amount?: number) =>
-  amount ? faker.random.words(amount) : faker.random.word();
+  amount ? faker.word.words(amount) : faker.word.words(1);
 
 const getRandomDates = (year: number) => {
-  const startDate = faker.date.between(new Date(year, 0, 1), new Date(year + 1, 0, 1));
-  const endDate = faker.date.between(
-    startDate,
-    new Date(year + Math.ceil(Math.random() * 4), 0, 1)
-  );
+  const startDate = faker.date.between({
+    from: new Date(year, 0, 1),
+    to: new Date(year + 1, 0, 1)
+  });
+  const endDate = faker.date.between({
+    from: startDate,
+    to: new Date(year + Math.ceil(Math.random() * 4), 0, 1)
+  });
 
   return { startDate, endDate };
 };
@@ -47,7 +50,7 @@ export const generateProjects = (
     for (let projectIndex = 0; projectIndex < projectsPerYear; projectIndex++) {
       const { startDate, endDate } = getRandomDates(yearIndex);
       data.push({
-        id: faker.datatype.uuid(),
+        id: faker.string.uuid(),
         startDate,
         endDate,
         occupancy: Math.ceil(Math.random() * secondsInWorkDay),
@@ -78,7 +81,7 @@ export const createMockData = (
     );
 
     const item = {
-      id: faker.datatype.uuid(),
+      id: faker.string.uuid(),
       label: {
         icon: "https://picsum.photos/24",
         title,

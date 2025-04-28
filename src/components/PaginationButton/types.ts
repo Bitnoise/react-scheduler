@@ -1,6 +1,6 @@
 export type PaginationButtonProps = {
-  intent: "previous" | "next";
-  isVisible: boolean;
+  $intent: "previous" | "next";
+  $isVisible: boolean;
   onClick: () => void;
   pageNum: number;
   pagesAmount: number;
@@ -8,5 +8,5 @@ export type PaginationButtonProps = {
 };
 
 export type StyledPaginationButton = {
-  isVisible: boolean;
+  $isVisible: boolean;
 };

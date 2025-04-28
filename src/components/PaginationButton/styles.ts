@@ -2,11 +2,11 @@ import styled from "styled-components";
 import { marginPaddingReset } from "@/styles";
 import { PaginationButtonProps, StyledPaginationButton } from "./types";
 
-export const StyledWrapper = styled.div<Pick<PaginationButtonProps, "intent">>`
+export const StyledWrapper = styled.div<Pick<PaginationButtonProps, "$intent">>`
   padding: 4px 11px 0;
   width: 100%;
-  border-top: ${({ intent, theme }) =>
-    intent === "next" ? `1px solid ${theme.colors.border}` : "none"};
+  border-top: ${({ $intent, theme }) =>
+    $intent === "next" ? `1px solid ${theme.colors.border}` : "none"};
 `;
 
 export const StyledButton = styled.button<StyledPaginationButton>`
@@ -23,8 +23,8 @@ export const StyledButton = styled.button<StyledPaginationButton>`
   line-height: 150%;
   letter-spacing: 1px;
   cursor: pointer;
-  opacity: ${({ isVisible }) => (isVisible ? "1" : "0")};
-  pointer-events: ${({ isVisible }) => (isVisible ? "auto" : "none")};
+  opacity: ${({ $isVisible }) => ($isVisible ? "1" : "0")};
+  pointer-events: ${({ $isVisible }) => ($isVisible ? "auto" : "none")};
   &:hover {
     transition: 0.5s ease;
     background-color: ${({ theme }) => theme.colors.hover};

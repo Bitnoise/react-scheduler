@@ -6,8 +6,8 @@ export const StyledWrapper = styled.div<StyledWrapperProps>`
   height: 100%;
   position: absolute;
   top: 0;
-  left: ${({ position }) => (position === "left" ? 0 : "auto")};
-  right: ${({ position }) => (position === "right" ? 0 : "auto")};
+  left: ${({ $position }) => ($position === "left" ? 0 : "auto")};
+  right: ${({ $position }) => ($position === "right" ? 0 : "auto")};
   background-color: ${({ theme }) => theme.colors.secondary};
   opacity: 0.7;
   overflow: hidden;
