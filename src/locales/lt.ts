@@ -10,7 +10,9 @@ export const lt = {
     next: "kitas",
     prev: "ankstesnis",
     today: "Šiandien",
-    view: "Rodinys"
+    view: "Rodinys",
+    zoomLevels: ["Savaitės", "Dienos", "Valandos"] as string[],
+    toggleTheme: "Keisti temą"
   },
   search: "ieškoti",
   week: "savaitė"

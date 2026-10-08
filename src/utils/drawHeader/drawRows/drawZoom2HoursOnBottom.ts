@@ -15,7 +15,7 @@ export const drawZoom2HoursOnBottom = (
   cols: number,
   startDate: Day,
   theme: Theme
-) => {
+): void => {
   let xPos = 0;
   const yPos = zoom2HeaderTopRowHeight + zoom2HeaderMiddleRowHeight;
 
@@ -25,7 +25,9 @@ export const drawZoom2HoursOnBottom = (
   const width = zoom2ColumnWidth;
 
   for (let i = 0; i < cols; i++) {
-    const hourLabel = startDateHour.add(i, "hours").format("HH:00").toUpperCase();
+    const hour = startDateHour.add(i, "hours");
+    const hourLabel = hour.format("HH:00");
+    const isCurrentHour = hour.isSame(dayjs(), "hour");
 
     drawRow(
       {
@@ -35,7 +37,8 @@ export const drawZoom2HoursOnBottom = (
         width,
         height: zoom2HeaderBottomRowHeight,
         label: hourLabel,
-        font: fonts.bottomRow.number,
+        font: isCurrentHour ? "600 11px Inter" : fonts.middleRow,
+        color: isCurrentHour ? theme.colors.accent : undefined,
         textYPos:
           zoom2HeaderTopRowHeight + zoom2HeaderMiddleRowHeight + zoom2HeaderBottomRowHeight / 2 + 2,
         labelBetweenCells: true

@@ -1,9 +1,11 @@
 import dayjs from "dayjs";
 import { Day } from "@/types/global";
-import { Theme } from "@/styles";
+import { getCanvasColors, Theme } from "@/styles";
 import { boxHeight, zoom2ColumnWidth } from "@/constants";
 import { getIsBusinessDay } from "../dates";
 import { drawCell } from "./drawCell";
+
+const workingHours = { start: 8, end: 19 };
 
 export const drawHourlyView = (
   ctx: CanvasRenderingContext2D,
@@ -11,31 +13,34 @@ export const drawHourlyView = (
   cols: number,
   startDate: Day,
   theme: Theme
-) => {
-  const date = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth + 1}`);
-  for (let i = 0; i < rows; i++) {
-    for (let j = 0; j <= cols; j++) {
-      let hour;
+): void => {
+  const startDateHour = dayjs(
+    `${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}T${startDate.hour}:00:00`
+  );
+  const height = rows * boxHeight;
 
-      if (j === Math.floor(cols / 2)) {
-        hour = dayjs();
-      } else if (j > Math.floor(cols / 2)) {
-        // next hours
-        hour = dayjs().add(j - Math.floor(cols / 2), "hours");
-      } else {
-        // previous hours
-        hour = dayjs().subtract(Math.floor(cols / 2) - i, "hours");
-      }
+  for (let j = 0; j <= cols; j++) {
+    const hour = startDateHour.add(j, "hours");
+    const x = j * zoom2ColumnWidth + zoom2ColumnWidth / 2 - 0.5; // -0.5 to align borders with the hour axis
+    const isOffHours = hour.hour() < workingHours.start || hour.hour() >= workingHours.end;
 
-      const isCurrentHour = date.isSame(dayjs(), "day") && hour.isSame(dayjs(), "hour");
+    // nights are shaded more lightly than weekends
+    if (isOffHours && getIsBusinessDay(hour)) {
+      ctx.save();
+      ctx.globalAlpha = 0.4;
+      ctx.fillStyle = getCanvasColors(theme).weekend;
+      ctx.fillRect(x, 0, zoom2ColumnWidth, height);
+      ctx.restore();
+    }
 
+    for (let i = 0; i < rows; i++) {
       drawCell(
         ctx,
-        j * zoom2ColumnWidth + zoom2ColumnWidth / 2 - 0.5, // -0.5 to make borders better aligned with hour axis
+        x,
         i * boxHeight,
         zoom2ColumnWidth,
         getIsBusinessDay(hour),
-        isCurrentHour,
+        hour.isSame(dayjs(), "hour"),
         theme
       );
     }

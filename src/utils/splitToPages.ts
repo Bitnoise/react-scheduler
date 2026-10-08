@@ -10,7 +10,7 @@ export const splitToPages = (
   projectsPerPerson: SchedulerProjectData[][][],
   rowsPerPerson: number[],
   recordsThreshold: number
-) => {
+): PaginatedSchedulerData[] => {
   const pages: PaginatedSchedulerData[] = [];
 
   let leftIndex = 0;

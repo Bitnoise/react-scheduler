@@ -1,6 +1,7 @@
 import { boxHeight } from "@/constants";
-import { Theme } from "@/styles";
+import { getCanvasColors, Theme } from "@/styles";
 
+// only the left separator is stroked: horizontal lines are drawn once per person in drawGrid
 export const drawCell = (
   ctx: CanvasRenderingContext2D,
   x: number,
@@ -9,17 +10,19 @@ export const drawCell = (
   isBusinessDay: boolean,
   isCurrentDay: boolean,
   theme: Theme
-) => {
-  ctx.strokeStyle = theme.colors.border;
+): void => {
+  const colors = getCanvasColors(theme);
   if (isCurrentDay) {
-    ctx.fillStyle = theme.colors.secondary;
-  } else if (isBusinessDay) {
-    ctx.fillStyle = "transparent";
-  } else {
-    ctx.fillStyle = theme.colors.primary;
+    ctx.fillStyle = colors.today;
+    ctx.fillRect(x, y, width, boxHeight);
+  } else if (!isBusinessDay) {
+    ctx.fillStyle = colors.weekend;
+    ctx.fillRect(x, y, width, boxHeight);
   }
   ctx.beginPath();
   ctx.setLineDash([]);
-  ctx.fillRect(x, y, width, boxHeight);
-  ctx.strokeRect(x + 0.5, y + 0.5, width, boxHeight);
+  ctx.strokeStyle = theme.colors.border;
+  ctx.moveTo(Math.round(x) + 0.5, y);
+  ctx.lineTo(Math.round(x) + 0.5, y + boxHeight);
+  ctx.stroke();
 };

@@ -1,37 +1,52 @@
-import styled from "styled-components";
+import { mobileMediaQuery } from "@/constants";
+import styled, { IStyledComponent } from "styled-components";
 import { marginPaddingReset } from "@/styles";
 import { PaginationButtonProps, StyledPaginationButton } from "./types";
 
-export const StyledWrapper = styled.div<Pick<PaginationButtonProps, "intent">>`
-  padding: 4px 11px 0;
+export const StyledWrapper: IStyledComponent<any, any> = styled.div<
+  { $intent: PaginationButtonProps["intent"]; $isVisible: boolean }
+>`
+  padding: 6px 10px;
   width: 100%;
-  border-top: ${({ intent, theme }) =>
-    intent === "next" ? `1px solid ${theme.colors.border}` : "none"};
-`;
+  border-top: ${({ $intent, theme }) =>
+    $intent === "next" ? `1px solid ${theme.colors.border}` : "none"};
 
-export const StyledButton = styled.button<StyledPaginationButton>`
-  margin-top: 0px;
-  padding: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.colors.accent};
-  border-radius: 4px;
-  font-size: 14px;
-  color: ${({ theme }) => theme.colors.accent};
-  line-height: 150%;
-  letter-spacing: 1px;
-  cursor: pointer;
-  opacity: ${({ isVisible }) => (isVisible ? "1" : "0")};
-  pointer-events: ${({ isVisible }) => (isVisible ? "auto" : "none")};
-  &:hover {
-    transition: 0.5s ease;
-    background-color: ${({ theme }) => theme.colors.hover};
+  @media ${mobileMediaQuery} {
+    ${({ $isVisible }) => (!$isVisible ? "display: none;" : "")}
   }
 `;
 
-export const StyledIconWrapper = styled.div`
+export const StyledButton: IStyledComponent<any, any> = styled.button<StyledPaginationButton>`
+  margin-top: 0px;
+  padding: 6px 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.background};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.textPrimary};
+  line-height: 150%;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    opacity 0.2s ease;
+  opacity: ${({ $isVisible }) => ($isVisible ? "1" : "0")};
+  pointer-events: ${({ $isVisible }) => ($isVisible ? "auto" : "none")};
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.primary};
+    border-color: ${({ theme }) => theme.colors.accent};
+  }
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.accent};
+    outline-offset: 2px;
+  }
+`;
+
+export const StyledIconWrapper: IStyledComponent<any, any> = styled.div`
   position: absolute;
   max-height: 16px;
   margin: 0 4px 0 10px;
@@ -40,7 +55,7 @@ export const StyledIconWrapper = styled.div`
   justify-content: center;
 `;
 
-export const StyledText = styled.p`
+export const StyledText: IStyledComponent<any, any> = styled.p`
   ${marginPaddingReset}
   margin-left: 14px;
   width: 100%;

@@ -1,12 +1,11 @@
-import { Theme } from "@/styles";
+import { getCanvasColors, Theme } from "@/styles";
 import { TextAndBoxStyleConfig } from "@/types/global";
 
-export const getBoxFillStyle = (config: TextAndBoxStyleConfig, theme: Theme) => {
+export const getBoxFillStyle = (config: TextAndBoxStyleConfig, theme: Theme): string => {
   const { isCurrent, isBusinessDay, variant } = config;
-  if (variant === "yearView")
-    return isCurrent ? theme.colors.tertiary : theme.colors.gridBackground;
-  if (isCurrent) return theme.colors.secondary;
-  if (!isBusinessDay) return theme.colors.secondary;
+  const colors = getCanvasColors(theme);
+  if (isCurrent) return colors.today;
+  if (variant !== "yearView" && !isBusinessDay) return colors.weekend;
 
-  return theme.colors.primary;
+  return theme.colors.gridBackground;
 };

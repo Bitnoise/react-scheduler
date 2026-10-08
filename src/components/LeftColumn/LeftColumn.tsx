@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useRef, useState } from "react";
 import { useLanguage } from "@/context/LocaleProvider";
 import Icon from "../Icon";
 import PaginationButton from "../PaginationButton/PaginationButton";
@@ -18,22 +18,33 @@ const LeftColumn: FC<LeftColumnProps> = ({
   onItemClick
 }) => {
   const [isInputFocused, setIsInputFocused] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
   const { search } = useLanguage();
 
-  const toggleFocus = () => setIsInputFocused((prev) => !prev);
+  const handleFocus = () => setIsInputFocused(true);
+  const handleBlur = () => setIsInputFocused(false);
+  // on mobile the input is collapsed to a search icon: tapping it expands and focuses the input
+  const openSearch = () => inputRef.current?.focus();
 
   return (
     <StyledWrapper>
       <StyledLeftColumnHeader>
-        <StyledInputWrapper isFocused={isInputFocused}>
+        <StyledInputWrapper
+          $isFocused={isInputFocused}
+          $isOpen={isInputFocused}
+          $hasValue={!!searchInputValue}
+          onClick={openSearch}>
+          <Icon iconName="search" />
           <StyledInput
+            ref={inputRef}
+            type="search"
             placeholder={search}
+            aria-label={search}
             value={searchInputValue}
             onChange={onSearchInputChange}
-            onFocus={toggleFocus}
-            onBlur={toggleFocus}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
           />
-          <Icon iconName="search" />
         </StyledInputWrapper>
         <PaginationButton
           intent="previous"

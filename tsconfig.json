@@ -1,25 +1,27 @@
 {
   "compilerOptions": {
+    "rootDir": "./src",
     "paths": { "@/*": ["./src/*"] },
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
     "skipLibCheck": true,
-    "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+
     "jsx": "react-jsx",
     "declaration": true,
-    "typeRoots": ["./dist/index.d.ts"]
+    "emitDeclarationOnly": true,
+    "isolatedDeclarations": true,
+    "outDir": "./dist",
+    "declarationDir": "./dist"
   },
-  "include": ["src", "index.ts"],
-  "exclude": ["node_modules"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

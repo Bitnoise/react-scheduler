@@ -1,4 +1,8 @@
-export const resizeCanvas = (ctx: CanvasRenderingContext2D, width: number, height: number) => {
+export const resizeCanvas = (
+  ctx: CanvasRenderingContext2D,
+  width: number,
+  height: number
+): void => {
   ctx.canvas.width = width * window.devicePixelRatio;
   ctx.canvas.height = height * window.devicePixelRatio;
   ctx.canvas.style.width = width + "px";

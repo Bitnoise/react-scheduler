@@ -11,8 +11,11 @@ export type CalendarContextType = {
   handleGoToday: () => void;
   zoomIn: () => void;
   zoomOut: () => void;
+  changeZoom: (zoomLevel: number) => void;
   handleFilterData: () => void;
   updateTilesCoords: (coords: Coords[]) => void;
+  /** Shifts the horizontal scroll to compensate the columns added by an infinite scroll load. */
+  applyScrollAnchor: () => void;
   onClearFilterData?: () => void;
   data?: SchedulerData;
   tilesCoords: Coords[];
@@ -26,6 +29,12 @@ export type CalendarContextType = {
   dayOfYear: number;
   recordsThreshold: number;
   config: Config;
+  /**
+   * Bumped every time handleGoNext/handleGoPrev navigate, paired with the direction,
+   * so a consumer can replay a transition each time (a plain state change is not enough
+   * when the same direction is pressed twice in a row).
+   */
+  navigation: { direction: "next" | "prev"; tick: number } | null;
 };
 
 export type CalendarProviderProps = {

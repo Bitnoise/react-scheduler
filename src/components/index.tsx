@@ -1,4 +1,4 @@
-export { default as Grid } from "./Calendar/Grid";
+export { Grid as Grid } from "./Calendar/Grid";
 export { default as Calendar } from "./Calendar";
 export { default as Topbar } from "./Calendar/Header/Topbar";
 export { default as Icon } from "./Icon";

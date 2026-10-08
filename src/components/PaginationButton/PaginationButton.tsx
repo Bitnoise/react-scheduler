@@ -19,8 +19,8 @@ const PaginationButton: FC<PaginationButtonProps> = ({
       : `${loadPrevious} ${pageNum}/${pagesAmount}`;
 
   return (
-    <StyledWrapper intent={intent}>
-      <StyledButton onClick={onClick} isVisible={isVisible}>
+    <StyledWrapper $intent={intent} $isVisible={isVisible}>
+      <StyledButton onClick={onClick} $isVisible={isVisible}>
         {icon && <StyledIconWrapper>{icon}</StyledIconWrapper>}
         <StyledText>{buttonText}</StyledText>
       </StyledButton>

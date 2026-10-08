@@ -1,11 +1,11 @@
 {
-  "name": "@bitnoi.se/react-scheduler",
-  "version": "0.3.0",
+  "name": "@code-rhapsodie/react-scheduler",
+  "version": "0.6.4",
   "type": "module",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Bitnoise/react-scheduler"
+    "url": "https://github.com/code-rhapsodie/react-scheduler"
   },
   "keywords": [
     "scheduler",
@@ -21,26 +21,27 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build && tsc",
     "preview": "vite preview",
-    "lint": "eslint .",
+    "lint": "typescript_eslint_allow_unsupported_typescript_version=true eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
     "typecheck": "tsc -b",
     "prepare": "husky install"
   },
-  "main": "dist/index.umd.js",
+  "main": "dist/index.cjs",
   "modules": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.umd.cjs"
+      "require": "./dist/index.cjs"
     },
-    "./dist/style.css": {
-      "import": "./dist/style.css",
-      "require": "./dist/style.css"
-    }
+    "./dist/index.css": "./dist/index.css",
+    "./index.css": "./dist/index.css",
+    "./dist/style.css": "./dist/index.css",
+    "./style.css": "./dist/index.css"
   },
   "files": [
     "dist"
@@ -54,41 +55,44 @@
     ]
   },
   "dependencies": {
-    "dayjs": "1.11.7",
-    "lodash.debounce": "4.0.8",
-    "path": "0.12.7",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "styled-components": "5.3.8",
-    "styled-normalize": "8.0.7"
+    "dayjs": "1.11.21",
+    "eslint-plugin-import-x": "^4.17.1",
+    "lodash.debounce": "4.0.8"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "styled-components": "^6.0.0"
   },
   "devDependencies": {
-    "@faker-js/faker": "7.6.0",
-    "@types/datejs": "0.0.32",
-    "@types/lodash.debounce": "4.0.7",
-    "@types/node": "18.15.11",
-    "@types/react": "18.0.27",
-    "@types/react-dom": "18.0.10",
-    "@types/styled-components": "5.1.26",
-    "@typescript-eslint/eslint-plugin": "5.57.1",
-    "@typescript-eslint/parser": "5.57.1",
-    "@vitejs/plugin-react": "3.1.0",
-    "babel-plugin-styled-components": "2.0.7",
-    "eslint": "8.37.0",
-    "eslint-config-prettier": "8.8.0",
-    "eslint-import-resolver-typescript": "3.5.5",
-    "eslint-plugin-filenames": "1.3.2",
-    "eslint-plugin-import": "2.27.5",
-    "eslint-plugin-prettier": "4.2.1",
-    "eslint-plugin-react": "7.32.2",
-    "eslint-plugin-react-hooks": "4.6.0",
-    "husky": "8.0.0",
-    "lint-staged": "13.2.0",
-    "prettier": "2.8.7",
-    "rollup-plugin-visualizer": "5.9.0",
-    "typescript": "4.9.3",
-    "vite": "4.1.0",
-    "vite-plugin-dts": "2.2.0",
-    "vite-plugin-svgr": "2.4.0"
+    "@eslint/js": "^10.0.1",
+    "@faker-js/faker": "10.5.0",
+    "@types/lodash.debounce": "4.0.9",
+    "@types/node": "24.13.3",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@typescript-eslint/eslint-plugin": "8.66.0",
+    "@typescript-eslint/parser": "8.66.0",
+    "@vitejs/plugin-react": "6.0.5",
+    "eslint": "10.8.1",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-import-resolver-typescript": "4.4.5",
+    "eslint-plugin-filenames": "^1.3.2",
+    "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-prettier": "^5.5.6",
+    "eslint-plugin-react": "7.37.5",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "globals": "^17.9.0",
+    "husky": "9.1.7",
+    "lint-staged": "17.3.0",
+    "prettier": "3.9.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "rollup-plugin-visualizer": "7.0.1",
+    "styled-components": "6.5.1",
+    "typescript": "7.0.2",
+    "typescript-eslint": "^8.66.0",
+    "vite": "8.2.1",
+    "vite-plugin-svgr": "5.2.0"
   }
 }

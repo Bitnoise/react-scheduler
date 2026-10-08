@@ -6,6 +6,8 @@ export type IconsNames =
   | "filter"
   | "arrowLeft"
   | "arrowRight"
+  | "chevronLeft"
+  | "chevronRight"
   | "defaultAvatar"
   | "calendarWarning"
   | "calendarFree"

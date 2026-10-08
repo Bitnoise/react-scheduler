@@ -1,5 +1,5 @@
 import { ThemeProvider } from "styled-components";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { JSX, useEffect, useMemo, useRef, useState } from "react";
 import dayjs from "dayjs";
 import { Calendar } from "@/components";
 import CalendarProvider from "@/context/CalendarProvider";
@@ -19,8 +19,12 @@ const Scheduler = ({
   onFilterData,
   onClearFilterData,
   onItemClick,
+  onCellClick,
+  onCellRangeSelect,
+  onTileMove,
+  selectedCell,
   isLoading
-}: SchedulerProps) => {
+}: SchedulerProps): JSX.Element => {
   const appConfig: Config = useMemo(
     () => ({
       zoom: 0,
@@ -38,7 +42,9 @@ const Scheduler = ({
   const defaultStartDate = useMemo(() => dayjs(startDate), [startDate]);
   const [themeMode, setThemeMode] = useState<"light" | "dark">(appConfig.defaultTheme ?? "light");
   const toggleTheme = () => {
-    themeMode === "light" ? setThemeMode("dark") : setThemeMode("light");
+    const nextMode = themeMode === "light" ? "dark" : "light";
+    setThemeMode(nextMode);
+    appConfig.onThemeChange?.(nextMode);
   };
 
   const currentTheme = themeMode === "light" ? theme : darkTheme;
@@ -78,17 +84,23 @@ const Scheduler = ({
             onRangeChange={onRangeChange}
             defaultStartDate={defaultStartDate}
             onFilterData={onFilterData}
-            onClearFilterData={onClearFilterData}>
+            onClearFilterData={onClearFilterData}
+          >
             <StyledOutsideWrapper
-              showScroll={!!data.length}
+              $showScroll={!!data.length}
               id={outsideWrapperId}
-              ref={outsideWrapperRef}>
+              ref={outsideWrapperRef}
+            >
               <StyledInnerWrapper>
                 <Calendar
                   data={data}
                   onTileClick={onTileClick}
                   topBarWidth={topBarWidth ?? 0}
                   onItemClick={onItemClick}
+                  onCellClick={onCellClick}
+                  onCellRangeSelect={onCellRangeSelect}
+                  onTileMove={onTileMove}
+                  selectedCell={selectedCell}
                   toggleTheme={toggleTheme}
                 />
               </StyledInnerWrapper>

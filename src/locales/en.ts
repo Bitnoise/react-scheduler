@@ -10,7 +10,9 @@ export const en = {
     next: "next",
     prev: "prev",
     today: "Today",
-    view: "View"
+    view: "View",
+    zoomLevels: ["Weeks", "Days", "Hours"] as string[],
+    toggleTheme: "Toggle theme"
   },
   search: "search",
   week: "week"

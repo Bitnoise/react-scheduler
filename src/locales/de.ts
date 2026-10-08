@@ -10,7 +10,9 @@ export const de = {
     next: "vor",
     prev: "zurück",
     today: "Heute",
-    view: "Ansicht"
+    view: "Ansicht",
+    zoomLevels: ["Wochen", "Tage", "Stunden"] as string[],
+    toggleTheme: "Design wechseln"
   },
   search: "Suche",
   week: "Woche"

@@ -1,18 +1,25 @@
 import { useTheme } from "styled-components";
-import { FC, MouseEventHandler } from "react";
-import { Icon, IconButton, Toggle } from "@/components";
+import { FC } from "react";
+import { Icon } from "@/components";
 import { useCalendar } from "@/context/CalendarProvider";
 import { useLanguage } from "@/context/LocaleProvider";
+import { allZoomLevel } from "@/types/global";
 import {
   NavigationWrapper,
   Wrapper,
-  NavBtn,
-  Today,
-  Zoom,
+  Segmented,
+  SegmentButton,
+  NavIconButton,
   Filters,
-  OptionsContainer
+  FilterButton,
+  FilterLabel,
+  OptionsContainer,
+  HideOnMobile,
+  ThemeButton
 } from "./styles";
 import { TopbarProps } from "./types";
+
+const defaultZoomLevels = ["Weeks", "Days", "Hours"];
 
 const Topbar: FC<TopbarProps> = ({ width, showThemeToggle, toggleTheme }) => {
   const { topbar } = useLanguage();
@@ -22,70 +29,89 @@ const Topbar: FC<TopbarProps> = ({ width, showThemeToggle, toggleTheme }) => {
     handleGoNext,
     handleGoPrev,
     handleGoToday,
-    zoomIn,
-    zoomOut,
-    isNextZoom,
-    isPrevZoom,
-    handleFilterData,
-    onClearFilterData
+    changeZoom,
+    zoom,
+    handleFilterData
   } = useCalendar();
-  const { colors } = useTheme();
+  const { mode } = useTheme();
   const { filterButtonState = -1 } = config;
-
-  const handleClearFilters: MouseEventHandler<HTMLButtonElement> = (event) => {
-    event.stopPropagation();
-    onClearFilterData?.();
-  };
+  const isFiltered = filterButtonState > 0;
+  const zoomLabels = topbar.zoomLevels ?? defaultZoomLevels;
+  const toggleThemeLabel = topbar.toggleTheme ?? "Toggle theme";
 
   return (
     <Wrapper width={width}>
       <Filters>
         {filterButtonState >= 0 && (
-          <IconButton
-            variant={filterButtonState ? "filled" : "outlined"}
-            iconName="filter"
-            width="16"
-            height="16"
-            onClick={handleFilterData}>
-            {topbar.filters}
-            {!!filterButtonState && (
-              <span onClick={handleClearFilters}>
-                <Icon iconName="close" height="16" width="16" fill={colors.textSecondary} />
-              </span>
-            )}
-          </IconButton>
+          <FilterButton
+            type="button"
+            $isActive={isFiltered}
+            aria-label={topbar.filters}
+            aria-pressed={isFiltered}
+            onClick={handleFilterData}
+          >
+            <Icon iconName="filter" width="18" height="18" fill="currentColor" />
+            <FilterLabel>{topbar.filters}</FilterLabel>
+          </FilterButton>
         )}
       </Filters>
       <NavigationWrapper>
-        <NavBtn disabled={!data?.length} onClick={handleGoPrev}>
-          <Icon iconName="arrowLeft" height="15" fill={colors.textPrimary} />
-          {topbar.prev}
-        </NavBtn>
-        <Today onClick={handleGoToday}>{topbar.today}</Today>
-        <NavBtn disabled={!data?.length} onClick={handleGoNext}>
-          {topbar.next}
-          <Icon iconName="arrowRight" height="15" fill={colors.textPrimary} />
-        </NavBtn>
+        <Segmented>
+          <HideOnMobile>
+            <NavIconButton
+              type="button"
+              disabled={!data?.length}
+              aria-label={topbar.prev}
+              title={topbar.prev}
+              onClick={handleGoPrev}
+            >
+              <Icon iconName="chevronLeft" width="18" height="18" fill="currentColor" />
+            </NavIconButton>
+          </HideOnMobile>
+          <SegmentButton type="button" onClick={handleGoToday}>
+            {topbar.today}
+          </SegmentButton>
+          <HideOnMobile>
+            <NavIconButton
+              type="button"
+              disabled={!data?.length}
+              aria-label={topbar.next}
+              title={topbar.next}
+              onClick={handleGoNext}
+            >
+              <Icon iconName="chevronRight" width="18" height="18" fill="currentColor" />
+            </NavIconButton>
+          </HideOnMobile>
+        </Segmented>
       </NavigationWrapper>
       <OptionsContainer>
-        {showThemeToggle && <Toggle toggleTheme={toggleTheme} />}
-        <Zoom>
-          {topbar.view}
-          <IconButton
-            isDisabled={!isPrevZoom}
-            onClick={zoomOut}
-            isFullRounded
-            iconName="subtract"
-            width="14"
-          />
-          <IconButton
-            isDisabled={!isNextZoom}
-            onClick={zoomIn}
-            isFullRounded
-            iconName="add"
-            width="14"
-          />
-        </Zoom>
+        <HideOnMobile>
+          <Segmented role="group" aria-label={topbar.view}>
+            {allZoomLevel.map((level) => (
+              <SegmentButton
+                key={level}
+                type="button"
+                $isActive={zoom === level}
+                aria-pressed={zoom === level}
+                onClick={() => changeZoom(level)}
+              >
+                {zoomLabels[level] ?? defaultZoomLevels[level]}
+              </SegmentButton>
+            ))}
+          </Segmented>
+        </HideOnMobile>
+        {showThemeToggle && (
+          <HideOnMobile>
+            <ThemeButton
+              type="button"
+              aria-label={toggleThemeLabel}
+              title={toggleThemeLabel}
+              onClick={toggleTheme}
+            >
+              <Icon iconName={mode === "light" ? "moon" : "sun"} width="18" height="18" />
+            </ThemeButton>
+          </HideOnMobile>
+        )}
       </OptionsContainer>
     </Wrapper>
   );

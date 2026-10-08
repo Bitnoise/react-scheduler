@@ -1,7 +1,16 @@
-import dayjs from "dayjs";
-import { SchedulerProjectData } from "@/types/global";
+import dayjs, { OpUnitType } from "dayjs";
+import { SchedulerProjectData, ZoomLevel } from "@/types/global";
 
-export const setProjectsInRows = (projects: SchedulerProjectData[]): SchedulerProjectData[][] => {
+const ZOOM_LEVEL_TO_COMPARISON_UNIT: Partial<Record<ZoomLevel, OpUnitType>> = {
+  0: "day",
+  1: "day",
+  2: undefined
+};
+
+export const setProjectsInRows = (
+  projects: SchedulerProjectData[],
+  zoomLevel?: ZoomLevel
+): SchedulerProjectData[][] => {
   const rows: SchedulerProjectData[][] = [];
   for (const project of projects) {
     let isAdded = false;
@@ -10,15 +19,14 @@ export const setProjectsInRows = (projects: SchedulerProjectData[]): SchedulerPr
         let isColliding = false;
         for (let i = 0; i < row.length; i++) {
           if (
-            dayjs(project.startDate).isBetween(row[i].startDate, row[i].endDate, null, "[]") ||
-            dayjs(project.endDate).isBetween(row[i].startDate, row[i].endDate, null, "[]")
-          ) {
-            isColliding = true;
-            break;
-          }
-          if (
-            dayjs(project.startDate).isBefore(row[i].startDate, "day") &&
-            dayjs(project.endDate).isAfter(row[i].endDate, "day")
+            dayjs(project.startDate).isSameOrBefore(
+              dayjs(row[i].endDate),
+              ZOOM_LEVEL_TO_COMPARISON_UNIT[zoomLevel || 0]
+            ) &&
+            dayjs(project.endDate).isSameOrAfter(
+              dayjs(row[i].startDate),
+              ZOOM_LEVEL_TO_COMPARISON_UNIT[zoomLevel || 0]
+            )
           ) {
             isColliding = true;
             break;

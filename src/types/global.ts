@@ -1,3 +1,4 @@
+import { CSSProperties } from "react";
 import { LocaleType } from "@/context/LocaleProvider/types";
 import { ColorType } from "@/styles";
 
@@ -9,7 +10,7 @@ type ZoomLevelTuple = typeof allZoomLevel;
 
 export type ZoomLevel = ZoomLevelTuple[number];
 
-export type LangCodes = "en" | "pl" | "de" | "lt";
+export type LangCodes = "en" | "es" | "pl" | "de" | "lt" | "fr" | "it" | "pt-BR" | "he" | "ro";
 
 export type Config = {
   zoom: ZoomLevel;
@@ -21,7 +22,7 @@ export type Config = {
    */
   filterButtonState?: number;
   /**
-   * Language code: "en" | "pl" | "de"
+   * Language code: "en" | "es" | "pl" | "de" | "lt" | "fr" | "it" | "pt-BR" | "he" | "ro"
    */
   lang?: LangCodes | string;
   isFiltersButtonVisible?: boolean;
@@ -50,6 +51,10 @@ export type Config = {
    * @default "light"
    */
   defaultTheme?: "light" | "dark";
+  /**
+   * called when the theme toggle switches the theme
+   */
+  onThemeChange?: (mode: "light" | "dark") => void;
   theme?: Theme;
 };
 
@@ -114,6 +119,14 @@ export type SchedulerProjectData = {
    * Background color of the tile, given in rgb color model. If not given, default color (rgb(114, 141,226 )) is set. Optional
    */
   bgColor?: string;
+  /**
+   * Whether the tile can be dragged when onTileMove is provided. Defaults to true. Optional
+   */
+  draggable?: boolean;
+  /**
+   * Additional inline styles applied to the tile (e.g. backgroundImage). Optional
+   */
+  style?: CSSProperties;
 };
 
 export type Day = {
@@ -139,6 +152,9 @@ type BottomRowText = {
   label: string;
   font: string;
   color: string;
+  letterSpacing?: string;
+  // draws a filled circle behind the text (e.g. today's day number)
+  circleColor?: string;
 };
 
 export type DrawRowConfig = {
@@ -155,6 +171,9 @@ export type DrawRowConfig = {
   topText?: BottomRowText;
   bottomText?: BottomRowText;
   labelBetweenCells?: boolean;
+  color?: string;
+  letterSpacing?: string;
+  align?: "left" | "center";
 };
 
 export type TileProperties = {
@@ -192,4 +211,59 @@ export type TooltipData = {
   coords: Coords;
   resourceIndex: number;
   disposition: OccupancyData;
+};
+
+export type CellClickData = {
+  /**
+   * Id of the resource (row) the clicked cell belongs to
+   */
+  resourceId: string;
+  /**
+   * Date represented by the clicked cell
+   */
+  date: Date;
+};
+
+export type CellRangeSelectData = {
+  /**
+   * Id of the resource (row) the selected range belongs to
+   */
+  resourceId: string;
+  /**
+   * First date of the selected range
+   */
+  startDate: Date;
+  /**
+   * Last date of the selected range
+   */
+  endDate: Date;
+};
+
+export type SelectedRange = {
+  resourceId: string;
+  startDate: Date;
+  endDate: Date;
+};
+
+export type TileMoveData = {
+  /**
+   * Id of the moved tile's underlying item
+   */
+  id: string;
+  /**
+   * Id of the resource (row) the tile was dragged from
+   */
+  previousResourceId: string;
+  /**
+   * Id of the resource (row) the tile was dropped onto
+   */
+  resourceId: string;
+  /**
+   * New start date, shifted by the same amount the tile was dragged by
+   */
+  startDate: Date;
+  /**
+   * New end date, keeping the tile's original duration
+   */
+  endDate: Date;
 };

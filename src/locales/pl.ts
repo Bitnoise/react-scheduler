@@ -10,7 +10,9 @@ export const pl = {
     next: "następny",
     prev: "poprzedni",
     today: "Dziś",
-    view: "Widok"
+    view: "Widok",
+    zoomLevels: ["Tygodnie", "Dni", "Godziny"] as string[],
+    toggleTheme: "Zmień motyw"
   },
   search: "szukaj",
   week: "tydzień"

@@ -1,5 +1,6 @@
 import { FC, useLayoutEffect, useRef } from "react";
-import { dayWidth, weekWidth, zoom2ColumnWidth } from "@/constants";
+import { weekWidth, zoom2ColumnWidth } from "@/constants";
+import { getDayWidth } from "@/utils/getDayWidth";
 import { useLanguage } from "@/context/LocaleProvider";
 import Icon from "../Icon";
 import {
@@ -25,7 +26,7 @@ const Tooltip: FC<TooltipProps> = ({ tooltipData, zoom }) => {
       width = weekWidth;
       break;
     case 1:
-      width = dayWidth;
+      width = getDayWidth();
       break;
     case 2:
       width = zoom2ColumnWidth;

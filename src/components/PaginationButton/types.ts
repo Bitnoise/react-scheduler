@@ -8,5 +8,5 @@ export type PaginationButtonProps = {
 };
 
 export type StyledPaginationButton = {
-  isVisible: boolean;
+  $isVisible: boolean;
 };

@@ -10,12 +10,14 @@ import { Day } from "@/types/global";
 import { Theme } from "@/styles";
 import { drawRow } from "../../drawRow";
 
+const capitalize = (value: string) => value.charAt(0).toUpperCase() + value.slice(1);
+
 export const drawZoom2MonthsOnTop = (
   ctx: CanvasRenderingContext2D,
   cols: number,
   startDate: Day,
   theme: Theme
-) => {
+): void => {
   const daysInRange = Math.ceil(cols / hoursInDay);
   const startDay = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`);
   const endDate = startDay.add(daysInRange - 1, "days");
@@ -31,7 +33,7 @@ export const drawZoom2MonthsOnTop = (
     );
     const firstDayOfAMonth = dayjs(`${startDate.year}-${startDate.month + i + 1}-01T:23:59:59`);
     const lastDayOfAMonth = firstDayOfAMonth.endOf("month");
-    const monthLabel = lastDayOfAMonth.format("MMMM").toUpperCase();
+    const monthLabel = capitalize(lastDayOfAMonth.format("MMMM YYYY"));
 
     const diff = lastDayOfAMonth.diff(startDateHour, "hour") + 1;
 
@@ -46,7 +48,9 @@ export const drawZoom2MonthsOnTop = (
         height: zoom2HeaderTopRowHeight,
         textYPos: topRowTextYPos,
         label: monthLabel,
-        font: fonts.topRow
+        font: fonts.topRow,
+        color: theme.colors.textPrimary,
+        align: "left"
       },
       theme
     );

@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { Day } from "@/types/global";
-import { boxHeight, dayWidth } from "@/constants";
+import { boxHeight } from "@/constants";
+import { getDayWidth } from "@/utils/getDayWidth";
 import { Theme } from "@/styles";
 import { getIsBusinessDay } from "../dates";
 import { drawCell } from "./drawCell";
@@ -11,7 +12,7 @@ export const drawMonthlyView = (
   cols: number,
   startDate: Day,
   theme: Theme
-) => {
+): void => {
   for (let i = 0; i < rows; i++) {
     for (let y = 0; y <= cols; y++) {
       const date = dayjs(`${startDate.year}-${startDate.month + 1}-${startDate.dayOfMonth}`).add(
@@ -23,9 +24,9 @@ export const drawMonthlyView = (
 
       drawCell(
         ctx,
-        y * dayWidth,
+        y * getDayWidth(),
         i * boxHeight,
-        dayWidth,
+        getDayWidth(),
         getIsBusinessDay(date),
         isCurrentDay,
         theme

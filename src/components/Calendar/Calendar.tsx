@@ -23,6 +23,10 @@ export const Calendar: FC<CalendarProps> = ({
   data,
   onTileClick,
   onItemClick,
+  onCellClick,
+  onCellRangeSelect,
+  onTileMove,
+  selectedCell,
   toggleTheme,
   topBarWidth
 }) => {
@@ -150,6 +154,10 @@ export const Calendar: FC<CalendarProps> = ({
             rows={totalRowsPerPage}
             ref={gridRef}
             onTileClick={onTileClick}
+            onCellClick={onCellClick}
+            onCellRangeSelect={onCellRangeSelect}
+            onTileMove={onTileMove}
+            selectedCell={selectedCell}
           />
         ) : (
           <StyledEmptyBoxWrapper width={topBarWidth}>

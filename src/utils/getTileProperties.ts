@@ -23,8 +23,8 @@ export const getTileProperties = (
     case 2: {
       parsedResourceStartDate = dayjs(resourceStartDate);
       parsedResourceEndDate = dayjs(resourceEndDate);
-      parsedStartDate = dayjs(startDate).hour(rangeStartHour).minute(0);
-      parsedEndDate = dayjs(endDate).hour(rangeEndHour).minute(0);
+      parsedStartDate = startDate.hour(rangeStartHour).minute(0);
+      parsedEndDate = endDate.hour(rangeEndHour).minute(0);
       break;
     }
     default: {

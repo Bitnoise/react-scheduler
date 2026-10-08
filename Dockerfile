@@ -1,5 +1,5 @@
 ## Prepare system image
-FROM node:18.16-alpine3.16
+FROM node:24-alpine
 WORKDIR /app
 
 ## Copy source files

@@ -1,7 +1,7 @@
 import { minutesInHour } from "@/constants";
 import { TimeUnits } from "@/types/global";
 
-export const getTotalHoursAndMinutes = (item: TimeUnits[]) => {
+export const getTotalHoursAndMinutes = (item: TimeUnits[]): { hours: number; minutes: number } => {
   let minutesSum = 0;
   let totalHours = 0;
   let totalMinutes = 0;

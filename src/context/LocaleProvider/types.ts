@@ -3,8 +3,6 @@ import { LangCodes } from "@/types/global";
 
 export type LocaleContextType = {
   currentLocale: LocaleType;
-  localesData: LocaleType[];
-  setCurrentLocale: (locale: LocaleType) => void;
 };
 
 export type LocaleProviderProps = {
@@ -19,6 +17,11 @@ export type Topbar = {
   prev: string;
   today: string;
   view: string;
+  /**
+   * labels of the zoom levels, from the widest (weeks) to the narrowest (hours)
+   */
+  zoomLevels?: string[];
+  toggleTheme?: string;
 };
 
 export type Translation = {

@@ -12,7 +12,7 @@ export const drawYearlyView = (
   cols: number,
   startDate: Day,
   theme: Theme
-) => {
+): void => {
   let xPos = 0;
   let startPos = -(startDate.dayOfMonth - 1) * singleDayWidth;
 

@@ -1,8 +1,9 @@
 import { useTheme } from "styled-components";
 import icons from "@/assets/icons";
 import { IconProps } from "./types";
+import { JSX } from "react";
 
-const Icon = ({ iconName, width, height, fill, className }: IconProps) => {
+const Icon = ({ iconName, width, height, fill, className }: IconProps): JSX.Element | null => {
   const { colors } = useTheme();
 
   const IconComponent = icons[iconName];

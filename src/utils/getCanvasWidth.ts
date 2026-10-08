@@ -1,7 +1,8 @@
-import { outsideWrapperId, leftColumnWidth, screenWidthMultiplier } from "@/constants";
+import { outsideWrapperId, screenWidthMultiplier } from "@/constants";
+import { getLeftColumnWidth } from "./getLeftColumnWidth";
 
-export const getCanvasWidth = () => {
+export const getCanvasWidth = (): number => {
   const wrapperWidth = document.getElementById(outsideWrapperId)?.clientWidth || 0;
-  const width = (wrapperWidth - leftColumnWidth) * screenWidthMultiplier;
-  return width;
+
+  return (wrapperWidth - getLeftColumnWidth()) * screenWidthMultiplier;
 };

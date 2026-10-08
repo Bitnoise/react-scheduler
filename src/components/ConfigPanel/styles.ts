@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled, { IStyledComponent } from "styled-components";
 
 type WrapperProps = {
   isExpanded: boolean;
 };
 
-export const StyledWrapper = styled.div<WrapperProps>`
+export const StyledWrapper: IStyledComponent<any, any> = styled.div<WrapperProps>`
   box-sizing: border-box;
   font-family: Inter;
   padding: 0 0.5rem;
@@ -17,7 +17,7 @@ export const StyledWrapper = styled.div<WrapperProps>`
   z-index: 999;
 `;
 
-export const StyledInnerWrapper = styled.div`
+export const StyledInnerWrapper: IStyledComponent<any, any> = styled.div`
   width: 100%;
   margin-top: 2px;
   height: 1.5rem;
@@ -28,11 +28,11 @@ export const StyledInnerWrapper = styled.div`
   background-color: white;
 `;
 
-export const StyledLabel = styled.label`
+export const StyledLabel: IStyledComponent<any, any> = styled.label`
   font-size: 14px;
 `;
 
-export const StyledInput = styled.input`
+export const StyledInput: IStyledComponent<any, any> = styled.input`
   width: 45px;
   height: 18px;
   font-size: 14px;
@@ -42,12 +42,12 @@ export const StyledInput = styled.input`
   outline: none;
 `;
 
-export const StyledCheckbox = styled.input`
+export const StyledCheckbox: IStyledComponent<any, any> = styled.input`
   height: 18px;
   width: 18px;
 `;
 
-export const StyledButton = styled.button`
+export const StyledButton: IStyledComponent<any, any> = styled.button`
   width: 100%;
   font-size: 14px;
   outline: none;
@@ -61,6 +61,6 @@ export const StyledButton = styled.button`
   }
 `;
 
-export const StyledForm = styled.form`
+export const StyledForm: IStyledComponent<any, any> = styled.form`
   background-color: rgba(255, 255, 255, 0.75);
 `;

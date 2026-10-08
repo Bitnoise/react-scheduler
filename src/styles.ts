@@ -1,8 +1,9 @@
-import styled, { createGlobalStyle, type DefaultTheme } from "styled-components";
+import styled, { createGlobalStyle, type DefaultTheme, IStyledComponent } from "styled-components";
+import { NamedExoticComponent } from "react";
 
 export const prefixId = "reactSchedulerOutsideWrapper";
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyle: NamedExoticComponent = createGlobalStyle`
 
   #${prefixId} {
     font-family: 'Inter', sans-serif;
@@ -47,7 +48,7 @@ export type Theme = {
 
 export const theme: DefaultTheme = {
   mode: "light",
-  navHeight: "44px",
+  navHeight: "56px",
   colors: {
     background: "#FFFFFF",
     gridBackground: "#FFFFFF",
@@ -61,8 +62,8 @@ export const theme: DefaultTheme = {
     placeholder: "#777777",
 
     button: "#FFFFFF",
-    border: "#D2D2D2",
-    tooltip: "#3B3C5F",
+    border: "#E4E7EC",
+    tooltip: "#1F2733",
     hover: "#E6F3FF",
     disabled: "#777777",
     warning: "#EF4444",
@@ -75,7 +76,7 @@ export const theme: DefaultTheme = {
 
 export const darkTheme: Theme = {
   mode: "dark",
-  navHeight: "44px",
+  navHeight: "56px",
   colors: {
     background: "#161B22",
     gridBackground: "#1E252E",
@@ -91,7 +92,7 @@ export const darkTheme: Theme = {
     button: "#60676f",
     border: "#2C333A",
     hover: "#303439",
-    tooltip: "#3B3C5F",
+    tooltip: "#39424F",
     disabled: "#38414a",
     warning: "#FF4C4C",
 
@@ -100,6 +101,29 @@ export const darkTheme: Theme = {
     accent: "#1798c2"
   }
 };
+
+// canvas can't use color-mix(), so tints are computed from hex colours
+export const withAlpha = (hex: string, alpha: number): string => {
+  const value = hex.replace("#", "");
+  const full =
+    value.length === 3
+      ? value
+          .split("")
+          .map((c) => c + c)
+          .join("")
+      : value.slice(0, 6);
+  const num = parseInt(full, 16);
+  if (Number.isNaN(num)) return hex;
+  return `rgba(${(num >> 16) & 255}, ${(num >> 8) & 255}, ${num & 255}, ${alpha})`;
+};
+
+export const getCanvasColors = (
+  theme: Theme
+): { today: string; weekend: string; todayBorder: string } => ({
+  today: withAlpha(theme.colors.accent, theme.mode === "dark" ? 0.2 : 0.11),
+  todayBorder: withAlpha(theme.colors.accent, 0.35),
+  weekend: theme.mode === "dark" ? "rgba(255, 255, 255, 0.06)" : "#EEF0F4"
+});
 
 export const marginPaddingReset = `
 margin: 0;
@@ -112,7 +136,7 @@ text-overflow: ellipsis;
 white-space: nowrap;
 `;
 
-export const StyledSchedulerFrame = styled.div`
+export const StyledSchedulerFrame: IStyledComponent<any, any> = styled.div`
   margin: 10rem 10rem;
   position: relative;
   width: 40vw;

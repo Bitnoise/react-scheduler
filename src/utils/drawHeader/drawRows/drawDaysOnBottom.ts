@@ -3,13 +3,13 @@ import { Day } from "@/types/global";
 import {
   dayNameYoffset,
   dayNumYOffset,
-  dayWidth,
   fonts,
   headerDayHeight,
   headerHeight,
   headerMonthHeight,
   headerWeekHeight
 } from "@/constants";
+import { getDayWidth } from "@/utils/getDayWidth";
 import { parseDay } from "@/utils/dates";
 import { Theme } from "@/styles";
 import { drawRow } from "../../drawRow";
@@ -21,7 +21,7 @@ export const drawDaysOnBottom = (
   cols: number,
   startDate: Day,
   theme: Theme
-) => {
+): void => {
   const dayNameYPos = headerHeight - headerDayHeight / dayNameYoffset;
   const dayNumYPos = headerHeight - headerDayHeight / dayNumYOffset;
   const yPos = headerMonthHeight + headerWeekHeight;
@@ -36,7 +36,7 @@ export const drawDaysOnBottom = (
         ctx,
         x: xPos,
         y: yPos,
-        width: dayWidth,
+        width: getDayWidth(),
         height: headerDayHeight,
         isBottomRow: true,
         fillStyle: getBoxFillStyle(
@@ -48,17 +48,9 @@ export const drawDaysOnBottom = (
         ),
         topText: {
           y: dayNameYPos,
-          label: day.dayName.toUpperCase(),
+          label: day.dayName.replace(".", "").toUpperCase(),
           font: fonts.bottomRow.name,
-          color: getTextStyle(
-            { isCurrent: day.isCurrentDay, isBusinessDay: day.isBusinessDay },
-            theme
-          )
-        },
-        bottomText: {
-          y: dayNumYPos,
-          label: `${day.dayOfMonth}`,
-          font: fonts.bottomRow.number,
+          letterSpacing: "0.6px",
           color: getTextStyle(
             {
               isCurrent: day.isCurrentDay,
@@ -67,11 +59,21 @@ export const drawDaysOnBottom = (
             },
             theme
           )
+        },
+        bottomText: {
+          y: dayNumYPos,
+          label: `${day.dayOfMonth}`,
+          font: fonts.bottomRow.number,
+          circleColor: day.isCurrentDay ? theme.colors.accent : undefined,
+          color: getTextStyle(
+            { isCurrent: day.isCurrentDay, isBusinessDay: day.isBusinessDay },
+            theme
+          )
         }
       },
       theme
     );
 
-    xPos += dayWidth;
+    xPos += getDayWidth();
   }
 };

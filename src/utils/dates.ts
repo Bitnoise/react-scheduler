@@ -1,15 +1,15 @@
 import dayjs from "dayjs";
 import { Day } from "@/types/global";
 
-export const daysInYear = (year: number) =>
+export const daysInYear = (year: number): 365 | 366 =>
   (year % 4 === 0 && year % 100 > 0) || year % 400 === 0 ? 366 : 365;
 
-export const getIsBusinessDay = (date: dayjs.Dayjs) => {
+export const getIsBusinessDay = (date: dayjs.Dayjs): boolean => {
   const day = date.day();
   return day !== 0 && day !== 6;
 };
 
-export const getDaysInMonths = (date: Day, iterator: number) =>
+export const getDaysInMonths = (date: Day, iterator: number): number =>
   dayjs(`${date.year}-${date.month + 1}-${date.dayOfMonth}`)
     .add(iterator, "months")
     .daysInMonth();
@@ -19,7 +19,7 @@ export const parseDay = (data: dayjs.Dayjs): Day => {
     hour: data.hour(),
     dayName: data.format("ddd"),
     dayOfMonth: data.date(),
-    weekOfYear: data.isoWeek(),
+    weekOfYear: data.week(),
     month: data.month(),
     monthName: data.format("MMMM"),
     isBusinessDay: getIsBusinessDay(data),

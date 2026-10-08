@@ -15,6 +15,7 @@ export const getDatesRange = (date: dayjs.Dayjs, zoom: number): DatesRange => {
   const colsOffset = getCols(zoom) / 2;
 
   let startDate;
+  let daysFromMonday: number;
   switch (zoom) {
     case 1:
       startDate = date.subtract(colsOffset, "days");
@@ -23,7 +24,8 @@ export const getDatesRange = (date: dayjs.Dayjs, zoom: number): DatesRange => {
       startDate = date.subtract(colsOffset, "hours");
       break;
     default:
-      startDate = date.subtract(colsOffset, "weeks");
+      daysFromMonday = (date.day() + 6) % 7;
+      startDate = date.subtract(colsOffset, "weeks").subtract(daysFromMonday, "days");
       break;
   }
 

@@ -18,7 +18,7 @@ export const drawHeader = (
   weekLabel: string,
   dayOfYear: number,
   theme: Theme
-) => {
+): void => {
   switch (zoom) {
     case 0:
       drawYearsOnTop(ctx, startDate, dayOfYear, theme);

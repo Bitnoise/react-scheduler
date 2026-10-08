@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
-import { weekWidth, boxHeight, dayWidth, zoom2ColumnWidth } from "@/constants";
+import { weekWidth, boxHeight, zoom2ColumnWidth } from "@/constants";
+import { getDayWidth } from "@/utils/getDayWidth";
 import { Day, Coords, SchedulerProjectData, TooltipData, ZoomLevel } from "@/types/global";
 import { getOccupancy } from "./getOccupancy";
 
@@ -20,7 +21,7 @@ export const getTooltipData = (
       break;
     case 1:
       timeUnit = "days";
-      currBoxWidth = dayWidth;
+      currBoxWidth = getDayWidth();
       break;
     case 2:
       timeUnit = "hours";

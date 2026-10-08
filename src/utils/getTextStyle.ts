@@ -1,11 +1,11 @@
 import { Theme } from "@/styles";
 import { TextAndBoxStyleConfig } from "@/types/global";
 
-export const getTextStyle = (config: TextAndBoxStyleConfig, theme: Theme) => {
+// variant "bottomRow" is the secondary (small) label of a header cell
+export const getTextStyle = (config: TextAndBoxStyleConfig, theme: Theme): string => {
   const { isCurrent, isBusinessDay, variant } = config;
-  if (isCurrent) return variant === "bottomRow" ? theme.colors.placeholder : theme.colors.accent;
-  if (isBusinessDay)
-    return variant === "bottomRow" ? theme.colors.placeholder : theme.colors.textPrimary;
+  if (isCurrent) return variant === "bottomRow" ? theme.colors.accent : "#FFFFFF";
+  if (isBusinessDay && variant !== "bottomRow") return theme.colors.textPrimary;
 
   return theme.colors.placeholder;
 };

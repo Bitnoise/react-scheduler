@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled, { IStyledComponent } from "styled-components";
 
-export const ToggleContainer = styled.div`
+export const ToggleContainer: IStyledComponent<any, any> = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -12,7 +12,7 @@ export const ToggleContainer = styled.div`
   transition: background-color 0.3s ease;
 `;
 
-export const ToggleCircle = styled.div`
+export const ToggleCircle: IStyledComponent<any, any> = styled.div`
   width: 20px;
   height: 20px;
   background-color: ${({ theme }) => theme.colors.button};
@@ -23,7 +23,7 @@ export const ToggleCircle = styled.div`
   transition: left 0.3s ease;
 `;
 
-export const IconContainer = styled.div`
+export const IconContainer: IStyledComponent<any, any> = styled.div`
   position: absolute;
   top: 5px;
   left: ${({ theme }) => (theme.mode === "light" ? "38px" : "4px")};

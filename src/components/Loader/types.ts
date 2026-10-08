@@ -1,7 +1,8 @@
 export interface StyledWrapperProps {
-  position: "left" | "right";
+  $position: "left" | "right";
 }
 
-export interface LoaderProps extends StyledWrapperProps {
+export interface LoaderProps {
   isLoading: boolean;
+  position: "left" | "right";
 }
